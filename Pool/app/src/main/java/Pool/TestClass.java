@@ -31,8 +31,14 @@ public class TestClass extends Application{
             else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
         });
         */
-        Vector v = new Vector(-4,4);
-        System.out.println(Math.toDegrees(v.getAngle()));
+        Vector v1 = new Vector(0,0);
+        Vector v2 = new Vector(0,4);
+        Vector v3 = new Vector(-4,0);
+        Vector v4 = new Vector(4,0);
+        System.out.println(Math.toDegrees(v1.getAngle()));
+        System.out.println(Math.toDegrees(v2.getAngle()));
+        System.out.println(Math.toDegrees(v3.getAngle()));
+        System.out.println(Math.toDegrees(v4.getAngle()));
         
         ps.setTitle("testScene");
         ps.setScene(sc);
