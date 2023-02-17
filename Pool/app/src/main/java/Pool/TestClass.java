@@ -20,17 +20,18 @@ public class TestClass extends Application{
     @Override
     public void start(Stage ps) throws Exception {
         
-        //CustomAnimation dino = new CustomAnimation("gaming_DinoSprites_walk",-5);
+        CustomAnimation dino = new CustomAnimation("gaming_DinoSprites_walk",-5);
         Pane pane = new Pane();
         
-       // pane.getChildren().add(dino);
+        pane.getChildren().add(dino);
         Scene sc = new Scene(pane,200,200);
-        /*
+        
         sc.setOnMouseClicked(e->{
             if(e.getButton()== MouseButton.PRIMARY){dino.nextFrame();}
             else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
         });
-        */
+        
+        //testVector
         Vector v1 = new Vector(0,0);
         Vector v2 = new Vector(0,4);
         Vector v3 = new Vector(-4,0);
