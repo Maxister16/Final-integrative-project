@@ -31,7 +31,6 @@ public class Vector extends Line{
     }
     
     public double getAngle(){//in RAD NEED FIXING
-        //NEED TO CHECK what we need because right now it only gives the angle between x and y component
         
         if(x==0){//x cannot = 0 because y/x
             if(y==0)

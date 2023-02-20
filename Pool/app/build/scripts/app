@@ -201,7 +201,7 @@ fi
 
 set -- \
         -classpath "$CLASSPATH" \
-        Pool.TestClass \
+        Pool.TestClassM \
         "$@"
 
 # Use "xargs" to parse quoted args.
