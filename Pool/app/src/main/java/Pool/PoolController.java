@@ -8,32 +8,16 @@ import javafx.scene.control.Slider;
 public class PoolController {
     
     //fields
-    double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass
+    double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
 
-   @FXML
-   Button playBtn;
-   @FXML
-   Button menuBtn;
-   @FXML
-   Slider forceSlider;
-
-   @FXML
-   Slider angleSlider;
-
-   @FXML
-     private void onClickMenu(){
-        setupMenu();
-    }
-
-    @FXML
-    private void onClickPlay(){
-        //get the value of the forceSlider
-        //get the value of the angleSlider
-        //do the physics
-    }
+    @FXML Button playBtn;
+    @FXML Button menuBtn;
+    @FXML Slider forceSlider;
+    @FXML Slider angleSlider;
 
     @FXML
     public void initialize(){
+        GameStatus.initialBallsAndNets();
         //play music
         //set scene to titleScreen
     }
@@ -54,7 +38,7 @@ public class PoolController {
     
     public void setUpGame(){
         //change to gameScene
-        //initialise listOfBalls[]
+        GameStatus.reset();
         
         //place objects in the place
         //start the game
@@ -72,6 +56,17 @@ public class PoolController {
         setUpGame();
     }
     
-    
+       @FXML
+     private void onClickMenu(){
+        setupMenu();
+    }
+
+    @FXML
+    private void onClickPlay(){
+        //get the value of the forceSlider
+        //get the value of the angleSlider
+        //do the physics
+    }
+
     
 }

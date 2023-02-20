@@ -31,8 +31,6 @@ public class TestClassM extends Application{
             else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
         });
         
-        
-        
         //testVector
         Vector v1 = new Vector(0,0);
         Vector v2 = new Vector(0,4);
