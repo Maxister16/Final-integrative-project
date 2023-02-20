@@ -31,6 +31,7 @@ public class Pool_Controller {
     public void setUpGame(){
         //change to gameScene
         //initialise listOfBalls[]
+        
         //place objects in the place
         //start the game
     }
@@ -39,11 +40,11 @@ public class Pool_Controller {
         setUpGame();
     }
     public void setupIce(){
-        //Ball.friction = FRICTION_COEFFICIENT[0] 
+        //Ball.friction = FRICTION_COEFFICIENT[1] 
         setUpGame();
     }
     public void setupGrass(){
-        //Ball.friction = FRICTION_COEFFICIENT[0]
+        //Ball.friction = FRICTION_COEFFICIENT[2]
         setUpGame();
     }
     
