@@ -10,15 +10,15 @@ public class PoolController {
     //fields
     double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass
 
-   @FXML
-   Button playBtn;
-   @FXML
-   Button menuBtn;
-   @FXML
-   Slider forceSlider;
-
-   @FXML
-   Slider angleSlider;
+//   @FXML
+//   Button playBtn;
+//   @FXML
+//   Button menuBtn;
+//   @FXML
+//   Slider forceSlider;
+//
+//   @FXML
+//   Slider angleSlider;
 
    @FXML
      private void onClickMenu(){
