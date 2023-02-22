@@ -19,18 +19,26 @@ public class TestClassM extends Application{
 
     @Override
     public void start(Stage ps){
-        
-        CustomAnimation dino = new CustomAnimation("gaming_DinoSprites_walk",5);
         Pane pane = new Pane();
         
-        pane.getChildren().add(dino);
-        Scene sc = new Scene(pane,200,200);
+        //CustomAnimation dino = new CustomAnimation("gaming_DinoSprites_walk",5);
         
-        sc.setOnMouseClicked(e->{
-            if(e.getButton()== MouseButton.PRIMARY){dino.nextFrame();}
-            else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
-        });
+       /* Net net = new Net(1);
+        pane.getChildren().add(net);
+        net.setCenterX(50);
+        net.setCenterY(50);*/
         
+        
+        GameStatus.initialBallsAndNets();
+        
+        for (int i = 0; i < GameStatus.nets.length; i++) {
+            GameStatus.nets[i].setCenterX((i%3)*60+20);
+            GameStatus.nets[i].setCenterY((i<3)?75:125);
+            
+            pane.getChildren().add(GameStatus.nets[i]);
+        }
+        
+        /*
         //testVector
         Vector v1 = new Vector(0,0);
         Vector v2 = new Vector(0,4);
@@ -40,10 +48,20 @@ public class TestClassM extends Application{
         System.out.println(Math.toDegrees(v2.getAngle()));
         System.out.println(Math.toDegrees(v3.getAngle()));
         System.out.println(Math.toDegrees(v4.getAngle()));
+        */
         
+        
+        
+        Scene sc = new Scene(pane,200,200);
         ps.setTitle("testScene");
         ps.setScene(sc);
         ps.show();
-
+        
+        
+        //event listener
+        /*sc.setOnMouseClicked(e->{
+                    if(e.getButton()== MouseButton.PRIMARY){dino.nextFrame();}
+                    else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
+                });*/
     }
 }
