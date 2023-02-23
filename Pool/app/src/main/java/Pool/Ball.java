@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import javafx.scene.shape.Circle;
 
 import java.lang.Math;
-public class Ball extends Circle {
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+public class Ball extends Circle implements InteractiveObject{
 //SETTING CLASS FIELDS
     public static double friction;
     private static double gravity=9.806;
@@ -144,5 +146,10 @@ public class Ball extends Circle {
             }
            
         }
+    }
+
+    @Override
+    public void setImage(Image newImage) {
+        this.setFill(new ImagePattern(newImage));
     }
 }
