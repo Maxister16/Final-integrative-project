@@ -17,7 +17,7 @@ public class PoolController {
 
     @FXML
     public void initialize(){
-        GameStatus.initialBallsAndNets();
+        GameStatus.initialize();
         //play music
         //set scene to titleScreen
     }

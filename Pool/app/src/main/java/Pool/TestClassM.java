@@ -3,6 +3,7 @@
  */
 package Pool;
 
+import static Pool.GameStatus.table;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,6 +18,10 @@ public class TestClassM extends Application{
         Application.launch();
     }
 
+    final double WIDTH_OF_WINDOW = 960;
+    final double HEIGHT_OF_WINDOW = 540;
+    
+    
     @Override
     public void start(Stage ps){
         Pane pane = new Pane();
@@ -29,14 +34,28 @@ public class TestClassM extends Application{
         net.setCenterY(50);*/
         
         
-        GameStatus.initialBallsAndNets();
+        GameStatus.table.setX((WIDTH_OF_WINDOW-GameStatus.table.getWidth())*0.5);
+        GameStatus.table.setY(HEIGHT_OF_WINDOW-GameStatus.table.getHeight()-50);
+        table.setImage(new Image("InteractiveObjectIMG\\tableGrassIMG.png"));
+        
+        GameStatus.initialize();
+        
+        pane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
         
         for (int i = 0; i < GameStatus.nets.length; i++) {
-            GameStatus.nets[i].setCenterX((i%3)*60+20);
-            GameStatus.nets[i].setCenterY((i<3)?75:125);
+            //GameStatus.nets[i].setCenterX((i%3)*GameStatus.table.getWidth()/2+GameStatus.table.getX());
+            //GameStatus.nets[i].setCenterY((i<3)?GameStatus.table.getY()+20:GameStatus.table.getY()+GameStatus.table.getHeight()-20);
             
             pane.getChildren().add(GameStatus.nets[i]);
         }
+        
+        for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
+            //GameStatus.listOfBalls[i].setCenterX(WIDTH_OF_WINDOW/2+10*i);
+            //GameStatus.listOfBalls[i].setCenterY(HEIGHT_OF_WINDOW/2+10*i);
+            pane.getChildren().add(GameStatus.listOfBalls[i]);
+        }
+        
+        GameStatus.setZorder();
         
         /*
         //testVector
@@ -52,7 +71,7 @@ public class TestClassM extends Application{
         
         
         
-        Scene sc = new Scene(pane,200,200);
+        Scene sc = new Scene(pane,WIDTH_OF_WINDOW,HEIGHT_OF_WINDOW);
         ps.setTitle("testScene");
         ps.setScene(sc);
         ps.show();
