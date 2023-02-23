@@ -14,9 +14,9 @@ public class Vector extends Line{
         this.x = 0;
         this.y = 0;
     }
-    public Vector(double newX, double newY){
-        this.x = newX;
-        this.y = newY;
+    public Vector(double xcomponent, double ycomponent){
+        this.x = xcomponent;
+        this.y = ycomponent;
     }
     
     //mutator
@@ -31,7 +31,7 @@ public class Vector extends Line{
     public double getXcomponent(){
         return x;
     }
-    public double getYcomponent(){//
+    public double getYcomponent(){
         return y;
     }
     public double getMagnitude(){
