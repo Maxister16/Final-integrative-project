@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Scene fill="#b24848" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Pool.PoolController">
+    <AnchorPane prefHeight="350.0" prefWidth="550.0">
+      <children>
+         <BorderPane layoutX="-2.0" prefHeight="350.0" prefWidth="551.0" AnchorPane.topAnchor="0.0">
+            <padding>
+               <Insets top="80.0" />
+            </padding>
+            <top>
+               <GridPane alignment="TOP_CENTER" prefHeight="30.0" prefWidth="450.0" BorderPane.alignment="TOP_CENTER">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+                  <padding>
+                     <Insets left="100.0" />
+                  </padding>
+                  <children>
+                     <Slider fx:id="forceSlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" GridPane.rowIndex="1" />
+                     <Slider fx:id="angleSlider" prefHeight="16.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     <Button fx:id="playBtn" mnemonicParsing="false" text="Play" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  </children>
+               </GridPane>
+            </top>
+            <bottom>
+               <Button fx:id="menuBtn" mnemonicParsing="false" text="Menu" BorderPane.alignment="BOTTOM_LEFT" />
+            </bottom>
+         </BorderPane>
+      </children></AnchorPane>
+</Scene>
