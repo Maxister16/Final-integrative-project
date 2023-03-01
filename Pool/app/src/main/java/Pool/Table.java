@@ -5,9 +5,17 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-public class Table extends Rectangle implements InteractiveObject{
+public class Table implements InteractiveObject{
+    
+    Rectangle background;
+    Rectangle border;
+    
+    public Table(){
+        this.setImage(newImage);
+    }
+    
     @Override
-    public void setImage(Image newImage) {
-        this.setFill(new ImagePattern(newImage));
+    public void setImage(Image newImage) { //sets the background
+        background.setFill(new ImagePattern(newImage));
     }
 }

@@ -19,6 +19,14 @@ public class Vector extends Line{
         this.y = newY;
     }
     
+    //mutator
+    public void setXcomponent(double newX){
+        this.x = newX;
+    }
+    public void setYcomponent(double newY){
+        this.y = newY;
+    }
+    
     //accessor
     public double getXcomponent(){
         return x;
@@ -61,14 +69,6 @@ public class Vector extends Line{
             else//points toward -x
                 return Math.PI;//180
         }
-    }
-    
-    //mutator
-    public void setXcomponent(double newX){
-        this.x = newX;
-    }
-    public void setYcomponent(double newY){
-        this.y = newY;
     }
     
     //static arithmetic function with other vector
