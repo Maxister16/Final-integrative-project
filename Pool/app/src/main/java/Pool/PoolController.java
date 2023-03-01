@@ -22,7 +22,7 @@ public class PoolController {
 
 
 
-    @FXML
+  //  @FXML
     public void initialize(){
         GameStatus.initialBallsAndNets();
         //play music
@@ -63,12 +63,12 @@ public class PoolController {
         setUpGame();
     }
     
-       @FXML
+  //    @FXML
      private void onClickMenu(){
         setupMenu();
     }
 
-    @FXML
+  //  @FXML
     private void onClickPlay(){
         //get the value of the forceSlider
         //get the value of the angleSlider
