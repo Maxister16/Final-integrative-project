@@ -1,8 +1,12 @@
 ### Java template
 *.class
 
+# Build files
+build/
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+.gradle/
 
 # Package Files #
 *.jar
