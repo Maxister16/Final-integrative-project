@@ -11,57 +11,70 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class TestClassM extends Application{
+import java.io.IOException;
 
+public class TestClassM extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
+        stage.setMinHeight(600);
+        stage.setMinWidth(900);
+        stage.setScene(welcomeScene.getScene());
+        stage.show();
+    }
     public static void main(String[] args) {
         Application.launch();
     }
 
-    @Override
-    public void start(Stage ps){
-        Pane pane = new Pane();
-        
-        //CustomAnimation dino = new CustomAnimation("gaming_DinoSprites_walk",5);
-        
-       /* Net net = new Net(1);
-        pane.getChildren().add(net);
-        net.setCenterX(50);
-        net.setCenterY(50);*/
-        
-        
-        GameStatus.initialBallsAndNets();
-        
-        for (int i = 0; i < GameStatus.nets.length; i++) {
-            GameStatus.nets[i].setCenterX((i%3)*60+20);
-            GameStatus.nets[i].setCenterY((i<3)?75:125);
-            
-            pane.getChildren().add(GameStatus.nets[i]);
-        }
-        
-        /*
-        //testVector
-        Vector v1 = new Vector(0,0);
-        Vector v2 = new Vector(0,4);
-        Vector v3 = new Vector(-4,0);
-        Vector v4 = new Vector(4,0);
-        System.out.println(Math.toDegrees(v1.getAngle()));
-        System.out.println(Math.toDegrees(v2.getAngle()));
-        System.out.println(Math.toDegrees(v3.getAngle()));
-        System.out.println(Math.toDegrees(v4.getAngle()));
-        */
-        
-        
-        
-        Scene sc = new Scene(pane,200,200);
-        ps.setTitle("testScene");
-        ps.setScene(sc);
-        ps.show();
-        
-        
-        //event listener
-        /*sc.setOnMouseClicked(e->{
-                    if(e.getButton()== MouseButton.PRIMARY){dino.nextFrame();}
-                    else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
-                });*/
-    }
 }
+
+    //Max's body
+
+//    @Override
+//    public void start(Stage ps){
+//        Pane pane = new Pane();
+//
+//        //CustomAnimation dino = new CustomAnimation("gaming_DinoSprites_walk",5);
+//
+//       /* Net net = new Net(1);
+//        pane.getChildren().add(net);
+//        net.setCenterX(50);
+//        net.setCenterY(50);*/
+//
+//
+//        GameStatus.initialBallsAndNets();
+//
+//        for (int i = 0; i < GameStatus.nets.length; i++) {
+//            GameStatus.nets[i].setCenterX((i%3)*60+20);
+//            GameStatus.nets[i].setCenterY((i<3)?75:125);
+//
+//            pane.getChildren().add(GameStatus.nets[i]);
+//        }
+//
+//        /*
+//        //testVector
+//        Vector v1 = new Vector(0,0);
+//        Vector v2 = new Vector(0,4);
+//        Vector v3 = new Vector(-4,0);
+//        Vector v4 = new Vector(4,0);
+//        System.out.println(Math.toDegrees(v1.getAngle()));
+//        System.out.println(Math.toDegrees(v2.getAngle()));
+//        System.out.println(Math.toDegrees(v3.getAngle()));
+//        System.out.println(Math.toDegrees(v4.getAngle()));
+//        */
+//
+//
+//
+//        Scene sc = new Scene(pane,200,200);
+//        ps.setTitle("testScene");
+//        ps.setScene(sc);
+//        ps.show();
+//
+//
+//        //event listener
+//        /*sc.setOnMouseClicked(e->{
+//                    if(e.getButton()== MouseButton.PRIMARY){dino.nextFrame();}
+//                    else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
+//                });*/
+//    }
+//}

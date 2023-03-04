@@ -1,13 +1,16 @@
 package Pool;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class GrassPlayScene {
     private Scene scene;
 
     public GrassPlayScene(Stage primaryStage, Table table) {
-        new PlayScene(primaryStage, table);
+        PlayScene playScene = new PlayScene(primaryStage, table);
+        scene = playScene.getScene();
+        primaryStage.setScene(playScene.getScene());
     }
 
     public Scene getScene() {

@@ -11,7 +11,7 @@ public class Table implements InteractiveObject{
     Rectangle border;
     
     public Table(){
-        this.setImage(newImage);
+       // this.setImage(newImage);
     }
     
     @Override

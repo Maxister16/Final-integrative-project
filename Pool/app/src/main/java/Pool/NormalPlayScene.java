@@ -7,7 +7,9 @@ public class NormalPlayScene {
     private Scene scene;
 
     public NormalPlayScene(Stage primaryStage, Table table) {
-        new PlayScene(primaryStage, table);
+        PlayScene playScene = new PlayScene(primaryStage, table);
+        scene = playScene.getScene();
+        primaryStage.setScene(playScene.getScene());
     }
 
     public Scene getScene() {

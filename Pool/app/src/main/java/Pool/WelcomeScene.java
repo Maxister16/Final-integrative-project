@@ -21,19 +21,19 @@ public class WelcomeScene {
         gridPane.add(grassBtn, 2, 0);
         gridPane.add(iceBtn, 3, 0);
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(new Node[]{gridPane});
+        layout.getChildren().addAll(gridPane);
         this.scene = new Scene(layout, 300.0, 250.0);
         normalBtn.setOnAction((event) -> {
-            PlayScene playScene = new PlayScene(primaryStage, table);
-            primaryStage.setScene(playScene.getScene());
+            NormalPlayScene normalPlayScene = new NormalPlayScene(primaryStage, table);
+            primaryStage.setScene(normalPlayScene.getScene());
         });
         grassBtn.setOnAction((event) -> {
-            PlayScene playScene = new PlayScene(primaryStage, table);
-            primaryStage.setScene(playScene.getScene());
+            GrassPlayScene grassPlayScene = new GrassPlayScene(primaryStage, table);
+            primaryStage.setScene(grassPlayScene.getScene());
         });
         iceBtn.setOnAction((event) -> {
-            PlayScene playScene = new PlayScene(primaryStage, table);
-            primaryStage.setScene(playScene.getScene());
+            IcePlayScene icePlayScene = new IcePlayScene(primaryStage, table);
+            primaryStage.setScene(icePlayScene.getScene());
         });
     }
 

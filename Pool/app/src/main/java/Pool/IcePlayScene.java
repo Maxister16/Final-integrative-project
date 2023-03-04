@@ -7,7 +7,9 @@ public class IcePlayScene {
     private Scene scene;
 
     public IcePlayScene(Stage primaryStage, Table table) {
-        new PlayScene(primaryStage, table);
+        PlayScene playScene = new PlayScene(primaryStage, table);
+        scene = playScene.getScene();
+        primaryStage.setScene(playScene.getScene());
     }
 
     public Scene getScene() {
