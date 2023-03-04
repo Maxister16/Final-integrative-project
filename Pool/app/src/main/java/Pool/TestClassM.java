@@ -4,6 +4,7 @@
 package Pool;
 
 import static Pool.GameStatus.table;
+import Pool.Scenes.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -33,7 +34,7 @@ public class TestClassM extends Application{
         net.setCenterX(50);
         net.setCenterY(50);*/
         
-        
+        /*
         GameStatus.table.setX((WIDTH_OF_WINDOW-GameStatus.table.getWidth())*0.5);
         GameStatus.table.setY(HEIGHT_OF_WINDOW-GameStatus.table.getHeight()-50);
         table.setImage(new Image("InteractiveObjectIMG\\tableGrassIMG.png"));
@@ -69,7 +70,7 @@ public class TestClassM extends Application{
         System.out.println(Math.toDegrees(v4.getAngle()));
         */
         
-        
+        //GrassPlayScene sc = new GrassPlayScene(ps,GameStatus.table);
         
         Scene sc = new Scene(pane,WIDTH_OF_WINDOW,HEIGHT_OF_WINDOW);
         ps.setTitle("testScene");
