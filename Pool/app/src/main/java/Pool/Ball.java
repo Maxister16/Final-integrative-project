@@ -12,14 +12,9 @@ public class Ball extends Circle implements InteractiveObject{
     private static double gravity=9.806;
     private int id;
     private int type;
-    private double xi;
-    private double yi;
-    private double vi;
-    private double vix;
-    private double viy;
-    private double a;
-    private double ax;
-    private double ay;
+    private Vector position;
+    private Vector vi;
+    private Vector a;
     private boolean isMoving;
     private long initialTime;
 //BALL CONSTRUCTOR
@@ -37,38 +32,20 @@ public class Ball extends Circle implements InteractiveObject{
     public double getType(){
         return this.type;
     }
-//GET X DOUBLE
-    public double getXi(){
-        return this.xi;
+//GET POSITION
+    public Vector getVectorPosition(){
+        return this.position;
     }
-//GET Y DOUBLE
-    public double getYi(){
-        return this.yi;
-    }
-//GET VI DOUBLE
-    public double getVi(){
+//GET VI VECTOR
+    public Vector getVi(){
         return this.vi;
     }
-//GET VIX DOUBLE
-    public double getVix(){
-        return this.vix;
-    }
-//GET VIY DOUBLE
-    public double getViy(){
-        return this.viy;
-    }
-//GET A DOUBLE
-    public double getA(){
+//GET A VECTOR
+    public Vector getA(){
         return this.a;
     }
-//GET AY DOUBLE
-    public double getAy(){
-        return this.ay;
-    }
-//GET AX DOUBLE
-    public double getAx(){
-        return this.ax;
-    }
+
+
 //GET IS MOVING DOUBLE
     public boolean getIsMoving(){
         return isMoving;
@@ -83,65 +60,57 @@ public class Ball extends Circle implements InteractiveObject{
     public void setType(int type){
         this.type=type;
     }
-//SET X DOUBLE
-    public void setXi(double xi){
-        this.xi=xi;
+//SET POSITION
+    public void setVectorPosition(Vector p){
+        this.position=p;
     }
-//SET Y DOUBLE
-    public void setYi(double yi){
-        this.yi=yi;
-    }
-//SET VI DOUBLE
-    public void setVi(double vi){
+//SET VI VECTOR
+    public void setVi(Vector vi){
         this.vi=vi;
     }
-//SET VIX DOUBLE
-    public void setVix(double vix){
-        this.vix=vix;
-    }
-//SET A DOUBLE
-    public void setA(double a){
+//SET A VECTOR
+    public void setA(Vector a){
         this.a=a;
     }
-//SET AY DOUBLE
-    public void setAy(double ay){
-        this.ay=ay;
-    }
-//SET AX DOUBLE
-    public void setAx(double ax){
-        this.ax=ax;
-    }
     public void updateMovement(Ball x){
+        //DEFINING NECESSARY VARIABLES
+        double xVelocityMag;
+        double viVelocityMag;
         //update the movement using the principles of collision
         //DEFINING NECESSARY VALUES FOR EQUATION
-        double velocitySum=this.getVi() + x.getVi();
+        double velocitySum=this.getVi().getMagnitude() + x.getVi().getMagnitude();
         double q=velocitySum;
 
-        double velocitySumSquared=Math.pow(this.getVi(), 2) + Math.pow(x.getVi(), 2);
+        double velocitySumSquared=Math.pow(this.getVi().getMagnitude(), 2) + Math.pow(x.getVi().getMagnitude(), 2);
         double z=velocitySumSquared;
 
         double r=(q*q)-z;
 
-        //CALCULATE VIX
+        //CALCULATE VI
         double velocityFound1= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
         double velocityFound2= (2*q - Math.sqrt((4*q*q)+ (8*r)))/4;
-        //IF FIRST BALL IS WITH HIGHER CAPACITY
-        if(this.getVi()<x.getVi()){
-            if(velocityFound1<x.getVi()){
-                x.setVi(velocityFound1);
-                this.setVi(velocityFound2);
+        //FIND THE X AND Y COMPONENTS OF VELOCITY VECTOR BETWEEN THE BALLS
+        //BALL VI
+        //Vector Vix=
+
+
+        //IF FIRST BALL IS WITH HIGHER INITIAL VELOCITY (knowing that ball with higher velocity loses velocity in collision)
+        if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
+            if(velocityFound1<x.getVi().getMagnitude()){
+                xVelocityMag=velocityFound1;
+                viVelocityMag=velocityFound2;
             }else{
-                x.setVi(velocityFound2);
-                this.setVi(velocityFound1);
+                xVelocityMag=velocityFound2;
+                viVelocityMag=velocityFound1;
             }
 //NOW IF THE OTHER BALL IS THE ONE WITH HIGHER VELOCITY
-        } else if(this.getVi()>x.getVi()){
-            if(velocityFound1<this.getVi()){
-                this.setVi(velocityFound1);
-                x.setVi(velocityFound2);
+        } else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
+            if(velocityFound1<this.getVi().getMagnitude()){
+                xVelocityMag=velocityFound2;
+                viVelocityMag=velocityFound1;
             }else{
-                this.setVi(velocityFound2);
-                x.setVi(velocityFound1);
+                xVelocityMag=velocityFound1;
+                viVelocityMag=velocityFound2;
             }
         }
     }
