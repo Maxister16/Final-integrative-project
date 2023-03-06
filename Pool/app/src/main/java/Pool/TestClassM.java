@@ -21,6 +21,14 @@ public class TestClassM extends Application {
         stage.setMinWidth(900);
         stage.setScene(welcomeScene.getScene());
         stage.show();
+        
+        Vector v = new Vector(4,3);
+        Vector u = v.getUnitVector();
+        Vector p = v.getPerpendicularVector();
+        
+        v.printInfo("v: ");
+        u.printInfo("u: ");
+        p.printInfo("unitP: ");
     }
     public static void main(String[] args) {
         Application.launch();
