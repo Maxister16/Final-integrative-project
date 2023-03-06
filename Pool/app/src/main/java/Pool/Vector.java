@@ -14,9 +14,9 @@ public class Vector extends Line{
         this.x = 0;
         this.y = 0;
     }
-    public Vector(double newX, double newY){
-        this.x = newX;
-        this.y = newY;
+    public Vector(double xcomponent, double ycomponent){
+        this.x = xcomponent;
+        this.y = ycomponent;
     }
     
     //mutator
@@ -35,10 +35,10 @@ public class Vector extends Line{
         return y;
     }
     public double getMagnitude(){
-        return y;//NEED TO DO THIS CLASS
+        return Math.sqrt(vectorDotProduct(this, this));
     }
     
-    public double getAngle(){//in RAD NEED FIXING
+    public double getAngle(){//in RAD
         
         if(x==0){//x cannot = 0 because y/x
             if(y==0)
@@ -81,8 +81,8 @@ public class Vector extends Line{
     public static Vector vectorScalarProduct(double k, Vector v){//k*v1
         return new Vector(k*v.getXcomponent(),k*v.getYcomponent());
     }
-    public static Vector vectorDotProduct(Vector v1, Vector v2){//v1*v2
-        return new Vector(v1.getXcomponent()*v2.getXcomponent(),v1.getYcomponent()*v2.getYcomponent());
+    public static double vectorDotProduct(Vector v1, Vector v2){//v1 ? v2
+        return v1.getXcomponent()*v2.getXcomponent()+v1.getYcomponent()*v2.getYcomponent();
     }
     
 }

@@ -7,8 +7,8 @@ import javafx.scene.image.ImageView;
 
 public class CustomAnimation extends ImageView{
 
-    int currentFrame;
-    Image[] imgArr;
+    private int currentFrame;
+    private Image[] imgArr;
     
     //constructors
     public CustomAnimation(String nameImg, int nbrOfFrames){

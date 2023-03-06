@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import javafx.scene.shape.Circle;
 
 import java.lang.Math;
-public class Ball extends Circle {
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+public class Ball extends Circle implements InteractiveObject{
 //SETTING CLASS FIELDS
-    private static double friction;
+    public static double friction;
     private static double gravity=9.806;
-    private static ArrayList<Ball> listOfBalls= new ArrayList<Ball>();
     private int id;
     private int type;
     private double xi;
@@ -24,6 +25,7 @@ public class Ball extends Circle {
 //BALL CONSTRUCTOR
     public Ball(int id){
         this.id=id;
+        this.setRadius(10);
     }
     //ACCESSOR METHODS
    
@@ -123,29 +125,31 @@ public class Ball extends Circle {
         //CALCULATE VIX
         double velocityFound= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
         //if(velocityFound<=this.)
-       
-       
-       
-       
+
     }
    
     public void reactIsHit(){
         //check if the ball touches another
         //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
-        for(int i=0; i<listOfBalls.size(); i++){
+        for(int i=0; i<GameStatus.listOfBalls.length; i++){
         //SET VALUES FOR X1,Y1 AND X2,Y2
             double x1=this.getCenterX();
-            double x2=listOfBalls.get(i).getCenterX();
+            double x2=GameStatus.listOfBalls[i].getCenterX();
             double y1=this.getCenterY();
-            double y2= listOfBalls.get(i).getCenterY();
+            double y2= GameStatus.listOfBalls[i].getCenterY();
         //CHECK IF BALLS ARE COLLIDING
             if(Math.sqrt( Math.pow( (x1-x2), 2) + Math.pow( (y1-y2), 2) ) <= 2*this.getRadius()){
-                this.updateMovement(listOfBalls.get(i));
+                this.updateMovement(GameStatus.listOfBalls[i]);
                 //listOfBalls.get(i).updateMovement(this);  
             }
             else{
             }
            
         }
+    }
+
+    @Override
+    public void setImage(Image newImage) {
+        this.setFill(new ImagePattern(newImage));
     }
 }
