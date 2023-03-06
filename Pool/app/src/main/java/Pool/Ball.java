@@ -114,18 +114,36 @@ public class Ball extends Circle implements InteractiveObject{
     public void updateMovement(Ball x){
         //update the movement using the principles of collision
         //DEFINING NECESSARY VALUES FOR EQUATION
-        double velocitySum=this.getVix() + x.getVix();
+        double velocitySum=this.getVi() + x.getVi();
         double q=velocitySum;
-       
-        double velocitySumSquared=Math.pow(this.getVix(), 2) + Math.pow(x.getVix(), 2);
-        double z=velocitySumSquared;
-       
-        double r=(q*q)-z;
-       
-        //CALCULATE VIX
-        double velocityFound= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
-        //if(velocityFound<=this.)
 
+        double velocitySumSquared=Math.pow(this.getVi(), 2) + Math.pow(x.getVi(), 2);
+        double z=velocitySumSquared;
+
+        double r=(q*q)-z;
+
+        //CALCULATE VIX
+        double velocityFound1= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
+        double velocityFound2= (2*q - Math.sqrt((4*q*q)+ (8*r)))/4;
+        //IF FIRST BALL IS WITH HIGHER CAPACITY
+        if(this.getVi()<x.getVi()){
+            if(velocityFound1<x.getVi()){
+                x.setVi(velocityFound1);
+                this.setVi(velocityFound2);
+            }else{
+                x.setVi(velocityFound2);
+                this.setVi(velocityFound1);
+            }
+//NOW IF THE OTHER BALL IS THE ONE WITH HIGHER VELOCITY
+        } else if(this.getVi()>x.getVi()){
+            if(velocityFound1<this.getVi()){
+                this.setVi(velocityFound1);
+                x.setVi(velocityFound2);
+            }else{
+                this.setVi(velocityFound2);
+                x.setVi(velocityFound1);
+            }
+        }
     }
    
     public void reactIsHit(){
