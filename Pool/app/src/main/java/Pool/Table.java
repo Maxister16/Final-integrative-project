@@ -15,8 +15,9 @@ public class Table implements InteractiveObject{
     public Table(){
         background = new Rectangle(WIDTH, HEIGHT);
         border = new Rectangle(WIDTH, HEIGHT);
-        border.setFill(new ImagePattern(new Image("InteractiveObjectIMG\\tableBorderIMG.png")));
+        border.setFill(new ImagePattern(new Image("/InteractiveObjectIMG/tableBorderIMG.png")));
     }
+
     
     public void setX(double x){
         background.setX(x);

@@ -9,10 +9,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-    public class PlayScene {
+//make it extend scene so i dont need a private scene and a get scene method caus its already a scene
+
+    public class ScenePlay{
         private Scene scene;
 
-        public PlayScene(Stage primaryStage, Table table) {
+        public ScenePlay(Stage primaryStage) {
             
             GameStatus.initialize();
 
@@ -40,9 +42,9 @@ import javafx.stage.Stage;
             layout.getChildren().addAll(GameStatus.nets);
             layout.getChildren().addAll(GameStatus.listOfBalls);
             layout.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder());
-            
+
             GameStatus.setZorder();
-            
+
             this.scene = new Scene(layout);
 
             playButton.setOnAction((event) -> {
@@ -53,8 +55,8 @@ import javafx.stage.Stage;
             });
 
             menuButton.setOnAction((event) -> {
-                MenuScene menuScene = new MenuScene(primaryStage, table);
-                primaryStage.setScene(menuScene.getScene());
+                SceneMenu sceneMenu = new SceneMenu(primaryStage);
+                primaryStage.setScene(sceneMenu.getScene());
             });
         }
 

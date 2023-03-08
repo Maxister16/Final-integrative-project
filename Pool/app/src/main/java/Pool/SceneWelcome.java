@@ -1,17 +1,16 @@
 package Pool;
 
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class WelcomeScene {
+public class SceneWelcome {
     private Scene scene;
 
-    public WelcomeScene(Stage primaryStage, Table table) {
+    public SceneWelcome(Stage primaryStage) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         Button normalBtn = new Button("Normal");
@@ -24,16 +23,16 @@ public class WelcomeScene {
         layout.getChildren().addAll(gridPane);
         this.scene = new Scene(layout, 300.0, 250.0);
         normalBtn.setOnAction((event) -> {
-            NormalPlayScene normalPlayScene = new NormalPlayScene(primaryStage, table);
-            primaryStage.setScene(normalPlayScene.getScene());
+            ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);
+            primaryStage.setScene(scenePlayNormal.getScene());
         });
         grassBtn.setOnAction((event) -> {
-            GrassPlayScene grassPlayScene = new GrassPlayScene(primaryStage, table);
-            primaryStage.setScene(grassPlayScene.getScene());
+            ScenePlayGrass scenePlayGrass = new ScenePlayGrass(primaryStage);
+            primaryStage.setScene(scenePlayGrass.getScene());
         });
         iceBtn.setOnAction((event) -> {
-            IcePlayScene icePlayScene = new IcePlayScene(primaryStage, table);
-            primaryStage.setScene(icePlayScene.getScene());
+            ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
+            primaryStage.setScene(scenePlayIce.getScene());
         });
     }
 

@@ -3,15 +3,14 @@ package Pool;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class MenuScene {
+public class SceneMenu{
     private Scene scene;
 
-    public MenuScene(Stage primaryStage, Table table) {
+    public SceneMenu(Stage primaryStage) {
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -40,8 +39,8 @@ public class MenuScene {
         });
 
         homeButton.setOnAction((event) -> {
-            WelcomeScene welcomeScene = new WelcomeScene(primaryStage, table);
-            primaryStage.setScene(welcomeScene.getScene());
+            SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+            primaryStage.setScene(sceneWelcome.getScene());
         });
 
         exitButton.setOnAction((event) -> {
