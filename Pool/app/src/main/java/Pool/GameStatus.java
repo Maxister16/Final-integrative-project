@@ -2,7 +2,7 @@
 package Pool;
 
 import javafx.scene.image.Image;
-import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 
 public class GameStatus {
     public static boolean isGameOn = false;
@@ -13,6 +13,7 @@ public class GameStatus {
     public static Ball[] listOfBalls = new Ball[10];
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
+    public static Line[] tableLines = new Line[2];
     
     public static void updateTime() throws InterruptedException{
         while(GameStatus.isGameOn){
@@ -22,17 +23,40 @@ public class GameStatus {
     }
     
     public static void positionObjects(double widthOfWindow, double heightOfWindow){
-        
+        //center table
         table.setX((widthOfWindow-table.getWidth())*0.5);
         table.setY(heightOfWindow-table.getHeight()-50);
         
+        //set position of lines
+    //HEADLINE
+        tableLines[0].setStartX(table.getX()+0.2*table.getWidth());
+        tableLines[0].setStartY(table.getY()+10);
+        tableLines[0].setEndX(table.getX()+0.2*table.getWidth());
+        tableLines[0].setEndY(table.getY()+table.getHeight()-10);
+    //START OF THE LOSANGE
+        tableLines[1].setStartX(table.getX()+0.7*table.getWidth());
+        tableLines[1].setStartY(table.getY()+10);
+        tableLines[1].setEndX(table.getX()+0.7*table.getWidth());
+        tableLines[1].setEndY(table.getY()+table.getHeight()-10);
+        
+        //set position of Nets and Balls
         for(int i = 0; i<listOfBalls.length;i++){
             if(i<nets.length){
                 nets[i].setCenterX((i%3)*(table.getWidth()-nets[0].getRadius()*2.5)/2+table.getX()+nets[0].getRadius());
                 nets[i].setCenterY((i<3)?table.getY()+nets[0].getRadius():table.getY()+table.getHeight()-nets[0].getRadius());
             }
-            listOfBalls[i].setCenterX(table.getX()+0.75*table.getWidth()+i*2*listOfBalls[i].getRadius());
-            listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
+            if(i==0){
+                listOfBalls[i].setCenterX(tableLines[0].getStartX());
+                listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
+            }
+            else if (i==8){
+                listOfBalls[i].setCenterX(tableLines[1].getStartX()+listOfBalls[i].getRadius()*1.5);
+                listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
+            }
+            else if (listOfBalls[i].getType() == 1){
+                listOfBalls[i].setCenterX(table.getX()+tableLines[1].getStartX()+i*2*listOfBalls[i].getRadius());
+                listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());   
+            }
         }
         setZorder();
     }
@@ -44,6 +68,9 @@ public class GameStatus {
         for(int i = 0; i<listOfBalls.length; i++){
             if(i<nets.length)
                 nets[i] = new Net(i);
+            
+            if(i<tableLines.length)
+                tableLines[i] = new Line();
             
             listOfBalls[i] = new Ball(i);
             if(i==0){ //is it white
@@ -72,6 +99,9 @@ public class GameStatus {
     public static void setZorder(){
         for (Net net : nets) {
             net.toFront();
+        }
+        for(Line line : tableLines){
+            line.toFront();
         }
         table.getBorder().toFront();
         for (Ball listOfBall : listOfBalls) {

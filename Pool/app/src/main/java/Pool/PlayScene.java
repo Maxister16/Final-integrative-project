@@ -41,6 +41,7 @@ import javafx.stage.Stage;
             
             gamePane.getChildren().addAll(GameStatus.nets);
             gamePane.getChildren().addAll(GameStatus.listOfBalls);
+            gamePane.getChildren().addAll(GameStatus.tableLines);
             gamePane.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder());
             layout.getChildren().addAll(gridPaneTop, gridPaneBot,gamePane);
             
