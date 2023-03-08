@@ -63,8 +63,8 @@ public class GameStatus {
     
     public static void initialize(){
         
-        Image team1Img = new Image("InteractiveObjectIMG\\BallTeam1IMG.png");
-        Image team2Img = new Image("InteractiveObjectIMG\\BallTeam2IMG.png");
+        Image team1Img = new Image("InteractiveObjectIMG/BallTeam1IMG.png");
+        Image team2Img = new Image("InteractiveObjectIMG/BallTeam2IMG.png");
         for(int i = 0; i<listOfBalls.length; i++){
             if(i<nets.length)
                 nets[i] = new Net(i);
@@ -74,12 +74,12 @@ public class GameStatus {
             
             listOfBalls[i] = new Ball(i);
             if(i==0){ //is it white
-                listOfBalls[i].setImage(new Image("InteractiveObjectIMG\\BallWhiteIMG.png"));
+                listOfBalls[i].setImage(new Image("InteractiveObjectIMG/BallWhiteIMG.png"));
                 //listOfBalls[i].setFill(Paint.valueOf("#ffffff"));
                 listOfBalls[i].setType(0);
             }
             else if(i==8){
-                listOfBalls[i].setImage(new Image("InteractiveObjectIMG\\BallBlackIMG.png"));
+                listOfBalls[i].setImage(new Image("InteractiveObjectIMG/BallBlackIMG.png"));
                 //listOfBalls[i].setFill(Paint.valueOf("#000000"));
                 listOfBalls[i].setType(3);
             }
