@@ -79,22 +79,30 @@ public class Ball extends Circle implements InteractiveObject{
     }
     public void updateMovement(Ball x){
         //DEFINING NECESSARY VARIABLES
-        double xVelocityMag;
-        double viVelocityMag;
-        //update the movement using the principles of collision
+        //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
+        double xVelocityMag=0;
+        double viVelocityMag = 0;
+
         //ROTATE THE SYSTEM OF THE BALLS
+
         //FIND ANGLE OF INITIAL COLLISION
-        //absolute value of the x and y components
         double vX= java.lang.Math.abs(this.getCenterX()-x.getCenterX());
         double vY=java.lang.Math.abs(this.getCenterY()-x.getCenterY());
         double angleCollision= atan(vY/vX);
         double ac=angleCollision;
+
         //MATRIX MULTIPLICATION
+
+        //X COMPONENTS OF VELOCITY
         double thisVelocity=  this.getVi().getXcomponent()*(cos(ac))+ this.getVi().getYcomponent()*(sin(ac));
         double xBallsVelocity= x.getVi().getXcomponent()*(cos(ac))+ x.getVi().getYcomponent()*(sin(ac));
+        //Y COMPONENTS OF VELOCITY (WHICH DO NOT CHANGE)
+        double thisY= this.getVi().getYcomponent()*(cos(ac))+ this.getVi().getXcomponent()*(-sin(ac));
+        double xBallsY= x.getVi().getXcomponent()*(-sin(ac))+ x.getVi().getYcomponent()*(cos(ac));
 
 
         //DEFINING NECESSARY VALUES FOR EQUATION
+
         //double velocitySum=this.getVi().getMagnitude() + x.getVi().getMagnitude();
         double velocitySum=thisVelocity + xBallsVelocity;
         double q=velocitySum;
@@ -112,7 +120,8 @@ public class Ball extends Circle implements InteractiveObject{
         //IF FIRST BALL IS WITH HIGHER INITIAL VELOCITY (knowing that ball with higher velocity loses velocity in collision)
         //if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
         if(thisVelocity<xBallsVelocity){
-            if(velocityFound1<x.getVi().getMagnitude()){
+            //if(velocityFound1<x.getVi().getMagnitude()){
+            if(velocityFound1<xBallsVelocity){
                 xVelocityMag=velocityFound1;
                 viVelocityMag=velocityFound2;
             }else{
@@ -122,7 +131,8 @@ public class Ball extends Circle implements InteractiveObject{
 //NOW IF THE OTHER BALL IS THE ONE WITH HIGHER VELOCITY
         } //else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
         else if(thisVelocity>xBallsVelocity){
-            if(velocityFound1<this.getVi().getMagnitude()){
+            //if(velocityFound1<this.getVi().getMagnitude()){
+            if(velocityFound1<thisVelocity){
                 xVelocityMag=velocityFound2;
                 viVelocityMag=velocityFound1;
             }else{
@@ -130,16 +140,16 @@ public class Ball extends Circle implements InteractiveObject{
                 viVelocityMag=velocityFound2;
             }
         }
-//SET THE VALUES OF THE VERTICAL COMPONENTS OF VELOCITY
+
+        //ROTATE THE SYSTEM BACK ALONG ANGLE OF ROTATION
+        this.getVi().setYcomponent(cos(ac)*thisY+ sin(ac)*viVelocityMag);
+        this.getVi().setXcomponent(-sin(ac)*thisY+ cos(ac)*viVelocityMag);
+
+        x.getVi().setXcomponent(xVelocityMag*cos(ac)+ xBallsY*-sin(ac));
+        x.getVi().setYcomponent(xBallsY*sin(ac)+ xVelocityMag*cos(ac));
 
 
 
-    //
-
-         
-
-
-    //X VELOCITY
     }
    
     public void reactIsHit(){
