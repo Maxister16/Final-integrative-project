@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -13,7 +14,11 @@ import javafx.stage.Stage;
         private Scene scene;
 
         public PlayScene(Stage primaryStage, Table table) {
+            
+            GameStatus.initialize();
 
+            Pane gamePane = new Pane();
+            
             GridPane gridPaneTop = new GridPane();
             GridPane gridPaneBot = new GridPane();
             gridPaneTop.setAlignment(Pos.TOP_CENTER);
@@ -33,8 +38,13 @@ import javafx.stage.Stage;
             StackPane layout = new StackPane();
             layout.setMinWidth(900);
             layout.setMinHeight(600);
-
-            layout.getChildren().addAll(gridPaneTop, gridPaneBot);
+            
+            gamePane.getChildren().addAll(GameStatus.nets);
+            gamePane.getChildren().addAll(GameStatus.listOfBalls);
+            gamePane.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder());
+            layout.getChildren().addAll(gridPaneTop, gridPaneBot,gamePane);
+            
+            GameStatus.positionObjects(layout.getMinWidth(), layout.getMinHeight());
             this.scene = new Scene(layout);
 
             playButton.setOnAction((event) -> {

@@ -21,40 +21,51 @@ public class GameStatus {
         }
     }
     
+    public static void positionObjects(double widthOfWindow, double heightOfWindow){
+        
+        table.setX((widthOfWindow-table.getWidth())*0.5);
+        table.setY(heightOfWindow-table.getHeight()-50);
+        
+        for(int i = 0; i<listOfBalls.length;i++){
+            if(i<nets.length){
+                nets[i].setCenterX((i%3)*(table.getWidth()-nets[0].getRadius()*2.5)/2+table.getX()+nets[0].getRadius());
+                nets[i].setCenterY((i<3)?table.getY()+nets[0].getRadius():table.getY()+table.getHeight()-nets[0].getRadius());
+            }
+            listOfBalls[i].setCenterX(table.getX()+0.75*table.getWidth()+i*2*listOfBalls[i].getRadius());
+            listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
+        }
+        setZorder();
+    }
+    
     public static void initialize(){
         
-        for(int i = 0; i<nets.length;i++){
-            nets[i] = new Net(i);
-            nets[i].setCenterX((i%3)*table.getWidth()/2+table.getX());
-            nets[i].setCenterY((i<3)?table.getY()+20:table.getY()+table.getHeight()-20); 
-        }
-        //Image team1Img = new Image("Interactive\\team1BallIMG.png");
-        //Image team2Img = new Image("Interactive\\team2BallIMG.png");
+        Image team1Img = new Image("InteractiveObjectIMG\\BallTeam1IMG.png");
+        Image team2Img = new Image("InteractiveObjectIMG\\BallTeam2IMG.png");
         for(int i = 0; i<listOfBalls.length; i++){
+            if(i<nets.length)
+                nets[i] = new Net(i);
+            
             listOfBalls[i] = new Ball(i);
             if(i==0){ //is it white
-                //listOfBalls[i].setImage(new Image("Interactive\\whiteBallIMG.png"));
-                listOfBalls[i].setFill(Paint.valueOf("#ffffff"));
+                listOfBalls[i].setImage(new Image("InteractiveObjectIMG\\BallWhiteIMG.png"));
+                //listOfBalls[i].setFill(Paint.valueOf("#ffffff"));
                 listOfBalls[i].setType(0);
             }
             else if(i==8){
-                //listOfBalls[i].setImage(new Image("Interactive\\blackBallIMG.png"));
-                listOfBalls[i].setFill(Paint.valueOf("#000000"));
+                listOfBalls[i].setImage(new Image("InteractiveObjectIMG\\BallBlackIMG.png"));
+                //listOfBalls[i].setFill(Paint.valueOf("#000000"));
                 listOfBalls[i].setType(3);
             }
             else if(i<=4){//is it team 1
-                //listOfBalls[i].setImage(team1Img);
-                listOfBalls[i].setFill(Paint.valueOf("#ff0000"));
+                listOfBalls[i].setImage(team1Img);
+                //listOfBalls[i].setFill(Paint.valueOf("#ff0000"));
                 listOfBalls[i].setType(1);
             }
             else {//is it team 2
-                //listOfBalls[i].setImage(team2Img);
-                listOfBalls[i].setFill(Paint.valueOf("#ff9900"));
+                listOfBalls[i].setImage(team2Img);
+                //listOfBalls[i].setFill(Paint.valueOf("#ff9900"));
                 listOfBalls[i].setType(2);
             }
-            
-            listOfBalls[i].setCenterX(table.getX()+0.75*table.getWidth()+i*2*listOfBalls[i].getRadius());
-            listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
         }
     }
     
