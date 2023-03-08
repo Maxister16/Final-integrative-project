@@ -6,6 +6,9 @@ import javafx.scene.shape.Circle;
 import java.lang.Math;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+
+import static java.lang.Math.*;
+
 public class Ball extends Circle implements InteractiveObject{
 //SETTING CLASS FIELDS
     public static double friction;
@@ -62,6 +65,8 @@ public class Ball extends Circle implements InteractiveObject{
     }
 //SET POSITION
     public void setVectorPosition(Vector p){
+        //p.setXcomponent(this.getCenterX());
+        //p.setYcomponent(this.getCenterY());
         this.position=p;
     }
 //SET VI VECTOR
@@ -77,8 +82,21 @@ public class Ball extends Circle implements InteractiveObject{
         double xVelocityMag;
         double viVelocityMag;
         //update the movement using the principles of collision
+        //ROTATE THE SYSTEM OF THE BALLS
+        //FIND ANGLE OF INITIAL COLLISION
+        //absolute value of the x and y components
+        double vX= java.lang.Math.abs(this.getCenterX()-x.getCenterX());
+        double vY=java.lang.Math.abs(this.getCenterY()-x.getCenterY());
+        double angleCollision= atan(vY/vX);
+        double ac=angleCollision;
+        //MATRIX MULTIPLICATION
+        double thisVelocity=  this.getVi().getXcomponent()*(cos(ac))+ this.getVi().getYcomponent()*(sin(ac));
+        double xBallsVelocity= x.getVi().getXcomponent()*(cos(ac))+ x.getVi().getYcomponent()*(sin(ac));
+
+
         //DEFINING NECESSARY VALUES FOR EQUATION
-        double velocitySum=this.getVi().getMagnitude() + x.getVi().getMagnitude();
+        //double velocitySum=this.getVi().getMagnitude() + x.getVi().getMagnitude();
+        double velocitySum=thisVelocity + xBallsVelocity;
         double q=velocitySum;
 
         double velocitySumSquared=Math.pow(this.getVi().getMagnitude(), 2) + Math.pow(x.getVi().getMagnitude(), 2);
@@ -89,13 +107,11 @@ public class Ball extends Circle implements InteractiveObject{
         //CALCULATE VI
         double velocityFound1= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
         double velocityFound2= (2*q - Math.sqrt((4*q*q)+ (8*r)))/4;
-        //FIND THE X AND Y COMPONENTS OF VELOCITY VECTOR BETWEEN THE BALLS
-        //BALL VI
-        //Vector Vix=
 
 
         //IF FIRST BALL IS WITH HIGHER INITIAL VELOCITY (knowing that ball with higher velocity loses velocity in collision)
-        if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
+        //if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
+        if(thisVelocity<xBallsVelocity){
             if(velocityFound1<x.getVi().getMagnitude()){
                 xVelocityMag=velocityFound1;
                 viVelocityMag=velocityFound2;
@@ -104,7 +120,8 @@ public class Ball extends Circle implements InteractiveObject{
                 viVelocityMag=velocityFound1;
             }
 //NOW IF THE OTHER BALL IS THE ONE WITH HIGHER VELOCITY
-        } else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
+        } //else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
+        else if(thisVelocity>xBallsVelocity){
             if(velocityFound1<this.getVi().getMagnitude()){
                 xVelocityMag=velocityFound2;
                 viVelocityMag=velocityFound1;
@@ -113,6 +130,16 @@ public class Ball extends Circle implements InteractiveObject{
                 viVelocityMag=velocityFound2;
             }
         }
+//SET THE VALUES OF THE VERTICAL COMPONENTS OF VELOCITY
+
+
+
+    //
+
+         
+
+
+    //X VELOCITY
     }
    
     public void reactIsHit(){
