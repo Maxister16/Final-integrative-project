@@ -9,7 +9,7 @@ public class ScenePlayIce {
 
     public ScenePlayIce(Stage primaryStage) {
 
-        GameStatus.table.setImage(new Image("/InteractiveObjectIMG/tableIceIMG.png"));
+        GameStatus.table.setImage(new Image("InteractiveObjectIMG/tableIceIMG.png"));
 
         ScenePlay scenePlay = new ScenePlay(primaryStage);
         scene = scenePlay.getScene();

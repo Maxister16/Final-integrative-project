@@ -11,6 +11,7 @@ import java.io.IOException;
 public class TestClassM extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        //GameStatus.OnLaunch();
         SceneWelcome sceneWelcome = new SceneWelcome(stage);
         stage.setMinHeight(600);
         stage.setMinWidth(900);

@@ -23,22 +23,24 @@ import javafx.stage.Stage;
             gridPaneTop.setAlignment(Pos.TOP_CENTER);
             gridPaneBot.setAlignment(Pos.BOTTOM_LEFT);
 
-            Slider forceSlider = new Slider(1.0, 5.0, 1.0);
-            Slider angleSlider = new Slider(0.0, 359.0, 1.0);
+            // Create Sliders and Buttons
+            Slider forceSlider = new Slider(1, 10, 1);
+            Slider angleSlider = new Slider(0.0, 359, 1.0);
             Button playButton = new Button("Play");
             Button menuButton = new Button("Menu");
 
+            // Add Sliders and buttons to GridPane
             gridPaneBot.add(menuButton, 0, 0);
-
             gridPaneTop.add(forceSlider, 0, 0);
             gridPaneTop.add(angleSlider, 2, 0);
             gridPaneTop.add(playButton, 3, 0);
 
+            // Create Layout
             StackPane layout = new StackPane();
             layout.setMinWidth(900);
             layout.setMinHeight(600);
 
-            layout.getChildren().addAll(gridPaneTop, gridPaneBot);
+            layout.getChildren().addAll(gridPaneBot, gridPaneTop);
             layout.getChildren().addAll(GameStatus.nets);
             layout.getChildren().addAll(GameStatus.listOfBalls);
             layout.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder());

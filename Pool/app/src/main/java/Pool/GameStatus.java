@@ -2,6 +2,7 @@
 package Pool;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 
 public class GameStatus {
@@ -13,8 +14,48 @@ public class GameStatus {
     public static Ball[] listOfBalls = new Ball[10];
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
-    
-    public static void updateTime() throws InterruptedException{
+//    public static String os = "";
+
+//    public static Image ballBlack;
+//    public static Image ballWhite;
+//    public static Image ballTeam1;
+//    public static Image ballTeam2;
+//    public static Image net;
+//    public static Image tableIce;
+//    public static Image tableGrass;
+//    public static Image tableNormal;
+//    public static Image tableBorder;
+//    public static void OnLaunch() {
+//        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+//            os = "win";
+//            ballBlack= new Image("\\InteractiveObjectIMG\\BallBlackIMG.png");
+//            ballWhite = new Image("\\InteractiveObjectIMG\\BallWhiteIMG.png");
+//            ballTeam1 = new Image("\\InteractiveObjectIMG\\BallTeam1IMG.png");
+//            ballTeam2 = new Image("\\InteractiveObjectIMG\\BallTeam2IMG.png");
+//            net = new Image("\\InteractiveObjectIMG\\netIMG.png");
+//            tableIce = new Image("\\InteractiveObjectIMG\\tableBorderIMG.png");
+//            tableGrass = new Image("\\InteractiveObjectIMG\\tableGrassIMG.png");
+//            tableNormal = new Image("\\InteractiveObjectIMG\\tableNormalIMG.png");
+//            tableBorder = new Image("\\InteractiveObjectIMG\\tableBorderIMG.png");
+//
+//        } else if (System.getProperty("os.name").toLowerCase().contains("osx")) {
+//            os = "mac";
+//            ballBlack= new Image("/InteractiveObjectIMG/BallBlackIMG.png");
+//            ballWhite = new Image("/InteractiveObjectIMG/BallWhiteIMG.png");
+//            ballTeam1 = new Image("/InteractiveObjectIMG/BallTeam1IMG.png");
+//            ballTeam2 = new Image("/InteractiveObjectIMG/BallTeam2IMG.png");
+//            net = new Image("/InteractiveObjectIMG/netIMG.png");
+//            tableIce = new Image("/InteractiveObjectIMG/tableBorderIMG.png");
+//            tableGrass = new Image("/InteractiveObjectIMG/tableGrassIMG.png");
+//            tableNormal = new Image("/InteractiveObjectIMG/tableNormalIMG.png");
+//            tableBorder = new Image("/InteractiveObjectIMG/tableBorderIMG.png");
+//
+//        } else {
+//            System.out.println("System is not supported");
+//        }
+    //   }
+
+        public static void updateTime() throws InterruptedException{
         while(GameStatus.isGameOn){
             Thread.sleep(100);
             time += 100;

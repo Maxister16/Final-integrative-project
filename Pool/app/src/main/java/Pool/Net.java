@@ -10,7 +10,7 @@ public class Net extends Circle implements InteractiveObject{
     
     public Net(int index){
         super(25);
-        this.setImage(new Image("/InteractiveObjectIMG/netIMG.png"));
+        this.setImage(new Image("InteractiveObjectIMG/netIMG.png"));
         switch(index){
             case 0, 5 -> this.setRotate(-45);
             case 1, 4 -> this.setRotate(0);

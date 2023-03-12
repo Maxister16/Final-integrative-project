@@ -9,7 +9,7 @@ public class ScenePlayNormal {
 
     public ScenePlayNormal(Stage primaryStage) {
         
-        GameStatus.table.setImage(new Image("/InteractiveObjectIMG/tableNormalIMG.png"));
+        GameStatus.table.setImage(new Image("InteractiveObjectIMG/tableNormalIMG.png"));
         
         ScenePlay scenePlay = new ScenePlay(primaryStage);
         scene = scenePlay.getScene();
