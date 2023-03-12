@@ -27,8 +27,8 @@ public class SceneMenu{
         gridPane.add(physicsButton, 0, 3);
 
         StackPane layout = new StackPane();
-        layout.setMinWidth(900);
-        layout.setMinHeight(600);
+       // layout.setMinWidth(900);
+        //layout.setMinHeight(600);
 
 
         layout.getChildren().add(gridPane);

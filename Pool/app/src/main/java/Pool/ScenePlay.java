@@ -37,8 +37,8 @@ import javafx.stage.Stage;
 
             // Create Layout
             StackPane layout = new StackPane();
-            layout.setMinWidth(900);
-            layout.setMinHeight(600);
+           // layout.setMinWidth(900);
+            //layout.setMinHeight(600);
 
             layout.getChildren().addAll(gridPaneBot, gridPaneTop);
             layout.getChildren().addAll(GameStatus.nets);
