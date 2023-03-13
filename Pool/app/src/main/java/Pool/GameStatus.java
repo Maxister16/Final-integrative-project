@@ -39,23 +39,67 @@ public class GameStatus {
         tableLines[1].setEndX(table.getX()+0.7*table.getWidth());
         tableLines[1].setEndY(table.getY()+table.getHeight()-10);
         
+        //constant and calculations for position of balls
+        double DISTANCE_BETWEEN_BALLS = 10d;
+        double DISTANCE_BETWEEN_CENTER_OF_BALLS = DISTANCE_BETWEEN_BALLS+listOfBalls[0].getRadius()*2; //distance between the center of the balls
+        //center of losange
+        double xCenter = tableLines[1].getStartX()+DISTANCE_BETWEEN_CENTER_OF_BALLS;
+        double yCenter = table.getY()+0.5*table.getHeight();
+        double DISTANCE_FROM_CENTER_TEAM2 = 0.5*DISTANCE_BETWEEN_CENTER_OF_BALLS; //distance from center of the balls of team 2 (on the axis)
+        
         //set position of Nets and Balls
         for(int i = 0; i<listOfBalls.length;i++){
             if(i<nets.length){
                 nets[i].setCenterX((i%3)*(table.getWidth()-nets[0].getRadius()*2.5)/2+table.getX()+nets[0].getRadius());
                 nets[i].setCenterY((i<3)?table.getY()+nets[0].getRadius():table.getY()+table.getHeight()-nets[0].getRadius());
             }
-            if(i==0){
-                listOfBalls[i].setCenterX(tableLines[0].getStartX());
-                listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
-            }
-            else if (i==8){
-                listOfBalls[i].setCenterX(tableLines[1].getStartX()+listOfBalls[i].getRadius()*1.5);
-                listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
-            }
-            else if (listOfBalls[i].getType() == 1){
-                listOfBalls[i].setCenterX(table.getX()+tableLines[1].getStartX()+i*2*listOfBalls[i].getRadius());
-                listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());   
+            
+            switch (i) {
+                case 0 -> {//white ball
+                    listOfBalls[i].setCenterX(tableLines[0].getStartX());
+                    listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight());
+                }
+                case 1 -> { //team 1
+                    listOfBalls[i].setCenterX(tableLines[1].getStartX());
+                    listOfBalls[i].setCenterY(yCenter);
+                }
+                case 2 -> { //team 1
+                    listOfBalls[i].setCenterX(xCenter+DISTANCE_BETWEEN_CENTER_OF_BALLS);
+                    listOfBalls[i].setCenterY(yCenter);
+                }
+                case 3 -> { //team 1
+                    listOfBalls[i].setCenterX(xCenter);
+                    listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight()-DISTANCE_BETWEEN_CENTER_OF_BALLS);
+                }
+                case 4 -> { //team 1
+                    listOfBalls[i].setCenterX(tableLines[1].getStartX()+DISTANCE_BETWEEN_CENTER_OF_BALLS);
+                    listOfBalls[i].setCenterY(table.getY()+0.5*table.getHeight()+DISTANCE_BETWEEN_CENTER_OF_BALLS);
+                }
+                case 5 -> { //team 2
+                    listOfBalls[i].setCenterX(xCenter-DISTANCE_FROM_CENTER_TEAM2);
+                    listOfBalls[i].setCenterY(yCenter-DISTANCE_FROM_CENTER_TEAM2);
+                }
+                case 6 -> { //team 2
+                    listOfBalls[i].setCenterX(xCenter-DISTANCE_FROM_CENTER_TEAM2);
+                    listOfBalls[i].setCenterY(yCenter+DISTANCE_FROM_CENTER_TEAM2);
+                }
+                case 7 -> { //team 2
+                    listOfBalls[i].setCenterX(xCenter+DISTANCE_FROM_CENTER_TEAM2);
+                    listOfBalls[i].setCenterY(yCenter+DISTANCE_FROM_CENTER_TEAM2);
+                }
+                case 9 -> { //team 2
+                    listOfBalls[i].setCenterX(xCenter+DISTANCE_FROM_CENTER_TEAM2);
+                    listOfBalls[i].setCenterY(yCenter-DISTANCE_FROM_CENTER_TEAM2);
+                }
+                case 8 -> { //black ball
+                    listOfBalls[i].setCenterX(xCenter);
+                    listOfBalls[i].setCenterY(yCenter);
+                }
+                default -> {
+                    listOfBalls[i].setCenterX(0);
+                    listOfBalls[i].setCenterY(0);
+                    System.out.println("Ball "+i+" has not been taken into account");
+                }
             }
         }
         setZorder();
