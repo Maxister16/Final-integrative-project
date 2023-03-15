@@ -9,17 +9,44 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 public class SceneWelcome {
     private Scene scene;
 
     public SceneWelcome(Stage primaryStage) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
+        gridPane.setVgap(10);
+        gridPane.setHgap(10);
 
-        //Mode buttons
-        Button normalBtn = new Button("Normal");
-        Button grassBtn = new Button("Grass");
-        Button iceBtn = new Button("Ice");
+        //Set up Button ImageViews
+        ImageView iceMode = new ImageView("ButtonIMG/IcePlayBtnIMG.png");
+        iceMode.setPreserveRatio(true);
+        iceMode.setFitHeight(170);
+        ImageView normalMode= new ImageView("ButtonIMG/NormalPlayBtnIMG.png");
+        normalMode.setPreserveRatio(true);
+        normalMode.setFitHeight(170);
+        ImageView grassMode = new ImageView("ButtonIMG/GrassPlayBtnIMG.png");
+        grassMode.setPreserveRatio(true);
+        grassMode.setFitHeight(170);
+
+        gridPane.translateYProperty().bind(iceMode.fitHeightProperty().divide(2.15));
+        gridPane.translateXProperty().bind(iceMode.fitHeightProperty().divide(1.6));
+
+
+        //Mode buttons with images
+        Button normalBtn = new Button("",normalMode);
+        Button grassBtn = new Button("",grassMode);
+        Button iceBtn = new Button("",iceMode);
+
+        //Set button node background and border to transparent
+        normalBtn.setBackground(null);
+        normalBtn.setBorder(null);
+        grassBtn.setBackground(null);
+        grassBtn.setBorder(null);
+        iceBtn.setBackground(null);
+        iceBtn.setBorder(null);
 
         //Add buttons to gridPane
         gridPane.add(normalBtn, 0, 0);
@@ -30,7 +57,7 @@ public class SceneWelcome {
 
         //ImageViews
         ImageView bg = new ImageView("BackgroundIMG/WelcomeBgIMG.jpg");
-        ImageView iceMode = new ImageView("Pool/redPlay.png");
+
 
         //Set background image
         bg.setPreserveRatio(true);
@@ -55,6 +82,15 @@ public class SceneWelcome {
             ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
             primaryStage.setScene(scenePlayIce.getScene());
         });
+
+        //Styling found on google
+        //final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
+        //final String HOVERED_BUTTON_STYLE = "-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;";
+        //
+        //
+        //button.setStyle(IDLE_BUTTON_STYLE);
+        //button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
+        //button.setOnMouseExited(e -> button.setStyle(IDLE_BUTTON_STYLE));
     }
 
     public Scene getScene() {
