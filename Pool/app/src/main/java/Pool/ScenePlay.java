@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
             
             GameStatus.initialize();
 
+            BorderPane borderPane = new BorderPane();
             GridPane gridPaneTop = new GridPane();
             GridPane gridPaneBot = new GridPane();
             gridPaneTop.setAlignment(Pos.TOP_CENTER);
@@ -37,17 +39,18 @@ import javafx.stage.Stage;
 
             // Create Layout
             StackPane layout = new StackPane();
-           // layout.setMinWidth(900);
-            //layout.setMinHeight(600);
-
-            layout.getChildren().addAll(gridPaneBot, gridPaneTop);
             layout.getChildren().addAll(GameStatus.nets);
             layout.getChildren().addAll(GameStatus.listOfBalls);
             layout.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder());
 
+
+            borderPane.setCenter(layout);
+            borderPane.setTop(gridPaneTop);
+            borderPane.setBottom(gridPaneBot);
+
             GameStatus.setZorder();
 
-            this.scene = new Scene(layout);
+            this.scene = new Scene(borderPane);
 
             playButton.setOnAction((event) -> {
                 int force = (int)forceSlider.getValue();

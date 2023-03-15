@@ -53,11 +53,10 @@ public class SceneWelcome {
         gridPane.add(grassBtn, 2, 0);
         gridPane.add(iceBtn, 3, 0);
 
+        //Set up scene background
         StackPane backgroundPane = new StackPane();
-
         //ImageViews
         ImageView bg = new ImageView("BackgroundIMG/WelcomeBgIMG.jpg");
-
 
         //Set background image
         bg.setPreserveRatio(true);
@@ -65,7 +64,6 @@ public class SceneWelcome {
         backgroundPane.getChildren().add(bg);
 
         //Set play button images
-
         StackPane layout = new StackPane();
         layout.getChildren().addAll(backgroundPane,gridPane);
 
