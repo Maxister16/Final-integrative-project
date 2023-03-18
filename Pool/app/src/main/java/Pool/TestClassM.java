@@ -18,13 +18,14 @@ public class TestClassM extends Application {
         stage.setScene(sceneWelcome.getScene());
         stage.show();
         
+        /*
         Vector v = new Vector(4,3);
         Vector u = v.getUnitVector();
         Vector p = v.getPerpendicularVector();
         
         v.printInfo("v: ");
         u.printInfo("u: ");
-        p.printInfo("unitP: ");
+        p.printInfo("unitP: ");*/
     }
     public static void main(String[] args) {
         Application.launch();

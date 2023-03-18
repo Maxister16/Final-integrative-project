@@ -7,17 +7,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-//make it extend scene so i dont need a private scene and a get scene method caus its already a scene
-
-    public class ScenePlay{
+    public class PlayScene {
         private Scene scene;
 
         public ScenePlay(Stage primaryStage) {
-            
+
             GameStatus.initialize();
+
+            Pane gamePane = new Pane();
 
             BorderPane borderPane = new BorderPane();
             GridPane gridPaneTop = new GridPane();
@@ -39,18 +40,17 @@ import javafx.stage.Stage;
 
             // Create Layout
             StackPane layout = new StackPane();
-            layout.getChildren().addAll(GameStatus.nets);
-            layout.getChildren().addAll(GameStatus.listOfBalls);
-            layout.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder());
+            layout.setMinWidth(900);
+            layout.setMinHeight(600);
 
+            gamePane.getChildren().addAll(GameStatus.nets);
+            gamePane.getChildren().addAll(GameStatus.listOfBalls);
+            gamePane.getChildren().addAll(GameStatus.tableLines);
+            gamePane.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder());
+            layout.getChildren().addAll(gridPaneTop, gridPaneBot,gamePane);
 
-            borderPane.setCenter(layout);
-            borderPane.setTop(gridPaneTop);
-            borderPane.setBottom(gridPaneBot);
-
-            GameStatus.setZorder();
-
-            this.scene = new Scene(borderPane);
+            GameStatus.positionObjects(layout.getMinWidth(), layout.getMinHeight());
+            this.scene = new Scene(layout);
 
             playButton.setOnAction((event) -> {
                 int force = (int)forceSlider.getValue();
