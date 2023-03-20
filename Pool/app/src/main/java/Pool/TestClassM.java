@@ -5,31 +5,48 @@ package Pool;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.animation.PathTransition;
+import javafx.util.Duration;
 
 public class TestClassM extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
+        //WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
         stage.setMinHeight(600);
         stage.setMinWidth(900);
-        stage.setScene(welcomeScene.getScene());
+        Pane pane = new Pane();
+        
+        GameStatus.initialize();
+        
+        pane.getChildren().addAll(GameStatus.listOfBalls[0],GameStatus.cue);
+        GameStatus.listOfBalls[0].setCenterY(200);
+        GameStatus.listOfBalls[0].setCenterX(400);
+        
+        GameStatus.cue.rotateAt(90);
+        
+        PathTransition anim = new PathTransition();
+        
+        anim.setNode(GameStatus.cue);
+        anim.setPath(GameStatus.cue.getGuide());
+        anim.setAutoReverse(false);
+        anim.setDuration(Duration.millis(5000));
+        anim.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        anim.play();
+        
+        pane.getChildren().addAll(GameStatus.cue.getGuide());
+        
+        Scene sc = new Scene(pane,200,300);
+        stage.setScene(sc);
+        //stage.setScene(welcomeScene.getScene());
         stage.show();
         
-        /*
-        Vector v = new Vector(4,3);
-        Vector u = v.getUnitVector();
-        Vector p = v.getPerpendicularVector();
         
-        v.printInfo("v: ");
-        u.printInfo("u: ");
-        p.printInfo("unitP: ");*/
+        
+        
     }
     public static void main(String[] args) {
         Application.launch();

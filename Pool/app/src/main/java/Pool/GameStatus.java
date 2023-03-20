@@ -14,6 +14,7 @@ public class GameStatus {
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
+    public static CueStick cue = new CueStick();
     
     public static void updateTime() throws InterruptedException{
         while(GameStatus.isGameOn){
@@ -133,6 +134,7 @@ public class GameStatus {
         for (Ball listOfBall : listOfBalls) {
             listOfBall.toFront();
         }
+        cue.toFront();
     }
     
     public static void reset(){
