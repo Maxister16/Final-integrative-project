@@ -1,15 +1,20 @@
 package Pool;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+
+//To do: make volume on off button, add sound effects and music
 
 public class SceneWelcome {
     private Scene scene;
@@ -17,8 +22,24 @@ public class SceneWelcome {
     public SceneWelcome(Stage primaryStage) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
-        gridPane.setVgap(10);
-        gridPane.setHgap(10);
+        gridPane.setTranslateY(90);
+        gridPane.setTranslateX(110);
+
+        // Create ColumnConstraints objects to set the size of the columns
+        ColumnConstraints column1 = new ColumnConstraints(200);
+        column1.setHalignment(HPos.CENTER);
+        ColumnConstraints column2 = new ColumnConstraints(200);
+        column2.setHalignment(HPos.CENTER);
+        ColumnConstraints column3 = new ColumnConstraints(200);
+        column3.setHalignment(HPos.CENTER);
+        RowConstraints row1 = new RowConstraints(200);
+        row1.setValignment(VPos.CENTER);
+
+
+        // Set the sizes of the columns and rows
+        gridPane.getColumnConstraints().addAll(column1, column2, column3);
+        gridPane.getRowConstraints().addAll(row1);
+
 
         //Set up Button ImageViews
         ImageView iceMode = new ImageView("ButtonIMG/IcePlayBtnIMG.png");
@@ -30,9 +51,6 @@ public class SceneWelcome {
         ImageView grassMode = new ImageView("ButtonIMG/GrassPlayBtnIMG.png");
         grassMode.setPreserveRatio(true);
         grassMode.setFitHeight(170);
-
-        gridPane.translateYProperty().bind(iceMode.fitHeightProperty().divide(2.15));
-        gridPane.translateXProperty().bind(iceMode.fitHeightProperty().divide(1.6));
 
 
         //Mode buttons with images
@@ -50,8 +68,8 @@ public class SceneWelcome {
 
         //Add buttons to gridPane
         gridPane.add(normalBtn, 0, 0);
-        gridPane.add(grassBtn, 2, 0);
-        gridPane.add(iceBtn, 3, 0);
+        gridPane.add(grassBtn, 1, 0);
+        gridPane.add(iceBtn, 2, 0);
 
         //Set up scene background
         StackPane backgroundPane = new StackPane();
@@ -72,13 +90,31 @@ public class SceneWelcome {
             ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);
             primaryStage.setScene(scenePlayNormal.getScene());
         });
+        normalBtn.setOnMouseEntered((event) -> {
+            normalMode.setFitHeight(185);
+        });
+        normalBtn.setOnMouseExited((event) -> {
+            normalMode.setFitHeight(170);
+        });
         grassBtn.setOnAction((event) -> {
             ScenePlayGrass scenePlayGrass = new ScenePlayGrass(primaryStage);
             primaryStage.setScene(scenePlayGrass.getScene());
         });
+        grassBtn.setOnMouseEntered((event) -> {
+            grassMode.setFitHeight(185);
+        });
+        grassBtn.setOnMouseExited((event) -> {
+            grassMode.setFitHeight(170);
+        });
         iceBtn.setOnAction((event) -> {
             ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
             primaryStage.setScene(scenePlayIce.getScene());
+        });
+        iceBtn.setOnMouseEntered((event) -> {
+            iceMode.setFitHeight(185);
+        });
+        iceBtn.setOnMouseExited((event) -> {
+            iceMode.setFitHeight(170);
         });
 
         //Styling found on google
