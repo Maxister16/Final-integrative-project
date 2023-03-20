@@ -30,7 +30,9 @@ public class ScenePlay {
                 gridPaneTop.setAlignment(Pos.TOP_CENTER);
                 gridPaneBot.setAlignment(Pos.BOTTOM_LEFT);
 
+                System.out.println("ScenePlay - create IV menu");
                 ImageView menu = new ImageView("ButtonIMG/MenuBtnIMG.png");
+                System.out.println("ScenePlay - create IV redPlay");
                 ImageView redPlay = new ImageView("ButtonIMG/RedPlayBtnIMG.png");
 
                 // Create Sliders and Buttons
@@ -73,9 +75,10 @@ public class ScenePlay {
 
                 //Set background image
 
-
+                System.out.println("ScenePlay playBGIMG");
                 ImageView bg = new ImageView("BackgroundIMG/PlayBgIMG.jpg");
-
+                System.out.println("ScenePlay playBGIMG: works");
+                
                 bg.setPreserveRatio(true);
                 bg.setFitWidth(1350);
           //      backgroundPane.getChildren().add(bg);
@@ -88,6 +91,7 @@ public class ScenePlay {
                 layout.getChildren().addAll(bg,borderPane);
 
                 GameStatus.positionObjects(layout.getMinWidth(), layout.getMinHeight());
+                
                 this.scene = new Scene(layout);
 
                 playButton.setOnAction((event) -> {
