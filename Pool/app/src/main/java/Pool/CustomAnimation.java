@@ -16,7 +16,7 @@ public class CustomAnimation extends ImageView{
         currentFrame = 0;
         imgArr = new Image[nbrOfFrames];
         for(int i = 0; i<nbrOfFrames; i++){
-            imgArr[i] = new Image(nameImg+"\\"+nameImg+i+".png");
+            imgArr[i] = new Image(nameImg+"/"+nameImg+i+".png");
         }
         updateFrame();
     }
