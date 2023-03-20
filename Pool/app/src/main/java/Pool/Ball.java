@@ -151,6 +151,13 @@ public class Ball extends Circle implements InteractiveObject{
 
 
     }
+    //CHANGE THE POSITION OF THE BALL
+    public void updatePosition(int time){
+        double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
+        double y=  vi.getYcomponent()*time + a.getYcomponent()*time*time*0.5 - position.getYcomponent();
+        Vector p=new Vector(x,y);
+        this.setVectorPosition(p);
+    }
    
     public void reactIsHit(){
         //check if the ball touches another
