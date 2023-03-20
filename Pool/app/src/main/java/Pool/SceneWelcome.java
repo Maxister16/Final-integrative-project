@@ -87,7 +87,9 @@ public class SceneWelcome {
 
         this.scene = new Scene(layout);
         normalBtn.setOnAction((event) -> {
-            ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);
+            System.out.println("SceneWelcome - scenePlay called");
+            ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);//ERROR
+            System.out.println("SceneWelcome - setting scene");
             primaryStage.setScene(scenePlayNormal.getScene());
         });
         normalBtn.setOnMouseEntered((event) -> {

@@ -11,8 +11,11 @@ public class ScenePlayNormal {
         
         GameStatus.table.setImage(new Image("InteractiveObjectIMG/tableNormalIMG.png"));
         
-        ScenePlay scenePlay = new ScenePlay(primaryStage);
+        System.out.println("ScenePlayNormal - create new ScenePlay");
+        ScenePlay scenePlay = new ScenePlay(primaryStage);//ERROR
+        System.out.println("ScenePlayNormal - scene = ");
         scene = scenePlay.getScene();
+        System.out.println("ScenePlayNormal - set scene");
         primaryStage.setScene(scenePlay.getScene());
     }
 
