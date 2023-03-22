@@ -10,41 +10,42 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import javafx.animation.PathTransition;
+import javafx.scene.control.Slider;
 import javafx.util.Duration;
 
 public class TestClassM extends Application {
+    public static Slider angleSlider = new Slider(0.0, 360.0, 1.0);
+    public static Slider forceSlider = new Slider(0.0, 100, 1.0);
+    
     @Override
     public void start(Stage stage) throws IOException {
         //WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
+        
         stage.setMinHeight(600);
         stage.setMinWidth(900);
         Pane pane = new Pane();
         
         GameStatus.initialize();
         
-        pane.getChildren().addAll(GameStatus.listOfBalls[0],GameStatus.cue);
+        pane.getChildren().addAll(GameStatus.listOfBalls[0],GameStatus.cue, angleSlider, forceSlider,CueStick.guide);
         GameStatus.listOfBalls[0].setCenterY(200);
         GameStatus.listOfBalls[0].setCenterX(400);
         
-        GameStatus.cue.rotateAt(90);
+        forceSlider.setTranslateX(200);
         
-        PathTransition anim = new PathTransition();
-        
-        anim.setNode(GameStatus.cue);
-        anim.setPath(GameStatus.cue.getGuide());
-        anim.setAutoReverse(false);
-        anim.setDuration(Duration.millis(5000));
-        anim.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-        anim.play();
-        
-        pane.getChildren().addAll(GameStatus.cue.getGuide());
+        GameStatus.cue.appears();
         
         Scene sc = new Scene(pane,200,300);
         stage.setScene(sc);
         //stage.setScene(welcomeScene.getScene());
         stage.show();
         
-        
+        sc.setOnMouseClicked(e->{
+            GameStatus.cue.hitAnim(forceSlider.getValue());
+        });
+        sc.setOnKeyPressed(e->{
+            forceSlider.setValue(0);
+        });
         
         
     }
