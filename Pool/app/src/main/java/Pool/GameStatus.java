@@ -87,4 +87,9 @@ public class GameStatus {
         
     }
 
+    public void BallMovement(){
+
+
+    }
+
 }

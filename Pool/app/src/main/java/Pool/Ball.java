@@ -172,6 +172,10 @@ public class Ball extends Circle implements InteractiveObject{
         }
     }
 
+    public void updateInGame(){
+
+    }
+
     @Override
     public void setImage(Image newImage) {
         this.setFill(new ImagePattern(newImage));

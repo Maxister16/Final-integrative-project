@@ -18,6 +18,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:23.0.0'
+
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
@@ -29,6 +31,7 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass = 'Pool.TestClassM'
+    mainClass='Pool.TextTheBall'
 }
 
 tasks.named('test') {
