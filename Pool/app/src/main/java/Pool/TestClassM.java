@@ -4,11 +4,6 @@
 package Pool;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,10 +11,13 @@ import java.io.IOException;
 public class TestClassM extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
-        stage.setMinHeight(600);
-        stage.setMinWidth(900);
-        stage.setScene(welcomeScene.getScene());
+        //GameStatus.OnLaunch();
+        SceneWelcome sceneWelcome = new SceneWelcome(stage);
+        stage.setHeight(780);
+        stage.setWidth(1350);
+        stage.setResizable(false);
+
+        stage.setScene(sceneWelcome.getScene());
         stage.show();
         
         /*
