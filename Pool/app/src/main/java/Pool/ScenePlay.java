@@ -1,6 +1,7 @@
 
 package Pool;
 
+import javafx.animation.FadeTransition;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -9,15 +10,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.io.File;
+import javafx.scene.paint.Color;
+
 
 public class ScenePlay {
 
             private Scene scene;
 
-            public ScenePlay(Stage primaryStage) {
+            public ScenePlay(Stage primaryStage)  {
 
                 GameStatus.initialize();
+                File btnFile = new File("Pool/app/src/main/resources/sound/tok.mp3");
+                MediaPlayer btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
+                btnSound.setVolume(0.5);
 
                 //Create Play Scene Panes
                 Pane gamePane = new Pane();
@@ -100,10 +110,16 @@ public class ScenePlay {
                 bg.setPreserveRatio(true);
                 bg.setFitWidth(1350);
           //    backgroundPane.getChildren().add(bg);
-
+                FadeTransition fade = new FadeTransition();
+                //setting the duration for the Fade transition
+                fade.setDuration(Duration.millis(200));
+                fade.setNode(layout);
+                fade.setFromValue(0.5);
+                fade.setToValue(1.0);
+                fade.play();
 
                 //Position Panes
-                borderPane.setCenter(gamePane);
+               // borderPane.setCenter(gamePane);
                 borderPane.setTop(gridPaneTop);
                 borderPane.setBottom(gridPaneBot);
                 layout.getChildren().addAll(bg,borderPane);
@@ -115,21 +131,19 @@ public class ScenePlay {
                     int force = (int) forceSlider.getValue();
                     int angle = (int) angleSlider.getValue();
                     System.out.println("Force: " + force + "Angle: " + angle);
-                    //set values for force and angle
+
                 });
 
                 playButton.setOnMouseEntered((event) -> {
                     redPlay.setFitHeight(80);
+                    btnSound.play();
                 });
                 playButton.setOnMouseExited((event) -> {
                     redPlay.setFitHeight(70);
+                    btnSound.stop();
                 });
 
-
-
                 menuButton.setOnAction((event) -> {
-                    //SceneMenu sceneMenu = new SceneMenu(primaryStage);
-                    //primaryStage.setScene(sceneMenu.getScene());
 
                             GridPane gridPane = new GridPane();
                             gridPane.setAlignment(Pos.CENTER);
@@ -167,7 +181,7 @@ public class ScenePlay {
                             gridPane.setHalignment(resumeButton, HPos.CENTER);
                             gridPane.setHalignment(homeButton, HPos.CENTER);
                             gridPane.setHalignment(exitButton, HPos.CENTER);
-                            gridPane.setHalignment(physicsButton, HPos.RIGHT);
+                            gridPane.setHalignment(physicsButton, HPos.CENTER);
 
                             gridPane.setTranslateY(30);
 
@@ -176,18 +190,85 @@ public class ScenePlay {
                             gridPane.add(exitButton, 0, 2);
                             gridPane.add(physicsButton, 0, 3);
 
+                            ColumnConstraints menuColumn = new ColumnConstraints(200);
+                            columnTop1.setHalignment(HPos.CENTER);
+                            RowConstraints menuRow1 = new RowConstraints(65);
+                            menuRow1.setValignment(VPos.CENTER);
+                            RowConstraints menuRow2 = new RowConstraints(65);
+                            menuRow2.setValignment(VPos.CENTER);
+                            RowConstraints menuRow3 = new RowConstraints(65);
+                            menuRow3.setValignment(VPos.CENTER);
+                            RowConstraints menuRow4 = new RowConstraints(110);
+                            menuRow4.setValignment(VPos.CENTER);
+                            gridPane.getColumnConstraints().add(menuColumn);
+                            gridPane.getRowConstraints().addAll(menuRow1,menuRow2,menuRow3,menuRow4);
+
                             //ImageViews
                             ImageView menuBg = new ImageView("BackgroundIMG/MenuBgIMG.png");
 
                             //Set background image
                             menuBg.setPreserveRatio(true);
                             menuBg.setFitWidth(500);
-                            layout.getChildren().addAll(menuBg,gridPane);
+                            Rectangle rectangle = new Rectangle(1350, 700);
+                            rectangle.setFill(Color.WHITE);
+                            rectangle.setTranslateY(-42);
+                            fade.setNode(rectangle);
+                            fade.setFromValue(0.0);
+                            fade.setToValue(0.4);
+                            fade.setDuration(Duration.millis(100));
+                            fade.play();
+
+                            layout.getChildren().addAll(rectangle,menuBg,gridPane);
 
                            // backgroundLayout.getChildren().addAll(backgroundPane, gridPane);
 
                             resumeButton.setOnAction((menuEvent) -> {
-                                layout.getChildren().removeAll(gridPane, menuBg);
+                                fade.setFromValue(0.4);
+                                fade.setToValue(0.0);
+                                fade.setDuration(Duration.millis(100));
+                                fade.play();
+                                layout.getChildren().removeAll(rectangle, gridPane, menuBg);
+
+                            });
+
+                            resumeButton.setOnMouseEntered((menuEvent) -> {
+                                resume.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            resumeButton.setOnMouseExited((menuEvent) -> {
+                                resume.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            homeButton.setOnMouseEntered((menuEvent) -> {
+                                home.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            homeButton.setOnMouseExited((menuEvent) -> {
+                                home.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            exitButton.setOnMouseEntered((menuEvent) -> {
+                                exit.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            exitButton.setOnMouseExited((menuEvent) -> {
+                                exit.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            physicsButton.setOnMouseEntered((menuEvent) -> {
+                                physicsOn.setFitHeight(130);
+                                btnSound.play();
+                            });
+
+                            physicsButton.setOnMouseExited((menuEvent) -> {
+                                physicsOn.setFitHeight(120);
+                                btnSound.stop();
                             });
 
                             homeButton.setOnAction((menuEvent) -> {
@@ -198,30 +279,32 @@ public class ScenePlay {
                             exitButton.setOnAction((menuEvent) -> {
                                 primaryStage.close();
                             });
-//        togglePhysicsButton(physicsButton);
+                        //        togglePhysicsButton(physicsButton);
 
 
-//    public void togglePhysicsButton(Button physicsButton) {
-//        // Set the initial text of the button
-//        physicsButton.setText("Physics on");
-//
-//        // Add an event handler to the button
-//        physicsButton.setOnAction((event) -> {
-//            // Check the current text of the button and toggle it
-//            if (physicsButton.getText().equals("on")) {
-//                physicsButton.setText("Physics off");
-//            } else {
-//                physicsButton.setText("Physics on");
-//            }
-//        });
-//    }
+                        //    public void togglePhysicsButton(Button physicsButton) {
+                        //        // Set the initial text of the button
+                        //        physicsButton.setText("Physics on");
+                        //
+                        //        // Add an event handler to the button
+                        //        physicsButton.setOnAction((event) -> {
+                        //            // Check the current text of the button and toggle it
+                        //            if (physicsButton.getText().equals("on")) {
+                        //                physicsButton.setText("Physics off");
+                        //            } else {
+                        //                physicsButton.setText("Physics on");
+                        //            }
+                        //        });
+                        //    }
                 });
 
                 menuButton.setOnMouseEntered((event) -> {
                     menu.setFitHeight(50);
+                    btnSound.play();
                 });
                 menuButton.setOnMouseExited((event) -> {
                     menu.setFitHeight(45);
+                    btnSound.stop();
                 });
 
 

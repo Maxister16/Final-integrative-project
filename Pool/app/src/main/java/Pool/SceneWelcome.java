@@ -1,5 +1,6 @@
 package Pool;
 
+import javafx.animation.FadeTransition;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -11,7 +12,12 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import javax.print.attribute.standard.Media;
+import java.io.File;
 
 
 //To do: make volume on off button, add sound effects and music
@@ -19,7 +25,13 @@ import javafx.stage.Stage;
 public class SceneWelcome {
     private Scene scene;
 
-    public SceneWelcome(Stage primaryStage) {
+
+    public SceneWelcome (Stage primaryStage) {
+
+        File btnFile = new File("Pool/app/src/main/resources/sound/tok.mp3");
+        MediaPlayer btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
+        btnSound.setVolume(0.5);
+
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setTranslateY(90);
@@ -91,32 +103,42 @@ public class SceneWelcome {
             ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);//ERROR
             System.out.println("SceneWelcome - setting scene");
             primaryStage.setScene(scenePlayNormal.getScene());
+
         });
         normalBtn.setOnMouseEntered((event) -> {
             normalMode.setFitHeight(185);
+            btnSound.play();
         });
         normalBtn.setOnMouseExited((event) -> {
             normalMode.setFitHeight(170);
+            btnSound.stop();
         });
         grassBtn.setOnAction((event) -> {
             ScenePlayGrass scenePlayGrass = new ScenePlayGrass(primaryStage);
             primaryStage.setScene(scenePlayGrass.getScene());
+            btnSound.play();
         });
         grassBtn.setOnMouseEntered((event) -> {
             grassMode.setFitHeight(185);
+            btnSound.play();
         });
         grassBtn.setOnMouseExited((event) -> {
             grassMode.setFitHeight(170);
+            btnSound.stop();
         });
         iceBtn.setOnAction((event) -> {
             ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
+
             primaryStage.setScene(scenePlayIce.getScene());
+            btnSound.play();
         });
         iceBtn.setOnMouseEntered((event) -> {
             iceMode.setFitHeight(185);
+            btnSound.play();
         });
         iceBtn.setOnMouseExited((event) -> {
             iceMode.setFitHeight(170);
+            btnSound.stop();
         });
 
         //Styling found on google

@@ -16,6 +16,7 @@ public class TestClassM extends Application {
         stage.setHeight(780);
         stage.setWidth(1350);
         stage.setResizable(false);
+
         stage.setScene(sceneWelcome.getScene());
         stage.show();
         
