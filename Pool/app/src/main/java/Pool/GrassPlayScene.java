@@ -9,6 +9,7 @@ public class GrassPlayScene {
 
     public GrassPlayScene(Stage primaryStage, Table table) {
         PlayScene playScene = new PlayScene(primaryStage, table);
+        GameStatus.table.setImage(2);
         scene = playScene.getScene();
         primaryStage.setScene(playScene.getScene());
     }

@@ -8,6 +8,7 @@ public class IcePlayScene {
 
     public IcePlayScene(Stage primaryStage, Table table) {
         PlayScene playScene = new PlayScene(primaryStage, table);
+        GameStatus.table.setImage(1);
         scene = playScene.getScene();
         primaryStage.setScene(playScene.getScene());
     }
