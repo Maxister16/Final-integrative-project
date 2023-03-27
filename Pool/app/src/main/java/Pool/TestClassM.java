@@ -27,7 +27,7 @@ public class TestClassM extends Application {
         
         GameStatus.initialize();
         
-        pane.getChildren().addAll(GameStatus.listOfBalls[0],GameStatus.cue, angleSlider, forceSlider,CueStick.guide);
+        pane.getChildren().addAll(GameStatus.listOfBalls[0],GameStatus.cue, angleSlider, forceSlider);
         GameStatus.listOfBalls[0].setCenterY(200);
         GameStatus.listOfBalls[0].setCenterX(400);
         
@@ -43,8 +43,10 @@ public class TestClassM extends Application {
         sc.setOnMouseClicked(e->{
             GameStatus.cue.hitAnim(forceSlider.getValue());
         });
+        
         sc.setOnKeyPressed(e->{
-            forceSlider.setValue(0);
+            System.out.println("key pressed");
+            GameStatus.cue.appears();
         });
         
         
