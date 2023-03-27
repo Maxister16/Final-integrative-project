@@ -40,7 +40,11 @@ public class GameStatus {
         tableLines[1].setEndX(table.getX()+0.7*table.getWidth());
         tableLines[1].setEndY(table.getY()+table.getHeight()-10);
         
-        //constant and calculations for position of balls
+        //constant and calculations for position of balls and nets
+        double heightOfBand = 30*table.getHeight()/352;
+        double widthOfBand = 30*table.getWidth()/702;
+        double extraBufferNets = 10;
+        
         double DISTANCE_BETWEEN_BALLS = 0d;
         double DISTANCE_BETWEEN_CENTER_OF_BALLS = DISTANCE_BETWEEN_BALLS+listOfBalls[0].getRadius()*2; //distance between the center of the balls
         //center of losange
@@ -50,8 +54,11 @@ public class GameStatus {
         //set position of Nets and Balls
         for(int i = 0; i<listOfBalls.length;i++){
             if(i<nets.length){
-                nets[i].setCenterX((i%3)*(table.getWidth()-nets[0].getRadius()*2.5)/2+table.getX()+nets[0].getRadius());
-                nets[i].setCenterY((i<3)?table.getY()+nets[0].getRadius():table.getY()+table.getHeight()-nets[0].getRadius());
+                nets[i].setCenterX(table.getX()+widthOfBand+extraBufferNets+(i%3)*(table.getWidth()-2*widthOfBand-2*extraBufferNets)/2);
+                nets[i].setCenterY((i<3)?table.getY()+heightOfBand+extraBufferNets:table.getY()+table.getHeight()-heightOfBand-extraBufferNets);
+                
+//                nets[i].setCenterX((i%3)*(table.getWidth()-nets[0].getRadius()*2.5)/2+table.getX()+nets[0].getRadius());
+//                nets[i].setCenterY((i<3)?table.getY()+nets[0].getRadius():table.getY()+table.getHeight()-nets[0].getRadius());
             }
             
             if(i==0){
