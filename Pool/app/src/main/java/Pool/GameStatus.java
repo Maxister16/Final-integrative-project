@@ -43,7 +43,7 @@ public class GameStatus {
         double DISTANCE_BETWEEN_BALLS = 0d;
         double DISTANCE_BETWEEN_CENTER_OF_BALLS = DISTANCE_BETWEEN_BALLS+listOfBalls[0].getRadius()*2; //distance between the center of the balls
         //center of losange
-        double xCenter = tableLines[1].getStartX()+DISTANCE_BETWEEN_CENTER_OF_BALLS;
+        double xCenter = tableLines[1].getStartX();
         double yCenter = table.getY()+0.5*table.getHeight();
         
         //set position of Nets and Balls
