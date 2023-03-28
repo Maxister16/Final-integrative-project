@@ -1,7 +1,9 @@
 package Pool;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Table implements InteractiveObject{
@@ -14,6 +16,8 @@ public class Table implements InteractiveObject{
     
     public Table(){
         background = new Rectangle(WIDTH, HEIGHT);
+        background.setArcWidth(30.0); 
+        background.setArcHeight(20.0); 
         border = new Rectangle(WIDTH, HEIGHT);
         border.setFill(new ImagePattern(new Image("InteractiveObjectIMG/tableBorderIMG.png")));
     }
@@ -51,5 +55,12 @@ public class Table implements InteractiveObject{
     @Override
     public void setImage(Image newImage) { //sets the background
         background.setFill(new ImagePattern(newImage));
+    }
+    public void setImage(int typeOfGame) { //sets the background
+        switch(typeOfGame){//0:normal, 1:ice, 2:grass 
+            case 0 -> background.setFill(Color.MOCCASIN);
+            case 1 -> background.setFill(Color.LIGHTCYAN);
+            case 2 -> background.setFill(Color.SEAGREEN);
+        }
     }
 }
