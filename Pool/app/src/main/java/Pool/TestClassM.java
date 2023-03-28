@@ -5,31 +5,51 @@ package Pool;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.animation.PathTransition;
+import javafx.scene.control.Slider;
+import javafx.util.Duration;
 
 public class TestClassM extends Application {
+    public static Slider angleSlider = new Slider(0.0, 360.0, 1.0);
+    public static Slider forceSlider = new Slider(0.0, 100, 1.0);
+    
     @Override
     public void start(Stage stage) throws IOException {
-        WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
+        //WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
+        
         stage.setMinHeight(600);
         stage.setMinWidth(900);
-        stage.setScene(welcomeScene.getScene());
+        Pane pane = new Pane();
+        
+        GameStatus.initialize();
+        
+        pane.getChildren().addAll(GameStatus.listOfBalls[0],GameStatus.cue, angleSlider, forceSlider);
+        GameStatus.listOfBalls[0].setCenterY(200);
+        GameStatus.listOfBalls[0].setCenterX(400);
+        
+        forceSlider.setTranslateX(200);
+        
+        GameStatus.cue.appears();
+        
+        Scene sc = new Scene(pane,200,300);
+        stage.setScene(sc);
+        //stage.setScene(welcomeScene.getScene());
         stage.show();
         
-        /*
-        Vector v = new Vector(4,3);
-        Vector u = v.getUnitVector();
-        Vector p = v.getPerpendicularVector();
+        sc.setOnMouseClicked(e->{
+            GameStatus.cue.hitAnim(forceSlider.getValue());
+        });
         
-        v.printInfo("v: ");
-        u.printInfo("u: ");
-        p.printInfo("unitP: ");*/
+        sc.setOnKeyPressed(e->{
+            System.out.println("key pressed");
+            GameStatus.cue.appears();
+        });
+        
+        
     }
     public static void main(String[] args) {
         Application.launch();
