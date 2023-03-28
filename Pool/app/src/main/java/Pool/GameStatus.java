@@ -15,6 +15,7 @@ public class GameStatus {
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
     public static double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    public static CueStick cue = new CueStick();
     
     public static void updateTime() throws InterruptedException{
         while(GameStatus.isGameOn){
@@ -141,6 +142,7 @@ public class GameStatus {
         for (Ball listOfBall : listOfBalls) {
             listOfBall.toFront();
         }
+        cue.toFront();
     }
     
     public static void reset(){
