@@ -1,6 +1,8 @@
 package Pool;
 
 import java.util.ArrayList;
+
+import javafx.animation.Interpolator;
 import javafx.scene.shape.Circle;
 
 import java.lang.Math;
@@ -8,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 import static java.lang.Math.*;
+import static javafx.animation.PathTransition.interpolate;
 
 public class Ball extends Circle implements InteractiveObject{
 //SETTING CLASS FIELDS
@@ -155,6 +158,12 @@ public class Ball extends Circle implements InteractiveObject{
     public void updatePosition(int time){
         double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
         double y=  vi.getYcomponent()*time + a.getYcomponent()*time*time*0.5 - position.getYcomponent();
+
+
+        //USE INTERPOLATION TO MOVE BALLS
+
+        double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
+        this.setCenterX(r);
         Vector p=new Vector(x,y);
         this.setVectorPosition(p);
     }
