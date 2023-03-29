@@ -30,6 +30,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
+    mainClass='Pool.MainClassTest'
     mainClass = 'Pool.TestClassM'
     mainClass='Pool.TextTheBall'
 }
