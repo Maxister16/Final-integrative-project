@@ -82,6 +82,7 @@ public double dx = 1, dy = 1;
         this.a=a;
     }
     public void updateMovement(Ball x){
+       // System.out.println("not");
         //DEFINING NECESSARY VARIABLES
         //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
         double xVelocityMag=0;
@@ -122,10 +123,10 @@ public double dx = 1, dy = 1;
 
 
         //IF FIRST BALL IS WITH HIGHER INITIAL VELOCITY (knowing that ball with higher velocity loses velocity in collision)
-        //if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
-        if(thisVelocity<xBallsVelocity){
-            //if(velocityFound1<x.getVi().getMagnitude()){
-            if(velocityFound1<xBallsVelocity){
+        if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
+        //if(thisVelocity<xBallsVelocity){
+            if(velocityFound1<x.getVi().getMagnitude()){
+            //if(velocityFound1<xBallsVelocity){
                 xVelocityMag=velocityFound1;
                 viVelocityMag=velocityFound2;
             }else{
@@ -133,10 +134,10 @@ public double dx = 1, dy = 1;
                 viVelocityMag=velocityFound1;
             }
 //NOW IF THE OTHER BALL IS THE ONE WITH HIGHER VELOCITY
-        } //else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
-        else if(thisVelocity>xBallsVelocity){
-            //if(velocityFound1<this.getVi().getMagnitude()){
-            if(velocityFound1<thisVelocity){
+        } else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
+        //else if(thisVelocity>xBallsVelocity){
+            if(velocityFound1<this.getVi().getMagnitude()){
+            //if(velocityFound1<thisVelocity){
                 xVelocityMag=velocityFound2;
                 viVelocityMag=velocityFound1;
             }else{
@@ -144,6 +145,8 @@ public double dx = 1, dy = 1;
                 viVelocityMag=velocityFound2;
             }
         }
+        System.out.println(xVelocityMag);
+        System.out.println(viVelocityMag);
 
         //ROTATE THE SYSTEM BACK ALONG ANGLE OF ROTATION
         this.getVi().setYcomponent(cos(ac)*thisY+ sin(ac)*viVelocityMag);
@@ -152,11 +155,13 @@ public double dx = 1, dy = 1;
         x.getVi().setXcomponent(xVelocityMag*cos(ac)+ xBallsY*-sin(ac));
         x.getVi().setYcomponent(xBallsY*sin(ac)+ xVelocityMag*cos(ac));
 
+        this.updatePosition(GameStatus.time);
+
 
 
     }
     //CHANGE THE POSITION OF THE BALL
-    public void updatePosition(int time){
+    public void updatePosition(long time){
         double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
         double y=  vi.getYcomponent()*time + a.getYcomponent()*time*time*0.5 - position.getYcomponent();
 
