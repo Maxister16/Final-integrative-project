@@ -19,9 +19,9 @@ public double dx = 1, dy = 1;
     private static double gravity=9.806;
     private int id;
     private int type;
-    private Vector position;
-    private Vector vi;
-    private Vector a;
+    private Vector position= new Vector(this.getCenterX(),this.getCenterY());
+    private Vector vi=new Vector(0,0);;
+    private Vector a=new Vector(0,0);;
     private boolean isMoving;
     private long initialTime;
 //BALL CONSTRUCTOR
