@@ -26,13 +26,15 @@ public class CueStick extends ImageView{
         this.setOpacity(1);
         this.setX(GameStatus.listOfBalls[0].getCenterX()-GameStatus.cue.getFitWidth()/2);
         this.setY(GameStatus.listOfBalls[0].getCenterY()-GameStatus.cue.getFitHeight()/2);
-        this.rotateProperty().bind(TestClassM.angleSlider.valueProperty());//bind to slider
+        //this.rotateProperty().bind(TestClassM.angleSlider.valueProperty());//bind to slider
+
     }
     
     public void hitAnim(double force){
         
         this.rotateProperty().unbind();
-        double WindUpLenght = (TestClassM.forceSlider.getValue()/TestClassM.forceSlider.getMax())+0.5;
+        //double WindUpLenght = (TestClassM.forceSlider.getValue()/TestClassM.forceSlider.getMax())+0.5;
+        double WindUpLenght = (5/4+0.5);
         Polyline guide = new Polyline();
         
         PathTransition hitAnim = new PathTransition();

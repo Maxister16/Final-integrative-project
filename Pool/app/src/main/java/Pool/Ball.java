@@ -10,10 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 import static java.lang.Math.*;
-import static javafx.animation.PathTransition.interpolate;
+//import static javafx.animation.PathTransition.interpolate;
 
 public class Ball extends Circle implements InteractiveObject{
 //SETTING CLASS FIELDS
+public double dx = 1, dy = 1;
     public static double friction;
     private static double gravity=9.806;
     private int id;
@@ -89,8 +90,8 @@ public class Ball extends Circle implements InteractiveObject{
         //ROTATE THE SYSTEM OF THE BALLS
 
         //FIND ANGLE OF INITIAL COLLISION
-        double vX= java.lang.Math.abs(this.getCenterX()-x.getCenterX());
-        double vY=java.lang.Math.abs(this.getCenterY()-x.getCenterY());
+        double vX= this.getCenterX()-x.getCenterX();
+        double vY=this.getCenterY()-x.getCenterY();
         double angleCollision= atan(vY/vX);
         double ac=angleCollision;
 
