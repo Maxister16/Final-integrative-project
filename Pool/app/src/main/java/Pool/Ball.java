@@ -118,8 +118,8 @@ public double dx = 1, dy = 1;
         double r=(q*q)-z;
 
         //CALCULATE VI
-        double velocityFound1= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
-        double velocityFound2= (2*q - Math.sqrt((4*q*q)+ (8*r)))/4;
+        double velocityFound1= (2*q + Math.sqrt((4*q*q)+ (8*r)))/40;
+        double velocityFound2= (2*q - Math.sqrt((4*q*q)+ (8*r)))/40;
 
 
         //IF FIRST BALL IS WITH HIGHER INITIAL VELOCITY (knowing that ball with higher velocity loses velocity in collision)
@@ -167,9 +167,10 @@ public double dx = 1, dy = 1;
 
 
         //USE INTERPOLATION TO MOVE BALLS
-
         double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
         this.setCenterX(r);
+        double d= Interpolator.LINEAR.interpolate(this.getCenterY(), x, 0.05);
+        this.setCenterY(d);
         Vector p=new Vector(x,y);
         this.setVectorPosition(p);
     }
