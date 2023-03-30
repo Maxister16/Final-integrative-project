@@ -15,7 +15,7 @@ public class GameStatus {
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
     public static double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
-    public static CueStick cue = new CueStick();
+    public static CueStick cue;
     
     public static void updateTime() throws InterruptedException{
         while(GameStatus.isGameOn){
@@ -100,14 +100,18 @@ public class GameStatus {
         
         Image team1Img = new Image("InteractiveObjectIMG/BallTeam1IMG.png");
         Image team2Img = new Image("InteractiveObjectIMG/BallTeam2IMG.png");
+        double ballRadius = 0.054*Math.sqrt(table.getHeight()*table.getWidth()/3.2258);
+        
+        cue = new CueStick(148.6/254*table.getWidth());
+        
         for(int i = 0; i<listOfBalls.length; i++){
             if(i<nets.length)
-                nets[i] = new Net(i);
+                nets[i] = new Net(i,2*ballRadius);
             
             if(i<tableLines.length)
                 tableLines[i] = new Line();
             
-            listOfBalls[i] = new Ball(i);
+            listOfBalls[i] = new Ball(i, ballRadius);
             if(i==0){ //is it white
                 listOfBalls[i].setImage(new Image("InteractiveObjectIMG/BallWhiteIMG.png"));
                 //listOfBalls[i].setFill(Paint.valueOf("#ffffff"));

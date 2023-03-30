@@ -12,13 +12,13 @@ import javafx.scene.shape.Polyline;
 
 public class CueStick extends ImageView{
     
-    public CueStick(){
-        //this.setFill(new ImagePattern(new Image("InteractiveObjectIMG/cueStickIMG.png")));
+    public CueStick(double width){
+        
         Image img = new Image("InteractiveObjectIMG/cueStickIMG.png");
         this.setImage(img);
         this.setSmooth(true);
         this.setPreserveRatio(true);
-        this.setFitWidth(145*2);
+        this.setFitWidth(width);
         this.setFitHeight(this.getFitWidth()*(img.getHeight()/img.getWidth()));
     }
     

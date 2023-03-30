@@ -21,22 +21,30 @@ public class TestClassM extends Application {
     public void start(Stage stage) throws IOException {
         //WelcomeScene welcomeScene = new WelcomeScene(stage, new Table());
         
-        stage.setMinHeight(600);
-        stage.setMinWidth(900);
+        stage.setMinHeight(500);
+        stage.setMinWidth(600);
         Pane pane = new Pane();
         
         GameStatus.initialize();
         
-        pane.getChildren().addAll(GameStatus.listOfBalls[0],GameStatus.cue, angleSlider, forceSlider);
-        GameStatus.listOfBalls[0].setCenterY(200);
-        GameStatus.listOfBalls[0].setCenterX(400);
+        pane.getChildren().addAll(GameStatus.table.getBackground(),GameStatus.table.getBorder(),GameStatus.cue, angleSlider,forceSlider);
+        pane.getChildren().addAll(GameStatus.listOfBalls);
+        pane.getChildren().addAll(GameStatus.nets);
+        pane.getChildren().addAll(GameStatus.tableLines);
+        
+        GameStatus.table.setImage(0);
+        
+        
         
         forceSlider.setTranslateX(200);
         
         GameStatus.cue.appears();
         
-        Scene sc = new Scene(pane,200,300);
+        Scene sc = new Scene(pane,600,500);
         stage.setScene(sc);
+        
+        GameStatus.positionObjects(sc.getWidth(), sc.getHeight());
+        
         //stage.setScene(welcomeScene.getScene());
         stage.show();
         

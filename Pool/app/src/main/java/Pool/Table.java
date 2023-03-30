@@ -8,16 +8,16 @@ import javafx.scene.shape.Rectangle;
 
 public class Table implements InteractiveObject{
     
-    final private double WIDTH = 500;
-    final private double HEIGHT = 250;
+    final private double WIDTH = 850;
+    final private double HEIGHT = 425;
     
     private Rectangle background;
     private Rectangle border;
     
     public Table(){
         background = new Rectangle(WIDTH, HEIGHT);
-        background.setArcWidth(30.0); 
-        background.setArcHeight(20.0); 
+        background.setArcWidth(50); 
+        background.setArcHeight(50); 
         border = new Rectangle(WIDTH, HEIGHT);
         border.setFill(new ImagePattern(new Image("InteractiveObjectIMG/tableBorderIMG.png")));
     }
