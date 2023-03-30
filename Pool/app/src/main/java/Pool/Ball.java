@@ -91,10 +91,19 @@ public double dx = 1, dy = 1;
         double y2= x.getCenterY();
         double relativeV= this.getVi().getMagnitude()-x.getVi().getMagnitude();
         double NormalVector= Math.sqrt( Math.pow( (x1-x2), 2) + Math.pow( (y1-y2), 2) );
+        //FIGURE OUT CALCULATIONS LATER
+        double UnitNormalV=0;
+        Vector VectorFormNormal=new Vector();
         double angleCollision=acos(NormalVector/relativeV);
         //ANGLE WILL BE FOUND USING A VECTOR FROM VELOCITY VECTOR 1 TO VELOCITY VECTOR 2,  THEN THE NORMALVECTOR AND finding arccos
         //SEPARATING VELOCITY IS A SCALAR, BUT CAN BECOME A VECTOR
         double separatingV= relativeV*cos(angleCollision);
+        double newSepV=-separatingV;
+        Vector vectorSep=new Vector(newSepV*VectorFormNormal.getXcomponent(), newSepV*VectorFormNormal.getYcomponent());
+
+        //CHANGE VELOCITIES
+        this.setVi(new Vector(this.getVi().getXcomponent()+vectorSep.getXcomponent(), this.getVi().getYcomponent()+vectorSep.getYcomponent()));
+        x.setVi(new Vector(x.getVi().getXcomponent()+vectorSep.getXcomponent(), x.getVi().getYcomponent()+vectorSep.getYcomponent()));
 
         //UPDATE POSITION
         this.updatePosition(GameStatus.time);
