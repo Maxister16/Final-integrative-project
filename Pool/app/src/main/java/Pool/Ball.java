@@ -69,8 +69,8 @@ public double dx = 1, dy = 1;
     }
 //SET POSITION
     public void setVectorPosition(Vector p){
-        //p.setXcomponent(this.getCenterX());
-        //p.setYcomponent(this.getCenterY());
+        p.setXcomponent(this.getCenterX());
+        p.setYcomponent(this.getCenterY());
         this.position=p;
     }
 //SET VI VECTOR
@@ -82,6 +82,24 @@ public double dx = 1, dy = 1;
         this.a=a;
     }
     public void updateMovement(Ball x){
+        //only x changes
+        double x1=this.getCenterX();
+        double x2=x.getCenterX();
+        //STAYS THE SAME
+        double y1=this.getCenterY();
+        //STAYS THE SAME
+        double y2= x.getCenterY();
+        double relativeV= this.getVi().getMagnitude()-x.getVi().getMagnitude();
+        double NormalVector= Math.sqrt( Math.pow( (x1-x2), 2) + Math.pow( (y1-y2), 2) );
+        double angleCollision=acos(NormalVector/relativeV);
+        //ANGLE WILL BE FOUND USING A VECTOR FROM VELOCITY VECTOR 1 TO VELOCITY VECTOR 2,  THEN THE NORMALVECTOR AND finding arccos
+        //SEPARATING VELOCITY IS A SCALAR, BUT CAN BECOME A VECTOR
+        double separatingV= relativeV*cos(angleCollision);
+
+        //UPDATE POSITION
+        this.updatePosition(GameStatus.time);
+
+        /*
        // System.out.println("not");
         //DEFINING NECESSARY VARIABLES
         //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
@@ -155,6 +173,8 @@ public double dx = 1, dy = 1;
         x.getVi().setXcomponent(xVelocityMag*cos(ac)+ xBallsY*-sin(ac));
         x.getVi().setYcomponent(xBallsY*sin(ac)+ xVelocityMag*cos(ac));
 
+         */
+
         this.updatePosition(GameStatus.time);
 
 
@@ -190,6 +210,7 @@ public double dx = 1, dy = 1;
                 //listOfBalls.get(i).updateMovement(this);  
             }
             else{
+                this.updatePosition(GameStatus.time);
             }
            
         }

@@ -28,6 +28,7 @@ import javafx.util.Duration;
  */
 public class CollidingBallsAnimation extends Application {
     private static ArrayList<Ball> listOfBallsA= new ArrayList<Ball>();
+    private static ArrayList<BallMovement> lol= new ArrayList<BallMovement>();
     public static void main(String[] args) {
         launch(args);
     }
@@ -48,16 +49,23 @@ public class CollidingBallsAnimation extends Application {
         //pane.getChildren().add(ok);
 
         for(int i=0; i<10;i++){
-            if(i==0||i==1){
+            if(i==0 ||i==1){
                 listOfBallsA.add(GameStatus.listOfBalls[i]);
+              //  lol.add(i,new BallMovement(0.5));
+              //  lol.get(i).getChildren().add(listOfBallsA.get(i));
             } else {
                 listOfBallsA.add(GameStatus.listOfBalls[i]);
                 //pane.getChildren().add(listOfBallsA.get(i));
                 inactive.getChildren().add(listOfBallsA.get(i));
+                //lol.add(i,new BallMovement(0));
+                //lol.get(i).getChildren().add(listOfBallsA.get(i));
             }
         }
         pane.getChildren().add(inactive);
-
+       /*for(int i=0; i<10; i++) {
+            pane.setCenter(lol.get(i));
+        }
+*/
 
         /*for(int i=0; i<10;i++){
             listOfBallsA.add(GameStatus.listOfBalls[i]);
@@ -71,6 +79,7 @@ public class CollidingBallsAnimation extends Application {
 
         //Ball white=new Ball(100,100,20,1);
         //white.setFill(Color.AQUAMARINE);
+
         listOfBallsA.get(0).setVi(new Vector (5,5));
         listOfBallsA.get(1).setVi(new Vector (5,5));
         p.add(listOfBallsA.get(0));
@@ -78,6 +87,8 @@ public class CollidingBallsAnimation extends Application {
 
 
         pane.setCenter(p);
+
+
 
         //pane.setLeft(inactive);
 
@@ -116,7 +127,7 @@ class BallMovement extends Pane {
         animation.setRate(z);
         //FOR THIS WE CAN SIMPLY DO A CALCULATION OF HOW LONG BEFORE VELOCITY REACHES ZERO WITH DECCELERATION
         animation.setCycleCount(Timeline.INDEFINITE);
-        //animation.play(); // Start animation
+        animation.play(); // Start animation
 
     }
 
@@ -155,6 +166,7 @@ class BallMovement extends Pane {
 
             //Ball b=this.getChildren().get(0);
             // Check boundaries
+            //ADD THIS TO REACTISHIT TO SEE IF BALLS HIT CORNERS
             if (ball.getCenterX() < ball.getRadius() ||
                     ball.getCenterX() > getWidth() - ball.getRadius()) {
                 ball.dx *= -1; // Change ball move direction
@@ -172,7 +184,9 @@ class BallMovement extends Pane {
                 double y2 = GameStatus.listOfBalls[i].getCenterY();
                 //CHECK IF BALLS ARE COLLIDING
                 if (Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) <= 4 * ball.getRadius() * ball.getRadius()) {
-                    ball.updateMovement(GameStatus.listOfBalls[i]);
+                    System.out.println("hey");
+                    //CALL A METHOD IN THIS CLASS THAT WILL CHECK FOR COLLISIONS
+                    //ball.updateMovement(GameStatus.listOfBalls[i]);
                     //listOfBalls.get(i).updateMovement(this);
                 }
 
