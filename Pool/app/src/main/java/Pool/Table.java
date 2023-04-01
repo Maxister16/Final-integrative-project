@@ -1,13 +1,16 @@
 package Pool;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class Table implements InteractiveObject{
-    
-    final private double WIDTH = 500;
-    final private double HEIGHT = 250;
+
+
+    //was 500, 250
+    final private double WIDTH = 850;
+    final private double HEIGHT = 425;
     
     private Rectangle background;
     private Rectangle border;
@@ -17,6 +20,7 @@ public class Table implements InteractiveObject{
         border = new Rectangle(WIDTH, HEIGHT);
         border.setFill(new ImagePattern(new Image("InteractiveObjectIMG/tableBorderIMG.png")));
     }
+
 
     
     public void setX(double x){

@@ -14,8 +14,10 @@ public class ScenePlayGrass{
         GameStatus.table.setImage(new Image("InteractiveObjectIMG/tableGrassIMG.png"));
 
         ScenePlay scenePlay = new ScenePlay(primaryStage);
+       // GameStatus.positionObjects(scenePlay.getScene().getWidth(), scenePlay.getScene().getHeight());
         scene = scenePlay.getScene();
         primaryStage.setScene(scenePlay.getScene());
+
     }
 
     public Scene getScene() {

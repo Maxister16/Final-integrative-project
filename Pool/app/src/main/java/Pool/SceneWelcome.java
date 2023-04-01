@@ -1,12 +1,10 @@
 package Pool;
 
-import javafx.animation.FadeTransition;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -14,23 +12,25 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import javax.print.attribute.standard.Media;
 import java.io.File;
 
-
-//To do: make volume on off button, add sound effects and music
 
 public class SceneWelcome {
     private Scene scene;
 
 
-    public SceneWelcome (Stage primaryStage) {
+    public SceneWelcome(Stage primaryStage) {
 
         File btnFile = new File("Pool/app/src/main/resources/sound/tok.mp3");
         MediaPlayer btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
-        btnSound.setVolume(0.5);
+        btnSound.setVolume(0.05);
+
+        File natureFile = new File("Pool/app/src/main/resources/sound/nature.mp3");
+        MediaPlayer welcomeBgSound = new MediaPlayer(new javafx.scene.media.Media(natureFile.toURI().toString()));
+        welcomeBgSound.play();
+        welcomeBgSound.setVolume(3);
+
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -57,7 +57,7 @@ public class SceneWelcome {
         ImageView iceMode = new ImageView("ButtonIMG/IcePlayBtnIMG.png");
         iceMode.setPreserveRatio(true);
         iceMode.setFitHeight(170);
-        ImageView normalMode= new ImageView("ButtonIMG/NormalPlayBtnIMG.png");
+        ImageView normalMode = new ImageView("ButtonIMG/NormalPlayBtnIMG.png");
         normalMode.setPreserveRatio(true);
         normalMode.setFitHeight(170);
         ImageView grassMode = new ImageView("ButtonIMG/GrassPlayBtnIMG.png");
@@ -66,9 +66,9 @@ public class SceneWelcome {
 
 
         //Mode buttons with images
-        Button normalBtn = new Button("",normalMode);
-        Button grassBtn = new Button("",grassMode);
-        Button iceBtn = new Button("",iceMode);
+        Button normalBtn = new Button("", normalMode);
+        Button grassBtn = new Button("", grassMode);
+        Button iceBtn = new Button("", iceMode);
 
         //Set button node background and border to transparent
         normalBtn.setBackground(null);
@@ -95,14 +95,14 @@ public class SceneWelcome {
 
         //Set play button images
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(backgroundPane,gridPane);
+        layout.getChildren().addAll(backgroundPane, gridPane);
 
         this.scene = new Scene(layout);
         normalBtn.setOnAction((event) -> {
-            System.out.println("SceneWelcome - scenePlay called");
             ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);//ERROR
-            System.out.println("SceneWelcome - setting scene");
             primaryStage.setScene(scenePlayNormal.getScene());
+            GameStatus.gameState = 0;
+           // welcomeBgSound.stop();
 
         });
         normalBtn.setOnMouseEntered((event) -> {
@@ -116,7 +116,8 @@ public class SceneWelcome {
         grassBtn.setOnAction((event) -> {
             ScenePlayGrass scenePlayGrass = new ScenePlayGrass(primaryStage);
             primaryStage.setScene(scenePlayGrass.getScene());
-            btnSound.play();
+            GameStatus.gameState = 2;
+            welcomeBgSound.pause();
         });
         grassBtn.setOnMouseEntered((event) -> {
             grassMode.setFitHeight(185);
@@ -128,9 +129,9 @@ public class SceneWelcome {
         });
         iceBtn.setOnAction((event) -> {
             ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
-
             primaryStage.setScene(scenePlayIce.getScene());
-            btnSound.play();
+            GameStatus.gameState = 1;
+            //welcomeBgSound.stop();
         });
         iceBtn.setOnMouseEntered((event) -> {
             iceMode.setFitHeight(185);
@@ -141,17 +142,11 @@ public class SceneWelcome {
             btnSound.stop();
         });
 
-        //Styling found on google
-        //final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
-        //final String HOVERED_BUTTON_STYLE = "-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;";
-        //
-        //
-        //button.setStyle(IDLE_BUTTON_STYLE);
-        //button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
-        //button.setOnMouseExited(e -> button.setStyle(IDLE_BUTTON_STYLE));
     }
+        public Scene getScene () {
+            return this.scene;
+        }
 
-    public Scene getScene() {
-        return this.scene;
-    }
+
+
 }
