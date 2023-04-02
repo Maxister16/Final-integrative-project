@@ -9,8 +9,8 @@ public class Table implements InteractiveObject{
 
 
     //was 500, 250
-    final private double WIDTH = 850;
-    final private double HEIGHT = 425;
+    final private double WIDTH = 830;
+    final private double HEIGHT = 415;
     
     private Rectangle background;
     private Rectangle border;

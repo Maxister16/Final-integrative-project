@@ -96,6 +96,13 @@ public class ScenePlay {
                 Button playButton = new Button("", play);
                 Button menuButton = new Button("",menu);
 
+//                ImageView angleWord = new ImageView("SliderIMG/forceSliderIMG.png");
+//                ImageView forceWord = new ImageView("SliderIMG/angleSliderIMG.png");
+//                forceWord.setPreserveRatio(true);
+//                forceWord.setFitHeight(50);
+//                angleWord.setPreserveRatio(true);
+//                angleWord.setFitHeight(50);
+
                 menu.setPreserveRatio(true);
                 menu.setFitHeight(45);
                 play.setPreserveRatio(true);
@@ -160,7 +167,8 @@ public class ScenePlay {
                 redBasketPane.getChildren().add(redBaskets);
 
                 orangeBaskets.setPreserveRatio(true);
-                orangeBaskets.setFitHeight(300);
+                orangeBaskets.setFitHeight(280);
+                orangeBaskets.setTranslateX(7);
 
                 orangeBaskets.nextFrame();
                 orangeBasketPane.getChildren().add(orangeBaskets);
@@ -184,7 +192,7 @@ public class ScenePlay {
                 borderPane.setLeft(redBasketPane);
                 borderPane.setRight(orangeBasketPane);
                 gamePane.setTranslateY(610);
-                gamePane.setTranslateX(500);
+                gamePane.setTranslateX(480);
                 borderPane.setTop(gridPaneTop);
 
                 borderPane.setBottom(gridPaneBot);
