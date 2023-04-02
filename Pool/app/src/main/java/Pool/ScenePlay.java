@@ -3,20 +3,26 @@ package Pool;
 
 import javafx.animation.FadeTransition;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.File;
 import javafx.scene.paint.Color;
+
+import javax.swing.text.html.StyleSheet;
 
 
 public class ScenePlay {
@@ -46,6 +52,7 @@ public class ScenePlay {
                 gridPaneBot.setAlignment(Pos.BOTTOM_LEFT);
 
 
+
                 //Set Size constraints in top Grid Pane
                 ColumnConstraints columnTop1 = new ColumnConstraints(200);
                 columnTop1.setHalignment(HPos.CENTER);
@@ -71,21 +78,28 @@ public class ScenePlay {
 
                 //Play scene Button ImageViews
                 ImageView menu = new ImageView("ButtonIMG/MenuBtnIMG.png");
-                ImageView redPlay = new ImageView("ButtonIMG/RedPlayBtnIMG.png");
+                ImageView play = new ImageView("ButtonIMG/playBtnIMG.png");
 
                 // Create Sliders and Buttons
                 Slider forceSlider = new Slider(1, 10, 1);
                 Slider angleSlider = new Slider(0.0, 359, 1.0);
+                //forceSlider.setOpacity(0.3);
 
 
 
-                Button playButton = new Button("", redPlay);
+
+                // Set the background of the track node
+              // forceSlider.setStyle("-fx-background-color: linear-gradient(to right, yellow, red); -fx-border-color: linear-gradient(to right, yellow, red); ");
+                //forceSlider.getStylesheets().add("slider.css");
+
+
+                Button playButton = new Button("", play);
                 Button menuButton = new Button("",menu);
 
                 menu.setPreserveRatio(true);
                 menu.setFitHeight(45);
-                redPlay.setPreserveRatio(true);
-                redPlay.setFitHeight(70);
+                play.setPreserveRatio(true);
+                play.setFitHeight(70);
 
                 //set button backgrounds and border transparent
                 menuButton.setBackground(null);
@@ -187,14 +201,105 @@ public class ScenePlay {
                 });
 
                 playButton.setOnMouseEntered((event) -> {
-                    redPlay.setFitHeight(80);
+                    play.setFitHeight(80);
                     btnSound.play();
 
                 });
                 playButton.setOnMouseExited((event) -> {
-                    redPlay.setFitHeight(70);
+                    play.setFitHeight(70);
                     btnSound.stop();
                 });
+
+                //Winning Screen
+                Pane winPane = new Pane();
+                ImageView orangeWin = new ImageView("BackgroundIMG/star0.png");
+                orangeWin.setPreserveRatio(true);
+                orangeWin.setFitHeight(760);
+                ImageView redWin = new ImageView("BackgroundIMG/redStar.png");
+                redWin.setPreserveRatio(true);
+                redWin.setFitHeight(760);
+                ImageView apple =new ImageView("ButtonIMG/redReplay.png");
+                apple.setPreserveRatio(true);
+                apple.setFitHeight(145);
+                ImageView orange =new ImageView("ButtonIMG/orangeReplay.png");
+                orange.setPreserveRatio(true);
+                orange.setFitHeight(145);
+
+                Button redReplay = new Button("", apple);
+                Button orangeReplay = new Button("", orange);
+
+                redReplay.setBackground(null);
+                orangeReplay.setBackground(null);
+                redReplay.setBorder(null);
+                orangeReplay.setBorder(null);
+                redReplay.setTranslateX(384);
+                redReplay.setTranslateY(310);
+                orangeReplay.setTranslateX(391);
+                orangeReplay.setTranslateY(327);
+
+
+
+
+                redReplay.setOnMouseEntered((event) -> {
+                    apple.setFitHeight(155);
+                    btnSound.play();
+                });
+
+                redReplay.setOnMouseExited((event) -> {
+                    apple.setFitHeight(145);
+                    btnSound.stop();
+                });
+
+                orangeReplay.setOnMouseEntered((event) -> {
+                    orange.setFitHeight(155);
+                    btnSound.play();
+                });
+
+                orangeReplay.setOnMouseExited((event) -> {
+                    orange.setFitHeight(145);
+                    btnSound.stop();
+                });
+
+
+
+                winPane.setTranslateX(180);
+                winPane.setTranslateY(0);
+                Rectangle winBlur = new Rectangle(0,0, 1350, 780);
+                winBlur.setFill(Color.WHITE);
+                winBlur.setOpacity(0.5);
+                winBlur.setTranslateX(-180);
+
+
+                //TO ADD -- Do same of opposite team sends black ball into hole
+
+                // GameStatus.team1Points=4; //For testing ... Orange= Team 1, Red= Team 2
+                if (GameStatus.team1Points==4){
+                    winPane.getChildren().addAll(winBlur,orangeWin,orangeReplay);
+                    layout.getChildren().add(winPane);
+                }
+
+                if (GameStatus.team2Points==4){
+                    winPane.getChildren().addAll(winBlur,redWin,redReplay);
+                    layout.getChildren().add(winPane);
+                }
+
+                orangeReplay.setOnAction((event) -> {
+                    winPane.getChildren().clear();
+                    layout.getChildren().remove(winPane);
+                    SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+                    primaryStage.setScene(sceneWelcome.getScene());
+                    playBgSound.pause();
+                });
+
+                redReplay.setOnAction((event) -> {
+                    winPane.getChildren().clear();
+                    layout.getChildren().remove(winPane);
+                    SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+                    primaryStage.setScene(sceneWelcome.getScene());
+
+                    playBgSound.pause();
+                });
+
 
                 menuButton.setOnAction((event) -> {
 

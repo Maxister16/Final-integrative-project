@@ -13,6 +13,7 @@ public class TestClassM extends Application {
     public void start(Stage stage) throws IOException {
         //GameStatus.OnLaunch();
         SceneWelcome sceneWelcome = new SceneWelcome(stage);
+
         stage.setHeight(780);
         stage.setWidth(1350);
         stage.setResizable(false);

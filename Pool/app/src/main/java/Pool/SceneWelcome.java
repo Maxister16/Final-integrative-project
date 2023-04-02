@@ -1,5 +1,6 @@
 package Pool;
 
+import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -17,7 +18,7 @@ import java.io.File;
 
 
 public class SceneWelcome {
-    private Scene scene;
+    public Scene scene;
 
 
     public SceneWelcome(Stage primaryStage) {
