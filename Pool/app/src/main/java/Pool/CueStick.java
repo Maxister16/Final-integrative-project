@@ -1,13 +1,10 @@
 
 package Pool;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.PathTransition;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polyline;
 
 public class CueStick extends ImageView{
@@ -22,17 +19,17 @@ public class CueStick extends ImageView{
         this.setFitHeight(this.getFitWidth()*(img.getHeight()/img.getWidth()));
     }
     
-    public void appears(){
+    public void appears(Slider angleSlider){
         this.setOpacity(1);
         this.setX(GameStatus.listOfBalls[0].getCenterX()-GameStatus.cue.getFitWidth()/2);
         this.setY(GameStatus.listOfBalls[0].getCenterY()-GameStatus.cue.getFitHeight()/2);
-        this.rotateProperty().bind(TestClassM.angleSlider.valueProperty());//bind to slider
+        this.rotateProperty().bind(angleSlider.valueProperty());//bind to slider
     }
     
-    public void hitAnim(double force){
+    public void hitAnim(Slider angleSlider,Slider forceSlider){
         
         this.rotateProperty().unbind();
-        double WindUpLenght = (TestClassM.forceSlider.getValue()/TestClassM.forceSlider.getMax())+0.5;
+        double WindUpLenght = (forceSlider.getValue()/forceSlider.getMax())+0.5;
         Polyline guide = new Polyline();
         
         PathTransition hitAnim = new PathTransition();

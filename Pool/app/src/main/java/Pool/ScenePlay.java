@@ -10,21 +10,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.File;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 
-public abstract class ScenePlay {
+public class ScenePlay {
 
             private Scene scene;
-            Slider forceSlider;
-            Slider angleSlider;
-            Button playButton;
-            Button menuButton;
+            public Slider forceSlider;
+            public Slider angleSlider;
+            public Button playButton;
+            public Button menuButton;
+            public CustomAnimation redBaskets;
+            public CustomAnimation orangeBaskets;
+            public CustomAnimation teamName;
+            public FadeTransition fade;
 
             public ScenePlay()  {
 
@@ -114,18 +115,18 @@ public abstract class ScenePlay {
                 layout.setMinHeight(600);
 
                 //Put table together
-                GameStatus.positionObjects(0,0);
                 gamePane.getChildren().addAll(GameStatus.nets);
                 gamePane.getChildren().addAll(GameStatus.listOfBalls);
                 gamePane.getChildren().addAll(GameStatus.tableLines);
                 gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
-
+                
                 //Set background image
                 ImageView bg = new ImageView("BackgroundIMG/PlayBgIMG.jpg");
 
                 bg.setPreserveRatio(true);
                 bg.setFitWidth(1350);
-                FadeTransition fade = new FadeTransition();
+                
+                fade = new FadeTransition();
 
                 //setting the duration for the Fade transition
                 fade.setDuration(Duration.millis(200));
@@ -139,8 +140,8 @@ public abstract class ScenePlay {
                 Pane orangeBasketPane = new Pane();
 
                 //Initialize custom animation for baskets
-                CustomAnimation redBaskets = new CustomAnimation("red",5);
-                CustomAnimation orangeBaskets = new CustomAnimation("orange",5);
+                redBaskets = new CustomAnimation("red",5);
+                orangeBaskets = new CustomAnimation("orange",5);
 
                 redBaskets.setPreserveRatio(true);
                 redBaskets.setFitHeight(300);
@@ -165,7 +166,7 @@ public abstract class ScenePlay {
                 Pane teamNamePane = new Pane();
 
                 //Initialize team name custom animation
-                CustomAnimation teamName = new CustomAnimation("team",2);
+                teamName = new CustomAnimation("team",2);
                 teamName.setPreserveRatio(true);
                 teamName.nextFrame();
                 teamName.setFitHeight(165);
@@ -185,6 +186,7 @@ public abstract class ScenePlay {
 
                 borderPane.setBottom(gridPaneBot);
                 layout.getChildren().addAll(bg,borderPane);
+                //layout.getChildren().addAll(borderPane);
 
                 GameStatus.positionObjects(layout.getWidth(), layout.getHeight());
                 this.scene = new Scene(layout);

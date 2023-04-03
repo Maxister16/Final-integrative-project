@@ -9,7 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.util.Duration;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class TestClassM extends Application {
     @Override
@@ -21,34 +24,39 @@ public class TestClassM extends Application {
         ScenePlayNormal scenePlayNormal = new ScenePlayNormal();
         ScenePlayIce scenePlayIce = new ScenePlayIce();
         
-
+        
         stage.setHeight(780);
         stage.setWidth(1350);
         stage.setResizable(false);
 
         stage.setScene(sceneWelcome.getScene());
+        stage.setScene(scenePlayNormal.getScene());
         stage.show();
-        
-        
-        
         
         
         
         
         //action handlers for repetitive actions
 //GO TO SCENES
-        EventHandler gotToNormal = e->{
+        EventHandler goToNormal = e->{
             stage.setScene(scenePlayNormal.getScene());
+            GameStatus.initialize();
             GameStatus.gameState = 0;
         };
-        EventHandler gotToGrass = e->{
-            stage.setScene(scenePlayGrass.getScene());
+        EventHandler goToIce = e->{
+            stage.setScene(scenePlayIce.getScene());
+            GameStatus.initialize();
             GameStatus.gameState = 1;
         };
-        EventHandler gotToIce = e->{
-            stage.setScene(scenePlayIce.getScene());
+        EventHandler goToGrass = e->{
+            stage.setScene(scenePlayGrass.getScene());
+            GameStatus.initialize();
             GameStatus.gameState = 2;
         };
+        EventHandler goToWelcome = e->{
+            stage.setScene(sceneWelcome.getScene());
+        };
+        
 //BUTTON ACTIONS
         EventHandler btnOnMouseEntered = e->{
             Button target = (Button)e.getTarget();
@@ -66,11 +74,13 @@ public class TestClassM extends Application {
         };
         
         
+        
+        
 //SCENE_WELCOME
         //Button Events
-        sceneWelcome.normalBtn.setOnAction(gotToNormal);
-        sceneWelcome.grassBtn.setOnAction(gotToGrass);
-        sceneWelcome.iceBtn.setOnAction(gotToIce);
+        sceneWelcome.normalBtn.setOnAction(goToNormal);
+        sceneWelcome.grassBtn.setOnAction(goToGrass);
+        sceneWelcome.iceBtn.setOnAction(goToIce);
         
         sceneWelcome.normalBtn.setOnMouseEntered(btnOnMouseEntered);
         sceneWelcome.normalBtn.setOnMouseExited(btnOnMouseExited);
@@ -80,8 +90,20 @@ public class TestClassM extends Application {
         sceneWelcome.iceBtn.setOnMouseExited(btnOnMouseExited);
         
 //SCENE_PLAY
+        scenePlayNormal.playButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.playButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.playButton.setOnAction(e->{
+            GameStatus.cue.hitAnim(scenePlayNormal.angleSlider, scenePlayNormal.forceSlider);
+        });
+        scenePlayNormal.menuButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.menuButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.menuButton.setOnAction(goToWelcome);
+        
         
     }
+    
+    
+    
     public static void main(String[] args) {
         Application.launch();
     }

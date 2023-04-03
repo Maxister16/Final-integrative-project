@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class ScenePlayNormal extends ScenePlay{
-    private Scene scene;
+    //private Scene scene;
 
     public ScenePlayNormal() {
         

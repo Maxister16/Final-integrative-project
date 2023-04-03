@@ -1,7 +1,5 @@
 package Pool;
 
-package Pool;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -159,12 +157,12 @@ class BallMovement extends Pane {
             // Check boundaries
             if (ball.getCenterX() < ball.getRadius() ||
                     ball.getCenterX() > getWidth() - ball.getRadius()) {
-                ball.dx *= -1; // Change ball move direction
+                //ball.dx *= -1; // Change ball move direction
             }
             if (ball.getCenterY() < ball.getRadius() ||
                     ball.getCenterY() > getHeight() - ball.getRadius()) {
                 //if(ball.getCenterY()> GameStatus.table.getHeight() || ball.getCenterY()< GameStatus.table.getHeight() ){
-                ball.dy *= -1; // Change ball move direction
+                //ball.dy *= -1; // Change ball move direction
             }
             for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
                 //SET VALUES FOR X1,Y1 AND X2,Y2
@@ -179,8 +177,10 @@ class BallMovement extends Pane {
                 }
 
                 // Adjust ball position
+                /*
                 ball.setCenterX(ball.dx + ball.getCenterX());
                 ball.setCenterY(ball.dy + ball.getCenterY());
+                */
                 //SET THE VECTOR POSITIONS
                 ball.setVectorPosition(new Vector(ball.getCenterX(), ball.getCenterY()));
                 //CHECK COLLISIONS

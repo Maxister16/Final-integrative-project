@@ -31,20 +31,20 @@ public class TestClassCueStick extends Application {
         
         forceSlider.setTranslateX(200);
         
-        GameStatus.cue.appears();
+        GameStatus.cue.appears(angleSlider);
         
         Scene sc = new Scene(pane,200,300);
         stage.setScene(sc);
         //stage.setScene(welcomeScene.getScene());
         stage.show();
-        
+        /*
         sc.setOnMouseClicked(e->{
-            GameStatus.cue.hitAnim(forceSlider.getValue());
-        });
+            GameStatus.cue.hitAnim(forceSlider.getValue(),angleSlider,forceSlider);
+        });*/
         
         sc.setOnKeyPressed(e->{
             System.out.println("key pressed");
-            GameStatus.cue.appears();
+            GameStatus.cue.appears(angleSlider);
         });
         
         

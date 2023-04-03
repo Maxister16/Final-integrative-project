@@ -137,6 +137,9 @@ public class GameStatus {
     }
     
     public static void setZorder(){
+        table.getBackground().toFront();
+        table.getBorder().toFront();
+        
         for (Net net : nets) {
             net.toFront();
         }

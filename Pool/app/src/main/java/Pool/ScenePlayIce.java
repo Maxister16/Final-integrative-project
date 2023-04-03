@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class ScenePlayIce extends ScenePlay{
-    private Scene scene;
+    //public Scene scene;
 
     public ScenePlayIce() {
 
