@@ -18,20 +18,25 @@ import java.io.File;
 
 
 public class SceneWelcome {
+    
     public Scene scene;
-
-
-    public SceneWelcome(Stage primaryStage) {
+    Button normalBtn;
+    Button grassBtn; 
+    Button iceBtn;
+    
+    public SceneWelcome() {
 
         //Set up music and sounds
-        File btnFile = new File("Pool/app/src/main/resources/sound/tok.mp3");
-        MediaPlayer btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
+        System.out.println("from class "+System.getProperty("user.dir"));
+        
+        /*File btnFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/tok.mp3");
+        btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
         btnSound.setVolume(0.05);
 
-        File natureFile = new File("Pool/app/src/main/resources/sound/nature.mp3");
-        MediaPlayer welcomeBgSound = new MediaPlayer(new javafx.scene.media.Media(natureFile.toURI().toString()));
+        File natureFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/nature.mp3");
+        welcomeBgSound = new MediaPlayer(new javafx.scene.media.Media(natureFile.toURI().toString()));
         welcomeBgSound.play();
-        welcomeBgSound.setVolume(3);
+        welcomeBgSound.setVolume(3);*/
 
         //GridPane for buttons
         GridPane gridPane = new GridPane();
@@ -65,9 +70,9 @@ public class SceneWelcome {
         grassMode.setFitHeight(170);
 
         //Mode buttons with images
-        Button normalBtn = new Button("", normalMode);
-        Button grassBtn = new Button("", grassMode);
-        Button iceBtn = new Button("", iceMode);
+        normalBtn = new Button("", normalMode);
+        grassBtn = new Button("", grassMode);
+        iceBtn = new Button("", iceMode);
 
         //Set button node background and border to transparent
         normalBtn.setBackground(null);
@@ -97,7 +102,7 @@ public class SceneWelcome {
 
         //create Welcome scene
         this.scene = new Scene(layout);
-
+/*
         //Button Events
         normalBtn.setOnAction((event) -> {
             ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);//ERROR
@@ -143,7 +148,7 @@ public class SceneWelcome {
         iceBtn.setOnMouseExited((event) -> {
             iceMode.setFitHeight(170);
             btnSound.stop();
-        });
+        });*/
 
     }
         public Scene getScene () {

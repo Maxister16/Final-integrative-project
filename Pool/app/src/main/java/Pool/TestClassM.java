@@ -7,12 +7,20 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 public class TestClassM extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        //GameStatus.OnLaunch();
-        SceneWelcome sceneWelcome = new SceneWelcome(stage);
+        Sound.initiateSound();
+        //create scenes
+        SceneWelcome sceneWelcome = new SceneWelcome();
+        ScenePlayGrass scenePlayGrass = new ScenePlayGrass();
+        ScenePlayNormal scenePlayNormal = new ScenePlayNormal();
+        ScenePlayIce scenePlayIce = new ScenePlayIce();
+        
 
         stage.setHeight(780);
         stage.setWidth(1350);
@@ -21,68 +29,60 @@ public class TestClassM extends Application {
         stage.setScene(sceneWelcome.getScene());
         stage.show();
         
-        /*
-        Vector v = new Vector(4,3);
-        Vector u = v.getUnitVector();
-        Vector p = v.getPerpendicularVector();
         
-        v.printInfo("v: ");
-        u.printInfo("u: ");
-        p.printInfo("unitP: ");*/
+        
+        
+        
+        
+        
+        //action handlers for repetitive actions
+//GO TO SCENES
+        EventHandler gotToNormal = e->{
+            stage.setScene(scenePlayNormal.getScene());
+            GameStatus.gameState = 0;
+        };
+        EventHandler gotToGrass = e->{
+            stage.setScene(scenePlayGrass.getScene());
+            GameStatus.gameState = 1;
+        };
+        EventHandler gotToIce = e->{
+            stage.setScene(scenePlayIce.getScene());
+            GameStatus.gameState = 2;
+        };
+//BUTTON ACTIONS
+        EventHandler btnOnMouseEntered = e->{
+            Button target = (Button)e.getTarget();
+            target.setScaleX(1.5);
+            target.setScaleY(1.5);
+            Sound.btnSound.stop();
+            Sound.btnSound.play();
+        };
+        EventHandler btnOnMouseExited = e->{
+            Button target = (Button)e.getTarget();
+            target.setScaleX(1);
+            target.setScaleY(1);
+            Sound.btnSound.stop();
+            Sound.btnSound.play();
+        };
+        
+        
+//SCENE_WELCOME
+        //Button Events
+        sceneWelcome.normalBtn.setOnAction(gotToNormal);
+        sceneWelcome.grassBtn.setOnAction(gotToGrass);
+        sceneWelcome.iceBtn.setOnAction(gotToIce);
+        
+        sceneWelcome.normalBtn.setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.normalBtn.setOnMouseExited(btnOnMouseExited);
+        sceneWelcome.grassBtn.setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.grassBtn.setOnMouseExited(btnOnMouseExited);
+        sceneWelcome.iceBtn.setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.iceBtn.setOnMouseExited(btnOnMouseExited);
+        
+//SCENE_PLAY
+        
     }
     public static void main(String[] args) {
         Application.launch();
     }
-
 }
-
-    //Max's body
-
-//    @Override
-//    public void start(Stage ps){
-//        Pane pane = new Pane();
-//
-//        //CustomAnimation dino = new CustomAnimation("gaming_DinoSprites_walk",5);
-//
-//       /* Net net = new Net(1);
-//        pane.getChildren().add(net);
-//        net.setCenterX(50);
-//        net.setCenterY(50);*/
-//
-//
-//        GameStatus.initialBallsAndNets();
-//
-//        for (int i = 0; i < GameStatus.nets.length; i++) {
-//            GameStatus.nets[i].setCenterX((i%3)*60+20);
-//            GameStatus.nets[i].setCenterY((i<3)?75:125);
-//
-//            pane.getChildren().add(GameStatus.nets[i]);
-//        }
-//
-//        /*
-//        //testVector
-//        Vector v1 = new Vector(0,0);
-//        Vector v2 = new Vector(0,4);
-//        Vector v3 = new Vector(-4,0);
-//        Vector v4 = new Vector(4,0);
-//        System.out.println(Math.toDegrees(v1.getAngle()));
-//        System.out.println(Math.toDegrees(v2.getAngle()));
-//        System.out.println(Math.toDegrees(v3.getAngle()));
-//        System.out.println(Math.toDegrees(v4.getAngle()));
-//        */
-//
-//
-//
-//        Scene sc = new Scene(pane,200,200);
-//        ps.setTitle("testScene");
-//        ps.setScene(sc);
-//        ps.show();
-//
-//
-//        //event listener
-//        /*sc.setOnMouseClicked(e->{
-//                    if(e.getButton()== MouseButton.PRIMARY){dino.nextFrame();}
-//                    else if(e.getButton()== MouseButton.SECONDARY){dino.previousFrame();}
-//                });*/
-//    }
-//}

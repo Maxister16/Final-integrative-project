@@ -1,4 +1,4 @@
-
+ 
 package Pool;
 
 import javafx.animation.FadeTransition;
@@ -18,25 +18,29 @@ import java.io.File;
 import javafx.scene.paint.Color;
 
 
-public class ScenePlay {
+public abstract class ScenePlay {
 
             private Scene scene;
+            Slider forceSlider;
+            Slider angleSlider;
+            Button playButton;
+            Button menuButton;
 
-            public ScenePlay(Stage primaryStage)  {
+            public ScenePlay()  {
 
                 //Initialize Game Status
                 GameStatus.initialize();
 
                 //Music and Sound set up
-                File btnFile = new File("Pool/app/src/main/resources/sound/tok.mp3");
+                /*File btnFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/tok.mp3");
                 MediaPlayer btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
                 btnSound.setVolume(0.05);
 
-                File songFile = new File("Pool/app/src/main/resources/sound/Song.mp3");
+                File songFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/Song.mp3");
                 MediaPlayer playBgSound = new MediaPlayer(new javafx.scene.media.Media(songFile.toURI().toString()));
                 playBgSound.play();
                 playBgSound.setVolume(0.08);
-                playBgSound.setCycleCount(MediaPlayer.INDEFINITE);
+                playBgSound.setCycleCount(MediaPlayer.INDEFINITE);*/
 
                 //Create Principal Panes
                 Pane gamePane = new Pane();
@@ -73,16 +77,16 @@ public class ScenePlay {
                 ImageView menu = new ImageView("ButtonIMG/MenuBtnIMG.png");
                 ImageView play = new ImageView("ButtonIMG/playBtnIMG.png");
 
-                Slider forceSlider = new Slider(1, 10, 1);
-                Slider angleSlider = new Slider(0.0, 359, 1.0);
+                forceSlider = new Slider(1, 10, 1);
+                angleSlider = new Slider(0.0, 359, 1.0);
 
                 //Not working attempt at styling sliders
                 // Set the background of the track node
-                // forceSlider.setStyle("-fx-background-color: linear-gradient(to right, yellow, red); -fx-border-color: linear-gradient(to right, yellow, red); ");
+                //forceSlider.setStyle("-fx-background-color: linear-gradient(to right, yellow, red); -fx-border-color: linear-gradient(to right, yellow, red); ");
                 //forceSlider.getStylesheets().add("slider.css");
 
-                Button playButton = new Button("", play);
-                Button menuButton = new Button("",menu);
+                playButton = new Button("", play);
+                menuButton = new Button("",menu);
 
                 menu.setPreserveRatio(true);
                 menu.setFitHeight(45);
@@ -187,7 +191,8 @@ public class ScenePlay {
 
                 // Play button events
                    //MAX-Player can't press play button if balls are still moving (setOnAction, setOnMouseEntered, setOnMouseExited events should be temporarily disabled)
-                playButton.setOnAction((event) -> {
+                /*
+                   playButton.setOnAction((event) -> {
                     double force = forceSlider.getValue();
                     double angle = angleSlider.getValue();
                     System.out.println("Force: " + force + "Angle: " + angle);
@@ -252,7 +257,7 @@ public class ScenePlay {
                     winPane.getChildren().addAll(winBlur,redWin,redReplay);
                     layout.getChildren().add(winPane);
                 }
-
+/*
                 //Replay button events
                 orangeReplay.setOnAction((event) -> {
                     winPane.getChildren().clear();
@@ -479,7 +484,7 @@ public class ScenePlay {
                     menu.setFitHeight(45);
                     btnSound.stop();
                 });
-
+*/
             }
 
             public Scene getScene() {

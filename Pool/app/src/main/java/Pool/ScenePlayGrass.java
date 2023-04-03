@@ -5,23 +5,20 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
-public class ScenePlayGrass{
+public class ScenePlayGrass extends ScenePlay{
 
-    private Scene scene;
+    //private Scene scene;
 
-    public ScenePlayGrass(Stage primaryStage) {
+    public ScenePlayGrass() {
 
         GameStatus.table.setImage(new Image("InteractiveObjectIMG/tableGrassIMG.png"));
-
-        ScenePlay scenePlay = new ScenePlay(primaryStage);
+        //ScenePlay scenePlay = new ScenePlay(primaryStage);
        // GameStatus.positionObjects(scenePlay.getScene().getWidth(), scenePlay.getScene().getHeight());
-        scene = scenePlay.getScene();
-        primaryStage.setScene(scenePlay.getScene());
 
     }
 
-    public Scene getScene() {
+    /*public Scene getScene() {
         return this.scene;
-    }
+    }*/
 }
 

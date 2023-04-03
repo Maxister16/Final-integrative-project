@@ -77,7 +77,7 @@ public class SceneMenu{
 
         layout.getChildren().addAll(backgroundPane, gridPane);
         this.scene = new Scene(layout);
-
+/*
         resumeButton.setOnAction((event) -> {
           //go back to paused play scene
             ScenePlay scenePlay = new ScenePlay(primaryStage);
@@ -85,7 +85,7 @@ public class SceneMenu{
         });
 
         homeButton.setOnAction((event) -> {
-            SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+            //SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
             primaryStage.setScene(sceneWelcome.getScene());
         });
 
@@ -108,7 +108,7 @@ public class SceneMenu{
 //                physicsButton.setText("Physics on");
 //            }
 //        });
-//    }
+*/    }
 
     public Scene getScene() {
         return this.scene;
