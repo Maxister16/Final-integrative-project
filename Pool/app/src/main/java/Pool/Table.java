@@ -6,7 +6,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class Table implements InteractiveObject{
+public class Table{
     
     final private double WIDTH = 850;
     final private double HEIGHT = 425;
@@ -52,10 +52,6 @@ public class Table implements InteractiveObject{
         return this.background;
     }
     
-    @Override
-    public void setImage(Image newImage) { //sets the background
-        background.setFill(new ImagePattern(newImage));
-    }
     public void setImage(int typeOfGame) { //sets the background
         switch(typeOfGame){//0:normal, 1:ice, 2:grass 
             case 0 -> background.setFill(Color.MOCCASIN);

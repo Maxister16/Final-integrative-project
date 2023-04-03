@@ -28,7 +28,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'Pool.TestClassM'
+    mainClass = 'Pool.MainApp'
 }
 
 tasks.named('test') {

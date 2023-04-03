@@ -15,10 +15,10 @@ public class PaneWin extends Pane{
         ImageView redWin = new ImageView("BackgroundIMG/redStar.png");
         redWin.setPreserveRatio(true);
         redWin.setFitHeight(760);
-        ImageView apple =new ImageView("ButtonIMG/redReplay.png");
+        ImageView apple = new ImageView("ButtonIMG/redReplay.png");
         apple.setPreserveRatio(true);
         apple.setFitHeight(145);
-        ImageView orange =new ImageView("ButtonIMG/orangeReplay.png");
+        ImageView orange = new ImageView("ButtonIMG/orangeReplay.png");
         orange.setPreserveRatio(true);
         orange.setFitHeight(145);
 
@@ -34,8 +34,8 @@ public class PaneWin extends Pane{
         orangeReplay.setTranslateX(391);
         orangeReplay.setTranslateY(327);
 
-        winPane.setTranslateX(180);
-        winPane.setTranslateY(0);
+        this.setTranslateX(180);
+        this.setTranslateY(0);
         Rectangle winBlur = new Rectangle(0,0, 1350, 780);
         //(will add fade transition later)
         winBlur.setFill(Color.WHITE);

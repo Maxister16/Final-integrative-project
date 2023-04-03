@@ -9,7 +9,7 @@ public class ScenePlayNormal extends ScenePlay{
 
     public ScenePlayNormal() {
         
-        GameStatus.table.setImage(new Image("InteractiveObjectIMG/tableNormalIMG.png"));
+        GameStatus.table.setImage(0);
         /*
         System.out.println("ScenePlayNormal - create new ScenePlay");
         ScenePlay scenePlay = new ScenePlay(primaryStage);//ERROR

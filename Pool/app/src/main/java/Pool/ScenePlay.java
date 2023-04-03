@@ -26,11 +26,21 @@ public class ScenePlay {
             public CustomAnimation orangeBaskets;
             public CustomAnimation teamName;
             public FadeTransition fade;
+            public Pane gamePane;
 
+            public void gdi(){
+                gamePane.getChildren().clear();
+                gamePane.getChildren().addAll(GameStatus.nets);
+                gamePane.getChildren().addAll(GameStatus.listOfBalls);
+                gamePane.getChildren().addAll(GameStatus.tableLines);
+                gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
+            }
+            
+            
             public ScenePlay()  {
 
                 //Initialize Game Status
-                GameStatus.initialize();
+                //GameStatus.initialize();
 
                 //Music and Sound set up
                 /*File btnFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/tok.mp3");
@@ -44,7 +54,7 @@ public class ScenePlay {
                 playBgSound.setCycleCount(MediaPlayer.INDEFINITE);*/
 
                 //Create Principal Panes
-                Pane gamePane = new Pane();
+                gamePane = new Pane();
                 BorderPane borderPane = new BorderPane();
                 GridPane gridPaneTop = new GridPane();
                 GridPane gridPaneBot = new GridPane();
@@ -111,14 +121,14 @@ public class ScenePlay {
                 StackPane layout = new StackPane();
 
                 //if I change these values the game Pane disappears (This doesn't matter as it won't change)
-                layout.setMinWidth(900);
-                layout.setMinHeight(600);
+                layout.setMaxWidth(1350);
+                layout.setMaxHeight(780);
 
                 //Put table together
-                gamePane.getChildren().addAll(GameStatus.nets);
-                gamePane.getChildren().addAll(GameStatus.listOfBalls);
-                gamePane.getChildren().addAll(GameStatus.tableLines);
-                gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
+//                gamePane.getChildren().addAll(GameStatus.nets);
+//                gamePane.getChildren().addAll(GameStatus.listOfBalls);
+//                gamePane.getChildren().addAll(GameStatus.tableLines);
+//                gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
                 
                 //Set background image
                 ImageView bg = new ImageView("BackgroundIMG/PlayBgIMG.jpg");
@@ -180,16 +190,16 @@ public class ScenePlay {
                 borderPane.setCenter(gamePane);
                 borderPane.setLeft(redBasketPane);
                 borderPane.setRight(orangeBasketPane);
-                gamePane.setTranslateY(610);
-                gamePane.setTranslateX(480);
+                //gamePane.setTranslateY(610);
+                //gamePane.setTranslateX(480);
                 borderPane.setTop(gridPaneTop);
 
                 borderPane.setBottom(gridPaneBot);
                 layout.getChildren().addAll(bg,borderPane);
                 //layout.getChildren().addAll(borderPane);
 
-                GameStatus.positionObjects(layout.getWidth(), layout.getHeight());
-                this.scene = new Scene(layout);
+                //GameStatus.positionObjects(1350, 780);
+                this.scene = new Scene(layout,1350,780);
 
                 // Play button events
                    //MAX-Player can't press play button if balls are still moving (setOnAction, setOnMouseEntered, setOnMouseExited events should be temporarily disabled)

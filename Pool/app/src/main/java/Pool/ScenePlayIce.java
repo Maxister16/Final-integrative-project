@@ -12,7 +12,7 @@ public class ScenePlayIce extends ScenePlay{
 
     public ScenePlayIce() {
 
-        GameStatus.table.setImage(new Image("InteractiveObjectIMG/tableIceIMG.png"));
+        GameStatus.table.setImage(1);
 /*
         ScenePlay scenePlay = new ScenePlay(primaryStage);
         scene = scenePlay.getScene();
