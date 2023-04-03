@@ -23,6 +23,7 @@ public class SceneWelcome {
 
     public SceneWelcome(Stage primaryStage) {
 
+        //Set up music and sounds
         File btnFile = new File("Pool/app/src/main/resources/sound/tok.mp3");
         MediaPlayer btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
         btnSound.setVolume(0.05);
@@ -32,13 +33,13 @@ public class SceneWelcome {
         welcomeBgSound.play();
         welcomeBgSound.setVolume(3);
 
-
+        //GridPane for buttons
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setTranslateY(90);
         gridPane.setTranslateX(110);
 
-        // Create ColumnConstraints objects to set the size of the columns
+        // Create ColumnConstraints objects to set the size of the columns and rows
         ColumnConstraints column1 = new ColumnConstraints(200);
         column1.setHalignment(HPos.CENTER);
         ColumnConstraints column2 = new ColumnConstraints(200);
@@ -48,11 +49,9 @@ public class SceneWelcome {
         RowConstraints row1 = new RowConstraints(200);
         row1.setValignment(VPos.CENTER);
 
-
         // Set the sizes of the columns and rows
         gridPane.getColumnConstraints().addAll(column1, column2, column3);
         gridPane.getRowConstraints().addAll(row1);
-
 
         //Set up Button ImageViews
         ImageView iceMode = new ImageView("ButtonIMG/IcePlayBtnIMG.png");
@@ -64,7 +63,6 @@ public class SceneWelcome {
         ImageView grassMode = new ImageView("ButtonIMG/GrassPlayBtnIMG.png");
         grassMode.setPreserveRatio(true);
         grassMode.setFitHeight(170);
-
 
         //Mode buttons with images
         Button normalBtn = new Button("", normalMode);
@@ -86,7 +84,6 @@ public class SceneWelcome {
 
         //Set up scene background
         StackPane backgroundPane = new StackPane();
-        //ImageViews
         ImageView bg = new ImageView("BackgroundIMG/WelcomeBgIMG.jpg");
 
         //Set background image
@@ -98,13 +95,15 @@ public class SceneWelcome {
         StackPane layout = new StackPane();
         layout.getChildren().addAll(backgroundPane, gridPane);
 
+        //create Welcome scene
         this.scene = new Scene(layout);
+
+        //Button Events
         normalBtn.setOnAction((event) -> {
             ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);//ERROR
             primaryStage.setScene(scenePlayNormal.getScene());
+            //set normal friction coefficient
             GameStatus.gameState = 0;
-           // welcomeBgSound.stop();
-
         });
         normalBtn.setOnMouseEntered((event) -> {
             normalMode.setFitHeight(185);
@@ -114,11 +113,13 @@ public class SceneWelcome {
             normalMode.setFitHeight(170);
             btnSound.stop();
         });
+
         grassBtn.setOnAction((event) -> {
             ScenePlayGrass scenePlayGrass = new ScenePlayGrass(primaryStage);
             primaryStage.setScene(scenePlayGrass.getScene());
+           //set grass friction coefficient
             GameStatus.gameState = 2;
-            welcomeBgSound.pause();
+            //welcomeBgSound.pause();
         });
         grassBtn.setOnMouseEntered((event) -> {
             grassMode.setFitHeight(185);
@@ -131,6 +132,7 @@ public class SceneWelcome {
         iceBtn.setOnAction((event) -> {
             ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
             primaryStage.setScene(scenePlayIce.getScene());
+            //set ice friction coefficient
             GameStatus.gameState = 1;
             //welcomeBgSound.stop();
         });
