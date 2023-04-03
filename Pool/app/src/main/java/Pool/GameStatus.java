@@ -15,6 +15,8 @@ public class GameStatus {
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
+    public static double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    public static CueStick cue;
     
     public static void updateTime() throws InterruptedException{
         while(GameStatus.isGameOn){
@@ -40,7 +42,11 @@ public class GameStatus {
         tableLines[1].setEndX(table.getX()+0.7*table.getWidth());
         tableLines[1].setEndY(table.getY()+table.getHeight()-10);
         
-        //constant and calculations for position of balls
+        //constant and calculations for position of balls and nets
+        double heightOfBand = 30*table.getHeight()/352;
+        double widthOfBand = 30*table.getWidth()/702;
+        double extraBufferNets = 10;
+        
         double DISTANCE_BETWEEN_BALLS = 0d;
         double DISTANCE_BETWEEN_CENTER_OF_BALLS = DISTANCE_BETWEEN_BALLS+listOfBalls[0].getRadius()*2; //distance between the center of the balls
         //center of losange
@@ -50,8 +56,11 @@ public class GameStatus {
         //set position of Nets and Balls
         for(int i = 0; i<listOfBalls.length;i++){
             if(i<nets.length){
-                nets[i].setCenterX((i%3)*(table.getWidth()-nets[0].getRadius()*2.5)/2+table.getX()+nets[0].getRadius());
-                nets[i].setCenterY((i<3)?table.getY()+nets[0].getRadius():table.getY()+table.getHeight()-nets[0].getRadius());
+                nets[i].setCenterX(table.getX()+widthOfBand+extraBufferNets+(i%3)*(table.getWidth()-2*widthOfBand-2*extraBufferNets)/2);
+                nets[i].setCenterY((i<3)?table.getY()+heightOfBand+extraBufferNets:table.getY()+table.getHeight()-heightOfBand-extraBufferNets);
+                
+//                nets[i].setCenterX((i%3)*(table.getWidth()-nets[0].getRadius()*2.5)/2+table.getX()+nets[0].getRadius());
+//                nets[i].setCenterY((i<3)?table.getY()+nets[0].getRadius():table.getY()+table.getHeight()-nets[0].getRadius());
             }
             
             if(i==0){
@@ -92,14 +101,18 @@ public class GameStatus {
         
         Image team1Img = new Image("InteractiveObjectIMG/BallTeam1IMG.png");
         Image team2Img = new Image("InteractiveObjectIMG/BallTeam2IMG.png");
+        double ballRadius = 0.054*Math.sqrt(table.getHeight()*table.getWidth()/3.2258);
+        
+        cue = new CueStick(148.6/254*table.getWidth());
+        
         for(int i = 0; i<listOfBalls.length; i++){
             if(i<nets.length)
-                nets[i] = new Net(i);
+                nets[i] = new Net(i,2*ballRadius);
             
             if(i<tableLines.length)
                 tableLines[i] = new Line();
             
-            listOfBalls[i] = new Ball(i);
+            listOfBalls[i] = new Ball(i, ballRadius);
             if(i==0){ //is it white
                 listOfBalls[i].setImage(new Image("InteractiveObjectIMG/BallWhiteIMG.png"));
                 //listOfBalls[i].setFill(Paint.valueOf("#ffffff"));
@@ -134,6 +147,7 @@ public class GameStatus {
         for (Ball listOfBall : listOfBalls) {
             listOfBall.toFront();
         }
+        cue.toFront();
     }
     
     public static void reset(){

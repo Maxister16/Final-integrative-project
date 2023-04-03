@@ -8,8 +8,8 @@ import javafx.scene.shape.Circle;
 
 public class Net extends Circle implements InteractiveObject{
     
-    public Net(int index){
-        super(25);
+    public Net(int index, double radius){
+        super(radius);
         this.setImage(new Image("InteractiveObjectIMG/netIMG.png"));
         switch(index){
             case 0, 5 -> this.setRotate(-45);
