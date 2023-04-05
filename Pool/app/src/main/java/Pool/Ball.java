@@ -82,6 +82,31 @@ public double dx = 1, dy = 1;
         this.a=a;
     }
     public void updateMovement(Ball x){
+
+        //ALL SHOULD BE VECTORS (FIND ABSOLUTE VALUE)
+        double xn=this.getCenterX()-x.getCenterX();
+        double yn=this.getCenterY()-x.getCenterY();
+        //CREATING NORMAL VECTOR
+        Vector norm=new Vector(xn, yn);
+        //CREATING RELATIVE VECTOR
+        double xv=this.getVi().getXcomponent()-x.getVi().getXcomponent();
+        double yv=this.getVi().getYcomponent()-x.getVi().getYcomponent();
+        Vector relVel=new Vector(xv, yv);
+        //MAKING THE SEPERATING VELOCITY VECTOR
+        double sepVel= -1* (relVel.getXcomponent()*norm.getXcomponent() + relVel.getYcomponent()*norm.getYcomponent());
+        double spx= sepVel*norm.getXcomponent();
+        double spy=sepVel*norm.getYcomponent();
+        Vector sepVelVec=new Vector(spx, spy);
+
+        //ADDING SEPERAATING VELOCITY VECTOR TO ORIGINAL VECTORS
+        this.getVi().setXcomponent(this.getVi().getXcomponent()+ sepVelVec.getXcomponent());
+        this.getVi().setYcomponent(this.getVi().getYcomponent()+ sepVelVec.getYcomponent());
+
+
+        x.getVi().setXcomponent(x.getVi().getXcomponent()- sepVelVec.getXcomponent());
+        x.getVi().setYcomponent(x.getVi().getYcomponent()- sepVelVec.getYcomponent());
+
+        /*
         //only x changes
         double x1=this.getCenterX();
         double x2=x.getCenterX();
@@ -89,6 +114,7 @@ public double dx = 1, dy = 1;
         double y1=this.getCenterY();
         //STAYS THE SAME
         double y2= x.getCenterY();
+
         double relativeV= this.getVi().getMagnitude()-x.getVi().getMagnitude();
         double NormalVector= Math.sqrt( Math.pow( (x1-x2), 2) + Math.pow( (y1-y2), 2) );
         //FIGURE OUT CALCULATIONS LATER
