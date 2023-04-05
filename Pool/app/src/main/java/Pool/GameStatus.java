@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Line;
 
 public class GameStatus {
-    public static String CLIENT_LOCATION_OF_PROJECT = System.getProperty("user.dir").replace("\\","/");
+    public static String CLIENT_LOCATION_OF_PROJECT = System.getProperty("user.dir");
     public static boolean isGameOn = false;
     public static int team1Points = 0;
     public static int team2Points = 0;

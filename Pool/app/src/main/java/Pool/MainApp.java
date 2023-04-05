@@ -6,7 +6,6 @@ package Pool;
 import static Pool.TestClassCueStick.angleSlider;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -14,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class MainApp extends Application {
     
@@ -26,40 +26,49 @@ public class MainApp extends Application {
         ScenePlayNormal scenePlayNormal = new ScenePlayNormal();
         ScenePlayIce scenePlayIce = new ScenePlayIce();
         
-        
         stage.setHeight(780);
         stage.setWidth(1350);
         //stage.setResizable(false);
 
         stage.setScene(sceneWelcome.getScene());
-        stage.setScene(scenePlayNormal.getScene());
         stage.show();
-        
-        
         
         //action handlers for repetitive actions
 //GO TO SCENES
         EventHandler goToNormal = e->{
             stage.setScene(scenePlayNormal.getScene());
-            GameStatus.initialize();
             GameStatus.gameState = 0;
             startGame(scenePlayNormal);
         };
         EventHandler goToIce = e->{
             stage.setScene(scenePlayIce.getScene());
-            GameStatus.initialize();
             GameStatus.gameState = 1;
             startGame(scenePlayIce);
         };
         EventHandler goToGrass = e->{
             stage.setScene(scenePlayGrass.getScene());
-            GameStatus.initialize();
             GameStatus.gameState = 2;
             startGame(scenePlayGrass);
         };
         EventHandler goToWelcome = e->{
             stage.setScene(sceneWelcome.getScene());
         };
+        EventHandler menuAppears = e->{
+        ImageView menuBg = new ImageView("BackgroundIMG/MenuBgIMG.png");
+
+            menuBg.setPreserveRatio(true);
+            menuBg.setFitWidth(500);
+            Rectangle rectangle = new Rectangle(1350, 700);
+            rectangle.setFill(Color.WHITE);
+            rectangle.setTranslateY(-42);
+            scenePlayNormal.fade.setNode(rectangle);
+            scenePlayNormal.fade.setFromValue(0.0);
+            scenePlayNormal.fade.setToValue(0.4);
+            scenePlayNormal.fade.setDuration(Duration.millis(100));
+            scenePlayNormal.layout.getChildren().addAll(rectangle,menuBg,scenePlayNormal.menuPane);
+            
+        };
+        
         
 //BUTTON ACTIONS
         EventHandler btnOnMouseEntered = e->{
@@ -98,18 +107,200 @@ public class MainApp extends Application {
         });
         scenePlayNormal.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.menuButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.menuButton.setOnAction(goToWelcome);
-        
+        scenePlayNormal.menuButton.setOnAction(menuAppears);
         
         scenePlayIce.menuButton.setOnAction(goToWelcome);
         scenePlayGrass.menuButton.setOnAction(goToWelcome);
+        
+        
+        
+        
+        /*
+        //Create Panes
+                            GridPane gridPane = new GridPane();
+                            gridPane.setAlignment(Pos.CENTER);
+//                            GridPane physicsButtonPane = new GridPane();
+//                            physicsButtonPane.setAlignment(Pos.CENTER);
+
+                            //Images
+                            ImageView resume = new ImageView("ButtonIMG/ResumeBtnIMG.png");
+                            resume.setPreserveRatio(true);
+                            resume.setFitHeight(60);
+                            ImageView home = new ImageView("ButtonIMG/HomeBtnIMG.png");
+                            home.setPreserveRatio(true);
+                            home.setFitHeight(60);
+                            ImageView exit = new ImageView("ButtonIMG/ExitBtnIMG.png");
+                            exit.setPreserveRatio(true);
+                            exit.setFitHeight(60);
+
+                            ImageView physicsLabel = new ImageView("ButtonIMG/PhysicsLableIMG.png");
+                            physicsLabel.setPreserveRatio(true);
+                            physicsLabel.setFitHeight(60);
+                            ImageView physicsOn = new ImageView("ButtonIMG/OnBtn.png");
+                            physicsOn.setPreserveRatio(true);
+                            physicsOn.setFitHeight(60);
+                            ImageView physicsOff = new ImageView("ButtonIMG/OffBtn.png");
+                            physicsOff.setPreserveRatio(true);
+                            physicsOff.setFitHeight(60);
+
+
+                            Button resumeButton = new Button("",resume);
+                            Button homeButton = new Button("",home);
+                            Button exitButton = new Button("",exit);
+                            Button physicsButton = new Button("",physicsOn);
+
+                            homeButton.setBackground(null);
+                            homeButton.setBorder(null);
+                            resumeButton.setBackground(null);
+                            resumeButton.setBorder(null);
+                            exitButton.setBackground(null);
+                            exitButton.setBorder(null);
+                            physicsButton.setBackground(null);
+
+                            //GridPane set up
+                            gridPane.setHalignment(resumeButton, HPos.CENTER);
+                            gridPane.setHalignment(homeButton, HPos.CENTER);
+                            gridPane.setHalignment(exitButton, HPos.CENTER);
+                            gridPane.setHalignment(physicsLabel, HPos.CENTER);
+                            gridPane.setHalignment(physicsButton, HPos.CENTER);
+                            gridPane.setTranslateY(30);
+
+                            gridPane.add(resumeButton, 0, 0);
+                            gridPane.add(homeButton, 0, 1);
+                            gridPane.add(exitButton, 0, 2);
+                            gridPane.add(physicsLabel, 0, 3);
+                            gridPane.add(physicsButton, 0, 4);
+
+                            //GridPane constraints
+                            ColumnConstraints menuColumn = new ColumnConstraints(200);
+                            columnTop1.setHalignment(HPos.CENTER);
+                            RowConstraints menuRow1 = new RowConstraints(65);
+                            menuRow1.setValignment(VPos.CENTER);
+                            RowConstraints menuRow2 = new RowConstraints(65);
+                            menuRow2.setValignment(VPos.CENTER);
+                            RowConstraints menuRow3 = new RowConstraints(65);
+                            menuRow3.setValignment(VPos.CENTER);
+                            RowConstraints menuRow4 = new RowConstraints(65);
+                            menuRow4.setValignment(VPos.CENTER);
+                            RowConstraints menuRow5 = new RowConstraints(65);
+                            menuRow5.setValignment(VPos.CENTER);
+                            gridPane.getColumnConstraints().add(menuColumn);
+                            gridPane.getRowConstraints().addAll(menuRow1,menuRow2,menuRow3,menuRow4,menuRow5);
+
+                            //Menu background
+                            ImageView menuBg = new ImageView("BackgroundIMG/MenuBgIMG.png");
+
+                            menuBg.setPreserveRatio(true);
+                            menuBg.setFitWidth(500);
+                            Rectangle rectangle = new Rectangle(1350, 700);
+                            rectangle.setFill(Color.WHITE);
+                            rectangle.setTranslateY(-42);
+                            fade.setNode(rectangle);
+                            fade.setFromValue(0.0);
+                            fade.setToValue(0.4);
+                            fade.setDuration(Duration.millis(100));
+                            fade.play();
+
+                            //Add to layout (this is the principal pane in ScenePaly)
+                            layout.getChildren().addAll(rectangle,menuBg,gridPane);
+
+                            //Button events
+                            resumeButton.setOnAction((menuEvent) -> {
+                                fade.setFromValue(0.4);
+                                fade.setToValue(0.0);
+                                fade.setDuration(Duration.millis(100));
+                                fade.play();
+                                layout.getChildren().removeAll(rectangle, gridPane, menuBg);
+
+                            });
+
+                            resumeButton.setOnMouseEntered((menuEvent) -> {
+                                resume.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            resumeButton.setOnMouseExited((menuEvent) -> {
+                                resume.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            homeButton.setOnMouseEntered((menuEvent) -> {
+                                home.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            homeButton.setOnMouseExited((menuEvent) -> {
+                                home.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            exitButton.setOnMouseEntered((menuEvent) -> {
+                                exit.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            exitButton.setOnMouseExited((menuEvent) -> {
+                                exit.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            physicsButton.setOnMouseEntered((menuEvent) -> {
+                                physicsOn.setFitHeight(70);
+                                physicsOff.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            physicsButton.setOnMouseExited((menuEvent) -> {
+                                physicsOn.setFitHeight(60);
+                                physicsOff.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+//                            physicsOffButton.setOnMouseEntered((menuEvent) -> {
+//                                physicsOff.setFitHeight(70);
+//                                btnSound.play();
+//                            });
+//
+//                            physicsOffButton.setOnMouseExited((menuEvent) -> {
+//                                physicsOff.setFitHeight(60);
+//                                btnSound.stop();
+//                            });
+
+                            homeButton.setOnAction((menuEvent) -> {
+                                SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+                                primaryStage.setScene(sceneWelcome.getScene());
+                                playBgSound.pause();
+                                //MAX-game ends
+                            });
+
+                            exitButton.setOnAction((menuEvent) -> {
+                                primaryStage.close();
+                                //MAX-game ends
+                            });
+
+                            //Eszter- doesn't save changes to physics button in menu (bc when button is created it has on, I will try to make it dependent on if the pane physics Pane is present
+                            physicsButton.setOnAction((menuEvent) -> {
+                                if (physicsButton.getGraphic() == physicsOn ) {
+                                    physicsButton.setGraphic(physicsOff);
+                                    //Eszter-once physics pane is created remove here from layout
+                                }
+                                else {
+                                    physicsButton.setGraphic(physicsOn);
+                                    //Eszter-once physics pane is created add here to layout
+                                }
+                            });
+
+        */
+        
+        
+        
         
     }
     
     public void startGame(ScenePlay sc){
         Sound.playBgSound.play();
         GameStatus.initialize();
-        sc.gdi();
+        sc.placeObjectsInGamePane();
         GameStatus.positionObjects(1350, 780);
         GameStatus.table.setImage(GameStatus.gameState);
     }
