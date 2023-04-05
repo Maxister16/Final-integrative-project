@@ -29,6 +29,10 @@ public class Ball extends Circle implements InteractiveObject{
         this.id=id;
         this.setRadius(10);
     }
+    public Ball(int id, double radius){
+        this.id=id;
+        this.setRadius(radius);
+    }
     //ACCESSOR METHODS
 
     //GET ID METHOD
