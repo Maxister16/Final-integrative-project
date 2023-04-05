@@ -84,8 +84,8 @@ public double dx = 1, dy = 1;
     public void updateMovement(Ball x){
 
         //ALL SHOULD BE VECTORS (FIND ABSOLUTE VALUE)
-        double xn=this.getCenterX()-x.getCenterX();
-        double yn=this.getCenterY()-x.getCenterY();
+        double xn=java.lang.Math.abs(this.getCenterX()-x.getCenterX());
+        double yn=java.lang.Math.abs(this.getCenterY()-x.getCenterY());
         //CREATING NORMAL VECTOR
         Vector norm=new Vector(xn, yn);
         //CREATING RELATIVE VECTOR

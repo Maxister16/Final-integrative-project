@@ -184,9 +184,9 @@ class BallMovement extends Pane {
                 double y2 = GameStatus.listOfBalls[i].getCenterY();
                 //CHECK IF BALLS ARE COLLIDING
                 if (Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) <= 4 * ball.getRadius() * ball.getRadius()) {
-                    System.out.println("hey");
+                    //System.out.println("hey");
                     //CALL A METHOD IN THIS CLASS THAT WILL CHECK FOR COLLISIONS
-                    //ball.updateMovement(GameStatus.listOfBalls[i]);
+                    ball.updateMovement(GameStatus.listOfBalls[i]);
                     //listOfBalls.get(i).updateMovement(this);
                 }
 
