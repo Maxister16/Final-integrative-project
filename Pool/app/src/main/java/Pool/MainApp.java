@@ -37,20 +37,28 @@ public class MainApp extends Application {
 //GO TO SCENES
         EventHandler goToNormal = e->{
             stage.setScene(scenePlayNormal.getScene());
+            stage.setFullScreen(true);
+            stage.setFullScreen(false);
             GameStatus.gameState = 0;
             startGame(scenePlayNormal);
         };
         EventHandler goToIce = e->{
             stage.setScene(scenePlayIce.getScene());
+            stage.setFullScreen(true);
+            stage.setFullScreen(false);
             GameStatus.gameState = 1;
             startGame(scenePlayIce);
         };
         EventHandler goToGrass = e->{
             stage.setScene(scenePlayGrass.getScene());
+            stage.setFullScreen(true);
+            stage.setFullScreen(false);
             GameStatus.gameState = 2;
             startGame(scenePlayGrass);
         };
         EventHandler goToWelcome = e->{
+            stage.setFullScreen(true);
+            stage.setFullScreen(false);
             stage.setScene(sceneWelcome.getScene());
         };
         EventHandler menuAppears = e->{
@@ -107,7 +115,7 @@ public class MainApp extends Application {
         });
         scenePlayNormal.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.menuButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.menuButton.setOnAction(menuAppears);
+        scenePlayNormal.menuButton.setOnAction(goToWelcome);
         
         scenePlayIce.menuButton.setOnAction(goToWelcome);
         scenePlayGrass.menuButton.setOnAction(goToWelcome);
