@@ -103,9 +103,10 @@ public double dx = 1, dy = 1;
         this.getVi().setYcomponent(this.getVi().getYcomponent()+ sepVelVec.getYcomponent());
         //System.out.println("this ball speed is "+this.getVi().getMagnitude());
 
-
-        x.getVi().setXcomponent(x.getVi().getXcomponent()-sepVelVec.getXcomponent());
-        x.getVi().setYcomponent(x.getVi().getYcomponent()- sepVelVec.getYcomponent());
+        x.getVi().setXcomponent(9);
+        x.getVi().setYcomponent(9);
+        //x.getVi().setXcomponent(x.getVi().getXcomponent()-sepVelVec.getXcomponent());
+        //x.getVi().setYcomponent(x.getVi().getYcomponent()- sepVelVec.getYcomponent());
        // System.out.println("x ball speed is "+x.getVi().getMagnitude());
 
        /*
@@ -220,6 +221,18 @@ public double dx = 1, dy = 1;
     }
     //CHANGE THE POSITION OF THE BALL
     public void updatePosition(long time){
+
+        double x = vi.getXcomponent() * time + a.getXcomponent() * time * time * 0.5 - position.getXcomponent();
+        double y = vi.getYcomponent() * time + a.getYcomponent() * time * time * 0.5 - position.getYcomponent();
+
+        //USE INTERPOLATION TO MOVE BALLS
+        double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
+        this.setCenterX(r);
+        double d= Interpolator.LINEAR.interpolate(this.getCenterY(), y, 0.05);
+        this.setCenterY(d);
+        Vector p=new Vector(x,y);
+        this.setVectorPosition(p);
+        this.setVi(new Vector(0,0));
         /*if(this.id!=0){
             double r= Interpolator.LINEAR.interpolate(this.getCenterX(), 0, 0.05);
             this.setCenterX(r);
@@ -228,6 +241,7 @@ public double dx = 1, dy = 1;
             Vector p=new Vector(15,15);
             this.setVectorPosition(p);
         }*/
+        /*
 
         if ((this.getCenterX() < this.getRadius() ||
                 this.getCenterX() > 450 - this.getRadius() ) && (this.getCenterY() < this.getRadius() ||
@@ -295,6 +309,8 @@ public double dx = 1, dy = 1;
             this.setVectorPosition(p);
             this.setVi(new Vector(0,0));
         }
+        */
+       // System.out.println("Position x and Y " + " "+ this.getVectorPosition().getXcomponent() + " "+ this.getVectorPosition().getYcomponent());
 
 
     }
