@@ -61,6 +61,7 @@ public class CollidingBallsAnimation extends Application {
                 //lol.get(i).getChildren().add(listOfBallsA.get(i));
             }
         }
+
         pane.getChildren().add(inactive);
        /*for(int i=0; i<10; i++) {
             pane.setCenter(lol.get(i));
@@ -81,7 +82,7 @@ public class CollidingBallsAnimation extends Application {
         //white.setFill(Color.AQUAMARINE);
 
         listOfBallsA.get(0).setVi(new Vector (5,5));
-        listOfBallsA.get(1).setVi(new Vector (5,5));
+        listOfBallsA.get(1).setVi(new Vector (2,2));
         p.add(listOfBallsA.get(0));
         p.add(listOfBallsA.get(1));
 
@@ -162,6 +163,8 @@ class BallMovement extends Pane {
 
 
         for (Node node : this.getChildren()) {
+            //System.out.println("Width" + getWidth());
+            //System.out.println("Height" + getHeight());
             Ball ball = (Ball) node;
 
             //Ball b=this.getChildren().get(0);

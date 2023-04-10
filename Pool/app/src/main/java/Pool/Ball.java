@@ -101,12 +101,14 @@ public double dx = 1, dy = 1;
         //ADDING SEPERAATING VELOCITY VECTOR TO ORIGINAL VECTORS
         this.getVi().setXcomponent(this.getVi().getXcomponent()+ sepVelVec.getXcomponent());
         this.getVi().setYcomponent(this.getVi().getYcomponent()+ sepVelVec.getYcomponent());
+        //System.out.println("this ball speed is "+this.getVi().getMagnitude());
 
 
-        x.getVi().setXcomponent(x.getVi().getXcomponent()- sepVelVec.getXcomponent());
+        x.getVi().setXcomponent(x.getVi().getXcomponent()-sepVelVec.getXcomponent());
         x.getVi().setYcomponent(x.getVi().getYcomponent()- sepVelVec.getYcomponent());
+       // System.out.println("x ball speed is "+x.getVi().getMagnitude());
 
-        /*
+       /*
         //only x changes
         double x1=this.getCenterX();
         double x2=x.getCenterX();
@@ -211,23 +213,90 @@ public double dx = 1, dy = 1;
          */
 
         this.updatePosition(GameStatus.time);
+       x.updatePosition(GameStatus.time);
 
 
 
     }
     //CHANGE THE POSITION OF THE BALL
     public void updatePosition(long time){
-        double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
-        double y=  vi.getYcomponent()*time + a.getYcomponent()*time*time*0.5 - position.getYcomponent();
+        /*if(this.id!=0){
+            double r= Interpolator.LINEAR.interpolate(this.getCenterX(), 0, 0.05);
+            this.setCenterX(r);
+            double d= Interpolator.LINEAR.interpolate(this.getCenterY(), 0, 0.05);
+            this.setCenterY(d);
+            Vector p=new Vector(15,15);
+            this.setVectorPosition(p);
+        }*/
+
+        if ((this.getCenterX() < this.getRadius() ||
+                this.getCenterX() > 450 - this.getRadius() ) && (this.getCenterY() < this.getRadius() ||
+                this.getCenterY() > 424.6666666666667 - this.getRadius()) ) {
+
+            //this.dx *= -1; // Change ball move direction
+            //this.getVi().setXcomponent(this.getVi().getXcomponent()*-1);
+            double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
+            double y = vi.getYcomponent() * time + a.getYcomponent() * time * time * 0.5 - position.getYcomponent();
+
+            //USE INTERPOLATION TO MOVE BALLS
+            double r= Interpolator.LINEAR.interpolate(this.getCenterX(), -1*x, 0.05);
+            this.setCenterX(r);
+            double d= Interpolator.LINEAR.interpolate(this.getCenterY(), -1*y, 0.05);
+            this.setCenterY(d);
+            Vector p=new Vector(x,y);
+            this.setVectorPosition(p);
+            this.setVi(new Vector(0,0));
+        }
+        if (this.getCenterX() < this.getRadius() ||
+                this.getCenterX() > 450 - this.getRadius()) {
+
+            this.dx *= -1; // Change ball move direction
+            this.getVi().setXcomponent(this.getVi().getXcomponent()*-1);
+            double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
+            double y = vi.getYcomponent() * time + a.getYcomponent() * time * time * 0.5 - position.getYcomponent();
+
+            //USE INTERPOLATION TO MOVE BALLS
+            double r= Interpolator.LINEAR.interpolate(this.getCenterX(), -1*x, 0.05);
+            this.setCenterX(r);
+            double d= Interpolator.LINEAR.interpolate(this.getCenterY(), y, 0.05);
+            this.setCenterY(d);
+            Vector p=new Vector(x,y);
+            this.setVectorPosition(p);
+            this.setVi(new Vector(0,0));
+        }
+        if (this.getCenterY() < this.getRadius() ||
+                this.getCenterY() > 424.6666666666667 - this.getRadius()) {
+            //if(ball.getCenterY()> GameStatus.table.getHeight() || ball.getCenterY()< GameStatus.table.getHeight() ){
+
+            this.dy *= -1; // Change ball move direction
+            this.getVi().setYcomponent(this.getVi().getYcomponent()*-1);
+            double y = vi.getYcomponent() * time + a.getYcomponent() * time * time * 0.5 - position.getYcomponent();
+            double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
+
+            //USE INTERPOLATION TO MOVE BALLS
+            double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
+            this.setCenterX(r);
+            double d= Interpolator.LINEAR.interpolate(this.getCenterY(), -1*y, 0.05);
+            this.setCenterY(d);
+            Vector p=new Vector(x,y);
+            this.setVectorPosition(p);
+            this.setVi(new Vector(0,0));
+        } else {
+
+            double x = vi.getXcomponent() * time + a.getXcomponent() * time * time * 0.5 - position.getXcomponent();
+            double y = vi.getYcomponent() * time + a.getYcomponent() * time * time * 0.5 - position.getYcomponent();
+
+            //USE INTERPOLATION TO MOVE BALLS
+            double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
+            this.setCenterX(r);
+            double d= Interpolator.LINEAR.interpolate(this.getCenterY(), y, 0.05);
+            this.setCenterY(d);
+            Vector p=new Vector(x,y);
+            this.setVectorPosition(p);
+            this.setVi(new Vector(0,0));
+        }
 
 
-        //USE INTERPOLATION TO MOVE BALLS
-        double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
-        this.setCenterX(r);
-        double d= Interpolator.LINEAR.interpolate(this.getCenterY(), x, 0.05);
-        this.setCenterY(d);
-        Vector p=new Vector(x,y);
-        this.setVectorPosition(p);
     }
    
     public void reactIsHit(){
