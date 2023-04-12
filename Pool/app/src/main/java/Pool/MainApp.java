@@ -135,16 +135,7 @@ public class MainApp extends Application {
         GameStatus.cue.appears(sc.angleSlider);
     }
     public void playButtonHit(ScenePlay sc){
-        //ANIMATION START NOT SURE WHERE TO PUT
-       /*
 
-       Animation mainAnimation = new Timeline(new KeyFrame(Duration.millis(5), e ->{
-        for(int r=0; r<GameStatus.listOfBalls.length; r++){
-            GameStatus.listOfBalls[r].updatePosition();
-        }
-        }
-}
-        */
         GameStatus.listOfBalls[0].setVi(new Vector(5,0));
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
 

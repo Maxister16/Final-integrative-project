@@ -165,6 +165,8 @@ public class Ball extends Circle implements InteractiveObject{
     }
     //CHANGE THE POSITION OF THE BALL
     public void updatePosition(){
+        this.setCenterX(this.getCenterX()+this.getVi().getXcomponent());
+        this.setCenterY(this.getCenterY()+this.getVi().getYcomponent());
 
         /*
         double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
