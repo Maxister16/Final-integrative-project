@@ -44,7 +44,7 @@ public class CollidingBallsAnimation extends Application {
         Button ok=new Button("start");
         ok.setOnAction(e -> {p.play();});
         pane.setBottom(ok);
-
+        System.out.println("lol "+pane.getWidth());
 
         //pane.getChildren().add(ok);
 
@@ -62,7 +62,7 @@ public class CollidingBallsAnimation extends Application {
             }
         }
 
-        pane.getChildren().add(inactive);
+
        /*for(int i=0; i<10; i++) {
             pane.setCenter(lol.get(i));
         }
@@ -82,6 +82,8 @@ public class CollidingBallsAnimation extends Application {
         //white.setFill(Color.AQUAMARINE);
 
         listOfBallsA.get(0).setVi(new Vector (5,5));
+        listOfBallsA.get(0).setID(0);
+        listOfBallsA.get(1).setID(1);
         listOfBallsA.get(1).setVi(new Vector (2,2));
         p.add(listOfBallsA.get(0));
         p.add(listOfBallsA.get(1));
@@ -95,6 +97,7 @@ public class CollidingBallsAnimation extends Application {
 
         Scene scene = new Scene(pane, 450, 450);
         //ScenePlayNormal sc=new ScenePlayNormal(primaryStage);
+        System.out.println("lol " + pane.getWidth());
 
         primaryStage.setTitle("Colliding Balls"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage
@@ -123,6 +126,7 @@ class BallMovement extends Pane {
 
     public BallMovement(double z) {
         // Create an animation for moving the ball
+        System.out.println(";ooo " + this.getWidth());
         animation = new Timeline(
                 new KeyFrame(Duration.millis(50), e -> moveBall()));
         animation.setRate(z);
@@ -167,6 +171,19 @@ class BallMovement extends Pane {
             //System.out.println("Height" + getHeight());
             Ball ball = (Ball) node;
 
+            for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
+                //SET VALUES FOR X1,Y1 AND X2,Y2
+                double x1 = ball.getCenterX();
+                double x2 = GameStatus.listOfBalls[i].getCenterX();
+                double y1 = ball.getCenterY();
+                double y2 = GameStatus.listOfBalls[i].getCenterY();
+                //CHECK IF BALLS ARE COLLIDING
+                if (Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) <= (4 * ball.getRadius() * ball.getRadius())) {
+                    //CALL A METHOD IN THIS CLASS THAT WILL CHECK FOR COLLISIONS
+                    ball.updateMovement(GameStatus.listOfBalls[i]);
+                    //listOfBalls.get(i).updateMovement(this);
+                }
+
             //Ball b=this.getChildren().get(0);
             // Check boundaries
             //ADD THIS TO REACTISHIT TO SEE IF BALLS HIT CORNERS
@@ -179,19 +196,7 @@ class BallMovement extends Pane {
                 //if(ball.getCenterY()> GameStatus.table.getHeight() || ball.getCenterY()< GameStatus.table.getHeight() ){
                 ball.dy *= -1; // Change ball move direction
             }
-            for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
-                //SET VALUES FOR X1,Y1 AND X2,Y2
-                double x1 = ball.getCenterX();
-                double x2 = GameStatus.listOfBalls[i].getCenterX();
-                double y1 = ball.getCenterY();
-                double y2 = GameStatus.listOfBalls[i].getCenterY();
-                //CHECK IF BALLS ARE COLLIDING
-                if (Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) <= 4 * ball.getRadius() * ball.getRadius()) {
-                    //System.out.println("hey");
-                    //CALL A METHOD IN THIS CLASS THAT WILL CHECK FOR COLLISIONS
-                    ball.updateMovement(GameStatus.listOfBalls[i]);
-                    //listOfBalls.get(i).updateMovement(this);
-                }
+            //IT WAS HERE
 
                 // Adjust ball position
                 ball.setCenterX(ball.dx + ball.getCenterX());

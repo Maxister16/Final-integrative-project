@@ -18,16 +18,19 @@ public double dx = 1, dy = 1;
     public static double friction;
     private static double gravity=9.806;
     private int id;
+
     private int type;
     private Vector position= new Vector(this.getCenterX(),this.getCenterY());
     private Vector vi=new Vector(0,0);;
+
+    private Vector v=new Vector(0,0);;
     private Vector a=new Vector(0,0);;
     private boolean isMoving;
     private long initialTime;
 //BALL CONSTRUCTOR
     public Ball(int id){
         this.id=id;
-        this.setRadius(10);
+        this.setRadius(18.070866141732285);
     }
     //ACCESSOR METHODS
    
@@ -80,6 +83,19 @@ public double dx = 1, dy = 1;
 //SET A VECTOR
     public void setA(Vector a){
         this.a=a;
+    }
+
+    public void moveBall(long time){
+        /*double z= vi.getXcomponent() + a.getXcomponent() * time;
+        double r= vi.getYcomponent() + a.getYcomponent() * time;
+        this.v.setXcomponent(z);
+        this.v.setYcomponent(r);
+         */
+        double z= vi.getMagnitude() + a.getMagnitude() * time;
+        while(z>=0){
+            double x = vi.getXcomponent() * time + a.getXcomponent() * time * time * 0.5 - position.getXcomponent();
+            double y = vi.getYcomponent() * time + a.getYcomponent() * time * time * 0.5 - position.getYcomponent();
+        }
     }
     public void updateMovement(Ball x){
 
@@ -226,7 +242,7 @@ public double dx = 1, dy = 1;
         double y = vi.getYcomponent() * time + a.getYcomponent() * time * time * 0.5 - position.getYcomponent();
 
         //USE INTERPOLATION TO MOVE BALLS
-        double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
+        /*double r= Interpolator.LINEAR.interpolate(this.getCenterX(), x, 0.05);
         this.setCenterX(r);
         double d= Interpolator.LINEAR.interpolate(this.getCenterY(), y, 0.05);
         this.setCenterY(d);
