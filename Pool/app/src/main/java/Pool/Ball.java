@@ -1,23 +1,31 @@
 package Pool;
 
 import java.util.ArrayList;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.shape.Circle;
 
 import java.lang.Math;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.util.Duration;
 
+import static Pool.GameStatus.time;
 import static java.lang.Math.*;
 
 public class Ball extends Circle implements InteractiveObject{
 //SETTING CLASS FIELDS
     public static double friction;
     private static double gravity=9.806;
+
+    public Animation mainAnimation;
     private int id;
     private int type;
-    private Vector position;
-    private Vector vi;
-    private Vector a;
+    private Vector position=new Vector(0,0);;
+    private Vector vi=new Vector(0,0);
+    private Vector a=new Vector(0,0);;
     private boolean isMoving;
     private long initialTime;
 //BALL CONSTRUCTOR
@@ -156,11 +164,15 @@ public class Ball extends Circle implements InteractiveObject{
 
     }
     //CHANGE THE POSITION OF THE BALL
-    public void updatePosition(int time){
+    public void updatePosition(){
+
+        /*
         double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
         double y=  vi.getYcomponent()*time + a.getYcomponent()*time*time*0.5 - position.getYcomponent();
         Vector p=new Vector(x,y);
         this.setVectorPosition(p);
+
+         */
     }
    
     public void reactIsHit(){
