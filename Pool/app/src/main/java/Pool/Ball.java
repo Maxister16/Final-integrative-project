@@ -15,9 +15,9 @@ public class Ball extends Circle implements InteractiveObject{
     private static double gravity=9.806;
     private int id;
     private int type;
-    private Vector position;
-    private Vector vi;
-    private Vector a;
+    private Vector position=new Vector(0,0);
+    private Vector vi=new Vector(0,0);
+    private Vector a=new Vector(0,0);
     private boolean isMoving;
     private long initialTime;
 //BALL CONSTRUCTOR
@@ -81,7 +81,7 @@ public class Ball extends Circle implements InteractiveObject{
     public void setA(Vector a){
         this.a=a;
     }
-    public void updateMovement(Ball x){
+    public void collisionCheck(Ball x){
         //DEFINING NECESSARY VARIABLES
         //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
         double xVelocityMag=0;
@@ -156,11 +156,17 @@ public class Ball extends Circle implements InteractiveObject{
 
     }
     //CHANGE THE POSITION OF THE BALL
-    public void updatePosition(int time){
-        double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
-        double y=  vi.getYcomponent()*time + a.getYcomponent()*time*time*0.5 - position.getYcomponent();
+    public void updatePosition(){
+        
+        double z= vi.getMagnitude() + a.getMagnitude()*GameStatus.time;
+        while(z>0){
+        double x=  vi.getXcomponent()*GameStatus.time + a.getXcomponent()*GameStatus.time*GameStatus.time*0.5 - position.getXcomponent();
+        double y=  vi.getYcomponent()*GameStatus.time + a.getYcomponent()*GameStatus.time*GameStatus.time*0.5 - position.getYcomponent();
         Vector p=new Vector(x,y);
-        this.setVectorPosition(p);
+        this.setVectorPosition(new Vector(x,y));
+        this.setCenterX(x);
+        this.setCenterY(y);
+        }
     }
    
     public void reactIsHit(){
@@ -174,7 +180,7 @@ public class Ball extends Circle implements InteractiveObject{
             double y2= GameStatus.listOfBalls[i].getCenterY();
         //CHECK IF BALLS ARE COLLIDING
             if(Math.sqrt( Math.pow( (x1-x2), 2) + Math.pow( (y1-y2), 2) ) <= 2*this.getRadius()){
-                this.updateMovement(GameStatus.listOfBalls[i]);
+                this.collisionCheck(GameStatus.listOfBalls[i]);
                 //listOfBalls.get(i).updateMovement(this);  
             }
             else{

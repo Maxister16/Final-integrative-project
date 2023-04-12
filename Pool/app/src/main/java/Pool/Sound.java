@@ -12,7 +12,7 @@ public class Sound {
     public static MediaPlayer playBgSound;
     
     public static void initiateSound(){
-        File btnFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"\\src\\main\\resources\\sound\\tok.mp3");
+        File btnFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/tok.mp3");
         btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
         btnSound.setVolume(0.05);
 

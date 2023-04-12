@@ -69,8 +69,8 @@ public class MainApp extends Application {
 //BUTTON ACTIONS
         EventHandler btnOnMouseEntered = e->{
             Button target = (Button)e.getTarget();
-            target.setScaleX(1.5);
-            target.setScaleY(1.5);
+            target.setScaleX(1.2);
+            target.setScaleY(1.2);
             Sound.btnSound.stop();
             Sound.btnSound.play();
         };
@@ -147,8 +147,19 @@ public class MainApp extends Application {
     public void movingTheBalls(ScenePlay sc){
         System.out.println("ball are moving method");
         
+        while(GameStatus.listOfBalls[0].getIsMoving()){
+            try {
+                GameStatus.listOfBalls[0].updatePosition();
+                Thread.sleep(1000);
+                GameStatus.time+= 1000;
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
         //when ball dont move
-        changeTeam(sc);
+        //changeTeam(sc);
         
         
         /*while(true){
