@@ -25,10 +25,10 @@ public class GameStatus {
         }
     }
     
-    public static void positionObjects(double widthOfWindow, double heightOfWindow){
+    public static void positionObjects(double widthOfWindow, double heightOfWindow, double xPositionOfGamepane, double yPositionOfGamepane){
         //center table
-        table.setX((widthOfWindow-table.getWidth())*0.5);
-        table.setY(heightOfWindow-table.getHeight()-50);
+        table.setX(-xPositionOfGamepane+(widthOfWindow-table.getWidth())*0.5);
+        table.setY(-yPositionOfGamepane+heightOfWindow-table.getHeight()-125);
         
         //set position of lines
     //HEADLINE

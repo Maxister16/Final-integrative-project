@@ -9,6 +9,8 @@ import javafx.scene.shape.Polyline;
 
 public class CueStick extends ImageView{
     
+    public PathTransition hitAnim;
+    
     public CueStick(double width){
         
         Image img = new Image("InteractiveObjectIMG/cueStickIMG.png");
@@ -32,7 +34,7 @@ public class CueStick extends ImageView{
         double WindUpLenght = (forceSlider.getValue()/forceSlider.getMax())+0.5;
         Polyline guide = new Polyline();
         
-        PathTransition hitAnim = new PathTransition();
+        hitAnim = new PathTransition();
         hitAnim.setNode(this);
         hitAnim.setPath(guide);
         hitAnim.setRate(0.8);
@@ -45,16 +47,8 @@ public class CueStick extends ImageView{
             GameStatus.listOfBalls[0].getCenterX()+0.25*this.getFitWidth()/2*Math.cos((this.getRotate())*Math.PI/180),GameStatus.listOfBalls[0].getCenterY()+.25*this.getFitWidth()/2*Math.sin((this.getRotate())*Math.PI/180),
             GameStatus.listOfBalls[0].getCenterX(),GameStatus.listOfBalls[0].getCenterY()});
         //guide.setStroke(Color.RED);
-        hitAnim.play();
         
-        hitAnim.setOnFinished(e->{
-            try {
-                System.out.println("hit the white ball");
-                Thread.sleep(500);
-                this.setOpacity(0);
-            } catch (InterruptedException ex) {}
-        });
-        //move the white ball
+        hitAnim.play();
     }
     
 }

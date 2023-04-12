@@ -35,7 +35,7 @@ public class CollidingBallsAnimation extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GameStatus.initialize();
-        GameStatus.positionObjects(500,250);
+        //GameStatus.positionObjects(500,250);
         BorderPane pane=new BorderPane();
         BallMovement p=new BallMovement(0.5);
         BallMovement inactive=new BallMovement(0);

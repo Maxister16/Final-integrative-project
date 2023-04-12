@@ -5,13 +5,11 @@ import javafx.animation.FadeTransition;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -21,38 +19,42 @@ public class ScenePlay {
             private Scene scene;
             public Pane gamePane;
             StackPane layout = new StackPane();
-            public Group menuPane = new Group();
+            public PaneMenu paneMenu = new PaneMenu();
             public GridPane gridPaneMenu = new GridPane();
             
-            public Slider forceSlider;
-            public Slider angleSlider;
-            
-            public Button playButton;
-            public Button menuButton;
             public Button resumeButton ;
             public Button homeButton ;
             public Button exitButton ;
             public Button physicsButton;
+            public FadeTransition fade = new FadeTransition();
+            
+            public Button playButton;
+            public Button menuButton;
+            
+            public Slider forceSlider;
+            public Slider angleSlider;
             
             public CustomAnimation redBaskets;
             public CustomAnimation orangeBaskets;
             public CustomAnimation teamName;
-            
-            public FadeTransition fade = new FadeTransition();
-            
             
             public void placeObjectsInGamePane(){
                 gamePane.getChildren().clear();
                 gamePane.getChildren().addAll(GameStatus.nets);
                 gamePane.getChildren().addAll(GameStatus.listOfBalls);
                 gamePane.getChildren().addAll(GameStatus.tableLines);
-                gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
+                gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder(),GameStatus.cue);
+            }
+            
+            public void menuAppears(){
+                layout.getChildren().addAll(paneMenu);
             }
             
             public ScenePlay()  {
 
                 //Create Principal Panes
                 gamePane = new Pane();
+                //gamePane.setStyle("-fx-background-color: #005555;");
                 BorderPane borderPane = new BorderPane();
                 GridPane gridPaneTop = new GridPane();
                 GridPane gridPaneBot = new GridPane();
@@ -80,7 +82,6 @@ public class ScenePlay {
 
                 gridPaneBot.getColumnConstraints().addAll(columnBot1);
                 gridPaneBot.getRowConstraints().addAll(rowBot1);
-
 
                 //Play screen Sliders and Buttons
                 ImageView menu = new ImageView("ButtonIMG/MenuBtnIMG.png");
@@ -164,8 +165,6 @@ public class ScenePlay {
                 borderPane.setCenter(gamePane);
                 borderPane.setLeft(redBasketPane);
                 borderPane.setRight(orangeBasketPane);
-                //gamePane.setTranslateY(610);
-                //gamePane.setTranslateX(480);
                 borderPane.setTop(gridPaneTop);
 
                 borderPane.setBottom(gridPaneBot);
@@ -173,7 +172,7 @@ public class ScenePlay {
                 
 
                 //MENU
-                //GridPane gridPaneMenu = new GridPane();
+                
                 gridPaneMenu.setAlignment(Pos.CENTER);
                 
                 //Images
@@ -240,7 +239,7 @@ public class ScenePlay {
                 menuRow5.setValignment(VPos.CENTER);
                 gridPaneMenu.getColumnConstraints().add(menuColumn);
                 gridPaneMenu.getRowConstraints().addAll(menuRow1,menuRow2,menuRow3,menuRow4,menuRow5);
-/*
+
                 //Menu background
                 ImageView menuBg = new ImageView("BackgroundIMG/MenuBgIMG.png");
 
@@ -248,13 +247,13 @@ public class ScenePlay {
                 menuBg.setFitWidth(500);
                 Rectangle rectangle = new Rectangle(1350, 700);
                 rectangle.setFill(Color.WHITE);
-                rectangle.setTranslateY(-42);
+                rectangle.setTranslateY(-42);/*
                 fade.setNode(rectangle);
                 fade.setFromValue(0.0);
                 fade.setToValue(0.4);
                 fade.setDuration(Duration.millis(100));*/
                 
-                //layout.getChildren().addAll(gridPaneMenu);
+                gridPaneMenu.getChildren().addAll(rectangle,menuBg);
 
                 //GameStatus.positionObjects(1350, 780);
                 this.scene = new Scene(layout,1350,780);
