@@ -23,11 +23,11 @@ public class MainApp extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        Animation mainAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> {
+         Timeline mainAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> {
             for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
                 GameStatus.listOfBalls[r].updatePosition();
             }
-        });
+        }));
 
         //Sound.initiateSound();
         //create scenes
