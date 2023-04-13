@@ -5,6 +5,7 @@ import javafx.animation.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,18 +17,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
+import static java.lang.Math.*;
 
 public class MainApp extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-         Timeline mainAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> {
+
+         /*Timeline mainAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> {
             for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
                 GameStatus.listOfBalls[r].updatePosition();
             }
         }));
+
+          */
 
         //Sound.initiateSound();
         //create scenes
@@ -134,12 +137,72 @@ public class MainApp extends Application {
     public void executeTurn(ScenePlay sc){
         GameStatus.cue.appears(sc.angleSlider);
     }
+
+    public void Game(){
+       // Time previousFrame=new Time(0);
+        //previousFrame.
+    }
+    /*
+    public void Game()
+    {
+        Time previousFrame = GetTime();
+        Time deltaTime = 1/60.;
+        while(GameRunning)
+        {
+            input();//white ball starts moving
+            Tick(deltaTime);//set value of x but dont move the ball
+            ResolveCollisions();//check with collision for the value of x calculated before
+            UpdateGraphic();//update position according to x and collision
+            //Time newTime = GetTime();
+            //deltaTime = newTime - previousTime;
+            //previousTime = newTime;
+            Time newTime;
+
+            do
+            {
+                newTime = GetTime();
+            }
+            while(newTime - previousTime < 1/60.);
+            previousTime = newTime;
+
+        }
+    }
+    public void Tick(float deltaTime){
+        public void Tick(float deltaTime)
+        {
+            foreach(ball in balls)
+            {
+                ball.updateposition();
+            }
+    }
+     */
     public void playButtonHit(ScenePlay sc){
 
-        GameStatus.listOfBalls[0].setVi(new Vector(5,0));
+        GameStatus.listOfBalls[0].setVi(new Vector(1,0));
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
+        GameStatus.cue.hitAnim.setOnFinished(e-> {
+            //GameStatus.cue.setOpacity(0);
+            movingTheBalls(sc);
+                try {
+                    double x = GameStatus.listOfBalls[0].getVi().getMagnitude() * cos((sc.angleSlider.getValue() * PI) / 180);
+                    double y = GameStatus.listOfBalls[0].getVi().getMagnitude() * sin((sc.angleSlider.getValue() * PI) / 180);
+                    System.out.println("angle " + (sc.angleSlider.getValue()));
+                    GameStatus.listOfBalls[0].setVi(new Vector(x, y));
 
-        GameStatus.cue.hitAnim.setOnFinished(e->{
+                    GameStatus.listOfBalls[0].updatePosition();
+                    Thread.sleep(500);
+                    //GameStatus.cue.setOpacity(0);
+
+
+                } catch (InterruptedException ex) {
+                }
+
+
+                }
+
+        );
+
+       /* GameStatus.cue.hitAnim.setOnFinished(e->{
             //FIRST INITIALIZE VELOCITY BASED ON PLACE STICK HIT
             //INSTEAD OF ALL THAT COMPLICATED STUFF, WE WOULD ALREADY HAVE A VALUE V THAT HAS THE MAGNITUDE BASED OFF THE SLIDER
 
@@ -156,7 +219,7 @@ public class MainApp extends Application {
                 GameStatus.listOfBalls[0].setVi(new Vector(x,y));
                 GameStatus.listOfBalls[0].updatePosition();
 
-                /*TranslateTransition tt = new TranslateTransition();
+                TranslateTransition tt = new TranslateTransition();
                 tt.setNode(GameStatus.listOfBalls[0]);
                 tt.setRate(0.5);
                 //tt.setFromX(150);
@@ -165,15 +228,17 @@ public class MainApp extends Application {
                 tt.setAutoReverse(true);
                 tt.play();
 
-                    /*double interpX = Interpolator.LINEAR.interpolate(GameStatus.listOfBalls[0].getCenterX(), 50, 0.05);
+                    double interpX = Interpolator.LINEAR.interpolate(GameStatus.listOfBalls[0].getCenterX(), 50, 0.05);
                     double interpY = Interpolator.LINEAR.interpolate(GameStatus.listOfBalls[0].getCenterY(), 50, 0.05);
                     GameStatus.listOfBalls[0].setCenterX(interpX);
                     GameStatus.listOfBalls[0].setCenterY(interpY);
-*/
                 Thread.sleep(500);
                 GameStatus.cue.setOpacity(0);
             } catch (InterruptedException ex) {}
         });
+
+        */
+
     }
     
     public void changeTeam(ScenePlay sc){
