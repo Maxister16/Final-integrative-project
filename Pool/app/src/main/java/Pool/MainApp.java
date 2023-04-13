@@ -199,7 +199,7 @@ public class MainApp extends Application {
         }
 
        /*Timeline mainAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-           for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
+           for (int r = 0; r < GameStatus.listOfBalls.length; r++) {//,.
                if(GameStatus.listOfBalls[r].getVi().getMagnitude()!= 0){
                    System.out.println("ball is " + r);
                    GameStatus.listOfBalls[r].updatePosition();
@@ -217,7 +217,7 @@ public class MainApp extends Application {
 
 
         if(GameStatus.listOfBalls[0].getVi().getMagnitude()==0){
-            GameStatus.listOfBalls[0].setVi(new Vector(70,0));
+            GameStatus.listOfBalls[0].setVi(new Vector(40,0));
         }
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
         GameStatus.cue.hitAnim.setOnFinished(e-> {
@@ -230,14 +230,12 @@ public class MainApp extends Application {
                         double y = GameStatus.listOfBalls[0].getVi().getMagnitude() * sin((sc.angleSlider.getValue() * PI) / 180);
                         System.out.println("angle " + (sc.angleSlider.getValue()));
                         GameStatus.listOfBalls[0].setVi(new Vector(x, y));
-                        MovingBallAnimation();
-                        /*while(c<10) {
-                            GameStatus.listOfBalls[0].updatePosition();
-                            c++;
-                            //
-                        }
+                        //MovingBallAnimation();
 
-                         */
+                            GameStatus.listOfBalls[0].updatePosition();
+
+
+
 
 
 

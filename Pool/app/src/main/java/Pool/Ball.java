@@ -14,6 +14,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
+import static Pool.GameStatus.table;
 import static Pool.GameStatus.time;
 import static java.lang.Math.*;
 
@@ -215,10 +216,10 @@ public class Ball extends Circle implements InteractiveObject {
 
 
         //BORDER LIMITATIONS
-        double tableBorderMinX=GameStatus.table.getX() +60 ;
-        double tableBorderMinY=GameStatus.table.getY()+50 ;
-        double tableBorderMaxX=GameStatus.table.getX() +(GameStatus.table.getWidth()) -60;
-        double tableBorderMaxY=GameStatus.table.getY() + (GameStatus.table.getHeight()) -50;
+        double tableBorderMinX= table.getX() + 30*table.getWidth()/702 ;
+        double tableBorderMinY= table.getY()+ 30*table.getHeight()/352;
+        double tableBorderMaxX= table.getX() +(table.getWidth()) -30*table.getWidth()/702;
+        double tableBorderMaxY= table.getY() + (table.getHeight()) - 30*table.getHeight()/352;
 
             if(this.getCenterX()<=tableBorderMinX|| this.getCenterX()>=tableBorderMaxX){
                 this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
@@ -236,7 +237,7 @@ public class Ball extends Circle implements InteractiveObject {
 
             //this.relocate(xPosition, yPosition);
             //SLOWING DOWN OF THE VELOCITY
-            this.setVi(this.getVi().vectorScalarProduct(decceleration, this.getVi()));
+            //this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], this.getVi()));
             //System.out.println("lol");
             //this.reactIsHit();
 
