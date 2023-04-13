@@ -57,6 +57,8 @@ public class MainApp extends Application {
             startGame(scenePlayGrass);
         };
         EventHandler goToWelcome = e->{
+            Sound.playBgSound.stop();
+            Sound.welcomeBgSound.play();
             stage.setScene(sceneWelcome.getScene());
             stage.setFullScreen(true);
             stage.setFullScreen(false);
@@ -97,22 +99,42 @@ public class MainApp extends Application {
         
 //SCENE_PLAY
 
+    //playButton
+
         scenePlayNormal.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.playButton.setOnMouseExited(btnOnMouseExited);
         scenePlayNormal.playButton.setOnAction(e->{
             playButtonHit(scenePlayNormal);
-            //GameStatus.cue.hitAnim(scenePlayNormal.angleSlider, scenePlayNormal.forceSlider);
         });
+        scenePlayIce.playButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.playButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.playButton.setOnAction(e->{
+            playButtonHit(scenePlayIce);
+        });
+        scenePlayGrass.playButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.playButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.playButton.setOnAction(e->{
+            playButtonHit(scenePlayGrass);
+        });
+        
+    //Menubutton
+        
         scenePlayNormal.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.menuButton.setOnMouseExited(btnOnMouseExited);
         scenePlayNormal.menuButton.setOnAction(goToWelcome);
         
+        scenePlayIce.menuButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.menuButton.setOnMouseExited(btnOnMouseExited);
         scenePlayIce.menuButton.setOnAction(goToWelcome);
+        
+        scenePlayGrass.menuButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.menuButton.setOnMouseExited(btnOnMouseExited);
         scenePlayGrass.menuButton.setOnAction(goToWelcome);
         
     }
     
     public void startGame(ScenePlay sc){
+        Sound.welcomeBgSound.stop();
         Sound.playBgSound.play();
         GameStatus.initialize();
         sc.placeObjectsInGamePane();
@@ -129,8 +151,10 @@ public class MainApp extends Application {
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
 
         GameStatus.cue.hitAnim.setOnFinished(e->{
+            System.out.println("set opacity to zero");
             GameStatus.cue.setOpacity(0);
             movingTheBalls(sc);
+            
             /*try {
                 
                 Thread.sleep(500);
@@ -147,6 +171,13 @@ public class MainApp extends Application {
     public void movingTheBalls(ScenePlay sc){
         System.out.println("ball are moving method");
         
+        
+        //            maxSpeed * percentage of force
+        double forceValue = 10 * sc.forceSlider.getValue()/100;
+        double angleValue = 180-sc.angleSlider.getValue(); //in deg
+        System.out.println(forceValue+" angle:"+angleValue);
+        changeTeam(sc);
+        /*
         while(GameStatus.listOfBalls[0].getIsMoving()){
             try {
                 GameStatus.listOfBalls[0].updatePosition();
@@ -155,12 +186,11 @@ public class MainApp extends Application {
             } catch (InterruptedException ex) {
                 Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }*/
         
         
         //when ball dont move
-        //changeTeam(sc);
-        
+
         
         /*while(true){
             while(GameStatus.isGameOn){   
