@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Time;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,9 +18,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import javax.swing.*;
+
 import static java.lang.Math.*;
 
 public class MainApp extends Application {
+    private Timer time;
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -176,22 +180,72 @@ public class MainApp extends Application {
             }
     }
      */
+
+    public void MovingBallAnimation(){
+        time= new Timer(500, e -> {for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
+            if(GameStatus.listOfBalls[r].getVi().getMagnitude()!= 0){
+                System.out.println("ball is " + r);
+                GameStatus.listOfBalls[0].updatePosition();
+            }
+        }
+        });
+        time.start();
+        double sumVelocity=0;
+        for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
+               sumVelocity+=GameStatus.listOfBalls[0].getVi().getMagnitude();
+            }
+        if(sumVelocity<1){
+            time.stop();
+        }
+
+       /*Timeline mainAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+           for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
+               if(GameStatus.listOfBalls[r].getVi().getMagnitude()!= 0){
+                   System.out.println("ball is " + r);
+                   GameStatus.listOfBalls[r].updatePosition();
+               }
+
+           }
+       }));
+       mainAnimation.play();
+       */
+
+   }
+
+
     public void playButtonHit(ScenePlay sc){
 
-        GameStatus.listOfBalls[0].setVi(new Vector(1,0));
+
+        if(GameStatus.listOfBalls[0].getVi().getMagnitude()==0){
+            GameStatus.listOfBalls[0].setVi(new Vector(70,0));
+        }
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
         GameStatus.cue.hitAnim.setOnFinished(e-> {
             //GameStatus.cue.setOpacity(0);
             movingTheBalls(sc);
                 try {
-                    double x = GameStatus.listOfBalls[0].getVi().getMagnitude() * cos((sc.angleSlider.getValue() * PI) / 180);
-                    double y = GameStatus.listOfBalls[0].getVi().getMagnitude() * sin((sc.angleSlider.getValue() * PI) / 180);
-                    System.out.println("angle " + (sc.angleSlider.getValue()));
-                    GameStatus.listOfBalls[0].setVi(new Vector(x, y));
+                    double c=0;
 
-                    GameStatus.listOfBalls[0].updatePosition();
-                    Thread.sleep(500);
-                    //GameStatus.cue.setOpacity(0);
+                        double x = GameStatus.listOfBalls[0].getVi().getMagnitude() * cos((sc.angleSlider.getValue() * PI) / 180);
+                        double y = GameStatus.listOfBalls[0].getVi().getMagnitude() * sin((sc.angleSlider.getValue() * PI) / 180);
+                        System.out.println("angle " + (sc.angleSlider.getValue()));
+                        GameStatus.listOfBalls[0].setVi(new Vector(x, y));
+                        MovingBallAnimation();
+                        /*while(c<10) {
+                            GameStatus.listOfBalls[0].updatePosition();
+                            c++;
+                            //
+                        }
+
+                         */
+
+
+
+
+                  ;Thread.sleep(500);
+
+                      //  GameStatus.cue.setOpacity(0);
+
 
 
                 } catch (InterruptedException ex) {

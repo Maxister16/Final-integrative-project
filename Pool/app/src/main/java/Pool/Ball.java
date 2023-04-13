@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.scene.shape.Circle;
 
 import java.lang.Math;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
 import static Pool.GameStatus.time;
@@ -23,6 +25,8 @@ public class Ball extends Circle implements InteractiveObject {
     public Animation mainAnimation;
     private int id;
     private int type;
+
+    private double decceleration=0.2;
     private Vector position = new Vector(0, 0);
     ;
     private Vector vi = new Vector(0, 0);
@@ -205,8 +209,37 @@ public class Ball extends Circle implements InteractiveObject {
         }
         //CHANGE THE POSITION OF THE BALL
         public void updatePosition () {
-            this.setCenterX(this.getCenterX() + this.getVi().getXcomponent());
-            this.setCenterY(this.getCenterY() + this.getVi().getYcomponent());
+        double xPosition=this.getCenterX() + this.getVi().getXcomponent();
+        double yPosition=this.getCenterY() + this.getVi().getYcomponent();
+        //this.position=new Vector(xPosition, yPosition);
+
+
+        //BORDER LIMITATIONS
+        double tableBorderMinX=GameStatus.table.getX() +60 ;
+        double tableBorderMinY=GameStatus.table.getY()+50 ;
+        double tableBorderMaxX=GameStatus.table.getX() +(GameStatus.table.getWidth()) -60;
+        double tableBorderMaxY=GameStatus.table.getY() + (GameStatus.table.getHeight()) -50;
+
+            if(this.getCenterX()<=tableBorderMinX|| this.getCenterX()>=tableBorderMaxX){
+                this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
+                System.out.println("lol");
+                 xPosition=this.getCenterX() + this.getVi().getXcomponent();
+            }
+            if(this.getCenterY()<=tableBorderMinY|| this.getCenterY()>=tableBorderMaxY){
+                this.getVi().setYcomponent(-1*this.getVi().getYcomponent());
+
+                 yPosition=this.getCenterY() + this.getVi().getYcomponent();
+            }
+            this.position=new Vector(xPosition, yPosition);
+            this.setCenterX(xPosition);
+            this.setCenterY(yPosition);
+
+            //this.relocate(xPosition, yPosition);
+            //SLOWING DOWN OF THE VELOCITY
+            this.setVi(this.getVi().vectorScalarProduct(decceleration, this.getVi()));
+            //System.out.println("lol");
+            //this.reactIsHit();
+
 
         /*
         double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
@@ -222,15 +255,18 @@ public class Ball extends Circle implements InteractiveObject {
             //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
             for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
                 //SET VALUES FOR X1,Y1 AND X2,Y2
-                double x1 = this.getCenterX();
-                double x2 = GameStatus.listOfBalls[i].getCenterX();
-                double y1 = this.getCenterY();
-                double y2 = GameStatus.listOfBalls[i].getCenterY();
-                //CHECK IF BALLS ARE COLLIDING
-                if (Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2)) <= 2 * this.getRadius()) {
-                    this.updateMovement(GameStatus.listOfBalls[i]);
-                    //listOfBalls.get(i).updateMovement(this);
-                } else {
+                if(this.id!=i) {
+                    double x1 = this.getCenterX();
+                    double x2 = GameStatus.listOfBalls[i].getCenterX();
+                    double y1 = this.getCenterY();
+                    double y2 = GameStatus.listOfBalls[i].getCenterY();
+                    //CHECK IF BALLS ARE COLLIDING
+                    if (Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2)) <= 2 * this.getRadius()) {
+                        //this.updateMovement(GameStatus.listOfBalls[i]);
+                        System.out.println("Haha collided");
+                        //listOfBalls.get(i).updateMovement(this);
+                    } else {
+                    }
                 }
 
             }
