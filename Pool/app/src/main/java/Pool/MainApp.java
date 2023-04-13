@@ -142,12 +142,6 @@ public class MainApp extends Application {
         GameStatus.cue.hitAnim.setOnFinished(e->{
             //FIRST INITIALIZE VELOCITY BASED ON PLACE STICK HIT
             //INSTEAD OF ALL THAT COMPLICATED STUFF, WE WOULD ALREADY HAVE A VALUE V THAT HAS THE MAGNITUDE BASED OFF THE SLIDER
-            double x= GameStatus.listOfBalls[0].getVi().getMagnitude()*cos(sc.angleSlider.getValue());
-            double y=GameStatus.listOfBalls[0].getVi().getMagnitude()*sin(sc.angleSlider.getValue());
-            GameStatus.listOfBalls[0].setVi(new Vector(x,y));
-            GameStatus.listOfBalls[0].updatePosition();
-
-
 
             //GameStatus.cue.setOpacity(0);
 
@@ -157,6 +151,11 @@ public class MainApp extends Application {
             //IF POSITION REACHES TABLE OR SOMETHING, THEN CHANGE THE ANIMATION SO THAT IT STOPS AT LIMITS OF TABLE AND THEN MAKE IT AO THAT
             //IT DOES 2 CYCLES. THAT WILL HAVE THE EFFECT OF HAVING IT REBOUND.
             try {
+                double x= GameStatus.listOfBalls[0].getVi().getMagnitude()*cos(sc.angleSlider.getValue());
+                double y=GameStatus.listOfBalls[0].getVi().getMagnitude()*sin(sc.angleSlider.getValue());
+                GameStatus.listOfBalls[0].setVi(new Vector(x,y));
+                GameStatus.listOfBalls[0].updatePosition();
+
                 /*TranslateTransition tt = new TranslateTransition();
                 tt.setNode(GameStatus.listOfBalls[0]);
                 tt.setRate(0.5);

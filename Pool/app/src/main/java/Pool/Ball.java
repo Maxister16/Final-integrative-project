@@ -15,81 +15,121 @@ import javafx.util.Duration;
 import static Pool.GameStatus.time;
 import static java.lang.Math.*;
 
-public class Ball extends Circle implements InteractiveObject{
-//SETTING CLASS FIELDS
+public class Ball extends Circle implements InteractiveObject {
+    //SETTING CLASS FIELDS
     public static double friction;
-    private static double gravity=9.806;
+    private static double gravity = 9.806;
 
     public Animation mainAnimation;
     private int id;
     private int type;
-    private Vector position=new Vector(0,0);;
-    private Vector vi=new Vector(0,0);
-    private Vector a=new Vector(0,0);;
+    private Vector position = new Vector(0, 0);
+    ;
+    private Vector vi = new Vector(0, 0);
+    private Vector a = new Vector(0, 0);
+    ;
     private boolean isMoving;
     private long initialTime;
-//BALL CONSTRUCTOR
-    public Ball(int id){
-        this.id=id;
+
+    //BALL CONSTRUCTOR
+    public Ball(int id) {
+        this.id = id;
         this.setRadius(10);
     }
-    public Ball(int id, double radius){
+
+    public Ball(int id, double radius) {
         super(radius);
-        this.id=id;
+        this.id = id;
     }
     //ACCESSOR METHODS
-   
-//GET ID METHOD
-    public double getID(){
+
+    //GET ID METHOD
+    public double getID() {
         return this.id;
     }
-//GET TYPE
-    public double getType(){
+
+    //GET TYPE
+    public double getType() {
         return this.type;
     }
-//GET POSITION
-    public Vector getVectorPosition(){
+
+    //GET POSITION
+    public Vector getVectorPosition() {
         return this.position;
     }
-//GET VI VECTOR
-    public Vector getVi(){
+
+    //GET VI VECTOR
+    public Vector getVi() {
         return this.vi;
     }
-//GET A VECTOR
-    public Vector getA(){
+
+    //GET A VECTOR
+    public Vector getA() {
         return this.a;
     }
 
 
-//GET IS MOVING DOUBLE
-    public boolean getIsMoving(){
+    //GET IS MOVING DOUBLE
+    public boolean getIsMoving() {
         return isMoving;
     }
-   
+
     //SETTER METHODS
 //SET ID METHOD
-    public void setID(int id){
-        this.id=id;
+    public void setID(int id) {
+        this.id = id;
     }
-//SET TYPE
-    public void setType(int type){
-        this.type=type;
+
+    //SET TYPE
+    public void setType(int type) {
+        this.type = type;
     }
-//SET POSITION
-    public void setVectorPosition(Vector p){
+
+    //SET POSITION
+    public void setVectorPosition(Vector p) {
         //p.setXcomponent(this.getCenterX());
         //p.setYcomponent(this.getCenterY());
-        this.position=p;
+        this.position = p;
     }
-//SET VI VECTOR
-    public void setVi(Vector vi){
-        this.vi=vi;
+
+    //SET VI VECTOR
+    public void setVi(Vector vi) {
+        this.vi = vi;
     }
-//SET A VECTOR
-    public void setA(Vector a){
-        this.a=a;
+
+    //SET A VECTOR
+    public void setA(Vector a) {
+        this.a = a;
     }
-    public void updateMovement(Ball x){
+
+    public void updateMovement(Ball x) {
+
+            //ALL SHOULD BE VECTORS (FIND ABSOLUTE VALUE)
+            double NormalVectorX = java.lang.Math.abs(this.getCenterX() - x.getCenterX());
+            double NormalVectorY = java.lang.Math.abs(this.getCenterY() - x.getCenterY());
+            //CREATING NORMAL VECTOR
+            Vector norm = new Vector(NormalVectorX, NormalVectorY);
+            //CREATING RELATIVE VECTOR
+            double relativeVectorX = this.getVi().getXcomponent() - x.getVi().getXcomponent();
+            double relativeVectorY = this.getVi().getYcomponent() - x.getVi().getYcomponent();
+            Vector relVel = new Vector(relativeVectorX, relativeVectorY);
+            //MAKING THE SEPERATING VELOCITY VECTOR
+            double sepVel = -1 * (relVel.getXcomponent() * norm.getXcomponent() + relVel.getYcomponent() * norm.getYcomponent());
+            double spx = sepVel * norm.getXcomponent();
+            double spy = sepVel * norm.getYcomponent();
+            Vector sepVelVec = new Vector(spx, spy);
+
+            //ADDING SEPERATING VELOCITY VECTOR TO ORIGINAL VECTORS
+            this.getVi().setXcomponent(this.getVi().getXcomponent() + sepVelVec.getXcomponent());
+            this.getVi().setYcomponent(this.getVi().getYcomponent() + sepVelVec.getYcomponent());
+            //System.out.println("this ball speed is "+this.getVi().getMagnitude());
+
+            x.getVi().setXcomponent(x.getVi().getXcomponent() - sepVelVec.getXcomponent());
+            x.getVi().setYcomponent(x.getVi().getYcomponent() - sepVelVec.getYcomponent());
+            // System.out.println("x ball speed is "+x.getVi().getMagnitude());
+            this.updatePosition();
+            x.updatePosition();
+        /*
         //DEFINING NECESSARY VARIABLES
         //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
         double xVelocityMag=0;
@@ -161,12 +201,12 @@ public class Ball extends Circle implements InteractiveObject{
         x.getVi().setYcomponent(xBallsY*sin(ac)+ xVelocityMag*cos(ac));
 
 
-
-    }
-    //CHANGE THE POSITION OF THE BALL
-    public void updatePosition(){
-        this.setCenterX(this.getCenterX()+this.getVi().getXcomponent());
-        this.setCenterY(this.getCenterY()+this.getVi().getYcomponent());
+*/
+        }
+        //CHANGE THE POSITION OF THE BALL
+        public void updatePosition () {
+            this.setCenterX(this.getCenterX() + this.getVi().getXcomponent());
+            this.setCenterY(this.getCenterY() + this.getVi().getYcomponent());
 
         /*
         double x=  vi.getXcomponent()*time + a.getXcomponent()*time*time*0.5 - position.getXcomponent();
@@ -175,30 +215,30 @@ public class Ball extends Circle implements InteractiveObject{
         this.setVectorPosition(p);
 
          */
-    }
-   
-    public void reactIsHit(){
-        //check if the ball touches another
-        //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
-        for(int i=0; i<GameStatus.listOfBalls.length; i++){
-        //SET VALUES FOR X1,Y1 AND X2,Y2
-            double x1=this.getCenterX();
-            double x2=GameStatus.listOfBalls[i].getCenterX();
-            double y1=this.getCenterY();
-            double y2= GameStatus.listOfBalls[i].getCenterY();
-        //CHECK IF BALLS ARE COLLIDING
-            if(Math.sqrt( Math.pow( (x1-x2), 2) + Math.pow( (y1-y2), 2) ) <= 2*this.getRadius()){
-                this.updateMovement(GameStatus.listOfBalls[i]);
-                //listOfBalls.get(i).updateMovement(this);  
+        }
+
+        public void reactIsHit() {
+            //check if the ball touches another
+            //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
+            for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
+                //SET VALUES FOR X1,Y1 AND X2,Y2
+                double x1 = this.getCenterX();
+                double x2 = GameStatus.listOfBalls[i].getCenterX();
+                double y1 = this.getCenterY();
+                double y2 = GameStatus.listOfBalls[i].getCenterY();
+                //CHECK IF BALLS ARE COLLIDING
+                if (Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2)) <= 2 * this.getRadius()) {
+                    this.updateMovement(GameStatus.listOfBalls[i]);
+                    //listOfBalls.get(i).updateMovement(this);
+                } else {
+                }
+
             }
-            else{
-            }
-           
+        }
+
+        @Override
+        public void setImage(Image newImage){
+            this.setFill(new ImagePattern(newImage));
         }
     }
 
-    @Override
-    public void setImage(Image newImage) {
-        this.setFill(new ImagePattern(newImage));
-    }
-}
