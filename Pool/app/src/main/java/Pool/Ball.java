@@ -12,14 +12,15 @@ import static java.lang.Math.*;
 public class Ball extends Circle implements InteractiveObject{
 //SETTING CLASS FIELDS
     public static double friction;
-    private static double gravity=9.806;
+    private static double gravity = 9.806;
     private int id;
     private int type;
-    private Vector position=new Vector(0,0);
-    private Vector vi=new Vector(0,0);
-    private Vector a=new Vector(0,0);
+    private Vector position = new Vector(0,0);
+    private Vector vi = new Vector(0,0);
+    private Vector a = new Vector(0,0);
     private boolean isMoving;
     private long initialTime;
+    
 //BALL CONSTRUCTOR
     public Ball(int id){
         this.id=id;
@@ -160,12 +161,12 @@ public class Ball extends Circle implements InteractiveObject{
         
         double z= vi.getMagnitude() + a.getMagnitude()*GameStatus.time;
         while(z>0){
-        double x=  vi.getXcomponent()*GameStatus.time + a.getXcomponent()*GameStatus.time*GameStatus.time*0.5 - position.getXcomponent();
-        double y=  vi.getYcomponent()*GameStatus.time + a.getYcomponent()*GameStatus.time*GameStatus.time*0.5 - position.getYcomponent();
-        Vector p=new Vector(x,y);
-        this.setVectorPosition(new Vector(x,y));
-        this.setCenterX(x);
-        this.setCenterY(y);
+            double x=  vi.getXcomponent()*GameStatus.time + a.getXcomponent()*GameStatus.time*GameStatus.time*0.5 - position.getXcomponent();
+            double y=  vi.getYcomponent()*GameStatus.time + a.getYcomponent()*GameStatus.time*GameStatus.time*0.5 - position.getYcomponent();
+            Vector p=new Vector(x,y);
+            this.setVectorPosition(new Vector(x,y));
+            this.setCenterX(x);
+            this.setCenterY(y);
         }
     }
    

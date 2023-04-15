@@ -3,7 +3,6 @@ package Pool;
 
 import javafx.scene.shape.Line;
 
-
 public class Vector {
     
     private double x;

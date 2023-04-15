@@ -171,7 +171,6 @@ public class MainApp extends Application {
     public void movingTheBalls(ScenePlay sc){
         System.out.println("ball are moving method");
         
-        
         //            maxSpeed * percentage of force
         double forceValue = 10 * sc.forceSlider.getValue()/100;
         double angleValue = 180-sc.angleSlider.getValue(); //in deg
@@ -199,8 +198,43 @@ public class MainApp extends Application {
         }*/
     }
     
+    public void endGame(ScenePlay sc){
+        
+    }
+    
     
     public static void main(String[] args) {
         Application.launch();
+    }/*
+    public void Game()
+    {
+        Time previousFrame = GetTime();
+        Time deltaTime = 1/60.;
+        while(GameRunning)
+        {
+            input();//white ball starts moving
+            Tick(deltaTime);//set value of x but dont move the ball
+            ResolveCollisions();//check with collision for the value of x calculated before
+            UpdateGraphic();//update position according to x and collision
+            //Time newTime = GetTime();
+            //deltaTime = newTime - previousTime;
+            //previousTime = newTime;
+            Time newTime;
+                    
+            do
+            {
+                newTime = GetTime();
+            }
+            while(newTime - previousTime < 1/60.);
+            previousTime = newTime;
+                   
+        }
     }
+    public void Tick(float deltaTime)
+    {
+        foreach(ball in balls)
+        {
+            ball.updateposition();
+        }
+    }*/
 }

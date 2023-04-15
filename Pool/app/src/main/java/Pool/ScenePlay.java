@@ -258,27 +258,7 @@ public class ScenePlay {
                 //GameStatus.positionObjects(1350, 780);
                 this.scene = new Scene(layout,1350,780);
 
-                // Play button events
-                   //MAX-Player can't press play button if balls are still moving (setOnAction, setOnMouseEntered, setOnMouseExited events should be temporarily disabled)
-                /*
-                   playButton.setOnAction((event) -> {
-                    double force = forceSlider.getValue();
-                    double angle = angleSlider.getValue();
-                    System.out.println("Force: " + force + "Angle: " + angle);
-                    // MAX-you get force and angle from here, +game starts
-                });
-
-                playButton.setOnMouseEntered((event) -> {
-                    play.setFitHeight(80);
-                    btnSound.play();
-
-                });
-                playButton.setOnMouseExited((event) -> {
-                    play.setFitHeight(70);
-                    btnSound.stop();
-                });
-
-                //Winning Screen
+//WINNING PANE
                 Pane winPane = new Pane();
                 ImageView orangeWin = new ImageView("BackgroundIMG/star0.png");
                 orangeWin.setPreserveRatio(true);
@@ -313,6 +293,7 @@ public class ScenePlay {
                 winBlur.setOpacity(0.5);
                 winBlur.setTranslateX(-180);
 
+                //layout.getChildren().add(winPane);
 
                 //MAX TO ADD -- Do same as below if opposite team sends black ball into hole
 
