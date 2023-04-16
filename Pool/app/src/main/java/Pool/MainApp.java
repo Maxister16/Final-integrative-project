@@ -19,7 +19,8 @@ public class MainApp extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        Sound.initiateSound();
+       // Sound.initiateSound();
+
         //create scenes
         SceneWelcome sceneWelcome = new SceneWelcome();
         ScenePlayGrass scenePlayGrass = new ScenePlayGrass();
@@ -28,7 +29,7 @@ public class MainApp extends Application {
         
         stage.setHeight(780);
         stage.setWidth(1350);
-        //stage.setResizable(false);
+        stage.setResizable(false);
 
         stage.setScene(sceneWelcome.getScene());
         stage.show();
@@ -57,8 +58,8 @@ public class MainApp extends Application {
             startGame(scenePlayGrass);
         };
         EventHandler goToWelcome = e->{
-            Sound.playBgSound.stop();
-            Sound.welcomeBgSound.play();
+            // Sound.playBgSound.stop();
+            // Sound.welcomeBgSound.play();
             stage.setScene(sceneWelcome.getScene());
             stage.setFullScreen(true);
             stage.setFullScreen(false);
@@ -73,15 +74,15 @@ public class MainApp extends Application {
             Button target = (Button)e.getTarget();
             target.setScaleX(1.2);
             target.setScaleY(1.2);
-            Sound.btnSound.stop();
-            Sound.btnSound.play();
+           // Sound.btnSound.stop();
+           // Sound.btnSound.play();
         };
         EventHandler btnOnMouseExited = e->{
             Button target = (Button)e.getTarget();
             target.setScaleX(1);
             target.setScaleY(1);
-            Sound.btnSound.stop();
-            Sound.btnSound.play();
+           // Sound.btnSound.stop();
+           // Sound.btnSound.play();
         };
         
 //SCENE_WELCOME
@@ -134,8 +135,8 @@ public class MainApp extends Application {
     }
     
     public void startGame(ScenePlay sc){
-        Sound.welcomeBgSound.stop();
-        Sound.playBgSound.play();
+      //  Sound.welcomeBgSound.stop();
+      //  Sound.playBgSound.play();
         GameStatus.initialize();
         sc.placeObjectsInGamePane();
         GameStatus.positionObjects(1350, 780, sc.gamePane.getLayoutX(), sc.gamePane.getLayoutY());
