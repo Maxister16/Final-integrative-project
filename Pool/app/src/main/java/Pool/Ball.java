@@ -237,7 +237,7 @@ public class Ball extends Circle implements InteractiveObject {
 
             //this.relocate(xPosition, yPosition);
             //SLOWING DOWN OF THE VELOCITY
-            //this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], this.getVi()));
+            this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], this.getVi()));
             //System.out.println("lol");
             //this.reactIsHit();
 
