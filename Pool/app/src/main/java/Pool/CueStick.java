@@ -5,6 +5,7 @@ import javafx.animation.PathTransition;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 
 public class CueStick extends ImageView{
