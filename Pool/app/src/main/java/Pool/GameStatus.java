@@ -25,6 +25,27 @@ public class GameStatus {
         }
     }
     
+    static public void checkBallsCollisions(){
+            
+            for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
+                
+                //check if collide with nets
+                if(){
+                    
+                }
+                
+                for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
+                    //do balls collide
+                    if(firstBallIndex!=secondBallIndex&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()){
+                        System.out.println("collided check ball"+ firstBallIndex+" "+secondBallIndex);
+                        Ball.reactIsHit(GameStatus.listOfBalls[firstBallIndex], GameStatus.listOfBalls[secondBallIndex]);
+                    }
+                }
+            }
+            
+        
+    }
+    
     public static void positionObjects(double widthOfWindow, double heightOfWindow, double xPositionOfGamepane, double yPositionOfGamepane){
         //center table
         table.setX(-xPositionOfGamepane+(widthOfWindow-table.getWidth())*0.5);
@@ -47,7 +68,7 @@ public class GameStatus {
         double widthOfBand = 30*table.getWidth()/702;
         double extraBufferNets = 10;
         
-        double DISTANCE_BETWEEN_BALLS = 0d;
+        double DISTANCE_BETWEEN_BALLS = 1d;
         double DISTANCE_BETWEEN_CENTER_OF_BALLS = DISTANCE_BETWEEN_BALLS+listOfBalls[0].getRadius()*2; //distance between the center of the balls
         //center of losange
         double xCenter = tableLines[1].getStartX();

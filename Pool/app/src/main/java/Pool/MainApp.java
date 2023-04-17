@@ -131,11 +131,12 @@ public class MainApp extends Application {
         long timeOfStart = System.currentTimeMillis();
         
         while(GameStatus.listOfBalls[0].getVi().getMagnitude() >= 0.001){
-                //for(Ball ball : GameStatus.listOfBalls)
-
-                GameStatus.listOfBalls[0].updatePosition();
-                GameStatus.listOfBalls[0].reactIsHit();
-                GameStatus.updateVisual();
+                for(Ball ball : GameStatus.listOfBalls){//calculate position
+                    ball.updatePosition();
+                }
+                GameStatus.checkBallsCollisions();//check if they collide, change x and speed of yes
+                
+                GameStatus.updateVisual();//set centerX and y to show the changes to the user
                 
                // GameStatus.listOfBalls[0].setCenterX(252);
                 System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
@@ -144,13 +145,15 @@ public class MainApp extends Application {
             do{    
                 timeOfEnd = System.currentTimeMillis();
                
-            }while(timeOfEnd - timeOfStart < TIME_OF_TICK);
+            }while(timeOfEnd - timeOfStart < TIME_OF_TICK);//make sure each step is the same amount of time
             
             System.out.print(" timeOfEnd: "+ (timeOfEnd - timeOfStart));
             System.out.print(" position "+ GameStatus.listOfBalls[0].getCenterX());
             timeOfStart = timeOfEnd;
             System.out.println();
         }
+        
+        changeTeam(sc);
         
     }
 
@@ -168,6 +171,8 @@ public class MainApp extends Application {
         });
 */
         GameStatus.cue.hitAnim.setOnFinished(e-> {
+            GameStatus.cue.setOpacity(0d);
+            
             Task<Integer> task = new Task<Integer>() {
                 @Override protected Integer call() throws Exception {
                     int iterations = 0;
@@ -180,96 +185,6 @@ public class MainApp extends Application {
             getItemsThread.start();
             
         });
-
-        /*
-        try {
-            System.out.println("duration "+(long) GameStatus.cue.hitAnim.getDuration().toMillis());
-            Thread.sleep((long) GameStatus.cue.hitAnim.getDuration().toMillis());
-            game();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        
-        
-        /*
-        
-        /**/
-        
-        
-        
-        
-        /*
-        GameStatus.cue.hitAnim.setOnFinished(e-> {
-            //GameStatus.listOfBalls[0].setCenterX(500);
-            movingTheBalls(sc);
-             //GameStatus.listOfBalls[0].setCenterX(300);
-             System.out.println("cry");
-            //GameStatus.cue.setOpacity(0);
-            game();
-            
-                /*movingTheBalls(sc);
-                try {
-                double c=0;
-                
-                double x = GameStatus.listOfBalls[0].getVi().getMagnitude() * cos((sc.angleSlider.getValue() * PI) / 180);
-                double y = GameStatus.listOfBalls[0].getVi().getMagnitude() * sin((sc.angleSlider.getValue() * PI) / 180);
-                System.out.println("angle " + (sc.angleSlider.getValue()));
-                GameStatus.listOfBalls[0].setVi(new Vector(x, y));
-                //MovingBallAnimation()
-                
-                GameStatus.listOfBalls[0].updatePosition();
-                c++;
-                
-                
-                
-                ;Thread.sleep(500);
-                
-                //  GameStatus.cue.setOpacity(0);
-                
-                
-                
-                } catch (InterruptedException ex) {
-                }
-                
-            */          
-                //});
-
-       /* GameStatus.cue.hitAnim.setOnFinished(e->{
-            //FIRST INITIALIZE VELOCITY BASED ON PLACE STICK HIT
-            //INSTEAD OF ALL THAT COMPLICATED STUFF, WE WOULD ALREADY HAVE A VALUE V THAT HAS THE MAGNITUDE BASED OFF THE SLIDER
-
-            //GameStatus.cue.setOpacity(0);
-
-            GameStatus.cue.setOpacity(0);
-            movingTheBalls(sc);
-            //CALCULATE POSITION
-            //IF POSITION REACHES TABLE OR SOMETHING, THEN CHANGE THE ANIMATION SO THAT IT STOPS AT LIMITS OF TABLE AND THEN MAKE IT AO THAT
-            //IT DOES 2 CYCLES. THAT WILL HAVE THE EFFECT OF HAVING IT REBOUND.
-            try {
-                double x= GameStatus.listOfBalls[0].getVi().getMagnitude()*cos(sc.angleSlider.getValue());
-                double y=GameStatus.listOfBalls[0].getVi().getMagnitude()*sin(sc.angleSlider.getValue());
-                GameStatus.listOfBalls[0].setVi(new Vector(x,y));
-                GameStatus.listOfBalls[0].updatePosition();
-
-                TranslateTransition tt = new TranslateTransition();
-                tt.setNode(GameStatus.listOfBalls[0]);
-                tt.setRate(0.5);
-                //tt.setFromX(150);
-                tt.setByX(326f);
-                tt.setCycleCount((int) 1f);
-                tt.setAutoReverse(true);
-                tt.play();
-
-                    double interpX = Interpolator.LINEAR.interpolate(GameStatus.listOfBalls[0].getCenterX(), 50, 0.05);
-                    double interpY = Interpolator.LINEAR.interpolate(GameStatus.listOfBalls[0].getCenterY(), 50, 0.05);
-                    GameStatus.listOfBalls[0].setCenterX(interpX);
-                    GameStatus.listOfBalls[0].setCenterY(interpY);
-                Thread.sleep(500);
-                GameStatus.cue.setOpacity(0);
-            } catch (InterruptedException ex) {}
-        });
-
-        */
 
     }
     
@@ -294,12 +209,6 @@ public class MainApp extends Application {
     
     
     public static void main(String[] args) {
-        System.out.println("Begore ");
         Application.launch();
-        System.out.println("After");
-        
-        
-        long lrt = 0;
-        
     }
 }

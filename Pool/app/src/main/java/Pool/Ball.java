@@ -135,79 +135,6 @@ public class Ball extends Circle implements InteractiveObject {
             // System.out.println("x ball speed is "+x.getVi().getMagnitude());
             this.updatePosition();
             x.updatePosition();
-        /*
-        //DEFINING NECESSARY VARIABLES
-        //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
-        double xVelocityMag=0;
-        double viVelocityMag = 0;
-
-        //ROTATE THE SYSTEM OF THE BALLS
-
-        //FIND ANGLE OF INITIAL COLLISION
-        double vX= java.lang.Math.abs(this.getCenterX()-x.getCenterX());
-        double vY=java.lang.Math.abs(this.getCenterY()-x.getCenterY());
-        double angleCollision= atan(vY/vX);
-        double ac=angleCollision;
-
-        //MATRIX MULTIPLICATION
-
-        //X COMPONENTS OF VELOCITY
-        double thisVelocity=  this.getVi().getXcomponent()*(cos(ac))+ this.getVi().getYcomponent()*(sin(ac));
-        double xBallsVelocity= x.getVi().getXcomponent()*(cos(ac))+ x.getVi().getYcomponent()*(sin(ac));
-        //Y COMPONENTS OF VELOCITY (WHICH DO NOT CHANGE)
-        double thisY= this.getVi().getYcomponent()*(cos(ac))+ this.getVi().getXcomponent()*(-sin(ac));
-        double xBallsY= x.getVi().getXcomponent()*(-sin(ac))+ x.getVi().getYcomponent()*(cos(ac));
-
-
-        //DEFINING NECESSARY VALUES FOR EQUATION
-
-        //double velocitySum=this.getVi().getMagnitude() + x.getVi().getMagnitude();
-        double velocitySum=thisVelocity + xBallsVelocity;
-        double q=velocitySum;
-
-        double velocitySumSquared=Math.pow(this.getVi().getMagnitude(), 2) + Math.pow(x.getVi().getMagnitude(), 2);
-        double z=velocitySumSquared;
-
-        double r=(q*q)-z;
-
-        //CALCULATE VI
-        double velocityFound1= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
-        double velocityFound2= (2*q - Math.sqrt((4*q*q)+ (8*r)))/4;
-
-
-        //IF FIRST BALL IS WITH HIGHER INITIAL VELOCITY (knowing that ball with higher velocity loses velocity in collision)
-        //if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
-        if(thisVelocity<xBallsVelocity){
-            //if(velocityFound1<x.getVi().getMagnitude()){
-            if(velocityFound1<xBallsVelocity){
-                xVelocityMag=velocityFound1;
-                viVelocityMag=velocityFound2;
-            }else{
-                xVelocityMag=velocityFound2;
-                viVelocityMag=velocityFound1;
-            }
-//NOW IF THE OTHER BALL IS THE ONE WITH HIGHER VELOCITY
-        } //else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
-        else if(thisVelocity>xBallsVelocity){
-            //if(velocityFound1<this.getVi().getMagnitude()){
-            if(velocityFound1<thisVelocity){
-                xVelocityMag=velocityFound2;
-                viVelocityMag=velocityFound1;
-            }else{
-                xVelocityMag=velocityFound1;
-                viVelocityMag=velocityFound2;
-            }
-        }
-
-        //ROTATE THE SYSTEM BACK ALONG ANGLE OF ROTATION
-        this.getVi().setYcomponent(cos(ac)*thisY+ sin(ac)*viVelocityMag);
-        this.getVi().setXcomponent(-sin(ac)*thisY+ cos(ac)*viVelocityMag);
-
-        x.getVi().setXcomponent(xVelocityMag*cos(ac)+ xBallsY*-sin(ac));
-        x.getVi().setYcomponent(xBallsY*sin(ac)+ xVelocityMag*cos(ac));
-
-
-*/
         }
     
     
@@ -259,6 +186,35 @@ public class Ball extends Circle implements InteractiveObject {
          */
         }
 
+        
+        static public void reactIsHit(Ball firstBall, Ball secondBall){
+            
+            double angle = atan2(firstBall.getVi().getMagnitude(), secondBall.getVi().getMagnitude());
+            double cos = cos(angle);
+            double sin = sin(angle);
+
+            double v1xRotated = cos * firstBall.getVi().getXcomponent() + sin * firstBall.getVi().getYcomponent();
+            double v1yRotated = -sin * firstBall.getVi().getXcomponent() + cos * firstBall.getVi().getYcomponent();
+            double v2xRotated = cos * secondBall.getVi().getXcomponent() + sin * secondBall.getVi().getYcomponent();
+            double v2yRotated = -sin * secondBall.getVi().getXcomponent() + cos * secondBall.getVi().getYcomponent();
+
+            double tempVx = v1xRotated;
+            v1xRotated = v2xRotated;
+            v2xRotated = tempVx;
+
+            double ball1deltaX = cos * v1xRotated - sin * v1yRotated;
+            double ball1deltaY = sin * v1xRotated + cos * v1yRotated;
+            double ball2deltaX = cos * v2xRotated - sin * v2yRotated;
+            double ball2deltaY = sin * v2xRotated + cos * v2yRotated;
+
+            firstBall.setVi(new Vector(ball1deltaX, ball1deltaY));
+            System.out.println("Ball 1 speed: " + firstBall.getVi().getMagnitude());
+            secondBall.setVi(new Vector(ball2deltaX, ball2deltaY));
+            System.out.println("Ball 2 speed: " + secondBall.getVi().getMagnitude());
+        
+        }
+        
+        
         public void reactIsHit() {
             //check if the ball touches another
             //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
