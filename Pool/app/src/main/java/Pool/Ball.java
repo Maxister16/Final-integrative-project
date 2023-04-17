@@ -28,7 +28,7 @@ public class Ball extends Circle implements InteractiveObject {
     private int type;
 
     private double decceleration=0.2;
-    private Vector position = new Vector(0, 0);
+    private Vector position = new Vector(this.getCenterX(), this.getCenterY());
     ;
     private Vector vi = new Vector(0, 0);
     private Vector a = new Vector(0, 0);
@@ -210,7 +210,19 @@ public class Ball extends Circle implements InteractiveObject {
         }
         //CHANGE THE POSITION OF THE BALL
         public void updatePosition () {
-        double xPosition=this.getCenterX() + this.getVi().getXcomponent();
+            Vector deltaPosition=Vector.vectorScalarProduct(0.0167, vi);
+            // this.setVectorPosition()
+            //Vector this.setVectorPosition(Vector.vectorSum(this.getVi(), Vector.vectorScalarProduct(E, ));
+            this.position = Vector.vectorSum(deltaPosition, this.position);
+
+
+
+
+            this.setCenterX(position.getXcomponent()+this.getCenterX());
+            this.setCenterY(position.getYcomponent()+this.getCenterY());
+            this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], this.getVi()));
+
+        /*double xPosition=this.getCenterX() + this.getVi().getXcomponent();
         double yPosition=this.getCenterY() + this.getVi().getYcomponent();
         //this.position=new Vector(xPosition, yPosition);
 

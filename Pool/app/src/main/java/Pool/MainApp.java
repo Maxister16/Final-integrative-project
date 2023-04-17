@@ -23,7 +23,7 @@ import javax.swing.*;
 import static java.lang.Math.*;
 
 public class MainApp extends Application {
-    private Timer time;
+    private long TIME_OF_TICK=1000/16;
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -142,9 +142,31 @@ public class MainApp extends Application {
         GameStatus.cue.appears(sc.angleSlider);
     }
 
-    public void Game(){
-       // Time previousFrame=new Time(0);
-        //previousFrame.
+    public void game(){
+
+        //GameStatus.listOfBalls[0].setCenterX(0);
+        long timeOfStart = System.currentTimeMillis();
+
+        //while(GameStatus.listOfBalls[0].getVi().getMagnitude() >= 0.001){
+        while(GameStatus.listOfBalls[0].getVi().getMagnitude() >= 0.001){
+            //for(Ball ball : GameStatus.listOfBalls)
+            GameStatus.listOfBalls[0].updatePosition();
+            // GameStatus.listOfBalls[0].setCenterX(252);
+            System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
+            long timeOfEnd;
+
+            do{
+                timeOfEnd = System.currentTimeMillis();
+
+            }while(timeOfEnd - timeOfStart < TIME_OF_TICK);
+
+            System.out.print(" timeOfEnd: "+ (timeOfEnd - timeOfStart));
+            System.out.print(" position "+ GameStatus.listOfBalls[0].getCenterX());
+            //GameStatus.listOfBalls[0].setCenterX(0);
+            timeOfStart = timeOfEnd;
+            System.out.println();
+        }
+
     }
     /*
     public void Game()
@@ -219,13 +241,18 @@ public class MainApp extends Application {
 
 
 
-            GameStatus.listOfBalls[0].setVi(new Vector(60,0));
+            GameStatus.listOfBalls[0].setVi(new Vector(2,0));
+
 
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
-        GameStatus.cue.hitAnim.setOnFinished(e-> {
+      //  game();
+         GameStatus.cue.hitAnim.setOnFinished(e-> {
+             game();
             //GameStatus.cue.setOpacity(0);
             movingTheBalls(sc);
-                try {
+             /*   try {
+                    game();
+
                     double c=0;
 
                         double x = GameStatus.listOfBalls[0].getVi().getMagnitude() * cos((sc.angleSlider.getValue() * PI) / 180);
@@ -234,12 +261,14 @@ public class MainApp extends Application {
                         GameStatus.listOfBalls[0].setVi(new Vector(x, y));
                         //MovingBallAnimation()
 
-                        GameStatus.listOfBalls[0].updatePosition();
+                        //GameStatus.listOfBalls[0].updatePosition();
+                    GameStatus.listOfBalls[0].setCenterX(GameStatus.listOfBalls[0].getCenterX() + GameStatus.listOfBalls[0].getVi().getXcomponent());
                         c++;
 
 
 
                   ;Thread.sleep(500);
+
 
                       //  GameStatus.cue.setOpacity(0);
 
@@ -247,7 +276,7 @@ public class MainApp extends Application {
 
                 } catch (InterruptedException ex) {
                 }
-
+*/
 
                 }
 
