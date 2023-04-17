@@ -15,13 +15,13 @@ public class GameStatus {
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
-    public static double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    public static double[] FRICTION_COEFFICIENT = {0.95,0.1,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
     public static CueStick cue;
     
-    public static void updateTime() throws InterruptedException{
-        while(GameStatus.isGameOn){
-            Thread.sleep(100);
-            time += 100;
+    static public void updateVisual(){
+        for(Ball ball: listOfBalls){
+            ball.setCenterX(ball.getVectorPosition().getXcomponent());
+            ball.setCenterY(ball.getVectorPosition().getYcomponent());
         }
     }
     
@@ -93,6 +93,8 @@ public class GameStatus {
                 listOfBalls[i].setCenterX(xCenter+xMult*(Math.sqrt(0.75)*DISTANCE_BETWEEN_CENTER_OF_BALLS+DISTANCE_BETWEEN_BALLS));
                 listOfBalls[i].setCenterY(yCenter+yMult*(0.5*DISTANCE_BETWEEN_CENTER_OF_BALLS+DISTANCE_BETWEEN_BALLS));
             }
+            
+            listOfBalls[i].setVectorPosition(new Vector(listOfBalls[i].getCenterX(),listOfBalls[i].getCenterY()));
         }
         setZorder();
     }
