@@ -130,29 +130,29 @@ public class MainApp extends Application {
         //GameStatus.listOfBalls[0].setCenterX(0);
         long timeOfStart = System.currentTimeMillis();
         
-        while(GameStatus.listOfBalls[0].getVi().getMagnitude() >= 0.001){
-                for(Ball ball : GameStatus.listOfBalls){//calculate position
-                    ball.updatePosition();
-                }
-                GameStatus.checkBallsCollisions(sc);//check if they collide, change x and speed of yes
-                
-                GameStatus.updateVisual();//set centerX and y to show the changes to the user
-                
-               // GameStatus.listOfBalls[0].setCenterX(252);
-                System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
+        while(GameStatus.listOfBalls[0].getVi().getMagnitude() >= 0.001) {
+            for (Ball ball : GameStatus.listOfBalls) {//calculate position
+                ball.updatePosition();
+            }
+            GameStatus.checkBallsCollisions(sc);//check if they collide, change x and speed of yes
+
+            GameStatus.updateVisual();//set centerX and y to show the changes to the user
+
+            // GameStatus.listOfBalls[0].setCenterX(252);
+            System.out.print("speed: " + GameStatus.listOfBalls[0].getVi().getMagnitude());
             long timeOfEnd;
-            
-            do{    
+
+            do {
                 timeOfEnd = System.currentTimeMillis();
-               
-            }while(timeOfEnd - timeOfStart < TIME_OF_TICK);//make sure each step is the same amount of time
-            
-            System.out.print(" timeOfEnd: "+ (timeOfEnd - timeOfStart));
-            System.out.print(" position "+ GameStatus.listOfBalls[0].getCenterX());
+
+            } while (timeOfEnd - timeOfStart < TIME_OF_TICK);//make sure each step is the same amount of time
+
+            System.out.print(" timeOfEnd: " + (timeOfEnd - timeOfStart));
+            System.out.print(" position " + GameStatus.listOfBalls[0].getCenterX());
             timeOfStart = timeOfEnd;
             System.out.println();
         }
-        
+
         changeTeam(sc);
         
     }

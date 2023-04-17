@@ -45,13 +45,17 @@ public class GameStatus {
                             //System.out.println("HAHA GET LOST" + firstBallIndex);
 
                             //sc.gamePane.getChildren().remove(GameStatus.listOfBalls[firstBallIndex]);
+                            GameStatus.listOfBalls[firstBallIndex].setOpacity(0);
+                            sc.gamePane.getChildren().remove(GameStatus.listOfBalls[firstBallIndex]);
+
+
                         } else if(firstBallIndex==0){
-                           /* GameStatus.listOfBalls[firstBallIndex].setCenterX(tableLines[0].getStartX());
+                            GameStatus.listOfBalls[firstBallIndex].setCenterX(tableLines[0].getStartX());
                             GameStatus.listOfBalls[firstBallIndex].setCenterY(table.getY()+0.5*table.getHeight());
                             GameStatus.listOfBalls[firstBallIndex].setVectorPosition(new Vector(GameStatus.listOfBalls[firstBallIndex].getCenterX(), GameStatus.listOfBalls[firstBallIndex].getCenterY() ));
                             GameStatus.listOfBalls[firstBallIndex].setVi(new Vector(0,0));
 
-                            */
+
                             System.out.println("lol");
 
                         }
