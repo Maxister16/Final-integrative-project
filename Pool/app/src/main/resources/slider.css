@@ -1,3 +1,19 @@
-.slider.track{
-    -fx-background-color: linear-gradient(to right, yellow, darkred);
+.slider .track {
+    -fx-border-color: null;
+    -fx-border-width: 4px;
+    -fx-border-radius: 10px;
+    -fx-background-color: linear-gradient(to right, yellow, orange, red, darkred);
+    -fx-pref-height: 20px;
+    -fx-pref-width: 200px;
+    -fx-background-radius: 10px;
+}
+
+.slider .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+    -fx-border-color: black;
+    -fx-backgrond-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+    -fx-border-width: 4px;
 }
