@@ -214,7 +214,7 @@ public class Ball extends Circle implements InteractiveObject {
         //CHANGE THE POSITION OF THE BALL
         public void updatePosition () {
      
-        Vector deltaPosition=Vector.vectorScalarProduct(16, vi);
+        Vector deltaPosition = Vector.vectorScalarProduct(16, vi);
         // this.setVectorPosition()
         //Vector this.setVectorPosition(Vector.vectorSum(this.getVi(), Vector.vectorScalarProduct(E, ));
         this.position = Vector.vectorSum(deltaPosition, this.position);
@@ -274,7 +274,7 @@ public class Ball extends Circle implements InteractiveObject {
                       if(Vector.vectorDifference(this.getVectorPosition(),GameStatus.listOfBalls[i].getVectorPosition()).getMagnitude() <= 2*this.getRadius()){  
                         //this.updateMovement(GameStatus.listOfBalls[i]);
                         System.out.println("Haha collided");
-                        //listOfBalls.get(i).updateMovement(this);
+                        GameStatus.listOfBalls[i].updateMovement(this);
                     } else {
                     }
                 }

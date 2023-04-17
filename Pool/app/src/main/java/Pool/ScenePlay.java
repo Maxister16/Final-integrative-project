@@ -87,7 +87,7 @@ public class ScenePlay {
                 ImageView menu = new ImageView("ButtonIMG/MenuBtnIMG.png");
                 ImageView play = new ImageView("ButtonIMG/playBtnIMG.png");
 
-                forceSlider = new Slider(1, 100, 1);
+                forceSlider = new Slider(0.1, 4, 0.1);
                 angleSlider = new Slider(0.0, 359, 1.0);
 
                 //Not working attempt at styling sliders

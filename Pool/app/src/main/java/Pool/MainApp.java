@@ -3,6 +3,7 @@ package Pool;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
+import static java.lang.Math.PI;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -13,11 +14,8 @@ public class MainApp extends Application {
     private long TIME_OF_TICK = 1000/60;//time in millis
     Stage stagefield;
     
-    
     @Override
     public void start(Stage stage) throws IOException {
-
-        
         
         stagefield = stage;
         
@@ -135,12 +133,9 @@ public class MainApp extends Application {
         while(GameStatus.listOfBalls[0].getVi().getMagnitude() >= 0.001){
                 //for(Ball ball : GameStatus.listOfBalls)
 
-                    
                 GameStatus.listOfBalls[0].updatePosition();
+                GameStatus.listOfBalls[0].reactIsHit();
                 GameStatus.updateVisual();
-                
-               // stagefield.setFullScreen(true);
-               //stagefield.setFullScreen(false);
                 
                // GameStatus.listOfBalls[0].setCenterX(252);
                 System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
@@ -153,85 +148,18 @@ public class MainApp extends Application {
             
             System.out.print(" timeOfEnd: "+ (timeOfEnd - timeOfStart));
             System.out.print(" position "+ GameStatus.listOfBalls[0].getCenterX());
-            GameStatus.updateVisual();
-            //GameStatus.listOfBalls[0].setCenterX(0);
             timeOfStart = timeOfEnd;
             System.out.println();
         }
         
     }
-    /*
-    public void Game()
-    {
-        Time previousFrame = GetTime();
-        Time deltaTime = 1/60.;
-        while(GameRunning)
-        {
-            input();//white ball starts moving
-            Tick(deltaTime);//set value of x but dont move the ball
-            ResolveCollisions();//check with collision for the value of x calculated before
-            UpdateGraphic();//update position according to x and collision
-            //Time newTime = GetTime();
-            //deltaTime = newTime - previousTime;
-            //previousTime = newTime;
-            Time newTime;
-
-            do
-            {
-                newTime = GetTime();
-            }
-            while(newTime - previousTime < 1/60.);
-            previousTime = newTime;
-
-            }
-    }
-    public void Tick(float deltaTime){
-        public void Tick(float deltaTime)
-        {
-            foreach(ball in balls)
-            {
-                ball.updateposition();
-            }
-    }
-     */
-
-    /*public void MovingBallAnimation(){
-        time= new Timer(500, e -> {for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
-            if(GameStatus.listOfBalls[r].getVi().getMagnitude()!= 0){
-                System.out.println("ball is " + r);
-                GameStatus.listOfBalls[0].updatePosition();
-            }
-        }
-        });
-        time.start();
-        double sumVelocity=0;
-        for (int r = 0; r < GameStatus.listOfBalls.length; r++) {
-               sumVelocity+=GameStatus.listOfBalls[0].getVi().getMagnitude();
-            }
-        if(sumVelocity<1){
-            time.stop();
-        }
-
-     */
-
-       /*Timeline mainAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-           for (int r = 0; r < GameStatus.listOfBalls.length; r++) {//,.
-               if(GameStatus.listOfBalls[r].getVi().getMagnitude()!= 0){
-                   System.out.println("ball is " + r);
-                   GameStatus.listOfBalls[r].updatePosition();
-               }
-
-           }
-       }));
-       mainAnimation.play();
-
-
-   }
-*/
 
     public void playButtonHit(ScenePlay sc){
         
-        GameStatus.listOfBalls[0].setVi(new Vector(20,5));
+        double vx = sc.forceSlider.getValue()*Math.cos(sc.angleSlider.getValue()*PI/180);
+        double vy = sc.forceSlider.getValue()*Math.sin(sc.angleSlider.getValue()*PI/180);
+        
+        GameStatus.listOfBalls[0].setVi(new Vector(vx,vy));
 
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
         
