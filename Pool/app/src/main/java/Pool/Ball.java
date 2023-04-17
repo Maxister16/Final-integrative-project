@@ -1,5 +1,6 @@
 package Pool;
 
+import static Pool.GameStatus.listOfBalls;
 import java.util.ArrayList;
 
 import javafx.animation.Animation;
@@ -28,7 +29,7 @@ public class Ball extends Circle implements InteractiveObject {
     private int type;
 
     private double decceleration=0.2;
-    private Vector position = new Vector(this.getCenterX(), this.getCenterY());
+    private Vector position = new Vector(0, 0);
     ;
     private Vector vi = new Vector(0, 0);
     private Vector a = new Vector(0, 0);
@@ -109,31 +110,31 @@ public class Ball extends Circle implements InteractiveObject {
 
     public void updateMovement(Ball x) {
 
-            //ALL SHOULD BE VECTORS (FIND ABSOLUTE VALUE)
-            double NormalVectorX = java.lang.Math.abs(this.getCenterX() - x.getCenterX());
-            double NormalVectorY = java.lang.Math.abs(this.getCenterY() - x.getCenterY());
-            //CREATING NORMAL VECTOR
-            Vector norm = new Vector(NormalVectorX, NormalVectorY);
-            //CREATING RELATIVE VECTOR
-            double relativeVectorX = this.getVi().getXcomponent() - x.getVi().getXcomponent();
-            double relativeVectorY = this.getVi().getYcomponent() - x.getVi().getYcomponent();
-            Vector relVel = new Vector(relativeVectorX, relativeVectorY);
-            //MAKING THE SEPERATING VELOCITY VECTOR
-            double sepVel = -1 * (relVel.getXcomponent() * norm.getXcomponent() + relVel.getYcomponent() * norm.getYcomponent());
-            double spx = sepVel * norm.getXcomponent();
-            double spy = sepVel * norm.getYcomponent();
-            Vector sepVelVec = new Vector(spx, spy);
+        //ALL SHOULD BE VECTORS (FIND ABSOLUTE VALUE)
+        double NormalVectorX = java.lang.Math.abs(this.getCenterX() - x.getCenterX());
+        double NormalVectorY = java.lang.Math.abs(this.getCenterY() - x.getCenterY());
+        //CREATING NORMAL VECTOR
+        Vector norm = new Vector(NormalVectorX, NormalVectorY);
+        //CREATING RELATIVE VECTOR
+        double relativeVectorX = this.getVi().getXcomponent() - x.getVi().getXcomponent();
+        double relativeVectorY = this.getVi().getYcomponent() - x.getVi().getYcomponent();
+        Vector relVel = new Vector(relativeVectorX, relativeVectorY);
+        //MAKING THE SEPERATING VELOCITY VECTOR
+        double sepVel = -1 * (relVel.getXcomponent() * norm.getXcomponent() + relVel.getYcomponent() * norm.getYcomponent());
+        double spx = sepVel * norm.getXcomponent();
+        double spy = sepVel * norm.getYcomponent();
+        Vector sepVelVec = new Vector(spx, spy);
 
-            //ADDING SEPERATING VELOCITY VECTOR TO ORIGINAL VECTORS
-            this.getVi().setXcomponent(this.getVi().getXcomponent() + sepVelVec.getXcomponent());
-            this.getVi().setYcomponent(this.getVi().getYcomponent() + sepVelVec.getYcomponent());
-            //System.out.println("this ball speed is "+this.getVi().getMagnitude());
+        //ADDING SEPERATING VELOCITY VECTOR TO ORIGINAL VECTORS
+        this.getVi().setXcomponent(this.getVi().getXcomponent() + sepVelVec.getXcomponent());
+        this.getVi().setYcomponent(this.getVi().getYcomponent() + sepVelVec.getYcomponent());
+        //System.out.println("this ball speed is "+this.getVi().getMagnitude());
 
-            x.getVi().setXcomponent(x.getVi().getXcomponent() - sepVelVec.getXcomponent());
-            x.getVi().setYcomponent(x.getVi().getYcomponent() - sepVelVec.getYcomponent());
-            // System.out.println("x ball speed is "+x.getVi().getMagnitude());
-            this.updatePosition();
-            x.updatePosition();
+        x.getVi().setXcomponent(x.getVi().getXcomponent() - sepVelVec.getXcomponent());
+        x.getVi().setYcomponent(x.getVi().getYcomponent() - sepVelVec.getYcomponent());
+        // System.out.println("x ball speed is "+x.getVi().getMagnitude());
+        this.updatePosition();
+        x.updatePosition();
         /*
         //DEFINING NECESSARY VARIABLES
         //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
@@ -207,51 +208,46 @@ public class Ball extends Circle implements InteractiveObject {
 
 
 */
-        }
-        //CHANGE THE POSITION OF THE BALL
-        public void updatePosition () {
-            Vector deltaPosition=Vector.vectorScalarProduct(0.0167, vi);
-            // this.setVectorPosition()
-            //Vector this.setVectorPosition(Vector.vectorSum(this.getVi(), Vector.vectorScalarProduct(E, ));
-            this.position = Vector.vectorSum(deltaPosition, this.position);
+    }
 
 
+    //CHANGE THE POSITION OF THE BALL
+    public void updatePosition () {
 
-
-            this.setCenterX(position.getXcomponent()+this.getCenterX());
-            this.setCenterY(position.getYcomponent()+this.getCenterY());
-            this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], this.getVi()));
-
-        /*double xPosition=this.getCenterX() + this.getVi().getXcomponent();
-        double yPosition=this.getCenterY() + this.getVi().getYcomponent();
-        //this.position=new Vector(xPosition, yPosition);
-
+        Vector deltaPosition = Vector.vectorScalarProduct(16, vi);
+        // this.setVectorPosition()
+        //Vector this.setVectorPosition(Vector.vectorSum(this.getVi(), Vector.vectorScalarProduct(E, ));
+        this.position = Vector.vectorSum(deltaPosition, this.position);
 
         //BORDER LIMITATIONS
-        double tableBorderMinX= table.getX() + 30*table.getWidth()/702 ;
-        double tableBorderMinY= table.getY()+ 30*table.getHeight()/352;
-        double tableBorderMaxX= table.getX() +(table.getWidth()) -30*table.getWidth()/702;
-        double tableBorderMaxY= table.getY() + (table.getHeight()) - 30*table.getHeight()/352;
+        double tableBorderMinX= table.getX() + 30*table.getWidth()/702 - getRadius();
+        double tableBorderMinY= table.getY()+ 30*table.getHeight()/352 - getRadius();
+        double tableBorderMaxX= table.getX() +(table.getWidth()) -30*table.getWidth()/702 - getRadius();
+        double tableBorderMaxY= table.getY() + (table.getHeight()) - 30*table.getHeight()/352 - getRadius();
 
-            if(this.getCenterX()<=tableBorderMinX|| this.getCenterX()>=tableBorderMaxX){
-                this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
-                System.out.println("lol");
-                 xPosition=this.getCenterX() + this.getVi().getXcomponent();
-            }
-            if(this.getCenterY()<=tableBorderMinY|| this.getCenterY()>=tableBorderMaxY){
-                this.getVi().setYcomponent(-1*this.getVi().getYcomponent());
+        if(position.x<=tableBorderMinX|| position.x>=tableBorderMaxX){
+            this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
+            System.out.println("lol");
+            if(position.x <=tableBorderMinX)
+                position.x = tableBorderMinX;
+            else
+                position.x = tableBorderMaxX;
+            //xPosition=this.getCenterX() + this.getVi().getXcomponent();
+        }
+        if(position.y<=tableBorderMinY|| position.y>=tableBorderMaxY){
+            this.getVi().setYcomponent(-1*this.getVi().getYcomponent());
+            if(position.y <=tableBorderMinY)
+                position.y = tableBorderMinY;
+            else
+                position.y = tableBorderMaxY;
+            //yPosition=this.getCenterY() + this.getVi().getYcomponent();
+        }
 
-                 yPosition=this.getCenterY() + this.getVi().getYcomponent();
-            }
-            this.position=new Vector(xPosition, yPosition);
-            this.setCenterX(xPosition);
-            this.setCenterY(yPosition);
-
-            //this.relocate(xPosition, yPosition);
-            //SLOWING DOWN OF THE VELOCITY
-            this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], this.getVi()));
-            //System.out.println("lol");
-            //this.reactIsHit();
+        //this.relocate(xPosition, yPosition);
+        //SLOWING DOWN OF THE VELOCITY
+        this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], vi));
+        //System.out.println("lol");
+        //this.reactIsHit();
 
 
         /*
@@ -261,33 +257,34 @@ public class Ball extends Circle implements InteractiveObject {
         this.setVectorPosition(p);
 
          */
-        }
+    }
 
-        public void reactIsHit() {
-            //check if the ball touches another
-            //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
-            for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
-                //SET VALUES FOR X1,Y1 AND X2,Y2
-                if(this.id!=i) {
-                    double x1 = this.getCenterX();
-                    double x2 = GameStatus.listOfBalls[i].getCenterX();
-                    double y1 = this.getCenterY();
-                    double y2 = GameStatus.listOfBalls[i].getCenterY();
-                    //CHECK IF BALLS ARE COLLIDING
-                    if (Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2)) <= 2 * this.getRadius()) {
-                        //this.updateMovement(GameStatus.listOfBalls[i]);
-                        System.out.println("Haha collided");
-                        //listOfBalls.get(i).updateMovement(this);
-                    } else {
-                    }
+    public void reactIsHit() {
+        //check if the ball touches another
+        //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
+        for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
+            //SET VALUES FOR X1,Y1 AND X2,Y2
+            if(this.id!=i) {
+                double x1 = this.getCenterX();
+                double x2 = GameStatus.listOfBalls[i].getCenterX();
+                double y1 = this.getCenterY();
+                double y2 = GameStatus.listOfBalls[i].getCenterY();
+                //CHECK IF BALLS ARE COLLIDING
+                //if (Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) <= 4* this.getRadius()*this.getRadius()) {
+                if(Vector.vectorDifference(this.getVectorPosition(),GameStatus.listOfBalls[i].getVectorPosition()).getMagnitude() <= 2*this.getRadius()){
+                    //this.updateMovement(GameStatus.listOfBalls[i]);
+                    System.out.println("Haha collided");
+                    GameStatus.listOfBalls[i].updateMovement(this);
+                } else {
                 }
-
             }
-        }
 
-        @Override
-        public void setImage(Image newImage){
-            this.setFill(new ImagePattern(newImage));
         }
     }
 
+    @Override
+    public void setImage(Image newImage){
+        this.setFill(new ImagePattern(newImage));
+    }
+
+}

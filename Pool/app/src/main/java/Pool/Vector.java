@@ -5,8 +5,8 @@ import javafx.scene.shape.Line;
 
 public class Vector {
     
-    private double x;
-    private double y;
+    public double x;
+    public double y;
     private double magnitude;
     
     //constructors

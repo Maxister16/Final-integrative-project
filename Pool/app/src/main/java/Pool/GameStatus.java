@@ -24,7 +24,12 @@ public class GameStatus {
             time += 100;
         }
     }
-    
+    static public void updateVisual(){
+        for(Ball ball: listOfBalls){
+            ball.setCenterX(ball.getVectorPosition().getXcomponent());
+            ball.setCenterY(ball.getVectorPosition().getYcomponent());
+        }
+    }
     public static void positionObjects(double widthOfWindow, double heightOfWindow, double xPositionOfGamepane, double yPositionOfGamepane){
         //center table
         table.setX(-xPositionOfGamepane+(widthOfWindow-table.getWidth())*0.5);
