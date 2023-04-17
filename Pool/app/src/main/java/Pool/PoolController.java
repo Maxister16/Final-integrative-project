@@ -24,7 +24,7 @@ public class PoolController {
 
   //  @FXML
     public void initialize(){
-        GameStatus.initialize();
+       // GameStatus.initialize();
         //play music
         //set scene to titleScreen
     }
@@ -45,7 +45,7 @@ public class PoolController {
     
     public void setUpGame(){
         //change to gameScene
-        GameStatus.reset();
+      //  GameStatus.reset();
         
         //place objects in the place
         //start the game

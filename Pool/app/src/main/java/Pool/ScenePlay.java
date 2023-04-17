@@ -17,6 +17,8 @@ import javafx.util.Duration;
 import java.io.File;
 import javafx.scene.paint.Color;
 
+import static java.lang.Math.*;
+
 
 public class ScenePlay {
 
@@ -24,8 +26,10 @@ public class ScenePlay {
 
             public ScenePlay(Stage primaryStage)  {
 
+
+
                 //Initialize Game Status
-                GameStatus.initialize();
+             //   GameStatus.initialize();
 
                 //Music and Sound set up
                 File btnFile = new File("Pool/app/src/main/resources/sound/tok.mp3");
@@ -40,6 +44,15 @@ public class ScenePlay {
 
                 //Create Principal Panes
                 Pane gamePane = new Pane();
+                gamePane.setMaxHeight(400);
+                gamePane.setMaxWidth(800);
+
+
+                //set gamePane background to light green
+                gamePane.setStyle("-fx-background-color: #85a447");
+
+                NBalls nBalls = new NBalls(gamePane);
+
                 BorderPane borderPane = new BorderPane();
                 GridPane gridPaneTop = new GridPane();
                 GridPane gridPaneBot = new GridPane();
@@ -105,16 +118,17 @@ public class ScenePlay {
                 // Create Layout
                 StackPane layout = new StackPane();
 
+
                 //if I change these values the game Pane disappears (This doesn't matter as it won't change)
                 layout.setMinWidth(900);
                 layout.setMinHeight(600);
 
                 //Put table together
-                GameStatus.positionObjects(0,0);
-                gamePane.getChildren().addAll(GameStatus.nets);
-                gamePane.getChildren().addAll(GameStatus.listOfBalls);
-                gamePane.getChildren().addAll(GameStatus.tableLines);
-                gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
+            //    GameStatus.positionObjects(0,0);
+             //   gamePane.getChildren().addAll(GameStatus.nets);
+              //  gamePane.getChildren().addAll(GameStatus.listOfBalls);
+               // gamePane.getChildren().addAll(GameStatus.tableLines);
+                //gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder());
 
                 //Set background image
                 ImageView bg = new ImageView("BackgroundIMG/PlayBgIMG.jpg");
@@ -172,17 +186,38 @@ public class ScenePlay {
                 gridPaneTop.getChildren().add(teamNamePane);
 
                 //Position Panes in Border Pane
-                borderPane.setCenter(gamePane);
+               // borderPane.setCenter(gamePane);
                 borderPane.setLeft(redBasketPane);
                 borderPane.setRight(orangeBasketPane);
-                gamePane.setTranslateY(610);
-                gamePane.setTranslateX(480);
+              //  gamePane.setTranslateY(610);
+              //  gamePane.setTranslateX(480);
                 borderPane.setTop(gridPaneTop);
 
-                borderPane.setBottom(gridPaneBot);
-                layout.getChildren().addAll(bg,borderPane);
 
-                GameStatus.positionObjects(layout.getWidth(), layout.getHeight());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                borderPane.setBottom(gridPaneBot);
+                gamePane.setTranslateX(0);
+                gamePane.setTranslateY(80);
+                layout.getChildren().addAll(bg,borderPane,gamePane);
+
+             //   GameStatus.positionObjects(layout.getWidth(), layout.getHeight());
                 this.scene = new Scene(layout);
 
                 // Play button events
@@ -191,6 +226,9 @@ public class ScenePlay {
                     double force = forceSlider.getValue();
                     double angle = angleSlider.getValue();
                     System.out.println("Force: " + force + "Angle: " + angle);
+                    double vx=force*cos(angle/180*PI);
+                    double vy=-force*sin(angle/180*PI);
+                    nBalls.balls.get(0).changeSpeed(vx,vy);
                     // MAX-you get force and angle from here, +game starts
                 });
 
@@ -243,15 +281,15 @@ public class ScenePlay {
                 //MAX TO ADD -- Do same as below if opposite team sends black ball into hole
 
                 // GameStatus.team1Points=4; // Uncomment if you want to see winPane (Orange= Team 1, Red= Team 2)
-                if (GameStatus.team1Points==4){
-                    winPane.getChildren().addAll(winBlur,orangeWin,orangeReplay);
-                    layout.getChildren().add(winPane);
-                }
-
-                if (GameStatus.team2Points==4){
-                    winPane.getChildren().addAll(winBlur,redWin,redReplay);
-                    layout.getChildren().add(winPane);
-                }
+//                if (GameStatus.team1Points==4){
+//                    winPane.getChildren().addAll(winBlur,orangeWin,orangeReplay);
+//                    layout.getChildren().add(winPane);
+//                }
+//
+//                if (GameStatus.team2Points==4){
+//                    winPane.getChildren().addAll(winBlur,redWin,redReplay);
+//                    layout.getChildren().add(winPane);
+//                }
 
                 //Replay button events
                 orangeReplay.setOnAction((event) -> {

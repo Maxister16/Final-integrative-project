@@ -103,7 +103,7 @@ public class SceneWelcome {
             ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);//ERROR
             primaryStage.setScene(scenePlayNormal.getScene());
             //set normal friction coefficient
-            GameStatus.gameState = 0;
+          //  GameStatus.gameState = 0;
         });
         normalBtn.setOnMouseEntered((event) -> {
             normalMode.setFitHeight(185);
@@ -118,7 +118,7 @@ public class SceneWelcome {
             ScenePlayGrass scenePlayGrass = new ScenePlayGrass(primaryStage);
             primaryStage.setScene(scenePlayGrass.getScene());
            //set grass friction coefficient
-            GameStatus.gameState = 2;
+          //  GameStatus.gameState = 2;
             //welcomeBgSound.pause();
         });
         grassBtn.setOnMouseEntered((event) -> {
@@ -133,7 +133,7 @@ public class SceneWelcome {
             ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
             primaryStage.setScene(scenePlayIce.getScene());
             //set ice friction coefficient
-            GameStatus.gameState = 1;
+           // GameStatus.gameState = 1;
             //welcomeBgSound.stop();
         });
         iceBtn.setOnMouseEntered((event) -> {
