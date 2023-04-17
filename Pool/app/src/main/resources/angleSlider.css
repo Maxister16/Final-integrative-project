@@ -2,7 +2,7 @@
     -fx-border-color: null;
     -fx-border-width: 4px;
     -fx-border-radius: 10px;
-    -fx-background-color: linear-gradient(to right, yellow, orange, red, darkred);
+    -fx-background-color: linear-gradient(to right, beige,saddlebrown, rgb(78,53,36), saddlebrown, beige);
     -fx-pref-height: 20px;
     -fx-pref-width: 200px;
     -fx-background-radius: 10px;

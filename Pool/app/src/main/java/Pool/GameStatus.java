@@ -15,7 +15,7 @@ public class GameStatus {
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
-    public static double[] FRICTION_COEFFICIENT = {0.95,0.1,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    public static double[] FRICTION_COEFFICIENT = {0.95,0.96,0.955}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
     public static CueStick cue;
     
     static public void updateVisual(){
@@ -30,9 +30,9 @@ public class GameStatus {
             for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
                 
                 //check if collide with nets
-                if(){
+                /*if(){
                     
-                }
+                }*/
                 
                 for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
                     //do balls collide
@@ -170,6 +170,7 @@ public class GameStatus {
             line.toFront();
         }
         table.getBorder().toFront();
+        
         for (Ball listOfBall : listOfBalls) {
             listOfBall.toFront();
         }

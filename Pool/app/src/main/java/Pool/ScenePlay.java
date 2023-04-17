@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 
 public class ScenePlay {
@@ -21,11 +22,15 @@ public class ScenePlay {
             StackPane layout = new StackPane();
             public PaneMenu paneMenu = new PaneMenu();
             public GridPane gridPaneMenu = new GridPane();
+            ImageView menuBg;
+            Rectangle rectangle;
             
             public Button resumeButton ;
             public Button homeButton ;
             public Button exitButton ;
             public Button physicsButton;
+            ImageView physicsOn;
+            ImageView physicsOff;
             public FadeTransition fade = new FadeTransition();
             
             public Button playButton;
@@ -47,7 +52,17 @@ public class ScenePlay {
             }
             
             public void menuAppears(){
-                layout.getChildren().addAll(paneMenu);
+                layout.getChildren().addAll(rectangle,menuBg,gridPaneMenu);
+            }
+            public void menuDisappears(){
+                layout.getChildren().removeAll(rectangle,menuBg,gridPaneMenu);
+            }
+            
+            public void winAppears(){
+                layout.getChildren().addAll(rectangle,menuBg,gridPaneMenu);
+            }
+            public void winDisappears(){
+                layout.getChildren().removeAll(rectangle,menuBg,gridPaneMenu);
             }
             
             public ScenePlay()  {
@@ -88,8 +103,12 @@ public class ScenePlay {
                 ImageView play = new ImageView("ButtonIMG/playBtnIMG.png");
 
                 forceSlider = new Slider(0.1, 4, 0.1);
+                forceSlider.getStylesheets().add("slider.css");
                 angleSlider = new Slider(0.0, 359, 1.0);
-
+                angleSlider.getStylesheets().add("angleSlider.css");
+                
+                gridPaneTop.setHgap(10);
+                
                 //Not working attempt at styling sliders
                 // Set the background of the track node
                 //forceSlider.setStyle("-fx-background-color: linear-gradient(to right, yellow, red); -fx-border-color: linear-gradient(to right, yellow, red); ");
@@ -169,12 +188,14 @@ public class ScenePlay {
 
                 borderPane.setBottom(gridPaneBot);
                 layout.getChildren().addAll(bg,borderPane);
-                
+                this.scene = new Scene(layout,1350,780);
 
-                //MENU
+        //MENU
                 
                 gridPaneMenu.setAlignment(Pos.CENTER);
-                
+//                            gridPaneMenu physicsButtonPane = new gridPaneMenu();
+//                            physicsButtonPane.setAlignment(Pos.CENTER);
+
                 //Images
                 ImageView resume = new ImageView("ButtonIMG/ResumeBtnIMG.png");
                 resume.setPreserveRatio(true);
@@ -189,10 +210,10 @@ public class ScenePlay {
                 ImageView physicsLabel = new ImageView("ButtonIMG/PhysicsLableIMG.png");
                 physicsLabel.setPreserveRatio(true);
                 physicsLabel.setFitHeight(60);
-                ImageView physicsOn = new ImageView("ButtonIMG/OnBtn.png");
+                physicsOn = new ImageView("ButtonIMG/OnBtn.png");
                 physicsOn.setPreserveRatio(true);
                 physicsOn.setFitHeight(60);
-                ImageView physicsOff = new ImageView("ButtonIMG/OffBtn.png");
+                physicsOff = new ImageView("ButtonIMG/OffBtn.png");
                 physicsOff.setPreserveRatio(true);
                 physicsOff.setFitHeight(60);
 
@@ -210,7 +231,7 @@ public class ScenePlay {
                 exitButton.setBorder(null);
                 physicsButton.setBackground(null);
 
-                //GridPaneMenu set up
+                //gridPaneMenu set up
                 gridPaneMenu.setHalignment(resumeButton, HPos.CENTER);
                 gridPaneMenu.setHalignment(homeButton, HPos.CENTER);
                 gridPaneMenu.setHalignment(exitButton, HPos.CENTER);
@@ -224,7 +245,7 @@ public class ScenePlay {
                 gridPaneMenu.add(physicsLabel, 0, 3);
                 gridPaneMenu.add(physicsButton, 0, 4);
 
-                //GridPaneMenu constraints
+                //gridPaneMenu constraints
                 ColumnConstraints menuColumn = new ColumnConstraints(200);
                 columnTop1.setHalignment(HPos.CENTER);
                 RowConstraints menuRow1 = new RowConstraints(65);
@@ -241,22 +262,18 @@ public class ScenePlay {
                 gridPaneMenu.getRowConstraints().addAll(menuRow1,menuRow2,menuRow3,menuRow4,menuRow5);
 
                 //Menu background
-                ImageView menuBg = new ImageView("BackgroundIMG/MenuBgIMG.png");
+                menuBg = new ImageView("BackgroundIMG/MenuBgIMG.png");
 
                 menuBg.setPreserveRatio(true);
                 menuBg.setFitWidth(500);
-                Rectangle rectangle = new Rectangle(1350, 700);
+                rectangle = new Rectangle(1350, 700);
                 rectangle.setFill(Color.WHITE);
-                rectangle.setTranslateY(-42);/*
+                rectangle.setTranslateY(-42);
                 fade.setNode(rectangle);
                 fade.setFromValue(0.0);
                 fade.setToValue(0.4);
-                fade.setDuration(Duration.millis(100));*/
-                
-                gridPaneMenu.getChildren().addAll(rectangle,menuBg);
-
-                //GameStatus.positionObjects(1350, 780);
-                this.scene = new Scene(layout,1350,780);
+                fade.setDuration(Duration.millis(1000));
+                fade.play();
 
 //WINNING PANE
                 Pane winPane = new Pane();
