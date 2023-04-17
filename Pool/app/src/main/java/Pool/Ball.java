@@ -110,110 +110,37 @@ public class Ball extends Circle implements InteractiveObject {
 
     public void updateMovement(Ball x) {
 
-        //ALL SHOULD BE VECTORS (FIND ABSOLUTE VALUE)
-        double NormalVectorX = java.lang.Math.abs(this.getCenterX() - x.getCenterX());
-        double NormalVectorY = java.lang.Math.abs(this.getCenterY() - x.getCenterY());
-        //CREATING NORMAL VECTOR
-        Vector norm = new Vector(NormalVectorX, NormalVectorY);
-        //CREATING RELATIVE VECTOR
-        double relativeVectorX = this.getVi().getXcomponent() - x.getVi().getXcomponent();
-        double relativeVectorY = this.getVi().getYcomponent() - x.getVi().getYcomponent();
-        Vector relVel = new Vector(relativeVectorX, relativeVectorY);
-        //MAKING THE SEPERATING VELOCITY VECTOR
-        double sepVel = -1 * (relVel.getXcomponent() * norm.getXcomponent() + relVel.getYcomponent() * norm.getYcomponent());
-        double spx = sepVel * norm.getXcomponent();
-        double spy = sepVel * norm.getYcomponent();
-        Vector sepVelVec = new Vector(spx, spy);
+            //ALL SHOULD BE VECTORS (FIND ABSOLUTE VALUE)
+            double NormalVectorX = java.lang.Math.abs(this.getCenterX() - x.getCenterX());
+            double NormalVectorY = java.lang.Math.abs(this.getCenterY() - x.getCenterY());
+            //CREATING NORMAL VECTOR
+            Vector norm = new Vector(NormalVectorX, NormalVectorY);
+            //CREATING RELATIVE VECTOR
+            double relativeVectorX = this.getVi().getXcomponent() - x.getVi().getXcomponent();
+            double relativeVectorY = this.getVi().getYcomponent() - x.getVi().getYcomponent();
+            Vector relVel = new Vector(relativeVectorX, relativeVectorY);
+            //MAKING THE SEPERATING VELOCITY VECTOR
+            double sepVel = -1 * (relVel.getXcomponent() * norm.getXcomponent() + relVel.getYcomponent() * norm.getYcomponent());
+            double spx = sepVel * norm.getXcomponent();
+            double spy = sepVel * norm.getYcomponent();
+            Vector sepVelVec = new Vector(spx, spy);
 
-        //ADDING SEPERATING VELOCITY VECTOR TO ORIGINAL VECTORS
-        this.getVi().setXcomponent(this.getVi().getXcomponent() + sepVelVec.getXcomponent());
-        this.getVi().setYcomponent(this.getVi().getYcomponent() + sepVelVec.getYcomponent());
-        //System.out.println("this ball speed is "+this.getVi().getMagnitude());
+            //ADDING SEPERATING VELOCITY VECTOR TO ORIGINAL VECTORS
+            this.getVi().setXcomponent(this.getVi().getXcomponent() + sepVelVec.getXcomponent());
+            this.getVi().setYcomponent(this.getVi().getYcomponent() + sepVelVec.getYcomponent());
+            //System.out.println("this ball speed is "+this.getVi().getMagnitude());
 
-        x.getVi().setXcomponent(x.getVi().getXcomponent() - sepVelVec.getXcomponent());
-        x.getVi().setYcomponent(x.getVi().getYcomponent() - sepVelVec.getYcomponent());
-        // System.out.println("x ball speed is "+x.getVi().getMagnitude());
-        this.updatePosition();
-        x.updatePosition();
-        /*
-        //DEFINING NECESSARY VARIABLES
-        //BOTH OF THESE REFER TO THE X COMPONENT OF THE MAGNITUDE
-        double xVelocityMag=0;
-        double viVelocityMag = 0;
-
-        //ROTATE THE SYSTEM OF THE BALLS
-
-        //FIND ANGLE OF INITIAL COLLISION
-        double vX= java.lang.Math.abs(this.getCenterX()-x.getCenterX());
-        double vY=java.lang.Math.abs(this.getCenterY()-x.getCenterY());
-        double angleCollision= atan(vY/vX);
-        double ac=angleCollision;
-
-        //MATRIX MULTIPLICATION
-
-        //X COMPONENTS OF VELOCITY
-        double thisVelocity=  this.getVi().getXcomponent()*(cos(ac))+ this.getVi().getYcomponent()*(sin(ac));
-        double xBallsVelocity= x.getVi().getXcomponent()*(cos(ac))+ x.getVi().getYcomponent()*(sin(ac));
-        //Y COMPONENTS OF VELOCITY (WHICH DO NOT CHANGE)
-        double thisY= this.getVi().getYcomponent()*(cos(ac))+ this.getVi().getXcomponent()*(-sin(ac));
-        double xBallsY= x.getVi().getXcomponent()*(-sin(ac))+ x.getVi().getYcomponent()*(cos(ac));
-
-
-        //DEFINING NECESSARY VALUES FOR EQUATION
-
-        //double velocitySum=this.getVi().getMagnitude() + x.getVi().getMagnitude();
-        double velocitySum=thisVelocity + xBallsVelocity;
-        double q=velocitySum;
-
-        double velocitySumSquared=Math.pow(this.getVi().getMagnitude(), 2) + Math.pow(x.getVi().getMagnitude(), 2);
-        double z=velocitySumSquared;
-
-        double r=(q*q)-z;
-
-        //CALCULATE VI
-        double velocityFound1= (2*q + Math.sqrt((4*q*q)+ (8*r)))/4;
-        double velocityFound2= (2*q - Math.sqrt((4*q*q)+ (8*r)))/4;
-
-
-        //IF FIRST BALL IS WITH HIGHER INITIAL VELOCITY (knowing that ball with higher velocity loses velocity in collision)
-        //if(this.getVi().getMagnitude()<x.getVi().getMagnitude()){
-        if(thisVelocity<xBallsVelocity){
-            //if(velocityFound1<x.getVi().getMagnitude()){
-            if(velocityFound1<xBallsVelocity){
-                xVelocityMag=velocityFound1;
-                viVelocityMag=velocityFound2;
-            }else{
-                xVelocityMag=velocityFound2;
-                viVelocityMag=velocityFound1;
-            }
-//NOW IF THE OTHER BALL IS THE ONE WITH HIGHER VELOCITY
-        } //else if(this.getVi().getMagnitude()>x.getVi().getMagnitude()){
-        else if(thisVelocity>xBallsVelocity){
-            //if(velocityFound1<this.getVi().getMagnitude()){
-            if(velocityFound1<thisVelocity){
-                xVelocityMag=velocityFound2;
-                viVelocityMag=velocityFound1;
-            }else{
-                xVelocityMag=velocityFound1;
-                viVelocityMag=velocityFound2;
-            }
+            x.getVi().setXcomponent(x.getVi().getXcomponent() - sepVelVec.getXcomponent());
+            x.getVi().setYcomponent(x.getVi().getYcomponent() - sepVelVec.getYcomponent());
+            // System.out.println("x ball speed is "+x.getVi().getMagnitude());
+            this.updatePosition();
+            x.updatePosition();
         }
-
-        //ROTATE THE SYSTEM BACK ALONG ANGLE OF ROTATION
-        this.getVi().setYcomponent(cos(ac)*thisY+ sin(ac)*viVelocityMag);
-        this.getVi().setXcomponent(-sin(ac)*thisY+ cos(ac)*viVelocityMag);
-
-        x.getVi().setXcomponent(xVelocityMag*cos(ac)+ xBallsY*-sin(ac));
-        x.getVi().setYcomponent(xBallsY*sin(ac)+ xVelocityMag*cos(ac));
-
-
-*/
-    }
-
-
-    //CHANGE THE POSITION OF THE BALL
-    public void updatePosition () {
-
+    
+    
+        //CHANGE THE POSITION OF THE BALL
+        public void updatePosition () {
+     
         Vector deltaPosition = Vector.vectorScalarProduct(16, vi);
         // this.setVectorPosition()
         //Vector this.setVectorPosition(Vector.vectorSum(this.getVi(), Vector.vectorScalarProduct(E, ));
@@ -225,29 +152,29 @@ public class Ball extends Circle implements InteractiveObject {
         double tableBorderMaxX= table.getX() +(table.getWidth()) -30*table.getWidth()/702 - getRadius();
         double tableBorderMaxY= table.getY() + (table.getHeight()) - 30*table.getHeight()/352 - getRadius();
 
-        if(position.x<=tableBorderMinX|| position.x>=tableBorderMaxX){
-            this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
-            System.out.println("lol");
-            if(position.x <=tableBorderMinX)
-                position.x = tableBorderMinX;
-            else
-                position.x = tableBorderMaxX;
-            //xPosition=this.getCenterX() + this.getVi().getXcomponent();
-        }
-        if(position.y<=tableBorderMinY|| position.y>=tableBorderMaxY){
-            this.getVi().setYcomponent(-1*this.getVi().getYcomponent());
-            if(position.y <=tableBorderMinY)
-                position.y = tableBorderMinY;
-            else
-                position.y = tableBorderMaxY;
-            //yPosition=this.getCenterY() + this.getVi().getYcomponent();
-        }
+            if(position.x<=tableBorderMinX|| position.x>=tableBorderMaxX){
+                this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
+                System.out.println("lol");
+                if(position.x <=tableBorderMinX)
+                    position.x = tableBorderMinX;
+                else
+                    position.x = tableBorderMaxX;
+                //xPosition=this.getCenterX() + this.getVi().getXcomponent();
+            }
+            if(position.y<=tableBorderMinY|| position.y>=tableBorderMaxY){
+                this.getVi().setYcomponent(-1*this.getVi().getYcomponent());
+                if(position.y <=tableBorderMinY)
+                    position.y = tableBorderMinY;
+                else
+                    position.y = tableBorderMaxY;
+                //yPosition=this.getCenterY() + this.getVi().getYcomponent();
+            }
 
-        //this.relocate(xPosition, yPosition);
-        //SLOWING DOWN OF THE VELOCITY
-        this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], vi));
-        //System.out.println("lol");
-        //this.reactIsHit();
+            //this.relocate(xPosition, yPosition);
+            //SLOWING DOWN OF THE VELOCITY
+            this.setVi(this.getVi().vectorScalarProduct(GameStatus.FRICTION_COEFFICIENT[GameStatus.gameState], vi));
+            //System.out.println("lol");
+            //this.reactIsHit();
 
 
         /*
@@ -257,34 +184,63 @@ public class Ball extends Circle implements InteractiveObject {
         this.setVectorPosition(p);
 
          */
-    }
-
-    public void reactIsHit() {
-        //check if the ball touches another
-        //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
-        for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
-            //SET VALUES FOR X1,Y1 AND X2,Y2
-            if(this.id!=i) {
-                double x1 = this.getCenterX();
-                double x2 = GameStatus.listOfBalls[i].getCenterX();
-                double y1 = this.getCenterY();
-                double y2 = GameStatus.listOfBalls[i].getCenterY();
-                //CHECK IF BALLS ARE COLLIDING
-                //if (Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) <= 4* this.getRadius()*this.getRadius()) {
-                if(Vector.vectorDifference(this.getVectorPosition(),GameStatus.listOfBalls[i].getVectorPosition()).getMagnitude() <= 2*this.getRadius()){
-                    //this.updateMovement(GameStatus.listOfBalls[i]);
-                    System.out.println("Haha collided");
-                    GameStatus.listOfBalls[i].updateMovement(this);
-                } else {
-                }
-            }
-
         }
-    }
 
-    @Override
-    public void setImage(Image newImage){
-        this.setFill(new ImagePattern(newImage));
-    }
+        
+        static public void reactIsHit(Ball firstBall, Ball secondBall){
+            
+            double angle = atan2(firstBall.getVi().getMagnitude(), secondBall.getVi().getMagnitude());
+            double cos = cos(angle);
+            double sin = sin(angle);
 
-}
+            double v1xRotated = cos * firstBall.getVi().getXcomponent() + sin * firstBall.getVi().getYcomponent();
+            double v1yRotated = -sin * firstBall.getVi().getXcomponent() + cos * firstBall.getVi().getYcomponent();
+            double v2xRotated = cos * secondBall.getVi().getXcomponent() + sin * secondBall.getVi().getYcomponent();
+            double v2yRotated = -sin * secondBall.getVi().getXcomponent() + cos * secondBall.getVi().getYcomponent();
+
+            double tempVx = v1xRotated;
+            v1xRotated = v2xRotated;
+            v2xRotated = tempVx;
+
+            double ball1deltaX = cos * v1xRotated - sin * v1yRotated;
+            double ball1deltaY = sin * v1xRotated + cos * v1yRotated;
+            double ball2deltaX = cos * v2xRotated - sin * v2yRotated;
+            double ball2deltaY = sin * v2xRotated + cos * v2yRotated;
+
+            firstBall.setVi(new Vector(ball1deltaX, ball1deltaY));
+            System.out.println("Ball 1 speed: " + firstBall.getVi().getMagnitude());
+            secondBall.setVi(new Vector(ball2deltaX, ball2deltaY));
+            System.out.println("Ball 2 speed: " + secondBall.getVi().getMagnitude());
+        
+        }
+        
+        
+        public void reactIsHit() {
+            //check if the ball touches another
+            //IN ANOTHER METHOD IN MAIN CLASS, IS THE FIRST FOR LOOP WHERE
+            for (int i = 0; i < GameStatus.listOfBalls.length; i++) {
+                //SET VALUES FOR X1,Y1 AND X2,Y2
+                if(this.id!=i) {
+                    double x1 = this.getCenterX();
+                    double x2 = GameStatus.listOfBalls[i].getCenterX();
+                    double y1 = this.getCenterY();
+                    double y2 = GameStatus.listOfBalls[i].getCenterY();
+                    //CHECK IF BALLS ARE COLLIDING
+                    //if (Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) <= 4* this.getRadius()*this.getRadius()) {
+                      if(Vector.vectorDifference(this.getVectorPosition(),GameStatus.listOfBalls[i].getVectorPosition()).getMagnitude() <= 2*this.getRadius()){  
+                        //this.updateMovement(GameStatus.listOfBalls[i]);
+                        System.out.println("Haha collided");
+                        GameStatus.listOfBalls[i].updateMovement(this);
+                    } else {
+                    }
+                }
+
+            }
+        }
+
+        @Override
+        public void setImage(Image newImage){
+            this.setFill(new ImagePattern(newImage));
+        }
+
+    }
