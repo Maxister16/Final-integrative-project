@@ -134,7 +134,7 @@ public class MainApp extends Application {
                 for(Ball ball : GameStatus.listOfBalls){//calculate position
                     ball.updatePosition();
                 }
-                GameStatus.checkBallsCollisions();//check if they collide, change x and speed of yes
+                GameStatus.checkBallsCollisions(sc);//check if they collide, change x and speed of yes
                 
                 GameStatus.updateVisual();//set centerX and y to show the changes to the user
                 

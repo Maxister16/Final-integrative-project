@@ -140,7 +140,7 @@ public class Ball extends Circle implements InteractiveObject {
     
         //CHANGE THE POSITION OF THE BALL
         public void updatePosition () {
-     
+
         Vector deltaPosition = Vector.vectorScalarProduct(16, vi);
         // this.setVectorPosition()
         //Vector this.setVectorPosition(Vector.vectorSum(this.getVi(), Vector.vectorScalarProduct(E, ));
@@ -169,6 +169,8 @@ public class Ball extends Circle implements InteractiveObject {
                     position.y = tableBorderMaxY;
                 //yPosition=this.getCenterY() + this.getVi().getYcomponent();
             }
+
+
 
             //this.relocate(xPosition, yPosition);
             //SLOWING DOWN OF THE VELOCITY

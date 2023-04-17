@@ -1,8 +1,12 @@
 
 package Pool;
 
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+
+import java.awt.*;
 
 public class GameStatus {
     public static String CLIENT_LOCATION_OF_PROJECT = System.getProperty("user.dir");
@@ -25,14 +29,75 @@ public class GameStatus {
         }
     }
     
-    static public void checkBallsCollisions(){
-            
+    static public void checkBallsCollisions(ScenePlay sc){
+
+
             for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
-                
-                //check if collide with nets
-                if(){
-                    
+                for(int r=0; r< nets.length; r++) {
+
+                    double netBorderMinX = nets[r].getCenterX() + listOfBalls[firstBallIndex].getRadius();
+                    double netBorderMinY = nets[r].getCenterY() + listOfBalls[firstBallIndex].getRadius();
+
+                    Vector netsPositionVector = new Vector(nets[r].getCenterX(),nets[r].getCenterY());
+                    if(Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),netsPositionVector).getMagnitude() <= GameStatus.listOfBalls[firstBallIndex].getRadius()+nets[r].getRadius()){
+                        //ScenePlay.gamePane
+                        if(firstBallIndex!=0) {
+                            sc.gamePane.getChildren().remove(GameStatus.listOfBalls[firstBallIndex]);
+                        } else if(firstBallIndex==0){
+                            GameStatus.listOfBalls[firstBallIndex].setCenterX(tableLines[0].getStartX());
+                            GameStatus.listOfBalls[firstBallIndex].setCenterY(table.getY()+0.5*table.getHeight());
+                            GameStatus.listOfBalls[firstBallIndex].setVectorPosition(new Vector(GameStatus.listOfBalls[firstBallIndex].getCenterX(), GameStatus.listOfBalls[firstBallIndex].getCenterY()));
+
+                            System.out.println("lol");
+
+                        }
+
+                    }
+
+
+                    /*
+                    if ((listOfBalls[firstBallIndex].getCenterX() + listOfBalls[firstBallIndex].getRadius()) <= netBorderMinX||(listOfBalls[firstBallIndex].getCenterX() - listOfBalls[firstBallIndex].getRadius()) <= netBorderMinX) {
+                        //listOfBalls[firstBallIndex].setFill(new Color(2,1,1,1));
+                        System.out.println("We done got hit");
+                    }if ((listOfBalls[firstBallIndex].getCenterY() + listOfBalls[firstBallIndex].getRadius()) <= netBorderMinY||(listOfBalls[firstBallIndex].getCenterY() - listOfBalls[firstBallIndex].getRadius()) <= netBorderMinY) {
+                       System.out.println("We done got hit along the y");
+                    }*/
                 }
+
+/*
+                if(position.x<=netBorderMinX|| position.x>=netBorderMaxX){
+                    this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
+                    System.out.println("lol");
+                    if(position.x <=netBorderMinX)
+                        position.x = netBorderMinX;
+                    else
+                        position.x = netBorderMaxX;
+                    //xPosition=this.getCenterX() + this.getVi().getXcomponent();
+                }
+                if(position.y<=netBorderMinY|| position.y>=netBorderMaxY){
+                    this.getVi().setYcomponent(-1*this.getVi().getYcomponent());
+                    if(position.y <=netBorderMinY)
+                        position.y = netBorderMinY;
+                    else
+                        position.y = netBorderMaxY;
+                    //yPosition=this.getCenterY() + this.getVi().getYcomponent();
+                }
+
+
+                    //check if collide with nets
+                   /* for (int r = 0; r < 6; r++) {
+                        if ((nets[r].getCenterX() + nets[r].getRadius()) >= listOfBalls[firstBallIndex].getCenterX()|| (nets[r].getCenterX() - nets[r].getRadius()) >= listOfBalls[firstBallIndex].getCenterX()) {
+                            System.out.println("LOL WE NETTED");
+
+                        } if ((nets[r].getCenterY() + nets[r].getRadius()) >= listOfBalls[firstBallIndex].getCenterY()|| (nets[r].getCenterY() - nets[r].getRadius()) >= listOfBalls[firstBallIndex].getCenterY()) {
+
+                            System.out.println("Lol we netted 2");
+                        }
+                    }
+
+                    */
+
+
                 
                 for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
                     //do balls collide

@@ -72,7 +72,7 @@ public class Nballs extends Application {
                 circle.setLayoutY(scene.getHeight()/2);
 
                  */
-                GameStatus.listOfBalls[i].setConstants(INIT_SPEED_X, INIT_SPEED_Y);
+               // GameStatus.listOfBalls[i].setConstants(INIT_SPEED_X, INIT_SPEED_Y);
                 layout.getChildren().add(GameStatus.listOfBalls[i]);
 
                 //balls.add(new Ball(circle, INIT_SPEED_X, INIT_SPEED_Y, Color.RED));
