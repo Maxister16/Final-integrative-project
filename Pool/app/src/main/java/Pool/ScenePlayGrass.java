@@ -4,12 +4,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class ScenePlayGrass extends ScenePlay{
 
     //private Scene scene;
 
-    public ScenePlayGrass() {
+    public ScenePlayGrass() throws IOException {
 
         GameStatus.table.setImage(2);
         //ScenePlay scenePlay = new ScenePlay(primaryStage);

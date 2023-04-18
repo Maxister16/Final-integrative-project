@@ -7,11 +7,13 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 
 public class ScenePlay {
@@ -26,10 +28,13 @@ public class ScenePlay {
             public Button homeButton ;
             public Button exitButton ;
             public Button physicsButton;
+
             public FadeTransition fade = new FadeTransition();
             
             public Button playButton;
             public Button menuButton;
+
+            public Button soundButton;
             
             public Slider forceSlider;
             public Slider angleSlider;
@@ -68,7 +73,7 @@ public class ScenePlay {
                 columnTop2.setHalignment(HPos.CENTER);
                 ColumnConstraints columnTop3 = new ColumnConstraints(100);
                 columnTop3.setHalignment(HPos.CENTER);
-                RowConstraints rowTop1 = new RowConstraints(100);
+                RowConstraints rowTop1 = new RowConstraints(52);
                 rowTop1.setValignment(VPos.CENTER);
 
                 gridPaneTop.getColumnConstraints().addAll(columnTop1, columnTop2, columnTop3);
@@ -90,6 +95,9 @@ public class ScenePlay {
                 forceSlider = new Slider(1, 100, 1);
                 angleSlider = new Slider(0.0, 359, 1.0);
 
+                forceSlider.getStylesheets().add("slider.css");
+                angleSlider.getStylesheets().add("angleSlider.css");
+
                 //Not working attempt at styling sliders
                 // Set the background of the track node
                 //forceSlider.setStyle("-fx-background-color: linear-gradient(to right, yellow, red); -fx-border-color: linear-gradient(to right, yellow, red); ");
@@ -109,12 +117,69 @@ public class ScenePlay {
                 playButton.setBackground(null);
                 playButton.setBorder(null);
 
+                //Physics text
+                ImageView frictionTitle = new ImageView("LabelIMG/FrictionWordIMG.png");
+                ImageView angleTitle = new ImageView("LabelIMG/AngleWordIMG.png");
+                ImageView forceTitle = new ImageView("LabelIMG/ForceWordIMG.png");
+                ImageView speedTitle = new ImageView("LabelIMG/SpeedWordIMG.png");
+                frictionTitle.setPreserveRatio(true);
+                frictionTitle.setFitHeight(30);
+                angleTitle.setPreserveRatio(true);
+                angleTitle.setFitHeight(30);
+                forceTitle.setPreserveRatio(true);
+                forceTitle.setFitHeight(30);
+                speedTitle.setPreserveRatio(true);
+                speedTitle.setFitHeight(30);
+
+                Label frictionValue = new Label("");
+                Label angleValue = new Label("");
+                Label forceValue = new Label("");
+                Label speedValue = new Label("");
+
+                frictionValue.setStyle("-fx-font-size: 50px; -fx-font-weight: bold;");
+                angleValue.setStyle("-fx-font-size: 50px; -fx-font-weight: bold;");
+                forceValue.setStyle("-fx-font-size: 50px; -fx-font-weight: bold;");
+
+                //Volume Button
+                ImageView soundOnIMG = new ImageView("ButtonIMG/VolumeBtnOnIMG.png");
+                soundOnIMG.setPreserveRatio(true);
+                soundOnIMG.setFitHeight(65);
+                soundButton = new Button("",soundOnIMG);
+                soundButton.setBackground(null);
+                soundButton.setBorder(null);
+                ImageView soundOffIMG = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
+                soundOffIMG.setPreserveRatio(true);
+                soundOffIMG.setFitHeight(65);
+
+
+
                 // Add Sliders and buttons to GridPanes
-                gridPaneBot.add(menuButton, 0, 0);
+                 gridPaneBot.add(menuButton, 0, 0);
+                 gridPaneBot.add(frictionTitle, 1, 0);
+                 gridPaneBot.add(frictionValue, 2, 0);
+                 gridPaneBot.add(forceTitle, 3, 0);
+                 gridPaneBot.add(forceValue, 4, 0);
+                 gridPaneBot.add(angleTitle, 5, 0);
+                 gridPaneBot.add(angleValue, 6, 0);
+                 gridPaneBot.add(speedTitle, 7, 0);
+                 gridPaneBot.add(speedValue, 8, 0);
+                 gridPaneBot.add(soundButton, 9, 0);
+
+                ImageView forceLabel = new ImageView("LabelIMG/ForceSliderIMG.jpg");
+                ImageView angleLabel = new ImageView("LabelIMG/AngleSliderIMG.jpg");
+                forceLabel.setPreserveRatio(true);
+                forceLabel.setFitHeight(35);
+                angleLabel.setPreserveRatio(true);
+                angleLabel.setFitHeight(35);
+
                 gridPaneTop.add(forceSlider, 0, 0);
                 gridPaneTop.add(angleSlider, 1, 0);
+                gridPaneTop.add(forceLabel, 0,1);
+                gridPaneTop.add(angleLabel, 1,1);
+
                 gridPaneTop.add(playButton, 2, 0);
                 gridPaneTop.setTranslateY(130);
+                gridPaneTop.setHgap(10);
                 
                 //if I change these values the game Pane disappears (This doesn't matter as it won't change)
                 layout.setMaxWidth(1350);
