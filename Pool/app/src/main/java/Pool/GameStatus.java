@@ -15,14 +15,35 @@ public class GameStatus {
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
-    public static double[] FRICTION_COEFFICIENT = {0.01,0.005,0.5}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    public static double[] FRICTION_COEFFICIENT = {0.95,0.96,0.955}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
     public static CueStick cue;
     
-    public static void updateTime() throws InterruptedException{
-        while(GameStatus.isGameOn){
-            Thread.sleep(100);
-            time += 100;
+    static public void updateVisual(){
+        for(Ball ball: listOfBalls){
+            ball.setCenterX(ball.getVectorPosition().getXcomponent());
+            ball.setCenterY(ball.getVectorPosition().getYcomponent());
         }
+    }
+    
+    static public void checkBallsCollisions(){
+            
+            for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
+                
+                //check if collide with nets
+                /*if(){
+                    
+                }*/
+                
+                for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
+                    //do balls collide
+                    if(firstBallIndex!=secondBallIndex&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()){
+                        System.out.println("collided check ball"+ firstBallIndex+" "+secondBallIndex);
+                        Ball.reactIsHit(GameStatus.listOfBalls[firstBallIndex], GameStatus.listOfBalls[secondBallIndex]);
+                    }
+                }
+            }
+            
+        
     }
     
     public static void positionObjects(double widthOfWindow, double heightOfWindow, double xPositionOfGamepane, double yPositionOfGamepane){
@@ -47,7 +68,7 @@ public class GameStatus {
         double widthOfBand = 30*table.getWidth()/702;
         double extraBufferNets = 10;
         
-        double DISTANCE_BETWEEN_BALLS = 0d;
+        double DISTANCE_BETWEEN_BALLS = 1d;
         double DISTANCE_BETWEEN_CENTER_OF_BALLS = DISTANCE_BETWEEN_BALLS+listOfBalls[0].getRadius()*2; //distance between the center of the balls
         //center of losange
         double xCenter = tableLines[1].getStartX();
@@ -93,6 +114,8 @@ public class GameStatus {
                 listOfBalls[i].setCenterX(xCenter+xMult*(Math.sqrt(0.75)*DISTANCE_BETWEEN_CENTER_OF_BALLS+DISTANCE_BETWEEN_BALLS));
                 listOfBalls[i].setCenterY(yCenter+yMult*(0.5*DISTANCE_BETWEEN_CENTER_OF_BALLS+DISTANCE_BETWEEN_BALLS));
             }
+            
+            listOfBalls[i].setVectorPosition(new Vector(listOfBalls[i].getCenterX(),listOfBalls[i].getCenterY()));
         }
         setZorder();
     }
@@ -147,6 +170,7 @@ public class GameStatus {
             line.toFront();
         }
         table.getBorder().toFront();
+        
         for (Ball listOfBall : listOfBalls) {
             listOfBall.toFront();
         }
