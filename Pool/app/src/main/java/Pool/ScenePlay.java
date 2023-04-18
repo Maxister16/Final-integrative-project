@@ -7,12 +7,17 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import javafx.scene.text.Font;
+
+import java.awt.font.ImageGraphicAttribute;
 
 
 public class ScenePlay {
@@ -20,38 +25,44 @@ public class ScenePlay {
             private Scene scene;
             public Pane gamePane;
             StackPane layout = new StackPane();
-            
-        //menu
             public PaneMenu paneMenu = new PaneMenu();
             public GridPane gridPaneMenu = new GridPane();
             ImageView menuBg;
-            Rectangle rectangle;    
+            Rectangle rectangle;
+
+            ImageView forceTitle;
+            ImageView angleTitle;
+            ImageView speedTitle;
+            ImageView frictionTitle;
+
             public Button resumeButton ;
             public Button homeButton ;
             public Button exitButton ;
             public Button physicsButton;
-            public ImageView physicsOn;
-            public ImageView physicsOff;
+
+            ImageView physicsOn;
+            ImageView physicsOff;
             public FadeTransition fade = new FadeTransition();
-        
-        //in game    
+            
             public Button playButton;
             public Button menuButton;
+
+            public Button soundButton;
+
+            ImageView soundOnIMG;
+            ImageView soundOffIMG;
+
+            Label frictionValue;
+            Label angleValue;
+            Label forceValue;
+            Label speedValue;
+
             public Slider forceSlider;
             public Slider angleSlider;
-        
-        //decorations
+            
             public CustomAnimation redBaskets;
             public CustomAnimation orangeBaskets;
             public CustomAnimation teamName;
-            
-        //winpane
-            public Pane winPane;
-            public Button buttonReplay;
-            Rectangle winBlur;
-            ImageView orangeWin;
-            ImageView redWin;
-            
             
             public void placeObjectsInGamePane(){
                 gamePane.getChildren().clear();
@@ -67,44 +78,19 @@ public class ScenePlay {
             public void menuDisappears(){
                 layout.getChildren().removeAll(rectangle,menuBg,gridPaneMenu);
             }
-            
-            public void winAppears(int winningTeamIndex){
-                winPane.getChildren().clear();
-                winPane.getChildren().addAll(winBlur,buttonReplay);
-                
-                String winningColor;
-                if(winningTeamIndex == 0){//if orange Win
-                    winPane.getChildren().addAll(orangeWin);
-                    winningColor = "orange";
-                }
-                else{//if red Win
-                    winPane.getChildren().addAll(redWin);
-                    winningColor = "red";
-                }
-                
-                ImageView buttonReplayIMG = new ImageView("ButtonIMG/"+winningColor+"Replay.png");
-                buttonReplayIMG.setPreserveRatio(true);
-                buttonReplayIMG.setFitHeight(145);
-                buttonReplay.setGraphic(buttonReplayIMG);//set image of button
-                buttonReplay.toFront();
-                layout.getChildren().add(winPane);
+
+            public void winAppears(){
+                layout.getChildren().addAll(rectangle,menuBg,gridPaneMenu);
             }
-            
             public void winDisappears(){
-                layout.getChildren().remove(winPane);
-            }
-            
-            public void physicsAppears(){
-                
-            }
-            public void physicsDisappears(){
-                
+                layout.getChildren().removeAll(rectangle,menuBg,gridPaneMenu);
             }
             
             public ScenePlay()  {
 
                 //Create Principal Panes
                 gamePane = new Pane();
+                gamePane.setTranslateY(25);
                 //gamePane.setStyle("-fx-background-color: #005555;");
                 BorderPane borderPane = new BorderPane();
                 GridPane gridPaneTop = new GridPane();
@@ -119,57 +105,135 @@ public class ScenePlay {
                 columnTop2.setHalignment(HPos.CENTER);
                 ColumnConstraints columnTop3 = new ColumnConstraints(100);
                 columnTop3.setHalignment(HPos.CENTER);
-                RowConstraints rowTop1 = new RowConstraints(100);
+                RowConstraints rowTop1 = new RowConstraints(52);
                 rowTop1.setValignment(VPos.CENTER);
 
                 gridPaneTop.getColumnConstraints().addAll(columnTop1, columnTop2, columnTop3);
                 gridPaneTop.getRowConstraints().addAll(rowTop1);
 
                 //Set Size constraints in bottom Grid Pane
-                ColumnConstraints columnBot1 = new ColumnConstraints(190);
-                columnBot1.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot1 = new ColumnConstraints(230);
+                columnBot1.setHalignment(HPos.LEFT);
+
+                ColumnConstraints columnBot2 = new ColumnConstraints(150);
+                columnBot2.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot3 = new ColumnConstraints(120);
+                columnBot3.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot4 = new ColumnConstraints(120);
+                columnBot4.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot5 = new ColumnConstraints(110);
+                columnBot5.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot6 = new ColumnConstraints(120);
+                columnBot6.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot7 = new ColumnConstraints(120);
+                columnBot7.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot8 = new ColumnConstraints(90);
+                columnBot8.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot9 = new ColumnConstraints(130);
+                columnBot9.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot10 = new ColumnConstraints(140);
+                columnBot10.setHalignment(HPos.RIGHT);
                 RowConstraints rowBot1 = new RowConstraints(60);
                 rowBot1.setValignment(VPos.CENTER);
 
-                gridPaneBot.getColumnConstraints().addAll(columnBot1);
+                gridPaneBot.getColumnConstraints().addAll(columnBot1, columnBot2, columnBot3, columnBot4, columnBot5, columnBot6, columnBot7, columnBot8, columnBot9, columnBot10);
                 gridPaneBot.getRowConstraints().addAll(rowBot1);
 
                 //Play screen Sliders and Buttons
                 ImageView menu = new ImageView("ButtonIMG/MenuBtnIMG.png");
                 ImageView play = new ImageView("ButtonIMG/playBtnIMG.png");
 
-                forceSlider = new Slider(0.1, 2, 0.1);
+                forceSlider = new Slider(0.1, 4, 0.1);
                 forceSlider.getStylesheets().add("slider.css");
-                angleSlider = new Slider(0.0, 359, 0.1);
+                angleSlider = new Slider(0.0, 359, 1.0);
                 angleSlider.getStylesheets().add("angleSlider.css");
-                
-                gridPaneTop.setHgap(10);
-                
-                //Not working attempt at styling sliders
-                // Set the background of the track node
-                //forceSlider.setStyle("-fx-background-color: linear-gradient(to right, yellow, red); -fx-border-color: linear-gradient(to right, yellow, red); ");
-                //forceSlider.getStylesheets().add("slider.css");
+
+                gridPaneTop.setHgap(20);
+
 
                 playButton = new Button("", play);
                 menuButton = new Button("",menu);
 
                 menu.setPreserveRatio(true);
-                menu.setFitHeight(45);
+                menu.setFitHeight(40);
                 play.setPreserveRatio(true);
                 play.setFitHeight(70);
 
                 //set button backgrounds and border transparent
                 menuButton.setBackground(null);
                 menuButton.setBorder(null);
+                menuButton.setTranslateX(3);
                 playButton.setBackground(null);
                 playButton.setBorder(null);
 
+                //Physics text
+                frictionTitle = new ImageView("LabelIMG/FrictionWordIMG.png");
+                frictionTitle.setRotate(2);
+                frictionTitle.setTranslateY(2);
+                angleTitle = new ImageView("LabelIMG/AngleWordIMG.png");
+                forceTitle = new ImageView("LabelIMG/ForceWordIMG.png");
+                forceTitle.setTranslateY(1);
+                speedTitle = new ImageView("LabelIMG/SpeedWordIMG.png");
+                frictionTitle.setPreserveRatio(true);
+                frictionTitle.setFitHeight(30);
+                angleTitle.setPreserveRatio(true);
+                angleTitle.setFitHeight(30);
+                forceTitle.setPreserveRatio(true);
+                forceTitle.setFitHeight(30);
+                speedTitle.setPreserveRatio(true);
+                speedTitle.setFitHeight(30);
+
+                frictionValue = new Label("");
+                angleValue = new Label("");
+                forceValue = new Label("");
+                speedValue = new Label("");
+
+                frictionValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
+                angleValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
+                forceValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
+
+                //Volume Button
+                soundOnIMG = new ImageView("ButtonIMG/VolumeBtnOnIMG.png");
+                soundOnIMG.setPreserveRatio(true);
+                soundOnIMG.setFitHeight(60);
+                soundButton = new Button("",soundOnIMG);
+                soundButton.setBackground(null);
+                soundButton.setBorder(null);
+                soundButton.setTranslateY(-3);
+                soundOffIMG = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
+                soundOffIMG.setPreserveRatio(true);
+                soundOffIMG.setFitHeight(60);
+
+
+
                 // Add Sliders and buttons to GridPanes
-                gridPaneBot.add(menuButton, 0, 0);
+                 gridPaneBot.add(menuButton, 0, 0);
+                 gridPaneBot.add(frictionTitle, 1, 0);
+                 gridPaneBot.add(frictionValue, 2, 0);
+                 gridPaneBot.add(forceTitle, 3, 0);
+                 gridPaneBot.add(forceValue, 4, 0);
+                 gridPaneBot.add(angleTitle, 5, 0);
+                 gridPaneBot.add(angleValue, 6, 0);
+                 gridPaneBot.add(speedTitle, 7, 0);
+                 gridPaneBot.add(speedValue, 8, 0);
+                 gridPaneBot.add(soundButton, 9, 0);
+
+                ImageView forceLabel = new ImageView("LabelIMG/ForceSliderIMG.jpg");
+                ImageView angleLabel = new ImageView("LabelIMG/AngleSliderIMG.jpg");
+                forceLabel.setPreserveRatio(true);
+                forceLabel.setFitHeight(32);
+                forceLabel.setTranslateY(-7);
+                angleLabel.setPreserveRatio(true);
+                angleLabel.setFitHeight(32);
+                angleLabel.setTranslateY(-7);
+
                 gridPaneTop.add(forceSlider, 0, 0);
                 gridPaneTop.add(angleSlider, 1, 0);
+                gridPaneTop.add(forceLabel, 0,1);
+                gridPaneTop.add(angleLabel, 1,1);
+
                 gridPaneTop.add(playButton, 2, 0);
-                gridPaneTop.setTranslateY(130);
+                gridPaneTop.setTranslateY(160);
                 
                 //if I change these values the game Pane disappears (This doesn't matter as it won't change)
                 layout.setMaxWidth(1350);
@@ -209,10 +273,10 @@ public class ScenePlay {
                 teamName = new CustomAnimation("team",2);
                 teamName.setPreserveRatio(true);
                 teamName.nextFrame();
-                teamName.setFitHeight(165);
+                teamName.setFitHeight(130);
                 teamNamePane.getChildren().add(teamName);
-                teamNamePane.setTranslateX(30);
-                teamNamePane.setTranslateY(-140);
+                teamNamePane.setTranslateX(10);
+                teamNamePane.setTranslateY(-160);
 
                 gridPaneTop.getChildren().add(teamNamePane);
 
@@ -312,43 +376,282 @@ public class ScenePlay {
                 fade.play();
 
 //WINNING PANE
-                winPane = new Pane();
-                orangeWin = new ImageView("BackgroundIMG/star0.png");
+                Pane winPane = new Pane();
+                ImageView orangeWin = new ImageView("BackgroundIMG/star0.png");
                 orangeWin.setPreserveRatio(true);
                 orangeWin.setFitHeight(760);
-                redWin = new ImageView("BackgroundIMG/redStar.png");
+                ImageView redWin = new ImageView("BackgroundIMG/redStar.png");
                 redWin.setPreserveRatio(true);
                 redWin.setFitHeight(760);
-                
-                /*ImageView apple = new ImageView("ButtonIMG/redReplay.png");
+                ImageView apple =new ImageView("ButtonIMG/redReplay.png");
                 apple.setPreserveRatio(true);
                 apple.setFitHeight(145);
                 ImageView orange = new ImageView("ButtonIMG/orangeReplay.png");
                 orange.setPreserveRatio(true);
                 orange.setFitHeight(145);
-                
-                /*
+
                 Button redReplay = new Button("", apple);
                 Button orangeReplay = new Button("", orange);
-                */
 
-                buttonReplay = new Button("");
-
-                buttonReplay.setBackground(null);
-                buttonReplay.setBorder(null);
-                buttonReplay.setTranslateX(384);
-                buttonReplay.setTranslateY(310);
+                redReplay.setBackground(null);
+                orangeReplay.setBackground(null);
+                redReplay.setBorder(null);
+                orangeReplay.setBorder(null);
+                redReplay.setTranslateX(384);
+                redReplay.setTranslateY(310);
+                orangeReplay.setTranslateX(391);
+                orangeReplay.setTranslateY(327);
 
                 winPane.setTranslateX(180);
                 winPane.setTranslateY(0);
-                winBlur = new Rectangle(0,0, 1350, 780);
+                Rectangle winBlur = new Rectangle(0,0, 1350, 780);
                 //(will add fade transition later)
                 winBlur.setFill(Color.WHITE);
                 winBlur.setOpacity(0.5);
                 winBlur.setTranslateX(-180);
+
                 //layout.getChildren().add(winPane);
 
-                
+                //MAX TO ADD -- Do same as below if opposite team sends black ball into hole
+
+                // GameStatus.team1Points=4; // Uncomment if you want to see winPane (Orange= Team 1, Red= Team 2)
+                if (GameStatus.team1Points==4){
+                    winPane.getChildren().addAll(winBlur,orangeWin,orangeReplay);
+                    layout.getChildren().add(winPane);
+                }
+
+                if (GameStatus.team2Points==4){
+                    winPane.getChildren().addAll(winBlur,redWin,redReplay);
+                    layout.getChildren().add(winPane);
+                }
+/*
+                //Replay button events
+                orangeReplay.setOnAction((event) -> {
+                    winPane.getChildren().clear();
+                    layout.getChildren().remove(winPane);
+                    SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+                    primaryStage.setScene(sceneWelcome.getScene());
+                    playBgSound.pause();
+                });
+
+                redReplay.setOnAction((event) -> {
+                    winPane.getChildren().clear();
+                    layout.getChildren().remove(winPane);
+                    SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+                    primaryStage.setScene(sceneWelcome.getScene());
+
+                    playBgSound.pause();
+                });
+
+                redReplay.setOnMouseEntered((event) -> {
+                    apple.setFitHeight(155);
+                    btnSound.play();
+                });
+
+                redReplay.setOnMouseExited((event) -> {
+                    apple.setFitHeight(145);
+                    btnSound.stop();
+                });
+
+                orangeReplay.setOnMouseEntered((event) -> {
+                    orange.setFitHeight(155);
+                    btnSound.play();
+                });
+
+                orangeReplay.setOnMouseExited((event) -> {
+                    orange.setFitHeight(145);
+                    btnSound.stop();
+                });
+
+                //Menu button event
+                menuButton.setOnAction((event) -> {
+                            //Create Panes
+                            GridPane gridPane = new GridPane();
+                            gridPane.setAlignment(Pos.CENTER);
+//                            GridPane physicsButtonPane = new GridPane();
+//                            physicsButtonPane.setAlignment(Pos.CENTER);
+
+                            //Images
+                            ImageView resume = new ImageView("ButtonIMG/ResumeBtnIMG.png");
+                            resume.setPreserveRatio(true);
+                            resume.setFitHeight(60);
+                            ImageView home = new ImageView("ButtonIMG/HomeBtnIMG.png");
+                            home.setPreserveRatio(true);
+                            home.setFitHeight(60);
+                            ImageView exit = new ImageView("ButtonIMG/ExitBtnIMG.png");
+                            exit.setPreserveRatio(true);
+                            exit.setFitHeight(60);
+
+                            ImageView physicsLabel = new ImageView("ButtonIMG/PhysicsLableIMG.png");
+                            physicsLabel.setPreserveRatio(true);
+                            physicsLabel.setFitHeight(60);
+                            ImageView physicsOn = new ImageView("ButtonIMG/OnBtn.png");
+                            physicsOn.setPreserveRatio(true);
+                            physicsOn.setFitHeight(60);
+                            ImageView physicsOff = new ImageView("ButtonIMG/OffBtn.png");
+                            physicsOff.setPreserveRatio(true);
+                            physicsOff.setFitHeight(60);
+
+
+                            Button resumeButton = new Button("",resume);
+                            Button homeButton = new Button("",home);
+                            Button exitButton = new Button("",exit);
+                            Button physicsButton = new Button("",physicsOn);
+
+                            homeButton.setBackground(null);
+                            homeButton.setBorder(null);
+                            resumeButton.setBackground(null);
+                            resumeButton.setBorder(null);
+                            exitButton.setBackground(null);
+                            exitButton.setBorder(null);
+                            physicsButton.setBackground(null);
+
+                            //GridPane set up
+                            gridPane.setHalignment(resumeButton, HPos.CENTER);
+                            gridPane.setHalignment(homeButton, HPos.CENTER);
+                            gridPane.setHalignment(exitButton, HPos.CENTER);
+                            gridPane.setHalignment(physicsLabel, HPos.CENTER);
+                            gridPane.setHalignment(physicsButton, HPos.CENTER);
+                            gridPane.setTranslateY(30);
+
+                            gridPane.add(resumeButton, 0, 0);
+                            gridPane.add(homeButton, 0, 1);
+                            gridPane.add(exitButton, 0, 2);
+                            gridPane.add(physicsLabel, 0, 3);
+                            gridPane.add(physicsButton, 0, 4);
+
+                            //GridPane constraints
+                            ColumnConstraints menuColumn = new ColumnConstraints(200);
+                            columnTop1.setHalignment(HPos.CENTER);
+                            RowConstraints menuRow1 = new RowConstraints(65);
+                            menuRow1.setValignment(VPos.CENTER);
+                            RowConstraints menuRow2 = new RowConstraints(65);
+                            menuRow2.setValignment(VPos.CENTER);
+                            RowConstraints menuRow3 = new RowConstraints(65);
+                            menuRow3.setValignment(VPos.CENTER);
+                            RowConstraints menuRow4 = new RowConstraints(65);
+                            menuRow4.setValignment(VPos.CENTER);
+                            RowConstraints menuRow5 = new RowConstraints(65);
+                            menuRow5.setValignment(VPos.CENTER);
+                            gridPane.getColumnConstraints().add(menuColumn);
+                            gridPane.getRowConstraints().addAll(menuRow1,menuRow2,menuRow3,menuRow4,menuRow5);
+
+                            //Menu background
+                            ImageView menuBg = new ImageView("BackgroundIMG/MenuBgIMG.png");
+
+                            menuBg.setPreserveRatio(true);
+                            menuBg.setFitWidth(500);
+                            Rectangle rectangle = new Rectangle(1350, 700);
+                            rectangle.setFill(Color.WHITE);
+                            rectangle.setTranslateY(-42);
+                            fade.setNode(rectangle);
+                            fade.setFromValue(0.0);
+                            fade.setToValue(0.4);
+                            fade.setDuration(Duration.millis(100));
+                            fade.play();
+
+                            //Add to layout (this is the principal pane in ScenePaly)
+                            layout.getChildren().addAll(rectangle,menuBg,gridPane);
+
+                            //Button events
+                            resumeButton.setOnAction((menuEvent) -> {
+                                fade.setFromValue(0.4);
+                                fade.setToValue(0.0);
+                                fade.setDuration(Duration.millis(100));
+                                fade.play();
+                                layout.getChildren().removeAll(rectangle, gridPane, menuBg);
+
+                            });
+
+                            resumeButton.setOnMouseEntered((menuEvent) -> {
+                                resume.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            resumeButton.setOnMouseExited((menuEvent) -> {
+                                resume.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            homeButton.setOnMouseEntered((menuEvent) -> {
+                                home.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            homeButton.setOnMouseExited((menuEvent) -> {
+                                home.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            exitButton.setOnMouseEntered((menuEvent) -> {
+                                exit.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            exitButton.setOnMouseExited((menuEvent) -> {
+                                exit.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+                            physicsButton.setOnMouseEntered((menuEvent) -> {
+                                physicsOn.setFitHeight(70);
+                                physicsOff.setFitHeight(70);
+                                btnSound.play();
+                            });
+
+                            physicsButton.setOnMouseExited((menuEvent) -> {
+                                physicsOn.setFitHeight(60);
+                                physicsOff.setFitHeight(60);
+                                btnSound.stop();
+                            });
+
+//                            physicsOffButton.setOnMouseEntered((menuEvent) -> {
+//                                physicsOff.setFitHeight(70);
+//                                btnSound.play();
+//                            });
+//
+//                            physicsOffButton.setOnMouseExited((menuEvent) -> {
+//                                physicsOff.setFitHeight(60);
+//                                btnSound.stop();
+//                            });
+
+                            homeButton.setOnAction((menuEvent) -> {
+                                SceneWelcome sceneWelcome = new SceneWelcome(primaryStage);
+                                primaryStage.setScene(sceneWelcome.getScene());
+                                playBgSound.pause();
+                                //MAX-game ends
+                            });
+
+                            exitButton.setOnAction((menuEvent) -> {
+                                primaryStage.close();
+                                //MAX-game ends
+                            });
+
+                            //Eszter- doesn't save changes to physics button in menu (bc when button is created it has on, I will try to make it dependent on if the pane physics Pane is present
+                            physicsButton.setOnAction((menuEvent) -> {
+                                if (physicsButton.getGraphic() == physicsOn ) {
+                                    physicsButton.setGraphic(physicsOff);
+                                    //Eszter-once physics pane is created remove here from layout
+                                }
+                                else {
+                                    physicsButton.setGraphic(physicsOn);
+                                    //Eszter-once physics pane is created add here to layout
+                                }
+                            });
+
+
+                });
+
+                //Menu button zoom when mouse on it
+                menuButton.setOnMouseEntered((event) -> {
+                    menu.setFitHeight(50);
+                    btnSound.play();
+                });
+                menuButton.setOnMouseExited((event) -> {
+                    menu.setFitHeight(45);
+                    btnSound.stop();
+                });
+*/
             }
 
             public Scene getScene() {
