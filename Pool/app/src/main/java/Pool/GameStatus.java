@@ -16,6 +16,7 @@ public class GameStatus {
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
     public static double[] FRICTION_COEFFICIENT = {0.95,0.96,0.955}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    //MAX- 0 should be ice, 1- normal, 2- grass
     public static CueStick cue;
     
     static public void updateVisual(){

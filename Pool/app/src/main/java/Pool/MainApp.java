@@ -6,6 +6,8 @@ import static Pool.GameStatus.tableLines;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 import static java.lang.Math.PI;
 
 import javafx.event.EventHandler;
@@ -23,7 +25,7 @@ public class MainApp extends Application {
 
         stagefield = stage;
 
-        Sound.initiateSound();
+       // Sound.initiateSound();
         //create scenes
         SceneWelcome sceneWelcome = new SceneWelcome();
         ScenePlayGrass scenePlayGrass = new ScenePlayGrass();
@@ -34,7 +36,7 @@ public class MainApp extends Application {
         stage.setWidth(1350);
         stage.setResizable(false);
 
-        Sound.welcomeBgSound.play();
+       // Sound.welcomeBgSound.play();
         stage.setScene(sceneWelcome.getScene());
         stage.show();
         
@@ -47,6 +49,8 @@ public class MainApp extends Application {
             stage.setFullScreen(false);
             GameStatus.gameState = 0;
             startGame(scenePlayNormal);
+            scenePlayNormal.frictionValue.setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[1])+" F/N");
+
         };
         EventHandler goToIce = e->{
             stage.setScene(scenePlayIce.getScene());
@@ -54,6 +58,7 @@ public class MainApp extends Application {
             stage.setFullScreen(false);
             GameStatus.gameState = 1;
             startGame(scenePlayIce);
+            scenePlayIce.frictionValue.setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[0])+" F/N");
         };
         EventHandler goToGrass = e->{
             stage.setScene(scenePlayGrass.getScene());
@@ -61,6 +66,8 @@ public class MainApp extends Application {
             stage.setFullScreen(false);
             GameStatus.gameState = 2;
             startGame(scenePlayGrass);
+            scenePlayGrass.frictionValue.setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[2])+" F/N");
+
         };
         EventHandler goToWelcome = e->{
          //   Sound.playBgSound.stop();
@@ -74,8 +81,8 @@ public class MainApp extends Application {
 //BUTTON ACTIONS
         EventHandler btnOnMouseEntered = e->{
             Button target = (Button)e.getTarget();
-            target.setScaleX(1.15);
-            target.setScaleY(1.15);
+            target.setScaleX(1.12);
+            target.setScaleY(1.12);
            // Sound.btnSound.stop();
            // Sound.btnSound.play();
         };
@@ -102,10 +109,14 @@ public class MainApp extends Application {
         
 //SCENE_PLAY
 
+        DecimalFormat df = new DecimalFormat("#.##");
+
         scenePlayNormal.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.playButton.setOnMouseExited(btnOnMouseExited);
         scenePlayNormal.playButton.setOnAction(e->{
             playButtonHit(scenePlayNormal);
+            scenePlayNormal.forceValue.setText(Float.valueOf(df.format(scenePlayNormal.forceSlider.getValue()))+" N");
+            scenePlayNormal.angleValue.setText(Float.valueOf(df.format(scenePlayNormal.angleSlider.getValue()))+"°");
         });
         scenePlayNormal.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.menuButton.setOnMouseExited(btnOnMouseExited);
@@ -115,23 +126,38 @@ public class MainApp extends Application {
         scenePlayIce.playButton.setOnMouseExited(btnOnMouseExited);
         scenePlayIce.playButton.setOnAction(e->{
             playButtonHit(scenePlayIce);
+            scenePlayIce.forceValue.setText(Float.valueOf(df.format(scenePlayIce.forceSlider.getValue()))+" N");
+
         });
         scenePlayGrass.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayGrass.menuButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.menuButton.setOnAction(e-> scenePlayGrass.menuAppears());
 
         scenePlayGrass.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayGrass.playButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.playButton.setOnAction(e->{
+        scenePlayGrass.playButton.setOnAction(e-> {
             playButtonHit(scenePlayGrass);
+            scenePlayGrass.forceValue.setText(Float.valueOf(df.format(scenePlayNormal.forceSlider.getValue()))+" N");
         });
-        scenePlayGrass.menuButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.menuButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.menuButton.setOnAction(goToWelcome);
 
-    //Sound btn
+        scenePlayIce.menuButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.menuButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.menuButton.setOnAction(e-> scenePlayIce.menuAppears());
+
+    //SOUND
         scenePlayNormal.soundButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.soundButton.setOnMouseExited(btnOnMouseExited);
-      //  scenePlayNormal.soundButton.setOnAction(e-> Sound.muteSound());
+
+        scenePlayNormal.soundButton.setOnAction(e->{
+            if (scenePlayNormal.soundButton.getGraphic() == scenePlayNormal.soundOnIMG ) {
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOffIMG);
+                Sound.muteSound();
+            }
+            else {
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOnIMG);
+                Sound.unmutesound();
+            }
+        });
 
         scenePlayIce.soundButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayIce.soundButton.setOnMouseExited(btnOnMouseExited);
@@ -305,6 +331,10 @@ public class MainApp extends Application {
             getItemsThread.start();
 
         });
+
+    }
+
+    public void playBtuttonAssign(ScenePlay sc){
 
     }
     

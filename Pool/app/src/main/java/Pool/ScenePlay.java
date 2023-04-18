@@ -9,12 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.text.Font;
+
+import java.awt.font.ImageGraphicAttribute;
 
 
 public class ScenePlay {
@@ -40,6 +43,14 @@ public class ScenePlay {
             public Button menuButton;
 
             public Button soundButton;
+
+            ImageView soundOnIMG;
+            ImageView soundOffIMG;
+
+            Label frictionValue;
+            Label angleValue;
+            Label forceValue;
+            Label speedValue;
 
             public Slider forceSlider;
             public Slider angleSlider;
@@ -95,12 +106,31 @@ public class ScenePlay {
                 gridPaneTop.getRowConstraints().addAll(rowTop1);
 
                 //Set Size constraints in bottom Grid Pane
-                ColumnConstraints columnBot1 = new ColumnConstraints(190);
-                columnBot1.setHalignment(HPos.CENTER);
-                RowConstraints rowBot1 = new RowConstraints(60);
+                ColumnConstraints columnBot1 = new ColumnConstraints(250);
+                columnBot1.setHalignment(HPos.LEFT);
+
+                ColumnConstraints columnBot2 = new ColumnConstraints(150);
+                columnBot2.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot3 = new ColumnConstraints(120);
+                columnBot3.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot4 = new ColumnConstraints(120);
+                columnBot4.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot5 = new ColumnConstraints(120);
+                columnBot5.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot6 = new ColumnConstraints(120);
+                columnBot6.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot7 = new ColumnConstraints(120);
+                columnBot7.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot8 = new ColumnConstraints(120);
+                columnBot8.setHalignment(HPos.CENTER);
+                ColumnConstraints columnBot9 = new ColumnConstraints(120);
+                columnBot9.setHalignment(HPos.LEFT);
+                ColumnConstraints columnBot10 = new ColumnConstraints(120);
+                columnBot10.setHalignment(HPos.RIGHT);
+                RowConstraints rowBot1 = new RowConstraints(62);
                 rowBot1.setValignment(VPos.CENTER);
 
-                gridPaneBot.getColumnConstraints().addAll(columnBot1);
+                gridPaneBot.getColumnConstraints().addAll(columnBot1, columnBot2, columnBot3, columnBot4, columnBot5, columnBot6, columnBot7, columnBot8, columnBot9, columnBot10);
                 gridPaneBot.getRowConstraints().addAll(rowBot1);
 
                 //Play screen Sliders and Buttons
@@ -112,12 +142,8 @@ public class ScenePlay {
                 angleSlider = new Slider(0.0, 359, 1.0);
                 angleSlider.getStylesheets().add("angleSlider.css");
 
-                gridPaneTop.setHgap(10);
+                gridPaneTop.setHgap(20);
 
-                //Not working attempt at styling sliders
-                // Set the background of the track node
-                //forceSlider.setStyle("-fx-background-color: linear-gradient(to right, yellow, red); -fx-border-color: linear-gradient(to right, yellow, red); ");
-                //forceSlider.getStylesheets().add("slider.css");
 
                 playButton = new Button("", play);
                 menuButton = new Button("",menu);
@@ -147,25 +173,25 @@ public class ScenePlay {
                 speedTitle.setPreserveRatio(true);
                 speedTitle.setFitHeight(30);
 
-                Label frictionValue = new Label("");
-                Label angleValue = new Label("");
-                Label forceValue = new Label("");
-                Label speedValue = new Label("");
+                frictionValue = new Label("");
+                angleValue = new Label("");
+                forceValue = new Label("");
+                speedValue = new Label("");
 
-                frictionValue.setStyle("-fx-font-size: 50px; -fx-font-weight: bold;");
-                angleValue.setStyle("-fx-font-size: 50px; -fx-font-weight: bold;");
-                forceValue.setStyle("-fx-font-size: 50px; -fx-font-weight: bold;");
+                frictionValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
+                angleValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
+                forceValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
 
                 //Volume Button
-                ImageView soundOnIMG = new ImageView("ButtonIMG/VolumeBtnOnIMG.png");
+                soundOnIMG = new ImageView("ButtonIMG/VolumeBtnOnIMG.png");
                 soundOnIMG.setPreserveRatio(true);
-                soundOnIMG.setFitHeight(65);
+                soundOnIMG.setFitHeight(57);
                 soundButton = new Button("",soundOnIMG);
                 soundButton.setBackground(null);
                 soundButton.setBorder(null);
-                ImageView soundOffIMG = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
+                soundOffIMG = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
                 soundOffIMG.setPreserveRatio(true);
-                soundOffIMG.setFitHeight(65);
+                soundOffIMG.setFitHeight(57);
 
 
 
@@ -234,9 +260,9 @@ public class ScenePlay {
                 teamName = new CustomAnimation("team",2);
                 teamName.setPreserveRatio(true);
                 teamName.nextFrame();
-                teamName.setFitHeight(165);
+                teamName.setFitHeight(120);
                 teamNamePane.getChildren().add(teamName);
-                teamNamePane.setTranslateX(30);
+                teamNamePane.setTranslateX(10);
                 teamNamePane.setTranslateY(-140);
 
                 gridPaneTop.getChildren().add(teamNamePane);
