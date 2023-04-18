@@ -30,6 +30,11 @@ public class ScenePlay {
             ImageView menuBg;
             Rectangle rectangle;
 
+            ImageView forceTitle;
+            ImageView angleTitle;
+            ImageView speedTitle;
+            ImageView frictionTitle;
+
             public Button resumeButton ;
             public Button homeButton ;
             public Button exitButton ;
@@ -85,6 +90,7 @@ public class ScenePlay {
 
                 //Create Principal Panes
                 gamePane = new Pane();
+                gamePane.setTranslateY(25);
                 //gamePane.setStyle("-fx-background-color: #005555;");
                 BorderPane borderPane = new BorderPane();
                 GridPane gridPaneTop = new GridPane();
@@ -106,7 +112,7 @@ public class ScenePlay {
                 gridPaneTop.getRowConstraints().addAll(rowTop1);
 
                 //Set Size constraints in bottom Grid Pane
-                ColumnConstraints columnBot1 = new ColumnConstraints(250);
+                ColumnConstraints columnBot1 = new ColumnConstraints(230);
                 columnBot1.setHalignment(HPos.LEFT);
 
                 ColumnConstraints columnBot2 = new ColumnConstraints(150);
@@ -115,19 +121,19 @@ public class ScenePlay {
                 columnBot3.setHalignment(HPos.LEFT);
                 ColumnConstraints columnBot4 = new ColumnConstraints(120);
                 columnBot4.setHalignment(HPos.CENTER);
-                ColumnConstraints columnBot5 = new ColumnConstraints(120);
+                ColumnConstraints columnBot5 = new ColumnConstraints(110);
                 columnBot5.setHalignment(HPos.LEFT);
                 ColumnConstraints columnBot6 = new ColumnConstraints(120);
                 columnBot6.setHalignment(HPos.CENTER);
                 ColumnConstraints columnBot7 = new ColumnConstraints(120);
                 columnBot7.setHalignment(HPos.LEFT);
-                ColumnConstraints columnBot8 = new ColumnConstraints(120);
+                ColumnConstraints columnBot8 = new ColumnConstraints(90);
                 columnBot8.setHalignment(HPos.CENTER);
-                ColumnConstraints columnBot9 = new ColumnConstraints(120);
+                ColumnConstraints columnBot9 = new ColumnConstraints(130);
                 columnBot9.setHalignment(HPos.LEFT);
-                ColumnConstraints columnBot10 = new ColumnConstraints(120);
+                ColumnConstraints columnBot10 = new ColumnConstraints(140);
                 columnBot10.setHalignment(HPos.RIGHT);
-                RowConstraints rowBot1 = new RowConstraints(62);
+                RowConstraints rowBot1 = new RowConstraints(60);
                 rowBot1.setValignment(VPos.CENTER);
 
                 gridPaneBot.getColumnConstraints().addAll(columnBot1, columnBot2, columnBot3, columnBot4, columnBot5, columnBot6, columnBot7, columnBot8, columnBot9, columnBot10);
@@ -149,21 +155,25 @@ public class ScenePlay {
                 menuButton = new Button("",menu);
 
                 menu.setPreserveRatio(true);
-                menu.setFitHeight(45);
+                menu.setFitHeight(40);
                 play.setPreserveRatio(true);
                 play.setFitHeight(70);
 
                 //set button backgrounds and border transparent
                 menuButton.setBackground(null);
                 menuButton.setBorder(null);
+                menuButton.setTranslateX(3);
                 playButton.setBackground(null);
                 playButton.setBorder(null);
 
                 //Physics text
-                ImageView frictionTitle = new ImageView("LabelIMG/FrictionWordIMG.png");
-                ImageView angleTitle = new ImageView("LabelIMG/AngleWordIMG.png");
-                ImageView forceTitle = new ImageView("LabelIMG/ForceWordIMG.png");
-                ImageView speedTitle = new ImageView("LabelIMG/SpeedWordIMG.png");
+                frictionTitle = new ImageView("LabelIMG/FrictionWordIMG.png");
+                frictionTitle.setRotate(2);
+                frictionTitle.setTranslateY(2);
+                angleTitle = new ImageView("LabelIMG/AngleWordIMG.png");
+                forceTitle = new ImageView("LabelIMG/ForceWordIMG.png");
+                forceTitle.setTranslateY(1);
+                speedTitle = new ImageView("LabelIMG/SpeedWordIMG.png");
                 frictionTitle.setPreserveRatio(true);
                 frictionTitle.setFitHeight(30);
                 angleTitle.setPreserveRatio(true);
@@ -185,13 +195,14 @@ public class ScenePlay {
                 //Volume Button
                 soundOnIMG = new ImageView("ButtonIMG/VolumeBtnOnIMG.png");
                 soundOnIMG.setPreserveRatio(true);
-                soundOnIMG.setFitHeight(57);
+                soundOnIMG.setFitHeight(60);
                 soundButton = new Button("",soundOnIMG);
                 soundButton.setBackground(null);
                 soundButton.setBorder(null);
+                soundButton.setTranslateY(-3);
                 soundOffIMG = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
                 soundOffIMG.setPreserveRatio(true);
-                soundOffIMG.setFitHeight(57);
+                soundOffIMG.setFitHeight(60);
 
 
 
@@ -210,9 +221,11 @@ public class ScenePlay {
                 ImageView forceLabel = new ImageView("LabelIMG/ForceSliderIMG.jpg");
                 ImageView angleLabel = new ImageView("LabelIMG/AngleSliderIMG.jpg");
                 forceLabel.setPreserveRatio(true);
-                forceLabel.setFitHeight(35);
+                forceLabel.setFitHeight(32);
+                forceLabel.setTranslateY(-7);
                 angleLabel.setPreserveRatio(true);
-                angleLabel.setFitHeight(35);
+                angleLabel.setFitHeight(32);
+                angleLabel.setTranslateY(-7);
 
                 gridPaneTop.add(forceSlider, 0, 0);
                 gridPaneTop.add(angleSlider, 1, 0);
@@ -220,7 +233,7 @@ public class ScenePlay {
                 gridPaneTop.add(angleLabel, 1,1);
 
                 gridPaneTop.add(playButton, 2, 0);
-                gridPaneTop.setTranslateY(130);
+                gridPaneTop.setTranslateY(160);
                 
                 //if I change these values the game Pane disappears (This doesn't matter as it won't change)
                 layout.setMaxWidth(1350);
@@ -260,10 +273,10 @@ public class ScenePlay {
                 teamName = new CustomAnimation("team",2);
                 teamName.setPreserveRatio(true);
                 teamName.nextFrame();
-                teamName.setFitHeight(120);
+                teamName.setFitHeight(130);
                 teamNamePane.getChildren().add(teamName);
                 teamNamePane.setTranslateX(10);
-                teamNamePane.setTranslateY(-140);
+                teamNamePane.setTranslateY(-160);
 
                 gridPaneTop.getChildren().add(teamNamePane);
 

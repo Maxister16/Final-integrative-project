@@ -51,12 +51,12 @@ public class Table{
     public Rectangle getBackground(){
         return this.background;
     }
-    
+
     public void setImage(int typeOfGame) { //sets the background
         switch(typeOfGame){//0:normal, 1:ice, 2:grass 
-            case 0 -> background.setFill(Color.MOCCASIN);
-            case 1 -> background.setFill(Color.LIGHTCYAN);
-            case 2 -> background.setFill(Color.SEAGREEN);
+            case 0 -> background.setFill(Color.BURLYWOOD);
+            case 1 -> background.setFill(Color.POWDERBLUE);
+            case 2 ->background.setFill(new Color (0.55,0.7,0.4,1));
         }
     }
 }

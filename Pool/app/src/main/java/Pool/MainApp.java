@@ -127,6 +127,7 @@ public class MainApp extends Application {
         scenePlayIce.playButton.setOnAction(e->{
             playButtonHit(scenePlayIce);
             scenePlayIce.forceValue.setText(Float.valueOf(df.format(scenePlayIce.forceSlider.getValue()))+" N");
+            scenePlayIce.angleValue.setText(Float.valueOf(df.format(scenePlayIce.angleSlider.getValue()))+"°");
 
         });
         scenePlayGrass.menuButton.setOnMouseEntered(btnOnMouseEntered);
@@ -137,7 +138,8 @@ public class MainApp extends Application {
         scenePlayGrass.playButton.setOnMouseExited(btnOnMouseExited);
         scenePlayGrass.playButton.setOnAction(e-> {
             playButtonHit(scenePlayGrass);
-            scenePlayGrass.forceValue.setText(Float.valueOf(df.format(scenePlayNormal.forceSlider.getValue()))+" N");
+            scenePlayGrass.forceValue.setText(Float.valueOf(df.format(scenePlayGrass.forceSlider.getValue()))+" N");
+            scenePlayGrass.angleValue.setText(Float.valueOf(df.format(scenePlayGrass.angleSlider.getValue()))+"°");
         });
 
         scenePlayIce.menuButton.setOnMouseEntered(btnOnMouseEntered);
@@ -161,11 +163,29 @@ public class MainApp extends Application {
 
         scenePlayIce.soundButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayIce.soundButton.setOnMouseExited(btnOnMouseExited);
-       // scenePlayIce.soundButton.setOnAction(e-> Sound.muteSound());
+        scenePlayIce.soundButton.setOnAction(e->{
+            if (scenePlayIce.soundButton.getGraphic() == scenePlayIce.soundOnIMG ) {
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOffIMG);
+                Sound.muteSound();
+            }
+            else {
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOnIMG);
+                Sound.unmutesound();
+            }
+        });
 
         scenePlayGrass.soundButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayGrass.soundButton.setOnMouseExited(btnOnMouseExited);
-       // scenePlayGrass.soundButton.setOnAction(e-> Sound.muteSound());
+        scenePlayGrass.soundButton.setOnAction(e->{
+            if (scenePlayGrass.soundButton.getGraphic() == scenePlayGrass.soundOnIMG ) {
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOffIMG);
+                Sound.muteSound();
+            }
+            else {
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOnIMG);
+                Sound.unmutesound();
+            }
+        });
 
 
 
@@ -189,9 +209,27 @@ public class MainApp extends Application {
 
             if (scenePlayNormal.physicsButton.getGraphic() == scenePlayNormal.physicsOn ) {
                 scenePlayNormal.physicsButton.setGraphic(scenePlayNormal.physicsOff);
+                scenePlayNormal.frictionValue.setStyle("-fx-opacity: 0;");
+                scenePlayNormal.angleValue.setStyle("-fx-opacity: 0;");
+                scenePlayNormal.speedValue.setStyle("-fx-opacity: 0;");
+                scenePlayNormal.forceValue.setStyle("-fx-opacity: 0;");
+                scenePlayNormal.frictionTitle.setStyle("-fx-opacity: 0;");
+                scenePlayNormal.angleTitle.setStyle("-fx-opacity: 0;");
+                scenePlayNormal.speedTitle.setStyle("-fx-opacity: 0;");
+                scenePlayNormal.forceTitle.setStyle("-fx-opacity: 0;");
+
+
             }
             else {
                 scenePlayNormal.physicsButton.setGraphic(scenePlayNormal.physicsOn);
+                scenePlayNormal.frictionValue.setStyle("-fx-opacity: 1; -fx-font-size: 25px; -fx-font-weight: bold");
+                scenePlayNormal.angleValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                scenePlayNormal.speedValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                scenePlayNormal.forceValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                scenePlayNormal.frictionTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                scenePlayNormal.angleTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                scenePlayNormal.speedTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                scenePlayNormal.forceTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
             }
          });
 
@@ -275,6 +313,10 @@ public class MainApp extends Application {
                 GameStatus.updateVisual();//set centerX and y to show the changes to the user
 
                 System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
+
+                //MAX- HELP this doesn't work
+            //sc.speedValue.setText(GameStatus.listOfBalls[0].getVi().getMagnitude() + "m/s");
+
             long timeOfEnd;
 
             do{
