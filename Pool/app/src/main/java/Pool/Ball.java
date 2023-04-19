@@ -30,11 +30,12 @@ public class Ball extends Circle implements InteractiveObject {
 
     private double decceleration=0.2;
     private Vector position = new Vector(0, 0);
-    ;
+    
     private Vector vi = new Vector(0, 0);
     private Vector a = new Vector(0, 0);
-    ;
+    
     private boolean isMoving;
+    public boolean isPocketed;
     private long initialTime;
 
     //BALL CONSTRUCTOR
