@@ -14,7 +14,7 @@ public class GameStatus {
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
-    public static double[] FRICTION_COEFFICIENT = {0.955,0.975,0.91}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    public static double[] FRICTION_COEFFICIENT = {0.955,0.975,0.91}; //0:normal, 1:ice, 2:grass NOT
     public static CueStick cue;
     
     public static boolean isGameOver = false;

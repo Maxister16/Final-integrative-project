@@ -26,9 +26,9 @@ public class MainApp extends Application {
         Sound.initiateSound();
         //create scenes
         SceneWelcome sceneWelcome = new SceneWelcome();
-        ScenePlayGrass scenePlayGrass = new ScenePlayGrass();
-        ScenePlayNormal scenePlayNormal = new ScenePlayNormal();
-        ScenePlayIce scenePlayIce = new ScenePlayIce();
+        ScenePlay scenePlayGrass = new ScenePlay();
+        ScenePlay scenePlayNormal = new ScenePlay();
+        ScenePlay scenePlayIce = new ScenePlay();
         
         stage.setHeight(780);
         stage.setWidth(1350);
@@ -39,6 +39,20 @@ public class MainApp extends Application {
         stage.show();
         
         scenePlayNormal.getScene().setOnKeyTyped(e->{
+            //scenePlayNormal.winAppears(0);
+            int randomValue = Character.getNumericValue(e.getCharacter().charAt(0));
+            GameStatus.listOfBalls[randomValue].setVectorPosition(new Vector(GameStatus.nets[0].getCenterX(),GameStatus.nets[0].getCenterY()));
+            GameStatus.listOfBalls[randomValue].setCenterX(GameStatus.nets[0].getCenterX());
+            GameStatus.listOfBalls[randomValue].setCenterY(GameStatus.nets[0].getCenterY());
+        });
+        scenePlayIce.getScene().setOnKeyTyped(e->{
+            //scenePlayNormal.winAppears(0);
+            int randomValue = Character.getNumericValue(e.getCharacter().charAt(0));
+            GameStatus.listOfBalls[randomValue].setVectorPosition(new Vector(GameStatus.nets[0].getCenterX(),GameStatus.nets[0].getCenterY()));
+            GameStatus.listOfBalls[randomValue].setCenterX(GameStatus.nets[0].getCenterX());
+            GameStatus.listOfBalls[randomValue].setCenterY(GameStatus.nets[0].getCenterY());
+        });
+        scenePlayGrass.getScene().setOnKeyTyped(e->{
             //scenePlayNormal.winAppears(0);
             int randomValue = Character.getNumericValue(e.getCharacter().charAt(0));
             GameStatus.listOfBalls[randomValue].setVectorPosition(new Vector(GameStatus.nets[0].getCenterX(),GameStatus.nets[0].getCenterY()));
@@ -133,7 +147,7 @@ public class MainApp extends Application {
         
 //SCENE_PLAY
 
-    //normal
+    //NORMAL
         scenePlayNormal.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.playButton.setOnMouseExited(btnOnMouseExited);
         scenePlayNormal.playButton.setOnAction(e->{
@@ -152,6 +166,12 @@ public class MainApp extends Application {
             scenePlayNormal.forceSlider.setValue(0);
             scenePlayNormal.orangeBaskets.setCurrentFrame(0);
             scenePlayNormal.redBaskets.setCurrentFrame(0);
+            
+            scenePlayNormal.winPaneRed.setScaleX(0.001);
+            scenePlayNormal.winPaneRed.setScaleY(0.001);
+            scenePlayNormal.winPaneOrange.setScaleX(0.001);
+            scenePlayNormal.winPaneOrange.setScaleY(0.001);
+            
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
@@ -163,6 +183,12 @@ public class MainApp extends Application {
             scenePlayNormal.forceSlider.setValue(0);
             scenePlayNormal.orangeBaskets.setCurrentFrame(0);
             scenePlayNormal.redBaskets.setCurrentFrame(0);
+            
+            scenePlayNormal.winPaneRed.setScaleX(0.001);
+            scenePlayNormal.winPaneRed.setScaleY(0.001);
+            scenePlayNormal.winPaneOrange.setScaleX(0.001);
+            scenePlayNormal.winPaneOrange.setScaleY(0.001);
+            
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
@@ -172,7 +198,7 @@ public class MainApp extends Application {
         scenePlayNormal.soundButton.setOnMouseExited(btnOnMouseExited);
         scenePlayNormal.soundButton.setOnAction(btnMuteClicked);
         
-    //ice
+    //ICE
         scenePlayIce.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayIce.playButton.setOnMouseExited(btnOnMouseExited);
         scenePlayIce.playButton.setOnAction(e->{
@@ -191,6 +217,12 @@ public class MainApp extends Application {
             scenePlayIce.forceSlider.setValue(0);
             scenePlayIce.orangeBaskets.setCurrentFrame(0);
             scenePlayIce.redBaskets.setCurrentFrame(0);
+            
+            scenePlayIce.winPaneRed.setScaleX(0.001);
+            scenePlayIce.winPaneRed.setScaleY(0.001);
+            scenePlayIce.winPaneOrange.setScaleX(0.001);
+            scenePlayIce.winPaneOrange.setScaleY(0.001);
+            
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
@@ -202,6 +234,12 @@ public class MainApp extends Application {
             scenePlayIce.forceSlider.setValue(0);
             scenePlayIce.orangeBaskets.setCurrentFrame(0);
             scenePlayIce.redBaskets.setCurrentFrame(0);
+            
+            scenePlayIce.winPaneRed.setScaleX(0.001);
+            scenePlayIce.winPaneRed.setScaleY(0.001);
+            scenePlayIce.winPaneOrange.setScaleX(0.001);
+            scenePlayIce.winPaneOrange.setScaleY(0.001);
+            
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
@@ -211,7 +249,7 @@ public class MainApp extends Application {
         scenePlayIce.soundButton.setOnMouseExited(btnOnMouseExited);
         scenePlayIce.soundButton.setOnAction(btnMuteClicked);
         
-    //grass    
+    //GRASS    
         scenePlayGrass.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayGrass.playButton.setOnMouseExited(btnOnMouseExited);
         scenePlayGrass.playButton.setOnAction(e->{
@@ -230,6 +268,12 @@ public class MainApp extends Application {
             scenePlayGrass.forceSlider.setValue(0);
             scenePlayGrass.orangeBaskets.setCurrentFrame(0);
             scenePlayGrass.redBaskets.setCurrentFrame(0);
+            
+            scenePlayGrass.winPaneRed.setScaleX(0.001);
+            scenePlayGrass.winPaneRed.setScaleY(0.001);
+            scenePlayGrass.winPaneOrange.setScaleX(0.001);
+            scenePlayGrass.winPaneOrange.setScaleY(0.001);
+            
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
@@ -241,6 +285,12 @@ public class MainApp extends Application {
             scenePlayGrass.forceSlider.setValue(0);
             scenePlayGrass.orangeBaskets.setCurrentFrame(0);
             scenePlayGrass.redBaskets.setCurrentFrame(0);
+            
+            scenePlayGrass.winPaneRed.setScaleX(0.001);
+            scenePlayGrass.winPaneRed.setScaleY(0.001);
+            scenePlayGrass.winPaneOrange.setScaleX(0.001);
+            scenePlayGrass.winPaneOrange.setScaleY(0.001);
+            
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
@@ -360,7 +410,6 @@ public class MainApp extends Application {
 
     public void game(ScenePlay sc){
         
-        //GameStatus.listOfBalls[0].setCenterX(0);
         long timeOfStart = System.currentTimeMillis();
         
         while(0.001 <= GameStatus.listOfBalls[0].getVi().getMagnitude()+GameStatus.listOfBalls[1].getVi().getMagnitude()+GameStatus.listOfBalls[2].getVi().getMagnitude()+GameStatus.listOfBalls[3].getVi().getMagnitude()+GameStatus.listOfBalls[4].getVi().getMagnitude()+GameStatus.listOfBalls[5].getVi().getMagnitude()+GameStatus.listOfBalls[6].getVi().getMagnitude()+GameStatus.listOfBalls[7].getVi().getMagnitude()+GameStatus.listOfBalls[8].getVi().getMagnitude()+GameStatus.listOfBalls[9].getVi().getMagnitude()){
@@ -477,14 +526,6 @@ public class MainApp extends Application {
         GameStatus.listOfBalls[0].setVi(new Vector(0,0));
         GameStatus.listOfBalls[0].isPocketed = false;
         GameStatus.listOfBalls[0].setOpacity(1d);
-    }
-    
-    public void movingTheBalls(ScenePlay sc){
-        System.out.println("ball are moving method");
-        
-        //when ball dont move
-        changeTeam(sc);
-
     }
     
     public static void main(String[] args) {

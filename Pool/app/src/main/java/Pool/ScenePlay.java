@@ -21,12 +21,10 @@ import java.awt.font.ImageGraphicAttribute;
 
 
 public class ScenePlay {
-
     
             private Scene scene;
             public Pane gamePane;
             StackPane layout = new StackPane();
-            public PaneMenu paneMenu = new PaneMenu();
             public GridPane gridPaneMenu = new GridPane();
             ImageView menuBg;
             Rectangle rectangle;
