@@ -37,6 +37,11 @@ public class Sound {
     //    welcomeBgSound.setVolume(3);
     //    playBgSound.setVolume(0.08);
 
+        File natureFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/nature.mp3");
+        welcomeBgSound = new MediaPlayer(new javafx.scene.media.Media(natureFile.toURI().toString()));
+        welcomeBgSound.setCycleCount(MediaPlayer.INDEFINITE);
+        welcomeBgSound.setVolume(5);
+
     }
 
 }
