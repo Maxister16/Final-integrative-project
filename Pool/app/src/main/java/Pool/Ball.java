@@ -206,8 +206,10 @@ public class Ball extends Circle implements InteractiveObject {
 
         
         static public void reactIsHit(Ball firstBall, Ball secondBall){
-            
-            double angle = atan2(firstBall.getVi().getMagnitude(), secondBall.getVi().getMagnitude());
+            double dx=(firstBall.getCenterX()+firstBall.getRadius()) - (secondBall.getCenterX()-firstBall.getRadius());
+            double dy=(firstBall.getCenterY()+firstBall.getRadius()) - (secondBall.getCenterY()-firstBall.getRadius());
+
+            double angle = atan2(dx, dy);
             double cos = cos(angle);
             double sin = sin(angle);
 
@@ -229,6 +231,9 @@ public class Ball extends Circle implements InteractiveObject {
             System.out.println("Ball 1 speed: " + firstBall.getVi().getMagnitude());
             secondBall.setVi(new Vector(ball2deltaX, ball2deltaY));
             System.out.println("Ball 2 speed: " + secondBall.getVi().getMagnitude());
+
+
+
         
         }
 

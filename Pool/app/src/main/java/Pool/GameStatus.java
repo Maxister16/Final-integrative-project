@@ -37,7 +37,7 @@ public class GameStatus {
             double penetrationDepth= (firtB.getRadius()*2)-distance.getMagnitude();
             Vector penetrationRes=Vector.vectorScalarProduct((penetrationDepth/2.0), distance.getUnitVector());
             firtB.setVectorPosition(Vector.vectorSum(firtB.getVectorPosition(), penetrationRes));
-            secondB.setVectorPosition(Vector.vectorSum(secondB.getVectorPosition(), penetrationRes));
+            secondB.setVectorPosition(Vector.vectorSum(secondB.getVectorPosition(), Vector.vectorScalarProduct(-1,penetrationRes)));
             // System.out.println(distanceBallsX+" so the balls overlap");
             //this.setVi(Vector.vectorScalarProduct(-1, this.getVi()));
             //listOfBalls[i].setVi(Vector.vectorScalarProduct(-1, listOfBalls[i].getVi()));
