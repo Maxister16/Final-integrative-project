@@ -125,7 +125,7 @@ public class Ball extends Circle implements InteractiveObject {
 
             if(position.x<=tableBorderMinX|| position.x>=tableBorderMaxX){
                 this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
-                System.out.println("lol");
+                //System.out.println("lol");
                 if(position.x <=tableBorderMinX)
                     position.x = tableBorderMinX;
                 else

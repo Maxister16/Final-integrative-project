@@ -182,7 +182,7 @@ public class ScenePlay {
                 ImageView menu = new ImageView("ButtonIMG/MenuBtnIMG.png");
                 ImageView play = new ImageView("ButtonIMG/playBtnIMG.png");
 
-                forceSlider = new Slider(0.1, 2, 0.1);
+                forceSlider = new Slider(0.1, 2, 0.01);
                 forceSlider.getStylesheets().add("slider.css");
                 angleSlider = new Slider(0.0, 359, 0.01);
                 angleSlider.getStylesheets().add("angleSlider.css");

@@ -14,7 +14,7 @@ import javafx.concurrent.Task;
 
 public class MainApp extends Application {
     
-    private long TIME_OF_TICK = 1000/60;//time in millis
+    private final long TIME_OF_TICK = 1000/60;//time in millis
     Stage stagefield;
     DecimalFormat df = new DecimalFormat("#.##");
     
@@ -39,7 +39,10 @@ public class MainApp extends Application {
         stage.show();
         
         scenePlayNormal.getScene().setOnKeyTyped(e->{
-            scenePlayNormal.winAppears(0);
+            int randomValue = Character.getNumericValue(e.getCharacter().charAt(0));
+            GameStatus.listOfBalls[randomValue].setVectorPosition(new Vector(GameStatus.nets[0].getCenterX(),GameStatus.nets[0].getCenterY()));
+            GameStatus.listOfBalls[randomValue].setCenterX(GameStatus.nets[0].getCenterX());
+            GameStatus.listOfBalls[randomValue].setCenterY(GameStatus.nets[0].getCenterY());
         });
         
         //action handlers for repetitive actions
@@ -320,11 +323,19 @@ public class MainApp extends Application {
             for(Ball ball : GameStatus.listOfBalls){//calculate position
                 ball.updatePosition();
             }
+            //CHECK OVERLAP
+               for(int ball1=0; ball1< GameStatus.listOfBalls.length; ball1++){
+                    for(int ball2=0; ball2< GameStatus.listOfBalls.length; ball2++){
+                        if(ball2!=ball1){
+                            GameStatus.penetrationFix(GameStatus.listOfBalls[ball1], GameStatus.listOfBalls[ball2]);
+                        }
+                    }
+                }
             GameStatus.checkBallsCollisions(sc);//check if they collide, change x and speed of yes
 
             GameStatus.updateVisual();//set centerX and y to show the changes to the user
 
-            System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
+            //System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
             
             long timeOfEnd;
             
@@ -333,41 +344,33 @@ public class MainApp extends Application {
                
             }while(timeOfEnd - timeOfStart < TIME_OF_TICK);//make sure each step is the same amount of time
             
-            System.out.print(" timeOfEnd: "+ (timeOfEnd - timeOfStart));
-            System.out.print(" position "+ GameStatus.listOfBalls[0].getCenterX());
+            //System.out.print(" timeOfEnd: "+ (timeOfEnd - timeOfStart));
+            //System.out.print(" position "+ GameStatus.listOfBalls[0].getCenterX());
             timeOfStart = timeOfEnd;
-            System.out.println();
+            //System.out.println();
+        }
+        //update baskets
+        sc.orangeBaskets.setCurrentFrame(GameStatus.teamsPoints[0]);
+        sc.redBaskets.setCurrentFrame(GameStatus.teamsPoints[1]);
+        
+        if(GameStatus.listOfBalls[0].isPocketed){//white ball is in pocket
+            whiteInPocket();
         }
         
-        for(int i = 0; i<GameStatus.listOfBalls.length; i++){//check which ball isPocketed
-            if(GameStatus.listOfBalls[i].isPocketed){
-                
-                if(i==8){//black ball
-                    if(GameStatus.teamsPoints[sc.teamName.getCurrentFrame()] >= 4){
-                        sc.winAppears(sc.teamName.getCurrentFrame());
-                    }
-                    else{
-                        sc.winAppears((sc.teamName.getCurrentFrame()==0)? 1: 0);
-                    }
-                }
-                
-                else if(i==0){//white ball
-                    whiteInPocket();
-                }
-                
-                else if(i<=4){//team 1
-                    GameStatus.teamsPoints[0] ++;
-                    sc.orangeBaskets.nextFrame();
-                }
-                
-                else if(i>4){ //team 2
-                    GameStatus.teamsPoints[1] ++;
-                    sc.redBaskets.nextFrame();
-                }
+        if(GameStatus.listOfBalls[8].isPocketed){//black ball is in pocket
+            if(GameStatus.teamsPoints[sc.teamName.getCurrentFrame()] >= 4){
+                System.out.println("team "+sc.teamName.getCurrentFrame()+" wins");
+                sc.winAppears(sc.teamName.getCurrentFrame());
+            }
+            else{
+                System.out.println("team "+((sc.teamName.getCurrentFrame()==0)? 1: 0)+" wins");
+                sc.winAppears((sc.teamName.getCurrentFrame()==0)? 1: 0);
             }
         }
+        else{
+            changeTeam(sc);
+        }
         
-        changeTeam(sc);
     }
 
     public void playButtonHit(ScenePlay sc){

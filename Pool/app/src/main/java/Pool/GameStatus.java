@@ -38,12 +38,19 @@ public class GameStatus {
                     Vector netsPositionVector = new Vector(nets[r].getCenterX(),nets[r].getCenterY());
                     if(Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),netsPositionVector).getMagnitude() <= GameStatus.listOfBalls[firstBallIndex].getRadius()+nets[r].getRadius()){
                         //ScenePlay.gamePane
-                        GameStatus.listOfBalls[firstBallIndex].setOpacity(0);
-                        //sc.gamePane.getChildren().remove(GameStatus.listOfBalls[firstBallIndex]);
+                        System.out.println("touch nets");
                         GameStatus.listOfBalls[firstBallIndex].setVi(new Vector(0,0));
-
                         GameStatus.listOfBalls[firstBallIndex].isPocketed = true;
-
+                        GameStatus.listOfBalls[firstBallIndex].setVectorPosition(new Vector(0,0));
+                        GameStatus.listOfBalls[firstBallIndex].setCenterX(0);
+                        GameStatus.listOfBalls[firstBallIndex].setCenterY(0);
+                        
+                        switch(firstBallIndex){
+                            case 1,2,3,4 -> GameStatus.teamsPoints[0]+=1;
+                            case 5,6,7,9 -> GameStatus.teamsPoints[1]+=1;
+                        }
+                        System.out.println("0: "+GameStatus.teamsPoints[0]+" 1: "+GameStatus.teamsPoints[1]);
+                        GameStatus.listOfBalls[firstBallIndex].setOpacity(0);
                     }
                 }
                 for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
@@ -197,17 +204,26 @@ public class GameStatus {
         team2Points = 0;
         time = 0;
         
-        /*
-        for(int i = 0; i<listOfBalls.length; i++){
-            listOfBalls[i].getVVector().setXcomponent(0);
-            listOfBalls[i].getVVector().setYcomponent(0);
-            listOfBalls[i].getAVector().setXcomponent(0);
-            listOfBalls[i].getAVector().setYcomponent(0);
-        
-            listOfBalls[i].setIsPocketed(false);
+    }
+    
+    static public void penetrationFix(Ball firtB, Ball secondB){
+
+        double distanceBallsX=firtB.getCenterX()- secondB.getCenterX();
+        double distanceBallsY=firtB.getCenterY()-secondB.getCenterY();
+        Vector distance=new Vector(distanceBallsX, distanceBallsY);
+
+        // double ball1Ball2OverX=listOfBalls[i].
+        if((secondB.getRadius()*2)>=distance.getMagnitude() && secondB.getID()!=firtB.getID()){
+            //PENETRATION RESOLUTION
+            double penetrationDepth= (firtB.getRadius()*2)-distance.getMagnitude();
+            Vector penetrationRes=Vector.vectorScalarProduct((penetrationDepth/2.0), distance.getUnitVector());
+            firtB.setVectorPosition(Vector.vectorSum(firtB.getVectorPosition(), penetrationRes));
+            secondB.setVectorPosition(Vector.vectorSum(secondB.getVectorPosition(), Vector.vectorScalarProduct(-1,penetrationRes)));
+            // System.out.println(distanceBallsX+" so the balls overlap");
+            //this.setVi(Vector.vectorScalarProduct(-1, this.getVi()));
+            //listOfBalls[i].setVi(Vector.vectorScalarProduct(-1, listOfBalls[i].getVi()));
+
         }
-        */
-        
     }
 
 }
