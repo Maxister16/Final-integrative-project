@@ -19,7 +19,7 @@ public class Sound {
         File natureFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/nature.mp3");
         welcomeBgSound = new MediaPlayer(new javafx.scene.media.Media(natureFile.toURI().toString()));
         welcomeBgSound.setCycleCount(MediaPlayer.INDEFINITE);
-        welcomeBgSound.setVolume(3);
+        welcomeBgSound.setVolume(5);
 
         File songFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/Song.mp3");
         playBgSound = new MediaPlayer(new javafx.scene.media.Media(songFile.toURI().toString()));

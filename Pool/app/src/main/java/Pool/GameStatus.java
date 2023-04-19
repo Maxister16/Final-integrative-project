@@ -7,6 +7,7 @@ import javafx.scene.shape.Line;
 public class GameStatus {
     public static String CLIENT_LOCATION_OF_PROJECT = System.getProperty("user.dir");
     public static boolean isGameOn = false;
+    public static int[] teamsPoints = {0,0};
     public static int team1Points = 0;
     public static int team2Points = 0;
     public static int gameState = 0;
@@ -28,11 +29,6 @@ public class GameStatus {
     static public void checkBallsCollisions(){
             
             for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
-                
-                //check if collide with nets
-                /*if(){
-                    
-                }*/
                 
                 for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
                     //do balls collide
@@ -68,7 +64,7 @@ public class GameStatus {
         double widthOfBand = 30*table.getWidth()/702;
         double extraBufferNets = 10;
         
-        double DISTANCE_BETWEEN_BALLS = 1d;
+        double DISTANCE_BETWEEN_BALLS = 5d;
         double DISTANCE_BETWEEN_CENTER_OF_BALLS = DISTANCE_BETWEEN_BALLS+listOfBalls[0].getRadius()*2; //distance between the center of the balls
         //center of losange
         double xCenter = tableLines[1].getStartX();
@@ -121,6 +117,9 @@ public class GameStatus {
     }
     
     public static void initialize(){
+        
+        teamsPoints[0] = 0;
+        teamsPoints[1] = 0;
         
         Image team1Img = new Image("InteractiveObjectIMG/BallTeam1IMG.png");
         Image team2Img = new Image("InteractiveObjectIMG/BallTeam2IMG.png");
