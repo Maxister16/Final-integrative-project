@@ -39,6 +39,7 @@ public class MainApp extends Application {
         stage.show();
         
         scenePlayNormal.getScene().setOnKeyTyped(e->{
+            //scenePlayNormal.winAppears(0);
             int randomValue = Character.getNumericValue(e.getCharacter().charAt(0));
             GameStatus.listOfBalls[randomValue].setVectorPosition(new Vector(GameStatus.nets[0].getCenterX(),GameStatus.nets[0].getCenterY()));
             GameStatus.listOfBalls[randomValue].setCenterX(GameStatus.nets[0].getCenterX());
@@ -142,10 +143,20 @@ public class MainApp extends Application {
         scenePlayNormal.menuButton.setOnAction(e->{scenePlayNormal.menuAppears();});
     
         //replay
-        scenePlayNormal.buttonReplay.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.buttonReplay.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.buttonReplay.setOnAction(e->{
-            scenePlayNormal.winDisappears();
+        scenePlayNormal.buttonReplayRed.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.buttonReplayRed.setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.buttonReplayRed.setOnAction(e->{
+            //scenePlayNormal.winDisappears();
+            scenePlayNormal.angleSlider.setValue(0);
+            scenePlayNormal.forceSlider.setValue(0);
+            scenePlayNormal.orangeBaskets.setCurrentFrame(0);
+            scenePlayNormal.redBaskets.setCurrentFrame(0);
+            startGame(scenePlayNormal);
+        });
+        scenePlayNormal.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.buttonReplayOrange.setOnAction(e->{
+            //scenePlayNormal.winDisappears();
             scenePlayNormal.angleSlider.setValue(0);
             scenePlayNormal.forceSlider.setValue(0);
             scenePlayNormal.orangeBaskets.setCurrentFrame(0);
@@ -169,10 +180,20 @@ public class MainApp extends Application {
         scenePlayIce.menuButton.setOnAction(e->{scenePlayIce.menuAppears();});
         
         //replay
-        scenePlayIce.buttonReplay.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.buttonReplay.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.buttonReplay.setOnAction(e->{
-            scenePlayIce.winDisappears();
+        scenePlayIce.buttonReplayRed.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.buttonReplayRed.setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.buttonReplayRed.setOnAction(e->{
+            //scenePlayIce.winDisappears();
+            scenePlayIce.angleSlider.setValue(0);
+            scenePlayIce.forceSlider.setValue(0);
+            scenePlayIce.orangeBaskets.setCurrentFrame(0);
+            scenePlayIce.redBaskets.setCurrentFrame(0);
+            startGame(scenePlayIce);
+        });
+        scenePlayIce.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.buttonReplayOrange.setOnAction(e->{
+            //scenePlayIce.winDisappears();
             scenePlayIce.angleSlider.setValue(0);
             scenePlayIce.forceSlider.setValue(0);
             scenePlayIce.orangeBaskets.setCurrentFrame(0);
@@ -196,10 +217,20 @@ public class MainApp extends Application {
         scenePlayGrass.menuButton.setOnAction(e->{scenePlayGrass.menuAppears();});
         
         //replay
-        scenePlayGrass.buttonReplay.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.buttonReplay.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.buttonReplay.setOnAction(e->{
-            scenePlayGrass.winDisappears();
+        scenePlayGrass.buttonReplayRed.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.buttonReplayRed.setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.buttonReplayRed.setOnAction(e->{
+            //scenePlayGrass.winDisappears();
+            scenePlayGrass.angleSlider.setValue(0);
+            scenePlayGrass.forceSlider.setValue(0);
+            scenePlayGrass.orangeBaskets.setCurrentFrame(0);
+            scenePlayGrass.redBaskets.setCurrentFrame(0);
+            startGame(scenePlayGrass);
+        });
+        scenePlayGrass.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.buttonReplayOrange.setOnAction(e->{
+            //scenePlayGrass.winDisappears();
             scenePlayGrass.angleSlider.setValue(0);
             scenePlayGrass.forceSlider.setValue(0);
             scenePlayGrass.orangeBaskets.setCurrentFrame(0);
@@ -296,6 +327,12 @@ public class MainApp extends Application {
     }
     
     public void startGame(ScenePlay sc){
+        //sc.winAppears(1);
+        sc.winPaneRed.setScaleX(0.001);
+        sc.winPaneRed.setScaleY(0.001);
+        sc.winPaneOrange.setScaleX(0.001);
+        sc.winPaneOrange.setScaleY(0.001);
+        
         Sound.playBgSound.play();
         Sound.welcomeBgSound.stop();
         GameStatus.initialize();
@@ -323,6 +360,7 @@ public class MainApp extends Application {
             for(Ball ball : GameStatus.listOfBalls){//calculate position
                 ball.updatePosition();
             }
+            
             //CHECK OVERLAP
                for(int ball1=0; ball1< GameStatus.listOfBalls.length; ball1++){
                     for(int ball2=0; ball2< GameStatus.listOfBalls.length; ball2++){
@@ -333,7 +371,7 @@ public class MainApp extends Application {
                 }
             GameStatus.checkBallsCollisions(sc);//check if they collide, change x and speed of yes
 
-            GameStatus.updateVisual();//set centerX and y to show the changes to the user
+            GameStatus.updateVisual(sc);//set centerX and y to show the changes to the user
 
             //System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
             
@@ -349,6 +387,7 @@ public class MainApp extends Application {
             timeOfStart = timeOfEnd;
             //System.out.println();
         }
+        System.out.println("ball finish moving");
         //update baskets
         sc.orangeBaskets.setCurrentFrame(GameStatus.teamsPoints[0]);
         sc.redBaskets.setCurrentFrame(GameStatus.teamsPoints[1]);
@@ -358,19 +397,27 @@ public class MainApp extends Application {
         }
         
         if(GameStatus.listOfBalls[8].isPocketed){//black ball is in pocket
+
+            int winningTeam;
             if(GameStatus.teamsPoints[sc.teamName.getCurrentFrame()] >= 4){
-                System.out.println("team "+sc.teamName.getCurrentFrame()+" wins");
-                sc.winAppears(sc.teamName.getCurrentFrame());
+                winningTeam = sc.teamName.getCurrentFrame();
+                System.out.println("normal win");
             }
             else{
-                System.out.println("team "+((sc.teamName.getCurrentFrame()==0)? 1: 0)+" wins");
-                sc.winAppears((sc.teamName.getCurrentFrame()==0)? 1: 0);
+                winningTeam = (sc.teamName.getCurrentFrame()==0)?1:0;
+                System.out.println("bomb win");
             }
+            if(winningTeam == 0){
+                sc.winPaneOrange.setScaleX(1);
+                sc.winPaneOrange.setScaleY(1);
+            }else{
+                sc.winPaneRed.setScaleX(1);
+                sc.winPaneRed.setScaleY(1);
+            }
+            
         }
-        else{
+        else
             changeTeam(sc);
-        }
-        
     }
 
     public void playButtonHit(ScenePlay sc){
@@ -409,6 +456,7 @@ public class MainApp extends Application {
     }
     
     public void changeTeam(ScenePlay sc){
+        System.out.println("change team done");
         sc.teamName.setCurrentFrame((sc.teamName.getCurrentFrame()+1)%2);
         executeTurn(sc);
     }
@@ -422,7 +470,6 @@ public class MainApp extends Application {
         GameStatus.listOfBalls[0].setOpacity(1d);
     }
     
-    
     public void movingTheBalls(ScenePlay sc){
         System.out.println("ball are moving method");
         
@@ -430,7 +477,6 @@ public class MainApp extends Application {
         changeTeam(sc);
 
     }
-    
     
     public static void main(String[] args) {
         Application.launch();

@@ -22,7 +22,7 @@ import java.awt.font.ImageGraphicAttribute;
 
 public class ScenePlay {
 
-    //
+    
             private Scene scene;
             public Pane gamePane;
             StackPane layout = new StackPane();
@@ -65,8 +65,10 @@ public class ScenePlay {
             public CustomAnimation teamName;
             
     //winpane
-            public Pane winPane;
-            public Button buttonReplay;
+            public Pane winPaneRed;
+            public Pane winPaneOrange;
+            public Button buttonReplayRed;
+            public Button buttonReplayOrange;
             Rectangle winBlur;
             ImageView orangeWin;
             ImageView redWin;
@@ -86,9 +88,11 @@ public class ScenePlay {
                 layout.getChildren().removeAll(rectangle,menuBg,gridPaneMenu);
             }
 
-            public void winAppears(int winningTeamIndex){
+            /*public void winAppears(int winningTeamIndex){
                 winPane.getChildren().clear();
                 winPane.getChildren().addAll(winBlur,buttonReplay);
+                
+                System.out.println("hello");
 
                 String winningColor;
                 if(winningTeamIndex == 0){//if orange Win
@@ -106,11 +110,12 @@ public class ScenePlay {
                 buttonReplay.setGraphic(buttonReplayIMG);//set image of button
                 buttonReplay.toFront();
                 layout.getChildren().add(winPane);
+                winPane.toFront();
             }
             public void winDisappears(){
                    layout.getChildren().remove(winPane);
             }
-
+*/
             public void physicsAppears(){
                 physicsButton.setGraphic(physicsOn);
                 frictionValue.setStyle("-fx-opacity: 1; -fx-font-size: 25px; -fx-font-weight: bold");
@@ -408,7 +413,29 @@ public class ScenePlay {
                 fade.play();
 
 //WINNING PANE
-                winPane = new Pane();
+                winPaneRed = new Pane();
+                winPaneOrange = new Pane();
+                
+                //System.out.println("hello");
+
+                /*String winningColor;
+                if(winningTeamIndex == 0){//if orange Win
+                    winPane.getChildren().addAll(orangeWin);
+                    winningColor = "orange";
+                }
+                else{//if red Win
+                    winPane.getChildren().addAll(redWin);
+                    winningColor = "red";
+                }
+
+                ImageView buttonReplayIMG = new ImageView("ButtonIMG/"+winningColor+"Replay.png");
+                buttonReplayIMG.setPreserveRatio(true);
+                buttonReplayIMG.setFitHeight(145);
+                buttonReplay.setGraphic(buttonReplayIMG);//set image of button
+                buttonReplay.toFront();
+                layout.getChildren().add(winPane);
+                winPane.toFront();*/
+                
                 orangeWin = new ImageView("BackgroundIMG/star0.png");
                 orangeWin.setPreserveRatio(true);
                 orangeWin.setFitHeight(760);
@@ -422,21 +449,41 @@ public class ScenePlay {
                 orange.setPreserveRatio(true);
                 orange.setFitHeight(145);
                 
-                buttonReplay = new Button("");
+                buttonReplayRed = new Button("",apple);
+                buttonReplayRed.setBackground(null);
+                buttonReplayRed.setBorder(null);
+                buttonReplayRed.setTranslateX(384);
+                buttonReplayRed.setTranslateY(310);
+                
+                buttonReplayOrange = new Button("",orange);
+                buttonReplayOrange.setBackground(null);
+                buttonReplayOrange.setBorder(null);
+                buttonReplayOrange.setTranslateX(384);
+                buttonReplayOrange.setTranslateY(310);
 
-                buttonReplay.setBackground(null);
-                buttonReplay.setBorder(null);
-                buttonReplay.setTranslateX(384);
-                buttonReplay.setTranslateY(310);
-
-                winPane.setTranslateX(180);
-                winPane.setTranslateY(0);
-                winBlur = new Rectangle(0,0, 1350, 780);
-                //(will add fade transition later)
-                winBlur.setFill(Color.WHITE);
-                winBlur.setOpacity(0.5);
-                winBlur.setTranslateX(-180);
-
+                winPaneRed.setTranslateX(180);
+                winPaneRed.setTranslateY(0);
+                winPaneOrange.setTranslateX(180);
+                winPaneOrange.setTranslateY(0);
+                Rectangle winBlurRed = new Rectangle(0,0, 1350, 780);
+                winBlurRed.setFill(Color.WHITE);
+                winBlurRed.setOpacity(0.5);
+                winBlurRed.setTranslateX(-180);
+                Rectangle winBlurOrange = new Rectangle(0,0, 1350, 780);
+                winBlurOrange.setFill(Color.WHITE);
+                winBlurOrange.setOpacity(0.5);
+                winBlurOrange.setTranslateX(-180);
+                
+                winPaneOrange.getChildren().addAll(winBlurOrange,orangeWin,buttonReplayOrange);
+                winPaneRed.getChildren().addAll(winBlurRed,redWin,buttonReplayRed);
+                
+                winPaneRed.setScaleX(0.001);
+                winPaneRed.setScaleY(0.001);
+                winPaneOrange.setScaleX(0.001);
+                winPaneOrange.setScaleY(0.001);
+                
+                layout.getChildren().addAll(winPaneOrange,winPaneRed);
+                
             }
 
             public Scene getScene() {

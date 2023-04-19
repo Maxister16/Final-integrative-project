@@ -8,8 +8,6 @@ public class GameStatus {
     public static String CLIENT_LOCATION_OF_PROJECT = System.getProperty("user.dir");
     public static boolean isGameOn = false;
     public static int[] teamsPoints = {0,0};
-    public static int team1Points = 0;
-    public static int team2Points = 0;
     public static int gameState = 0;
     public static long time = 0;
     public static Ball[] listOfBalls = new Ball[10];
@@ -19,7 +17,9 @@ public class GameStatus {
     public static double[] FRICTION_COEFFICIENT = {0.95,0.96,0.955}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
     public static CueStick cue;
     
-    static public void updateVisual(){
+    public static boolean isGameOver = false;
+    
+    static public void updateVisual(ScenePlay sc){
         for(Ball ball: listOfBalls){
             ball.setCenterX(ball.getVectorPosition().getXcomponent());
             ball.setCenterY(ball.getVectorPosition().getYcomponent());
@@ -28,7 +28,7 @@ public class GameStatus {
     
     static public void checkBallsCollisions(ScenePlay sc){
             
-        for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
+        for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length; firstBallIndex++){
             if(!GameStatus.listOfBalls[firstBallIndex].isPocketed){
                 for(int r=0; r< nets.length; r++) {
 
@@ -48,7 +48,9 @@ public class GameStatus {
                         switch(firstBallIndex){
                             case 1,2,3,4 -> GameStatus.teamsPoints[0]+=1;
                             case 5,6,7,9 -> GameStatus.teamsPoints[1]+=1;
+                            case 8 -> GameStatus.isGameOver = true;
                         }
+                        
                         System.out.println("0: "+GameStatus.teamsPoints[0]+" 1: "+GameStatus.teamsPoints[1]);
                         GameStatus.listOfBalls[firstBallIndex].setOpacity(0);
                     }
@@ -200,8 +202,8 @@ public class GameStatus {
     
     public static void reset(){
         isGameOn = false;
-        team1Points = 0;
-        team2Points = 0;
+//        team1Points = 0;
+//        team2Points = 0;
         time = 0;
         
     }

@@ -17,6 +17,7 @@ import javafx.util.Duration;
 
 import static Pool.GameStatus.table;
 import static Pool.GameStatus.time;
+import java.awt.event.ActionListener;
 import static java.lang.Math.*;
 
 public class Ball extends Circle implements InteractiveObject {
@@ -189,5 +190,9 @@ public class Ball extends Circle implements InteractiveObject {
         public void setImage(Image newImage){
             this.setFill(new ImagePattern(newImage));
         }
+
+    void addActionListener(ActionListener actionListener) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     }
