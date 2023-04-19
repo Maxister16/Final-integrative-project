@@ -25,9 +25,9 @@ public class MainApp extends Application {
         Sound.initiateSound();
         //create scenes
         SceneWelcome sceneWelcome = new SceneWelcome();
-        ScenePlay scenePlayGrass = new ScenePlayGrass();
-        ScenePlay scenePlayNormal = new ScenePlayNormal();
-        ScenePlay scenePlayIce = new ScenePlayIce();
+        ScenePlayGrass scenePlayGrass = new ScenePlayGrass();
+        ScenePlayNormal scenePlayNormal = new ScenePlayNormal();
+        ScenePlayIce scenePlayIce = new ScenePlayIce();
         
         stage.setHeight(780);
         stage.setWidth(1350);
@@ -258,7 +258,6 @@ public class MainApp extends Application {
             if (sc.physicsButton.getGraphic() == sc.physicsOn ) {//print physics
 
             }
-
                 
             System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
                 
