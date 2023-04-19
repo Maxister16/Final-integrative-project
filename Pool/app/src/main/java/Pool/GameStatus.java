@@ -25,6 +25,25 @@ public class GameStatus {
             ball.setCenterY(ball.getVectorPosition().getYcomponent());
         }
     }
+    static public void penetrationFix(Ball firtB, Ball secondB){
+
+        double distanceBallsX=firtB.getCenterX()- secondB.getCenterX();
+        double distanceBallsY=firtB.getCenterY()-secondB.getCenterY();
+        Vector distance=new Vector(distanceBallsX, distanceBallsY);
+
+        // double ball1Ball2OverX=listOfBalls[i].
+        if((secondB.getRadius()*2)>=distance.getMagnitude() && secondB.getID()!=firtB.getID()){
+            //PENETRATION RESOLUTION
+            double penetrationDepth= (firtB.getRadius()*2)-distance.getMagnitude();
+            Vector penetrationRes=Vector.vectorScalarProduct((penetrationDepth/2.0), distance.getUnitVector());
+            firtB.setVectorPosition(Vector.vectorSum(firtB.getVectorPosition(), penetrationRes));
+            secondB.setVectorPosition(Vector.vectorSum(secondB.getVectorPosition(), penetrationRes));
+            // System.out.println(distanceBallsX+" so the balls overlap");
+            //this.setVi(Vector.vectorScalarProduct(-1, this.getVi()));
+            //listOfBalls[i].setVi(Vector.vectorScalarProduct(-1, listOfBalls[i].getVi()));
+
+        }
+    }
     
     static public void checkBallsCollisions(){
             
@@ -39,6 +58,24 @@ public class GameStatus {
                     //do balls collide
                     if(firstBallIndex!=secondBallIndex&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()){
                         System.out.println("collided check ball"+ firstBallIndex+" "+secondBallIndex);
+                      /* // CHECKING FOR OVERLAP
+                        double distanceBallsX=listOfBalls[firstBallIndex].getCenterX()- listOfBalls[secondBallIndex].getCenterX();
+                        double distanceBallsY=listOfBalls[firstBallIndex].getCenterY()-listOfBalls[secondBallIndex].getCenterY();
+                        Vector distance=new Vector(distanceBallsX, distanceBallsY);
+                            // double ball1Ball2OverX=listOfBalls[i].
+                            if((listOfBalls[secondBallIndex].getRadius()*2)>=distance.getMagnitude()){
+                                //PENETRATION RESOLUTION
+                                double penetrationDepth= (listOfBalls[firstBallIndex].getRadius()*2)-distance.getMagnitude();
+                                Vector penetrationRes=Vector.vectorScalarProduct((penetrationDepth/2.0), distance.getUnitVector());
+                                listOfBalls[firstBallIndex].setVectorPosition(Vector.vectorSum(listOfBalls[firstBallIndex].getVectorPosition(), penetrationRes));
+                                listOfBalls[secondBallIndex].setVectorPosition(Vector.vectorSum(listOfBalls[secondBallIndex].getVectorPosition(), penetrationRes));
+                                System.out.println(distanceBallsX+" so the balls overlap");
+                                //this.setVi(Vector.vectorScalarProduct(-1, this.getVi()));
+                                //listOfBalls[i].setVi(Vector.vectorScalarProduct(-1, listOfBalls[i].getVi()));
+                            //}
+                        }
+
+                       */
                         Ball.reactIsHit(GameStatus.listOfBalls[firstBallIndex], GameStatus.listOfBalls[secondBallIndex]);
                     }
                 }

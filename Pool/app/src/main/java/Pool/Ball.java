@@ -140,6 +140,27 @@ public class Ball extends Circle implements InteractiveObject {
                     position.y = tableBorderMaxY;
                 //yPosition=this.getCenterY() + this.getVi().getYcomponent();
             }
+            /*for(int i=0; i< listOfBalls.length;i++){
+                double distanceBallsX=this.getCenterX()- listOfBalls[i].getCenterX();
+                double distanceBallsY=this.getCenterY()-listOfBalls[i].getCenterY();
+                Vector distance=new Vector(distanceBallsX, distanceBallsY);
+
+               // double ball1Ball2OverX=listOfBalls[i].
+                if((listOfBalls[i].getRadius()*2)>=distance.getMagnitude() && i!=this.id){
+                    //PENETRATION RESOLUTION
+                    double penetrationDepth= (getRadius()*2)-distance.getMagnitude();
+                    Vector penetrationRes=Vector.vectorScalarProduct((penetrationDepth/2.0), distance.getUnitVector());
+                    this.setVectorPosition(Vector.vectorSum(this.getVectorPosition(), penetrationRes));
+                    listOfBalls[i].setVectorPosition(Vector.vectorSum(listOfBalls[i].getVectorPosition(), penetrationRes));
+                    System.out.println(distanceBallsX+" so the balls overlap");
+                    //this.setVi(Vector.vectorScalarProduct(-1, this.getVi()));
+                    //listOfBalls[i].setVi(Vector.vectorScalarProduct(-1, listOfBalls[i].getVi()));
+                }
+            }
+
+             */
+
+
 
 
 
@@ -158,6 +179,30 @@ public class Ball extends Circle implements InteractiveObject {
 
          */
         }
+     public void penetrationFix(){
+        for(int i=0; i< listOfBalls.length;i++){
+            Ball secondB=listOfBalls[i];
+
+            double distanceBallsX=this.getCenterX()- secondB.getCenterX();
+            double distanceBallsY=this.getCenterY()-secondB.getCenterY();
+            Vector distance=new Vector(distanceBallsX, distanceBallsY);
+
+            // double ball1Ball2OverX=listOfBalls[i].
+            if((secondB.getRadius()*2)>=distance.getMagnitude() && secondB.getID()!=this.getID()) {
+                //PENETRATION RESOLUTION
+                double penetrationDepth = (this.getRadius() * 2) - distance.getMagnitude();
+                Vector penetrationRes = Vector.vectorScalarProduct((penetrationDepth / 2.0), distance.getUnitVector());
+                this.setVectorPosition(Vector.vectorSum(this.getVectorPosition(), penetrationRes));
+                secondB.setVectorPosition(Vector.vectorSum(secondB.getVectorPosition(), penetrationRes));
+                // System.out.println(distanceBallsX+" so the balls overlap");
+                //this.setVi(Vector.vectorScalarProduct(-1, this.getVi()));
+                //listOfBalls[i].setVi(Vector.vectorScalarProduct(-1, listOfBalls[i].getVi()));
+            }
+
+        }
+    }
+
+
 
         
         static public void reactIsHit(Ball firstBall, Ball secondBall){

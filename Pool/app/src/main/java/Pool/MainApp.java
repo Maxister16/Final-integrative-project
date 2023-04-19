@@ -344,7 +344,19 @@ public class MainApp extends Application {
         while(0.001 <= GameStatus.listOfBalls[0].getVi().getMagnitude()+GameStatus.listOfBalls[1].getVi().getMagnitude()+GameStatus.listOfBalls[2].getVi().getMagnitude()+GameStatus.listOfBalls[3].getVi().getMagnitude()+GameStatus.listOfBalls[4].getVi().getMagnitude()+GameStatus.listOfBalls[5].getVi().getMagnitude()+GameStatus.listOfBalls[6].getVi().getMagnitude()+GameStatus.listOfBalls[7].getVi().getMagnitude()+GameStatus.listOfBalls[8].getVi().getMagnitude()+GameStatus.listOfBalls[9].getVi().getMagnitude()){
                 for(Ball ball : GameStatus.listOfBalls){//calculate position
                     ball.updatePosition();
+                    ball.penetrationFix();
+
                 }
+                //CHECK OVERLAP
+               /* for(int ball1=0; ball1< listOfBalls.length; ball1++){
+                    for(int ball2=0; ball2< listOfBalls.length; ball2++){
+                        if(ball2!=ball1){
+                            GameStatus.penetrationFix(listOfBalls[ball1], listOfBalls[ball2]);
+                        }
+                    }
+                }
+
+                */
                 GameStatus.checkBallsCollisions();//check if they collide, change x and speed of yes
 
                 GameStatus.updateVisual();//set centerX and y to show the changes to the user
