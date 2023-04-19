@@ -14,7 +14,7 @@ public class GameStatus {
     public static Net[] nets = new Net[6];
     public static Table table = new Table();
     public static Line[] tableLines = new Line[2];
-    public static double[] FRICTION_COEFFICIENT = {0.95,0.96,0.955}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
+    public static double[] FRICTION_COEFFICIENT = {0.955,0.975,0.91}; //0:normal, 1:ice, 2:grass NOT OFFICIAL
     public static CueStick cue;
     
     public static boolean isGameOver = false;
@@ -57,7 +57,7 @@ public class GameStatus {
                 }
                 for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
                     //do balls collide
-                    if(firstBallIndex!=secondBallIndex&&!GameStatus.listOfBalls[secondBallIndex].isPocketed&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()+5){
+                    if(firstBallIndex!=secondBallIndex&&!GameStatus.listOfBalls[secondBallIndex].isPocketed&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()+2){
                         System.out.println("collided check ball"+ firstBallIndex+" "+secondBallIndex);
                         Ball.reactIsHit(GameStatus.listOfBalls[firstBallIndex], GameStatus.listOfBalls[secondBallIndex]);
                     }

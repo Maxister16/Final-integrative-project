@@ -31,7 +31,7 @@ public class PaneWin extends Pane{
         orangeReplay.setBorder(null);
         redReplay.setTranslateX(384);
         redReplay.setTranslateY(310);
-        orangeReplay.setTranslateX(391);
+        orangeReplay.setTranslateX(393);
         orangeReplay.setTranslateY(327);
 
         this.setTranslateX(180);

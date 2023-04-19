@@ -1,10 +1,10 @@
 package Pool;
 
-import static Pool.GameStatus.table;
-import static Pool.GameStatus.tableLines;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
+
+import static Pool.GameStatus.*;
 import static java.lang.Math.PI;
 import java.text.DecimalFormat;
 
@@ -132,6 +132,7 @@ public class MainApp extends Application {
         sceneWelcome.welcomeSoundBtn.setOnAction(btnMuteClicked);
         
 //SCENE_PLAY
+
     //normal
         scenePlayNormal.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.playButton.setOnMouseExited(btnOnMouseExited);
@@ -151,7 +152,8 @@ public class MainApp extends Application {
             scenePlayNormal.forceSlider.setValue(0);
             scenePlayNormal.orangeBaskets.setCurrentFrame(0);
             scenePlayNormal.redBaskets.setCurrentFrame(0);
-            startGame(scenePlayNormal);
+            goToWelcome.handle(e);
+            Sound.yaySound.stop();
         });
         scenePlayNormal.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
@@ -161,7 +163,8 @@ public class MainApp extends Application {
             scenePlayNormal.forceSlider.setValue(0);
             scenePlayNormal.orangeBaskets.setCurrentFrame(0);
             scenePlayNormal.redBaskets.setCurrentFrame(0);
-            startGame(scenePlayNormal);
+            goToWelcome.handle(e);
+            Sound.yaySound.stop();
         });
     
         //sound button
@@ -188,7 +191,8 @@ public class MainApp extends Application {
             scenePlayIce.forceSlider.setValue(0);
             scenePlayIce.orangeBaskets.setCurrentFrame(0);
             scenePlayIce.redBaskets.setCurrentFrame(0);
-            startGame(scenePlayIce);
+            goToWelcome.handle(e);
+            Sound.yaySound.stop();
         });
         scenePlayIce.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
         scenePlayIce.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
@@ -198,7 +202,8 @@ public class MainApp extends Application {
             scenePlayIce.forceSlider.setValue(0);
             scenePlayIce.orangeBaskets.setCurrentFrame(0);
             scenePlayIce.redBaskets.setCurrentFrame(0);
-            startGame(scenePlayIce);
+            goToWelcome.handle(e);
+            Sound.yaySound.stop();
         });
     
         //sound button
@@ -225,7 +230,8 @@ public class MainApp extends Application {
             scenePlayGrass.forceSlider.setValue(0);
             scenePlayGrass.orangeBaskets.setCurrentFrame(0);
             scenePlayGrass.redBaskets.setCurrentFrame(0);
-            startGame(scenePlayGrass);
+            goToWelcome.handle(e);
+            Sound.yaySound.stop();
         });
         scenePlayGrass.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
         scenePlayGrass.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
@@ -235,7 +241,8 @@ public class MainApp extends Application {
             scenePlayGrass.forceSlider.setValue(0);
             scenePlayGrass.orangeBaskets.setCurrentFrame(0);
             scenePlayGrass.redBaskets.setCurrentFrame(0);
-            startGame(scenePlayGrass);
+            goToWelcome.handle(e);
+            Sound.yaySound.stop();
         });
     
         //sound button
@@ -339,7 +346,7 @@ public class MainApp extends Application {
         sc.placeObjectsInGamePane();
         GameStatus.positionObjects(1350, 780, sc.gamePane.getLayoutX(), sc.gamePane.getLayoutY());
         GameStatus.table.setImage(GameStatus.gameState);
-        sc.frictionValue.setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[1])+" F/N");
+        sc.frictionValue.setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[gameState])+" F/N");
         executeTurn(sc);
     }
     
@@ -410,9 +417,11 @@ public class MainApp extends Application {
             if(winningTeam == 0){
                 sc.winPaneOrange.setScaleX(1);
                 sc.winPaneOrange.setScaleY(1);
+                Sound.yaySound.play();
             }else{
                 sc.winPaneRed.setScaleX(1);
                 sc.winPaneRed.setScaleY(1);
+                Sound.yaySound.play();
             }
             
         }
@@ -423,7 +432,7 @@ public class MainApp extends Application {
     public void playButtonHit(ScenePlay sc){
         
         sc.forceValue.setText(Float.valueOf(df.format(sc.forceSlider.getValue()))+" N");
-        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+"°");
+        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+"");
         
         sc.playButton.setDisable(true);
         sc.menuButton.setDisable(true);
