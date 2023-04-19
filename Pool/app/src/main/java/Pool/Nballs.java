@@ -26,7 +26,7 @@ public class Nballs extends Application {
     final double PADDING = 1.0;
     final double FRICTION_COEFFICIENT = 0.005;
 
-
+//BALL CLASS 2.0
     public static class Ball {
         Circle circle;
         double deltaX;
@@ -50,6 +50,9 @@ public class Nballs extends Application {
     public void start(Stage primaryStage) {
         Pane layout = new Pane();
         Scene scene = new Scene(layout, 700, 350);
+        //We already have balls so take from game status
+        GameStatus.initialize();
+
 
         List<Ball> balls = new ArrayList<>();
 
@@ -60,12 +63,19 @@ public class Nballs extends Application {
 
         for (int i = 0; i <= numBalls; i++) {
             if (i ==0) {
-                Circle circle = new Circle(ballRadius);
+                GameStatus.listOfBalls[i].setLayoutX(10);
+                GameStatus.listOfBalls[i].setLayoutX(scene.getHeight()/2);
+
+                /*Circle circle = new Circle(ballRadius);
                 //For whatever reason keep this >= 10
                 circle.setLayoutX(10);
                 circle.setLayoutY(scene.getHeight()/2);
-                layout.getChildren().add(circle);
-                balls.add(new Ball(circle, INIT_SPEED_X, INIT_SPEED_Y, Color.RED));
+
+                 */
+               // GameStatus.listOfBalls[i].setConstants(INIT_SPEED_X, INIT_SPEED_Y);
+                layout.getChildren().add(GameStatus.listOfBalls[i]);
+
+                //balls.add(new Ball(circle, INIT_SPEED_X, INIT_SPEED_Y, Color.RED));
             }
             Circle circle = new Circle(ballRadius);
             double x = clusterX + Math.random() * ballRadius * 2 - ballRadius;
