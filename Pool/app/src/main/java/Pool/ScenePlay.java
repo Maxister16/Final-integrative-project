@@ -33,7 +33,6 @@ public class ScenePlay {
 
             ImageView forceTitle;
             ImageView angleTitle;
-            ImageView speedTitle;
             ImageView frictionTitle;
 
     //menu
@@ -59,7 +58,6 @@ public class ScenePlay {
             Label frictionValue;
             Label angleValue;
             Label forceValue;
-            Label speedValue;
             
     //decorations        
             public CustomAnimation redBaskets;
@@ -114,10 +112,22 @@ public class ScenePlay {
             }
 
             public void physicsAppears(){
-
+                physicsButton.setGraphic(physicsOn);
+                frictionValue.setStyle("-fx-opacity: 1; -fx-font-size: 25px; -fx-font-weight: bold");
+                angleValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                forceValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                frictionTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                angleTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
+                forceTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
             }
             public void physicsDisappears(){
-
+                physicsButton.setGraphic(physicsOff);
+                frictionValue.setStyle("-fx-opacity: 0;");
+                angleValue.setStyle("-fx-opacity: 0;");
+                forceValue.setStyle("-fx-opacity: 0;");
+                frictionTitle.setStyle("-fx-opacity: 0;");
+                angleTitle.setStyle("-fx-opacity: 0;");
+                forceTitle.setStyle("-fx-opacity: 0;");
             }
             
             public ScenePlay()  {
@@ -146,31 +156,26 @@ public class ScenePlay {
                 gridPaneTop.getRowConstraints().addAll(rowTop1);
 
                 //Set Size constraints in bottom Grid Pane
-                ColumnConstraints columnBot1 = new ColumnConstraints(230);
+                ColumnConstraints columnBot1 = new ColumnConstraints(280);
                 columnBot1.setHalignment(HPos.LEFT);
-
                 ColumnConstraints columnBot2 = new ColumnConstraints(150);
                 columnBot2.setHalignment(HPos.CENTER);
-                ColumnConstraints columnBot3 = new ColumnConstraints(120);
+                ColumnConstraints columnBot3 = new ColumnConstraints(160);
                 columnBot3.setHalignment(HPos.LEFT);
-                ColumnConstraints columnBot4 = new ColumnConstraints(120);
+                ColumnConstraints columnBot4 = new ColumnConstraints(110);
                 columnBot4.setHalignment(HPos.CENTER);
-                ColumnConstraints columnBot5 = new ColumnConstraints(110);
+                ColumnConstraints columnBot5 = new ColumnConstraints(150);
                 columnBot5.setHalignment(HPos.LEFT);
                 ColumnConstraints columnBot6 = new ColumnConstraints(120);
                 columnBot6.setHalignment(HPos.CENTER);
-                ColumnConstraints columnBot7 = new ColumnConstraints(120);
+                ColumnConstraints columnBot7 = new ColumnConstraints(110);
                 columnBot7.setHalignment(HPos.LEFT);
-                ColumnConstraints columnBot8 = new ColumnConstraints(90);
+                ColumnConstraints columnBot8 = new ColumnConstraints(100);
                 columnBot8.setHalignment(HPos.CENTER);
-                ColumnConstraints columnBot9 = new ColumnConstraints(130);
-                columnBot9.setHalignment(HPos.LEFT);
-                ColumnConstraints columnBot10 = new ColumnConstraints(140);
-                columnBot10.setHalignment(HPos.RIGHT);
                 RowConstraints rowBot1 = new RowConstraints(60);
                 rowBot1.setValignment(VPos.CENTER);
 
-                gridPaneBot.getColumnConstraints().addAll(columnBot1, columnBot2, columnBot3, columnBot4, columnBot5, columnBot6, columnBot7, columnBot8, columnBot9, columnBot10);
+                gridPaneBot.getColumnConstraints().addAll(columnBot1, columnBot2, columnBot3, columnBot4, columnBot5, columnBot6, columnBot7, columnBot8);
                 gridPaneBot.getRowConstraints().addAll(rowBot1);
 
                 //Play screen Sliders and Buttons
@@ -179,7 +184,7 @@ public class ScenePlay {
 
                 forceSlider = new Slider(0.1, 2, 0.1);
                 forceSlider.getStylesheets().add("slider.css");
-                angleSlider = new Slider(0.0, 359, 0.1);
+                angleSlider = new Slider(0.0, 359, 0.01);
                 angleSlider.getStylesheets().add("angleSlider.css");
 
                 gridPaneTop.setHgap(20);
@@ -207,20 +212,16 @@ public class ScenePlay {
                 angleTitle = new ImageView("LabelIMG/AngleWordIMG.png");
                 forceTitle = new ImageView("LabelIMG/ForceWordIMG.png");
                 forceTitle.setTranslateY(1);
-                speedTitle = new ImageView("LabelIMG/SpeedWordIMG.png");
                 frictionTitle.setPreserveRatio(true);
                 frictionTitle.setFitHeight(30);
                 angleTitle.setPreserveRatio(true);
                 angleTitle.setFitHeight(30);
                 forceTitle.setPreserveRatio(true);
                 forceTitle.setFitHeight(30);
-                speedTitle.setPreserveRatio(true);
-                speedTitle.setFitHeight(30);
 
                 frictionValue = new Label("");
                 angleValue = new Label("");
                 forceValue = new Label("");
-                speedValue = new Label("");
 
                 frictionValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
                 angleValue.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
@@ -234,11 +235,10 @@ public class ScenePlay {
                 soundButton.setBackground(null);
                 soundButton.setBorder(null);
                 soundButton.setTranslateY(-3);
+                soundButton.setTranslateX(150);
                 soundOffIMG = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
                 soundOffIMG.setPreserveRatio(true);
                 soundOffIMG.setFitHeight(60);
-
-
 
                 // Add Sliders and buttons to GridPanes
                  gridPaneBot.add(menuButton, 0, 0);
@@ -248,9 +248,7 @@ public class ScenePlay {
                  gridPaneBot.add(forceValue, 4, 0);
                  gridPaneBot.add(angleTitle, 5, 0);
                  gridPaneBot.add(angleValue, 6, 0);
-                 gridPaneBot.add(speedTitle, 7, 0);
-                 gridPaneBot.add(speedValue, 8, 0);
-                 gridPaneBot.add(soundButton, 9, 0);
+                 gridPaneBot.add(soundButton, 7, 0);
 
                 ImageView forceLabel = new ImageView("LabelIMG/ForceSliderIMG.jpg");
                 ImageView angleLabel = new ImageView("LabelIMG/AngleSliderIMG.jpg");

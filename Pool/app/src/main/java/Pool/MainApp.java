@@ -1,12 +1,12 @@
 package Pool;
 
-import static Pool.GameStatus.listOfBalls;
 import static Pool.GameStatus.table;
 import static Pool.GameStatus.tableLines;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
 import static java.lang.Math.PI;
+import java.text.DecimalFormat;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -16,6 +16,7 @@ public class MainApp extends Application {
     
     private long TIME_OF_TICK = 1000/60;//time in millis
     Stage stagefield;
+    DecimalFormat df = new DecimalFormat("#.##");
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -36,6 +37,10 @@ public class MainApp extends Application {
         Sound.welcomeBgSound.play();
         stage.setScene(sceneWelcome.getScene());
         stage.show();
+        
+        scenePlayNormal.getScene().setOnKeyTyped(e->{
+            scenePlayNormal.winAppears(0);
+        });
         
         //action handlers for repetitive actions
 //GO TO SCENES
@@ -74,8 +79,8 @@ public class MainApp extends Application {
 //BUTTON ACTIONS
         EventHandler btnOnMouseEntered = e->{
             Button target = (Button)e.getTarget();
-            target.setScaleX(1.15);
-            target.setScaleY(1.15);
+            target.setScaleX(1.12);
+            target.setScaleY(1.12);
             Sound.btnSound.stop();
             Sound.btnSound.play();
         };
@@ -85,6 +90,24 @@ public class MainApp extends Application {
             target.setScaleY(1);
             Sound.btnSound.stop();
             Sound.btnSound.play();
+        };
+        
+        EventHandler btnMuteClicked = e ->{
+            Button sourceBtn = (Button)e.getSource();
+            if (sourceBtn.getGraphic() == scenePlayNormal.soundOnIMG || sourceBtn.getGraphic() == scenePlayIce.soundOnIMG || sourceBtn.getGraphic() == scenePlayGrass.soundOnIMG || sourceBtn.getGraphic() == sceneWelcome.welcomeSoundOn) {
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOffIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOff);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOffIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOffIMG);
+                Sound.muteSound();
+            }
+            else {
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOnIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOn);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOnIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOnIMG);
+                Sound.unmutesound();
+            }
         };
         
 //SCENE_WELCOME
@@ -99,6 +122,10 @@ public class MainApp extends Application {
         sceneWelcome.grassBtn.setOnMouseExited(btnOnMouseExited);
         sceneWelcome.iceBtn.setOnMouseEntered(btnOnMouseEntered);
         sceneWelcome.iceBtn.setOnMouseExited(btnOnMouseExited);
+        //sound button
+        sceneWelcome.welcomeSoundBtn.setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.welcomeSoundBtn.setOnMouseExited(btnOnMouseExited);
+        sceneWelcome.welcomeSoundBtn.setOnAction(btnMuteClicked);
         
 //SCENE_PLAY
     //normal
@@ -110,7 +137,8 @@ public class MainApp extends Application {
         scenePlayNormal.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.menuButton.setOnMouseExited(btnOnMouseExited);
         scenePlayNormal.menuButton.setOnAction(e->{scenePlayNormal.menuAppears();});
-        
+    
+        //replay
         scenePlayNormal.buttonReplay.setOnMouseEntered(btnOnMouseEntered);
         scenePlayNormal.buttonReplay.setOnMouseExited(btnOnMouseExited);
         scenePlayNormal.buttonReplay.setOnAction(e->{
@@ -121,6 +149,11 @@ public class MainApp extends Application {
             scenePlayNormal.redBaskets.setCurrentFrame(0);
             startGame(scenePlayNormal);
         });
+    
+        //sound button
+        scenePlayNormal.soundButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.soundButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.soundButton.setOnAction(btnMuteClicked);
         
     //ice
         scenePlayIce.playButton.setOnMouseEntered(btnOnMouseEntered);
@@ -131,6 +164,24 @@ public class MainApp extends Application {
         scenePlayIce.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayIce.menuButton.setOnMouseExited(btnOnMouseExited);
         scenePlayIce.menuButton.setOnAction(e->{scenePlayIce.menuAppears();});
+        
+        //replay
+        scenePlayIce.buttonReplay.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.buttonReplay.setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.buttonReplay.setOnAction(e->{
+            scenePlayIce.winDisappears();
+            scenePlayIce.angleSlider.setValue(0);
+            scenePlayIce.forceSlider.setValue(0);
+            scenePlayIce.orangeBaskets.setCurrentFrame(0);
+            scenePlayIce.redBaskets.setCurrentFrame(0);
+            startGame(scenePlayIce);
+        });
+    
+        //sound button
+        scenePlayIce.soundButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.soundButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.soundButton.setOnAction(btnMuteClicked);
+        
     //grass    
         scenePlayGrass.playButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayGrass.playButton.setOnMouseExited(btnOnMouseExited);
@@ -140,6 +191,23 @@ public class MainApp extends Application {
         scenePlayGrass.menuButton.setOnMouseEntered(btnOnMouseEntered);
         scenePlayGrass.menuButton.setOnMouseExited(btnOnMouseExited);
         scenePlayGrass.menuButton.setOnAction(e->{scenePlayGrass.menuAppears();});
+        
+        //replay
+        scenePlayGrass.buttonReplay.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.buttonReplay.setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.buttonReplay.setOnAction(e->{
+            scenePlayGrass.winDisappears();
+            scenePlayGrass.angleSlider.setValue(0);
+            scenePlayGrass.forceSlider.setValue(0);
+            scenePlayGrass.orangeBaskets.setCurrentFrame(0);
+            scenePlayGrass.redBaskets.setCurrentFrame(0);
+            startGame(scenePlayGrass);
+        });
+    
+        //sound button
+        scenePlayGrass.soundButton.setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.soundButton.setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.soundButton.setOnAction(btnMuteClicked);
         
 //MENU
     //normal
@@ -231,6 +299,7 @@ public class MainApp extends Application {
         sc.placeObjectsInGamePane();
         GameStatus.positionObjects(1350, 780, sc.gamePane.getLayoutX(), sc.gamePane.getLayoutY());
         GameStatus.table.setImage(GameStatus.gameState);
+        sc.frictionValue.setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[1])+" F/N");
         executeTurn(sc);
     }
     
@@ -255,12 +324,8 @@ public class MainApp extends Application {
 
             GameStatus.updateVisual();//set centerX and y to show the changes to the user
 
-            if (sc.physicsButton.getGraphic() == sc.physicsOn ) {//print physics
-
-            }
-                
             System.out.print("speed: "+GameStatus.listOfBalls[0].getVi().getMagnitude());
-                
+            
             long timeOfEnd;
             
             do{    
@@ -307,6 +372,9 @@ public class MainApp extends Application {
 
     public void playButtonHit(ScenePlay sc){
         
+        sc.forceValue.setText(Float.valueOf(df.format(sc.forceSlider.getValue()))+" N");
+        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+"°");
+        
         sc.playButton.setDisable(true);
         sc.menuButton.setDisable(true);
         sc.forceSlider.setDisable(true);
@@ -319,10 +387,6 @@ public class MainApp extends Application {
 
         GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
         
- /*       GameStatus.cue.hitAnim.setOnFinished(e-> {
-       game(sc);    
-        });
-*/
         GameStatus.cue.hitAnim.setOnFinished(e-> {
             GameStatus.cue.setOpacity(0d);
             

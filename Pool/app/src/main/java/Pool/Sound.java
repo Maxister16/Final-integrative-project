@@ -26,5 +26,16 @@ public class Sound {
         playBgSound.setVolume(0.08);
         playBgSound.setCycleCount(MediaPlayer.INDEFINITE);
     }
+    
+    public static void muteSound(){
+        btnSound.setVolume(0);
+        welcomeBgSound.setVolume(0);
+        playBgSound.setVolume(0);
+    }
+    public static void unmutesound(){
+        btnSound.setVolume(0.05);
+        welcomeBgSound.setVolume(5);
+        playBgSound.setVolume(0.08);
+    }
 
 }

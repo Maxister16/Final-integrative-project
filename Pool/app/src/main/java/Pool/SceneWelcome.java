@@ -1,3 +1,4 @@
+
 package Pool;
 
 import javafx.application.Application;
@@ -6,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -16,31 +19,28 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-
 public class SceneWelcome {
     
     public Scene scene;
+//button to gamemode
     Button normalBtn;
     Button grassBtn; 
     Button iceBtn;
+//button sound mute
+    Button welcomeSoundBtn;
+    ImageView welcomeSoundOn;
+    ImageView welcomeSoundOff;
     
     public SceneWelcome() {
 
-        //Set up music and sounds
-        System.out.println("from class "+System.getProperty("user.dir"));
-        
-        /*File btnFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/tok.mp3");
-        btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
-        btnSound.setVolume(0.05);
-
-        File natureFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/nature.mp3");
-        welcomeBgSound = new MediaPlayer(new javafx.scene.media.Media(natureFile.toURI().toString()));
-        welcomeBgSound.play();
-        welcomeBgSound.setVolume(3);*/
-
         //GridPane for buttons
         GridPane gridPane = new GridPane();
+        GridPane soundGridPane = new GridPane();
+        soundGridPane.setMaxSize(80,80);
+        soundGridPane.setAlignment(Pos.CENTER);
         gridPane.setAlignment(Pos.CENTER);
+        soundGridPane.setTranslateX(620);
+        soundGridPane.setTranslateY(330);
         gridPane.setTranslateY(90);
         gridPane.setTranslateX(110);
 
@@ -68,11 +68,18 @@ public class SceneWelcome {
         ImageView grassMode = new ImageView("ButtonIMG/GrassPlayBtnIMG.png");
         grassMode.setPreserveRatio(true);
         grassMode.setFitHeight(170);
+        welcomeSoundOn = new ImageView("ButtonIMG/VolumeBtnOnIMG.png");
+        welcomeSoundOn.setPreserveRatio(true);
+        welcomeSoundOn.setFitHeight(60);
+        welcomeSoundOff = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
+        welcomeSoundOff.setPreserveRatio(true);
+        welcomeSoundOff.setFitHeight(60);
 
         //Mode buttons with images
         normalBtn = new Button("", normalMode);
         grassBtn = new Button("", grassMode);
         iceBtn = new Button("", iceMode);
+        welcomeSoundBtn =new Button("",welcomeSoundOn);
 
         //Set button node background and border to transparent
         normalBtn.setBackground(null);
@@ -81,8 +88,11 @@ public class SceneWelcome {
         grassBtn.setBorder(null);
         iceBtn.setBackground(null);
         iceBtn.setBorder(null);
+        welcomeSoundBtn.setBorder(null);
+        welcomeSoundBtn.setBackground(null);
 
         //Add buttons to gridPane
+        soundGridPane.add(welcomeSoundBtn,0,0);
         gridPane.add(normalBtn, 0, 0);
         gridPane.add(grassBtn, 1, 0);
         gridPane.add(iceBtn, 2, 0);
@@ -98,57 +108,10 @@ public class SceneWelcome {
 
         //Set play button images
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(backgroundPane, gridPane);
+        layout.getChildren().addAll(backgroundPane, gridPane, soundGridPane);
 
         //create Welcome scene
         this.scene = new Scene(layout);
-/*
-        //Button Events
-        normalBtn.setOnAction((event) -> {
-            ScenePlayNormal scenePlayNormal = new ScenePlayNormal(primaryStage);//ERROR
-            primaryStage.setScene(scenePlayNormal.getScene());
-            //set normal friction coefficient
-            GameStatus.gameState = 0;
-        });
-        normalBtn.setOnMouseEntered((event) -> {
-            normalMode.setFitHeight(185);
-            btnSound.play();
-        });
-        normalBtn.setOnMouseExited((event) -> {
-            normalMode.setFitHeight(170);
-            btnSound.stop();
-        });
-
-        grassBtn.setOnAction((event) -> {
-            ScenePlayGrass scenePlayGrass = new ScenePlayGrass(primaryStage);
-            primaryStage.setScene(scenePlayGrass.getScene());
-           //set grass friction coefficient
-            GameStatus.gameState = 2;
-            //welcomeBgSound.pause();
-        });
-        grassBtn.setOnMouseEntered((event) -> {
-            grassMode.setFitHeight(185);
-            btnSound.play();
-        });
-        grassBtn.setOnMouseExited((event) -> {
-            grassMode.setFitHeight(170);
-            btnSound.stop();
-        });
-        iceBtn.setOnAction((event) -> {
-            ScenePlayIce scenePlayIce = new ScenePlayIce(primaryStage);
-            primaryStage.setScene(scenePlayIce.getScene());
-            //set ice friction coefficient
-            GameStatus.gameState = 1;
-            //welcomeBgSound.stop();
-        });
-        iceBtn.setOnMouseEntered((event) -> {
-            iceMode.setFitHeight(185);
-            btnSound.play();
-        });
-        iceBtn.setOnMouseExited((event) -> {
-            iceMode.setFitHeight(170);
-            btnSound.stop();
-        });*/
 
     }
         public Scene getScene () {

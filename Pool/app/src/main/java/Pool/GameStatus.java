@@ -48,13 +48,13 @@ public class GameStatus {
                 }
                 for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
                     //do balls collide
-                    if(firstBallIndex!=secondBallIndex&&!GameStatus.listOfBalls[secondBallIndex].isPocketed&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()){
+                    if(firstBallIndex!=secondBallIndex&&!GameStatus.listOfBalls[secondBallIndex].isPocketed&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()+5){
                         System.out.println("collided check ball"+ firstBallIndex+" "+secondBallIndex);
                         Ball.reactIsHit(GameStatus.listOfBalls[firstBallIndex], GameStatus.listOfBalls[secondBallIndex]);
                     }
                 }
             }
-        }    
+        }
     }
     
     public static void positionObjects(double widthOfWindow, double heightOfWindow, double xPositionOfGamepane, double yPositionOfGamepane){
