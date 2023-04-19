@@ -443,6 +443,11 @@ public class MainApp extends Application {
             timeOfStart = timeOfEnd;
             //System.out.println();
         }
+        
+        for(Ball ball : GameStatus.listOfBalls)
+            ball.setVi(new Vector(0,0));
+        
+        
         System.out.println("ball finish moving");
         //update baskets
         sc.orangeBaskets.setCurrentFrame(GameStatus.teamsPoints[0]);
