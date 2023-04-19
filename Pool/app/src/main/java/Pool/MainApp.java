@@ -99,7 +99,25 @@ public class MainApp extends Application {
         sceneWelcome.normalBtn.setOnAction(goToNormal);
         sceneWelcome.grassBtn.setOnAction(goToGrass);
         sceneWelcome.iceBtn.setOnAction(goToIce);
-        
+        sceneWelcome.welcomeSoundBtn.setOnAction(e->{
+            if (sceneWelcome.welcomeSoundBtn.getGraphic() == sceneWelcome.welcomeSoundOn) {
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOff);
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOffIMG);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOffIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOffIMG);
+                Sound.muteSound();
+            }
+            else {
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOn);
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOnIMG);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOnIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOnIMG);
+                Sound.unmutesound();
+            }
+        });
+
+        sceneWelcome.welcomeSoundBtn.setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.welcomeSoundBtn.setOnMouseExited(btnOnMouseExited);
         sceneWelcome.normalBtn.setOnMouseEntered(btnOnMouseEntered);
         sceneWelcome.normalBtn.setOnMouseExited(btnOnMouseExited);
         sceneWelcome.grassBtn.setOnMouseEntered(btnOnMouseEntered);
@@ -153,10 +171,16 @@ public class MainApp extends Application {
         scenePlayNormal.soundButton.setOnAction(e->{
             if (scenePlayNormal.soundButton.getGraphic() == scenePlayNormal.soundOnIMG ) {
                 scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOffIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOff);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOffIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOffIMG);
                 Sound.muteSound();
             }
             else {
                 scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOnIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOn);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOnIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOnIMG);
                 Sound.unmutesound();
             }
         });
@@ -166,10 +190,17 @@ public class MainApp extends Application {
         scenePlayIce.soundButton.setOnAction(e->{
             if (scenePlayIce.soundButton.getGraphic() == scenePlayIce.soundOnIMG ) {
                 scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOffIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOff);
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOffIMG);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOffIMG);
+
                 Sound.muteSound();
             }
             else {
                 scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOnIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOn);
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOnIMG);
+                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOnIMG);
                 Sound.unmutesound();
             }
         });
@@ -179,10 +210,16 @@ public class MainApp extends Application {
         scenePlayGrass.soundButton.setOnAction(e->{
             if (scenePlayGrass.soundButton.getGraphic() == scenePlayGrass.soundOnIMG ) {
                 scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOffIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOff);
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOffIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOffIMG);
                 Sound.muteSound();
             }
             else {
                 scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOnIMG);
+                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOn);
+                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOnIMG);
+                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOnIMG);
                 Sound.unmutesound();
             }
         });

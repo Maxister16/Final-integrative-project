@@ -6,6 +6,8 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -23,6 +25,12 @@ public class SceneWelcome {
     Button normalBtn;
     Button grassBtn; 
     Button iceBtn;
+
+    Button welcomeSoundBtn;
+
+    ImageView welcomeSoundOn;
+
+    ImageView welcomeSoundOff;
     
     public SceneWelcome() {
 
@@ -40,7 +48,12 @@ public class SceneWelcome {
 
         //GridPane for buttons
         GridPane gridPane = new GridPane();
+        GridPane soundGridPane = new GridPane();
+        soundGridPane.setMaxSize(80,80);
+        soundGridPane.setAlignment(Pos.CENTER);
         gridPane.setAlignment(Pos.CENTER);
+        soundGridPane.setTranslateX(620);
+        soundGridPane.setTranslateY(330);
         gridPane.setTranslateY(90);
         gridPane.setTranslateX(110);
 
@@ -68,11 +81,18 @@ public class SceneWelcome {
         ImageView grassMode = new ImageView("ButtonIMG/GrassPlayBtnIMG.png");
         grassMode.setPreserveRatio(true);
         grassMode.setFitHeight(170);
+        welcomeSoundOn = new ImageView("ButtonIMG/VolumeBtnOnIMG.png");
+        welcomeSoundOn.setPreserveRatio(true);
+        welcomeSoundOn.setFitHeight(60);
+        welcomeSoundOff = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
+        welcomeSoundOff.setPreserveRatio(true);
+        welcomeSoundOff.setFitHeight(60);
 
         //Mode buttons with images
         normalBtn = new Button("", normalMode);
         grassBtn = new Button("", grassMode);
         iceBtn = new Button("", iceMode);
+        welcomeSoundBtn =new Button("",welcomeSoundOn);
 
         //Set button node background and border to transparent
         normalBtn.setBackground(null);
@@ -81,8 +101,11 @@ public class SceneWelcome {
         grassBtn.setBorder(null);
         iceBtn.setBackground(null);
         iceBtn.setBorder(null);
+        welcomeSoundBtn.setBorder(null);
+        welcomeSoundBtn.setBackground(null);
 
         //Add buttons to gridPane
+        soundGridPane.add(welcomeSoundBtn,0,0);
         gridPane.add(normalBtn, 0, 0);
         gridPane.add(grassBtn, 1, 0);
         gridPane.add(iceBtn, 2, 0);
@@ -98,7 +121,7 @@ public class SceneWelcome {
 
         //Set play button images
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(backgroundPane, gridPane);
+        layout.getChildren().addAll(backgroundPane, gridPane, soundGridPane);
 
         //create Welcome scene
         this.scene = new Scene(layout);
