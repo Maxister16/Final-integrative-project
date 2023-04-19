@@ -251,7 +251,7 @@ public class MainApp extends Application {
             for(Ball ball : GameStatus.listOfBalls){//calculate position
                 ball.updatePosition();
             }
-            GameStatus.checkBallsCollisions();//check if they collide, change x and speed of yes
+            GameStatus.checkBallsCollisions(sc);//check if they collide, change x and speed of yes
 
             GameStatus.updateVisual();//set centerX and y to show the changes to the user
 
@@ -275,15 +275,31 @@ public class MainApp extends Application {
             System.out.println();
         }
         
-        if(GameStatus.listOfBalls[0].isPocketed){
-            whiteInPocket();
-        }
-        if(GameStatus.listOfBalls[8].isPocketed){
-            if(GameStatus.teamsPoints[sc.teamName.getCurrentFrame()] >= 4){
-                sc.winAppears(sc.teamName.getCurrentFrame());
-            }
-            else{
-                sc.winAppears((sc.teamName.getCurrentFrame()==0)? 1: 0);
+        for(int i = 0; i<GameStatus.listOfBalls.length; i++){//check which ball isPocketed
+            if(GameStatus.listOfBalls[i].isPocketed){
+                
+                if(i==8){//black ball
+                    if(GameStatus.teamsPoints[sc.teamName.getCurrentFrame()] >= 4){
+                        sc.winAppears(sc.teamName.getCurrentFrame());
+                    }
+                    else{
+                        sc.winAppears((sc.teamName.getCurrentFrame()==0)? 1: 0);
+                    }
+                }
+                
+                else if(i==0){//white ball
+                    whiteInPocket();
+                }
+                
+                else if(i<=4){//team 1
+                    GameStatus.teamsPoints[0] ++;
+                    sc.orangeBaskets.nextFrame();
+                }
+                
+                else if(i>4){ //team 2
+                    GameStatus.teamsPoints[1] ++;
+                    sc.redBaskets.nextFrame();
+                }
             }
         }
         
@@ -334,6 +350,10 @@ public class MainApp extends Application {
     public void whiteInPocket(){
         GameStatus.listOfBalls[0].setCenterX(tableLines[0].getStartX());
         GameStatus.listOfBalls[0].setCenterY(table.getY()+0.5*table.getHeight());
+        GameStatus.listOfBalls[0].setVectorPosition(new Vector(GameStatus.listOfBalls[0].getCenterX(),GameStatus.listOfBalls[0].getCenterY()));
+        GameStatus.listOfBalls[0].setVi(new Vector(0,0));
+        GameStatus.listOfBalls[0].isPocketed = false;
+        GameStatus.listOfBalls[0].setOpacity(1d);
     }
     
     

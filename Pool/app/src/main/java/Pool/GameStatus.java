@@ -26,20 +26,35 @@ public class GameStatus {
         }
     }
     
-    static public void checkBallsCollisions(){
+    static public void checkBallsCollisions(ScenePlay sc){
             
-            for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
-                
+        for(int firstBallIndex = 0; firstBallIndex<GameStatus.listOfBalls.length-1; firstBallIndex++){
+            if(!GameStatus.listOfBalls[firstBallIndex].isPocketed){
+                for(int r=0; r< nets.length; r++) {
+
+                    double netBorderMinX = nets[r].getCenterX() + listOfBalls[firstBallIndex].getRadius();
+                    double netBorderMinY = nets[r].getCenterY() + listOfBalls[firstBallIndex].getRadius();
+
+                    Vector netsPositionVector = new Vector(nets[r].getCenterX(),nets[r].getCenterY());
+                    if(Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),netsPositionVector).getMagnitude() <= GameStatus.listOfBalls[firstBallIndex].getRadius()+nets[r].getRadius()){
+                        //ScenePlay.gamePane
+                        GameStatus.listOfBalls[firstBallIndex].setOpacity(0);
+                        //sc.gamePane.getChildren().remove(GameStatus.listOfBalls[firstBallIndex]);
+                        GameStatus.listOfBalls[firstBallIndex].setVi(new Vector(0,0));
+
+                        GameStatus.listOfBalls[firstBallIndex].isPocketed = true;
+
+                    }
+                }
                 for(int secondBallIndex=0; secondBallIndex<GameStatus.listOfBalls.length; secondBallIndex++){
                     //do balls collide
-                    if(firstBallIndex!=secondBallIndex&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()){
+                    if(firstBallIndex!=secondBallIndex&&!GameStatus.listOfBalls[secondBallIndex].isPocketed&&Vector.vectorDifference(GameStatus.listOfBalls[firstBallIndex].getVectorPosition(),GameStatus.listOfBalls[secondBallIndex].getVectorPosition()).getMagnitude() <= 2*GameStatus.listOfBalls[secondBallIndex].getRadius()){
                         System.out.println("collided check ball"+ firstBallIndex+" "+secondBallIndex);
                         Ball.reactIsHit(GameStatus.listOfBalls[firstBallIndex], GameStatus.listOfBalls[secondBallIndex]);
                     }
                 }
             }
-            
-        
+        }    
     }
     
     public static void positionObjects(double widthOfWindow, double heightOfWindow, double xPositionOfGamepane, double yPositionOfGamepane){
