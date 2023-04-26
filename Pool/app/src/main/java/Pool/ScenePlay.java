@@ -79,6 +79,8 @@ public class ScenePlay {
                 gamePane.getChildren().addAll(GameStatus.listOfBalls);
                 gamePane.getChildren().addAll(GameStatus.tableLines);
                 gamePane.getChildren().addAll(GameStatus.table.getBackground(), GameStatus.table.getBorder(),GameStatus.cue);
+                gamePane.setLayoutY(57);
+                gamePane.setLayoutX(200);
             }
             
             public void menuAppears(){
@@ -139,7 +141,8 @@ public class ScenePlay {
 
                 //Create Principal Panes
                 gamePane = new Pane();
-                gamePane.setTranslateY(25);
+                gamePane.setLayoutY(0);
+                gamePane.setLayoutX(0);
                 //gamePane.setStyle("-fx-background-color: #005555;");
                 BorderPane borderPane = new BorderPane();
                 GridPane gridPaneTop = new GridPane();
@@ -240,7 +243,7 @@ public class ScenePlay {
                 soundButton.setBackground(null);
                 soundButton.setBorder(null);
                 soundButton.setTranslateY(-3);
-                soundButton.setTranslateX(150);
+                soundButton.setTranslateX(170);
                 soundOffIMG = new ImageView("ButtonIMG/VolumeBtnOffIMG.png");
                 soundOffIMG.setPreserveRatio(true);
                 soundOffIMG.setFitHeight(60);

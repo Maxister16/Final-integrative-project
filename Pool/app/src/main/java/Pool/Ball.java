@@ -160,8 +160,20 @@ public class Ball extends Circle implements InteractiveObject {
 
         
         static public void reactIsHit(Ball firstBall, Ball secondBall){
-            
-            double angle = atan2(firstBall.getVi().getMagnitude(), secondBall.getVi().getMagnitude());
+
+
+        //with e formulas angle should be
+            //        double dx = ball1.circle.getLayoutX() - ball2.circle.getLayoutX();
+            //        double dy = ball1.circle.getLayoutY() - ball2.circle.getLayoutY();
+            //        double angle = Math.atan2(dy, dx);
+//            double angle = atan2(firstBall.getVi().getMagnitude(), secondBall.getVi().getMagnitude());
+//            double cos = cos(angle);
+//            double sin = sin(angle);
+
+            double dx=(firstBall.getCenterX()+firstBall.getRadius()) - (secondBall.getCenterX()-firstBall.getRadius());
+            double dy=(firstBall.getCenterY()+firstBall.getRadius()) - (secondBall.getCenterY()-firstBall.getRadius());
+
+            double angle = atan2(dx, dy);
             double cos = cos(angle);
             double sin = sin(angle);
 
@@ -178,6 +190,8 @@ public class Ball extends Circle implements InteractiveObject {
             double ball1deltaY = sin * v1xRotated + cos * v1yRotated;
             double ball2deltaX = cos * v2xRotated - sin * v2yRotated;
             double ball2deltaY = sin * v2xRotated + cos * v2yRotated;
+
+            //is the issue with the get magnitude being positive
 
             firstBall.setVi(new Vector(ball1deltaX, ball1deltaY));
             System.out.println("Ball 1 speed: " + firstBall.getVi().getMagnitude());

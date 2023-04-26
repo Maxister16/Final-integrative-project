@@ -29,7 +29,7 @@ public class Sound {
 
         File yayFile = new File("Pool/app/src/main/resources/sound/yay.mp3");
         yaySound = new MediaPlayer(new javafx.scene.media.Media(yayFile.toURI().toString()));
-        yaySound.setVolume(1);
+        yaySound.setVolume(0.2);
         yaySound.setCycleCount(1);
 
         //in Main, when win pane is shown, play yaySound
@@ -46,6 +46,6 @@ public class Sound {
         btnSound.setVolume(0.05);
         welcomeBgSound.setVolume(3);
         playBgSound.setVolume(0.08);
-        yaySound.setVolume(1);
+        yaySound.setVolume(0.2);
     }
 }

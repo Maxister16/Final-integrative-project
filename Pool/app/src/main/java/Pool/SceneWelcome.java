@@ -3,18 +3,18 @@ package Pool;
 
 import javafx.application.Application;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -94,8 +94,8 @@ public class SceneWelcome {
         //Add buttons to gridPane
         soundGridPane.add(welcomeSoundBtn,0,0);
         gridPane.add(normalBtn, 0, 0);
-        gridPane.add(grassBtn, 1, 0);
-        gridPane.add(iceBtn, 2, 0);
+        gridPane.add(grassBtn, 2, 0);
+        gridPane.add(iceBtn, 1, 0);
 
         //Set up scene background
         StackPane backgroundPane = new StackPane();
@@ -106,9 +106,16 @@ public class SceneWelcome {
         bg.setFitWidth(1350);
         backgroundPane.getChildren().add(bg);
 
+        Label nameLabel = new Label("Created by" + ":\nMaxime Sevigny\nEszter Anna Kovacs\nMarie Cogna Diagne");
+        nameLabel.setTranslateX(-582);
+        nameLabel.setTranslateY(315);
+
+        nameLabel.setStyle("-fx-font-size: 18px; -fx-background-fill: null;");
+        nameLabel.setTextFill(Color.WHITE);
+
         //Set play button images
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(backgroundPane, gridPane, soundGridPane);
+        layout.getChildren().addAll(backgroundPane, gridPane, soundGridPane, nameLabel);
 
         //create Welcome scene
         this.scene = new Scene(layout);

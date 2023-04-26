@@ -26,9 +26,9 @@ public class MainApp extends Application {
         Sound.initiateSound();
         //create scenes
         SceneWelcome sceneWelcome = new SceneWelcome();
-        ScenePlayGrass scenePlayGrass = new ScenePlayGrass();
-        ScenePlayNormal scenePlayNormal = new ScenePlayNormal();
-        ScenePlayIce scenePlayIce = new ScenePlayIce();
+        ScenePlay scenePlayGrass = new ScenePlay();
+        ScenePlay scenePlayNormal = new ScenePlay();
+        ScenePlay scenePlayIce = new ScenePlay();
         
         stage.setHeight(780);
         stage.setWidth(1350);
@@ -51,24 +51,24 @@ public class MainApp extends Application {
         EventHandler goToNormal = e->{
             scenePlayNormal.menuDisappears();
             stage.setScene(scenePlayNormal.getScene());
-            stage.setFullScreen(true);
-            stage.setFullScreen(false);
+//            stage.setFullScreen(true);
+//            stage.setFullScreen(false);
             GameStatus.gameState = 0;
             startGame(scenePlayNormal);
         };
         EventHandler goToIce = e->{
             scenePlayIce.menuDisappears();
             stage.setScene(scenePlayIce.getScene());
-            stage.setFullScreen(true);
-            stage.setFullScreen(false);
+//            stage.setFullScreen(true);
+//            stage.setFullScreen(false);
             GameStatus.gameState = 1;
             startGame(scenePlayIce);
         };
         EventHandler goToGrass = e->{
             scenePlayGrass.menuDisappears();
             stage.setScene(scenePlayGrass.getScene());
-            stage.setFullScreen(true);
-            stage.setFullScreen(false);
+//            stage.setFullScreen(true);
+//            stage.setFullScreen(false);
             GameStatus.gameState = 2;
             startGame(scenePlayGrass);
         };
@@ -76,8 +76,8 @@ public class MainApp extends Application {
             Sound.playBgSound.stop();
             Sound.welcomeBgSound.play();
             stage.setScene(sceneWelcome.getScene());
-            stage.setFullScreen(true);
-            stage.setFullScreen(false);
+//            stage.setFullScreen(true);
+//            stage.setFullScreen(false);
         };
         
 //BUTTON ACTIONS
@@ -432,7 +432,7 @@ public class MainApp extends Application {
     public void playButtonHit(ScenePlay sc){
         
         sc.forceValue.setText(Float.valueOf(df.format(sc.forceSlider.getValue()))+" N");
-        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+"");
+        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+" °");
         
         sc.playButton.setDisable(true);
         sc.menuButton.setDisable(true);

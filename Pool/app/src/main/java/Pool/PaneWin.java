@@ -41,5 +41,6 @@ public class PaneWin extends Pane{
         winBlur.setFill(Color.WHITE);
         winBlur.setOpacity(0.5);
         winBlur.setTranslateX(-180);
+
     }
 }
