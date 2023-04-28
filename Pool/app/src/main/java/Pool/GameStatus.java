@@ -212,7 +212,7 @@ public class GameStatus {
 
         double distanceBallsX=firtB.getCenterX()- secondB.getCenterX();
         double distanceBallsY=firtB.getCenterY()-secondB.getCenterY();
-        Vector distance=new Vector(distanceBallsX, distanceBallsY);
+        Vector distance = new Vector(distanceBallsX, distanceBallsY);
 
         // double ball1Ball2OverX=listOfBalls[i].
         if((secondB.getRadius()*2)>=distance.getMagnitude() && secondB.getID()!=firtB.getID()){

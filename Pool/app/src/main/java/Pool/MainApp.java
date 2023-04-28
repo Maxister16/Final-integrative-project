@@ -486,7 +486,7 @@ public class MainApp extends Application {
     public void playButtonHit(ScenePlay sc){
         
         sc.forceValue.setText(Float.valueOf(df.format(sc.forceSlider.getValue()))+" N");
-        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+"");
+        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+" deg");
         
         sc.playButton.setDisable(true);
         sc.menuButton.setDisable(true);

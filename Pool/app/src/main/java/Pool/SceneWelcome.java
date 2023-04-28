@@ -1,23 +1,22 @@
 
 package Pool;
 
-import javafx.application.Application;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Glow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
-
-import java.io.File;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 public class SceneWelcome {
     
@@ -94,8 +93,8 @@ public class SceneWelcome {
         //Add buttons to gridPane
         soundGridPane.add(welcomeSoundBtn,0,0);
         gridPane.add(normalBtn, 0, 0);
-        gridPane.add(grassBtn, 1, 0);
-        gridPane.add(iceBtn, 2, 0);
+        gridPane.add(grassBtn, 2, 0);
+        gridPane.add(iceBtn, 1, 0);
 
         //Set up scene background
         StackPane backgroundPane = new StackPane();
@@ -109,6 +108,28 @@ public class SceneWelcome {
         //Set play button images
         StackPane layout = new StackPane();
         layout.getChildren().addAll(backgroundPane, gridPane, soundGridPane);
+        /*
+        Label nameLabel = new Label("Made by Maxime Sevigny, Marie Cogna Diagne & Eszter Anna Kovacs");
+        nameLabel.setStyle("-fx-color:red;");
+        nameLabel.setTranslateX(-1350/2+(nameLabel.getText().length())*nameLabel.getFont().getSize()/2+30);
+        nameLabel.setTranslateY(350);
+        
+        nameLabel.setStyle(
+                "-fx-font-size: 25px; -fx-text-fill: black; -fx-background-fill: black;");
+        
+        nameLabel.setBackground(new Background(
+   new BackgroundFill(Color.color(1, 1, 1, 0.5d), CornerRadii.EMPTY, Insets.EMPTY)));*/
+        
+        Label nameLabel = new Label("Created by" + ":\nMaxime Sévigny\nEszter Anna Kovacs\nMarie Cogna Diagne");
+        nameLabel.setTranslateX(-582);
+        nameLabel.setTranslateY(315);
+
+        nameLabel.setStyle("-fx-font-size: 18px; -fx-background-fill: null;");
+        nameLabel.setTextFill(Color.WHITE);
+        
+        nameLabel.setPadding(new Insets(5));
+        
+        layout.getChildren().add(nameLabel);
 
         //create Welcome scene
         this.scene = new Scene(layout);
