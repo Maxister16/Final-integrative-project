@@ -21,11 +21,10 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-       // Sound.initiateSound();
+        Sound.initiateSound();
 
         stagefield = stage;
 
-       // Sound.initiateSound();
         //create scenes
         SceneWelcome sceneWelcome = new SceneWelcome();
         ScenePlayGrass scenePlayGrass = new ScenePlayGrass();
@@ -36,7 +35,7 @@ public class MainApp extends Application {
         stage.setWidth(1350);
         stage.setResizable(false);
 
-       // Sound.welcomeBgSound.play();
+        Sound.welcomeBgSound.play();
         stage.setScene(sceneWelcome.getScene());
         stage.show();
         
@@ -70,8 +69,8 @@ public class MainApp extends Application {
 
         };
         EventHandler goToWelcome = e->{
-         //   Sound.playBgSound.stop();
-          //  Sound.welcomeBgSound.play();
+            Sound.playBgSound.stop();
+            Sound.welcomeBgSound.play();
             stage.setScene(sceneWelcome.getScene());
             stage.setFullScreen(true);
             stage.setFullScreen(false);
@@ -83,15 +82,15 @@ public class MainApp extends Application {
             Button target = (Button)e.getTarget();
             target.setScaleX(1.12);
             target.setScaleY(1.12);
-           // Sound.btnSound.stop();
-           // Sound.btnSound.play();
+            Sound.btnSound.stop();
+            Sound.btnSound.play();
         };
         EventHandler btnOnMouseExited = e->{
             Button target = (Button)e.getTarget();
             target.setScaleX(1);
             target.setScaleY(1);
-          //  Sound.btnSound.stop();
-           // Sound.btnSound.play();
+            Sound.btnSound.stop();
+            Sound.btnSound.play();
         };
         
 //SCENE_WELCOME
@@ -248,11 +247,9 @@ public class MainApp extends Application {
                 scenePlayNormal.physicsButton.setGraphic(scenePlayNormal.physicsOff);
                 scenePlayNormal.frictionValue.setStyle("-fx-opacity: 0;");
                 scenePlayNormal.angleValue.setStyle("-fx-opacity: 0;");
-                scenePlayNormal.speedValue.setStyle("-fx-opacity: 0;");
                 scenePlayNormal.forceValue.setStyle("-fx-opacity: 0;");
                 scenePlayNormal.frictionTitle.setStyle("-fx-opacity: 0;");
                 scenePlayNormal.angleTitle.setStyle("-fx-opacity: 0;");
-                scenePlayNormal.speedTitle.setStyle("-fx-opacity: 0;");
                 scenePlayNormal.forceTitle.setStyle("-fx-opacity: 0;");
 
 
@@ -261,11 +258,9 @@ public class MainApp extends Application {
                 scenePlayNormal.physicsButton.setGraphic(scenePlayNormal.physicsOn);
                 scenePlayNormal.frictionValue.setStyle("-fx-opacity: 1; -fx-font-size: 25px; -fx-font-weight: bold");
                 scenePlayNormal.angleValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
-                scenePlayNormal.speedValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
                 scenePlayNormal.forceValue.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
                 scenePlayNormal.frictionTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
                 scenePlayNormal.angleTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
-                scenePlayNormal.speedTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
                 scenePlayNormal.forceTitle.setStyle("-fx-opacity: 1;-fx-font-size: 25px; -fx-font-weight: bold");
             }
          });
@@ -320,8 +315,8 @@ public class MainApp extends Application {
     }
     
     public void startGame(ScenePlay sc){
-      //  Sound.playBgSound.play();
-       // Sound.welcomeBgSound.stop();
+        Sound.playBgSound.play();
+        Sound.welcomeBgSound.stop();
         GameStatus.initialize();
         sc.placeObjectsInGamePane();
         GameStatus.positionObjects(1350, 780, sc.gamePane.getLayoutX(), sc.gamePane.getLayoutY());
