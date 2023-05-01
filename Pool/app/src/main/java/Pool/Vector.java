@@ -82,6 +82,7 @@ public class Vector {
         magnitude = Math.sqrt(vectorDotProduct(this, this));
     }
     
+    //testing class
     public void printInfo(){
         System.out.println("x:"+this.x+"  y:"+this.y+"  m:"+this.magnitude+"  angle:"+this.angleInDegree());
     }
@@ -96,7 +97,7 @@ public class Vector {
         u.setYcomponent((1/this.magnitude)*this.getYcomponent());
         return u;
     }
-    public Vector getPerpendicularVector(){
+    public Vector getPerpendicularVector(){//return a unit vector perpendicular to itself
         Vector p = new Vector();
         p.setYcomponent(this.x);
         p.setXcomponent(-this.y*this.x/p.getYcomponent());
@@ -111,7 +112,7 @@ public class Vector {
     public static Vector vectorDifference(Vector v1, Vector v2){//v1-v2
         return new Vector(v1.getXcomponent()-v2.getXcomponent(),v1.getYcomponent()-v2.getYcomponent());
     }
-    public static Vector vectorScalarProduct(double k, Vector v){//k*v1
+    public static Vector vectorScalarProduct(double k, Vector v){//k*v1 product of a vector by a scalar
         return new Vector(k*v.getXcomponent(),k*v.getYcomponent());
     }
     public static double vectorDotProduct(Vector v1, Vector v2){//v1 . v2

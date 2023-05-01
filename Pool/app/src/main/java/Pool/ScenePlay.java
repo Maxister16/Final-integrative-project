@@ -86,34 +86,7 @@ public class ScenePlay {
                 layout.getChildren().removeAll(rectangle,menuBg,gridPaneMenu);
             }
 
-            /*public void winAppears(int winningTeamIndex){
-                winPane.getChildren().clear();
-                winPane.getChildren().addAll(winBlur,buttonReplay);
-                
-                System.out.println("hello");
-
-                String winningColor;
-                if(winningTeamIndex == 0){//if orange Win
-                    winPane.getChildren().addAll(orangeWin);
-                    winningColor = "orange";
-                }
-                else{//if red Win
-                    winPane.getChildren().addAll(redWin);
-                    winningColor = "red";
-                }
-
-                ImageView buttonReplayIMG = new ImageView("ButtonIMG/"+winningColor+"Replay.png");
-                buttonReplayIMG.setPreserveRatio(true);
-                buttonReplayIMG.setFitHeight(145);
-                buttonReplay.setGraphic(buttonReplayIMG);//set image of button
-                buttonReplay.toFront();
-                layout.getChildren().add(winPane);
-                winPane.toFront();
-            }
-            public void winDisappears(){
-                   layout.getChildren().remove(winPane);
-            }
-*/
+            
             public void physicsAppears(){
                 physicsButton.setGraphic(physicsOn);
                 frictionValue.setStyle("-fx-opacity: 1; -fx-font-size: 25px; -fx-font-weight: bold");
@@ -187,7 +160,7 @@ public class ScenePlay {
 
                 forceSlider = new Slider(0.1, 2, 0.01);
                 forceSlider.getStylesheets().add("slider.css");
-                angleSlider = new Slider(0.0, 359, 0.01);
+                angleSlider = new Slider(0.0, 359, 0.001);
                 angleSlider.getStylesheets().add("angleSlider.css");
 
                 gridPaneTop.setHgap(20);
@@ -325,11 +298,11 @@ public class ScenePlay {
                 layout.getChildren().addAll(bg,borderPane);
                 this.scene = new Scene(layout,1350,780);
 
-        //MENU
+//MENU PANE
                 
                 gridPaneMenu.setAlignment(Pos.CENTER);
-//                            gridPaneMenu physicsButtonPane = new gridPaneMenu();
-//                            physicsButtonPane.setAlignment(Pos.CENTER);
+                //gridPaneMenu physicsButtonPane = new gridPaneMenu();
+                //physicsButtonPane.setAlignment(Pos.CENTER);
 
                 //Images
                 ImageView resume = new ImageView("ButtonIMG/ResumeBtnIMG.png");
@@ -413,26 +386,6 @@ public class ScenePlay {
 //WINNING PANE
                 winPaneRed = new Pane();
                 winPaneOrange = new Pane();
-                
-                //System.out.println("hello");
-
-                /*String winningColor;
-                if(winningTeamIndex == 0){//if orange Win
-                    winPane.getChildren().addAll(orangeWin);
-                    winningColor = "orange";
-                }
-                else{//if red Win
-                    winPane.getChildren().addAll(redWin);
-                    winningColor = "red";
-                }
-
-                ImageView buttonReplayIMG = new ImageView("ButtonIMG/"+winningColor+"Replay.png");
-                buttonReplayIMG.setPreserveRatio(true);
-                buttonReplayIMG.setFitHeight(145);
-                buttonReplay.setGraphic(buttonReplayIMG);//set image of button
-                buttonReplay.toFront();
-                layout.getChildren().add(winPane);
-                winPane.toFront();*/
                 
                 orangeWin = new ImageView("BackgroundIMG/star0.png");
                 orangeWin.setPreserveRatio(true);

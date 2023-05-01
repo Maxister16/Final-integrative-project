@@ -12,6 +12,7 @@ public class Sound {
     public static MediaPlayer playBgSound;
     public static MediaPlayer yaySound;
     
+    //initiate all the mediaplayers to the correct volume and file
     public static void initiateSound(){
         File btnFile = new File(GameStatus.CLIENT_LOCATION_OF_PROJECT+"/src/main/resources/sound/tok.mp3");
         btnSound = new MediaPlayer(new javafx.scene.media.Media(btnFile.toURI().toString()));
@@ -31,9 +32,7 @@ public class Sound {
         yaySound = new MediaPlayer(new javafx.scene.media.Media(yayFile.toURI().toString()));
         yaySound.setVolume(0.2);
         yaySound.setCycleCount(1);
-
-        //in Main, when win pane is shown, play yaySound
-        //in Main, on click of winpane replay btn (for orange and red), stop yaySound
+        
     }
 
     public static void muteSound(){

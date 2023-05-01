@@ -13,7 +13,7 @@ public class CueStick extends ImageView{
     public PathTransition hitAnim;
     
     public CueStick(double width){
-        
+        //set image and size
         Image img = new Image("InteractiveObjectIMG/cueStickIMG.png");
         this.setImage(img);
         this.setSmooth(true);
@@ -22,6 +22,7 @@ public class CueStick extends ImageView{
         this.setFitHeight(this.getFitWidth()*(img.getHeight()/img.getWidth()));
     }
     
+    //when the stick appears
     public void appears(Slider angleSlider){
         this.setOpacity(1);
         this.setX(GameStatus.listOfBalls[0].getCenterX()-GameStatus.cue.getFitWidth()/2);
@@ -29,6 +30,7 @@ public class CueStick extends ImageView{
         this.rotateProperty().bind(angleSlider.valueProperty());//bind to slider
     }
     
+    //when the stick hits the white ball
     public void hitAnim(Slider angleSlider,Slider forceSlider){
         
         this.rotateProperty().unbind();

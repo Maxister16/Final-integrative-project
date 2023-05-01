@@ -12,7 +12,6 @@ public class CustomAnimation extends ImageView{
     
     //constructors
     public CustomAnimation(String nameImg, int nbrOfFrames){
-        //System.out.println("run");
         currentFrame = 0;
         imgArr = new Image[nbrOfFrames];
         for(int i = 0; i<nbrOfFrames; i++){

@@ -22,7 +22,7 @@ public class Table{
         border.setFill(new ImagePattern(new Image("InteractiveObjectIMG/tableBorderIMG.png")));
     }
 
-    
+//ACCESSOR AND MUTATOR METHODS
     public void setX(double x){
         background.setX(x);
         border.setX(x);
@@ -52,6 +52,7 @@ public class Table{
         return this.background;
     }
 
+    //set image of background
     public void setImage(int typeOfGame) { //sets the background
         switch(typeOfGame){//0:normal, 1:ice, 2:grass 
             case 0 -> background.setFill(Color.BURLYWOOD);
