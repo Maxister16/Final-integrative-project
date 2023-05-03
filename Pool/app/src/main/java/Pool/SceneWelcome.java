@@ -22,13 +22,37 @@ public class SceneWelcome {
     
     public Scene scene;
 //button to gamemode
-    Button normalBtn;
-    Button grassBtn; 
-    Button iceBtn;
+    private Button normalBtn;
+    private Button grassBtn; 
+    private Button iceBtn;
 //button sound mute
-    Button welcomeSoundBtn;
-    ImageView welcomeSoundOn;
-    ImageView welcomeSoundOff;
+    private Button welcomeSoundBtn;
+    private ImageView welcomeSoundOn;
+    private ImageView welcomeSoundOff;
+    
+    //accessor methods
+    public Scene getScene () {
+        return this.scene;
+    }
+    public Button getNormalBtn(){
+        return normalBtn;
+    }
+    public Button getGrassBtn(){
+        return grassBtn;
+    }
+    public Button getIceBtn(){
+        return iceBtn;
+    }
+    public Button getWelcomeSoundBtn(){
+        return welcomeSoundBtn;
+    }
+    public ImageView getWelcomeSoundOn(){
+        return welcomeSoundOn;
+    }
+    public ImageView getWelcomeSoundOff(){
+        return welcomeSoundOff;
+    }
+    
     
     public SceneWelcome() {
 
@@ -135,10 +159,4 @@ public class SceneWelcome {
         this.scene = new Scene(layout);
 
     }
-        public Scene getScene () {
-            return this.scene;
-        }
-
-
-
 }

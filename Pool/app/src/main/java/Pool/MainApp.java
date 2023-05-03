@@ -15,13 +15,10 @@ import javafx.concurrent.Task;
 public class MainApp extends Application {
     
     private final long TIME_OF_TICK = 1000/60;//time in millis
-    Stage stagefield;
-    DecimalFormat df = new DecimalFormat("#.##");
+    private final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
     
     @Override
     public void start(Stage stage) throws IOException {
-        
-        stagefield = stage;
         
         Sound.initiateSound();
         //create scenes
@@ -112,272 +109,272 @@ public class MainApp extends Application {
         
         EventHandler btnMuteClicked = e ->{
             Button sourceBtn = (Button)e.getSource();
-            if (sourceBtn.getGraphic() == scenePlayNormal.soundOnIMG || sourceBtn.getGraphic() == scenePlayIce.soundOnIMG || sourceBtn.getGraphic() == scenePlayGrass.soundOnIMG || sourceBtn.getGraphic() == sceneWelcome.welcomeSoundOn) {
-                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOffIMG);
-                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOff);
-                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOffIMG);
-                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOffIMG);
+            if (sourceBtn.getGraphic() == scenePlayNormal.getSoundOnIMG() || sourceBtn.getGraphic() == scenePlayIce.getSoundOnIMG() || sourceBtn.getGraphic() == scenePlayGrass.getSoundOnIMG() || sourceBtn.getGraphic() == sceneWelcome.getWelcomeSoundOn()) {
+                scenePlayNormal.getSoundButton().setGraphic(scenePlayNormal.getSoundOffIMG());
+                sceneWelcome.getWelcomeSoundBtn().setGraphic(sceneWelcome.getWelcomeSoundOff());
+                scenePlayGrass.getSoundButton().setGraphic(scenePlayGrass.getSoundOffIMG());
+                scenePlayIce.getSoundButton().setGraphic(scenePlayIce.getSoundOffIMG());
                 Sound.muteSound();
             }
             else {
-                scenePlayNormal.soundButton.setGraphic(scenePlayNormal.soundOnIMG);
-                sceneWelcome.welcomeSoundBtn.setGraphic(sceneWelcome.welcomeSoundOn);
-                scenePlayGrass.soundButton.setGraphic(scenePlayGrass.soundOnIMG);
-                scenePlayIce.soundButton.setGraphic(scenePlayIce.soundOnIMG);
+                scenePlayNormal.getSoundButton().setGraphic(scenePlayNormal.getSoundOnIMG());
+                sceneWelcome.getWelcomeSoundBtn().setGraphic(sceneWelcome.getWelcomeSoundOn());
+                scenePlayGrass.getSoundButton().setGraphic(scenePlayGrass.getSoundOnIMG());
+                scenePlayIce.getSoundButton().setGraphic(scenePlayIce.getSoundOnIMG());
                 Sound.unmutesound();
             }
         };
         
 //SCENE_WELCOME
         //Button Events
-        sceneWelcome.normalBtn.setOnAction(goToNormal);
-        sceneWelcome.grassBtn.setOnAction(goToGrass);
-        sceneWelcome.iceBtn.setOnAction(goToIce);
+        sceneWelcome.getNormalBtn().setOnAction(goToNormal);
+        sceneWelcome.getGrassBtn().setOnAction(goToGrass);
+        sceneWelcome.getIceBtn().setOnAction(goToIce);
         
-        sceneWelcome.normalBtn.setOnMouseEntered(btnOnMouseEntered);
-        sceneWelcome.normalBtn.setOnMouseExited(btnOnMouseExited);
-        sceneWelcome.grassBtn.setOnMouseEntered(btnOnMouseEntered);
-        sceneWelcome.grassBtn.setOnMouseExited(btnOnMouseExited);
-        sceneWelcome.iceBtn.setOnMouseEntered(btnOnMouseEntered);
-        sceneWelcome.iceBtn.setOnMouseExited(btnOnMouseExited);
+        sceneWelcome.getNormalBtn().setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.getNormalBtn().setOnMouseExited(btnOnMouseExited);
+        sceneWelcome.getGrassBtn().setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.getGrassBtn().setOnMouseExited(btnOnMouseExited);
+        sceneWelcome.getIceBtn().setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.getIceBtn().setOnMouseExited(btnOnMouseExited);
         //sound button
-        sceneWelcome.welcomeSoundBtn.setOnMouseEntered(btnOnMouseEntered);
-        sceneWelcome.welcomeSoundBtn.setOnMouseExited(btnOnMouseExited);
-        sceneWelcome.welcomeSoundBtn.setOnAction(btnMuteClicked);
+        sceneWelcome.getWelcomeSoundBtn().setOnMouseEntered(btnOnMouseEntered);
+        sceneWelcome.getWelcomeSoundBtn().setOnMouseExited(btnOnMouseExited);
+        sceneWelcome.getWelcomeSoundBtn().setOnAction(btnMuteClicked);
         
 //SCENE_PLAY
 
     //NORMAL
-        scenePlayNormal.playButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.playButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.playButton.setOnAction(e->{
+        scenePlayNormal.getPlayButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getPlayButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getPlayButton().setOnAction(e->{
             playButtonHit(scenePlayNormal);
         });
-        scenePlayNormal.menuButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.menuButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.menuButton.setOnAction(e->{scenePlayNormal.menuAppears();});
+        scenePlayNormal.getMenuButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getMenuButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getMenuButton().setOnAction(e->{scenePlayNormal.menuAppears();});
     
         //replay
-        scenePlayNormal.buttonReplayRed.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.buttonReplayRed.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.buttonReplayRed.setOnAction(e->{
+        scenePlayNormal.getButtonReplayRed().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getButtonReplayRed().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getButtonReplayRed().setOnAction(e->{
             //scenePlayNormal.winDisappears();
-            scenePlayNormal.angleSlider.setValue(0);
-            scenePlayNormal.forceSlider.setValue(0);
-            scenePlayNormal.orangeBaskets.setCurrentFrame(0);
-            scenePlayNormal.redBaskets.setCurrentFrame(0);
+            scenePlayNormal.getAngleSliderButton().setValue(0);
+            scenePlayNormal.getForceSliderButton().setValue(0);
+            scenePlayNormal.getOrangeBaskets().setCurrentFrame(0);
+            scenePlayNormal.getRedBaskets().setCurrentFrame(0);
             
-            scenePlayNormal.winPaneRed.setScaleX(0.001);
-            scenePlayNormal.winPaneRed.setScaleY(0.001);
-            scenePlayNormal.winPaneOrange.setScaleX(0.001);
-            scenePlayNormal.winPaneOrange.setScaleY(0.001);
+            scenePlayNormal.getWinPaneRed().setScaleX(0.001);
+            scenePlayNormal.getWinPaneRed().setScaleY(0.001);
+            scenePlayNormal.getWinPaneOrange().setScaleX(0.001);
+            scenePlayNormal.getWinPaneOrange().setScaleY(0.001);
             
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
-        scenePlayNormal.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.buttonReplayOrange.setOnAction(e->{
+        scenePlayNormal.getButtonReplayOrange().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getButtonReplayOrange().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getButtonReplayOrange().setOnAction(e->{
             //scenePlayNormal.winDisappears();
-            scenePlayNormal.angleSlider.setValue(0);
-            scenePlayNormal.forceSlider.setValue(0);
-            scenePlayNormal.orangeBaskets.setCurrentFrame(0);
-            scenePlayNormal.redBaskets.setCurrentFrame(0);
+            scenePlayNormal.getAngleSliderButton().setValue(0);
+            scenePlayNormal.getForceSliderButton().setValue(0);
+            scenePlayNormal.getOrangeBaskets().setCurrentFrame(0);
+            scenePlayNormal.getRedBaskets().setCurrentFrame(0);
             
-            scenePlayNormal.winPaneRed.setScaleX(0.001);
-            scenePlayNormal.winPaneRed.setScaleY(0.001);
-            scenePlayNormal.winPaneOrange.setScaleX(0.001);
-            scenePlayNormal.winPaneOrange.setScaleY(0.001);
+            scenePlayNormal.getWinPaneRed().setScaleX(0.001);
+            scenePlayNormal.getWinPaneRed().setScaleY(0.001);
+            scenePlayNormal.getWinPaneOrange().setScaleX(0.001);
+            scenePlayNormal.getWinPaneOrange().setScaleY(0.001);
             
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
     
         //sound button
-        scenePlayNormal.soundButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.soundButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.soundButton.setOnAction(btnMuteClicked);
+        scenePlayNormal.getSoundButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getSoundButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getSoundButton().setOnAction(btnMuteClicked);
         
     //ICE
-        scenePlayIce.playButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.playButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.playButton.setOnAction(e->{
+        scenePlayIce.getPlayButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getPlayButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getPlayButton().setOnAction(e->{
             playButtonHit(scenePlayIce);
         });
-        scenePlayIce.menuButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.menuButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.menuButton.setOnAction(e->{scenePlayIce.menuAppears();});
+        scenePlayIce.getMenuButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getMenuButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getMenuButton().setOnAction(e->{scenePlayIce.menuAppears();});
         
         //replay
-        scenePlayIce.buttonReplayRed.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.buttonReplayRed.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.buttonReplayRed.setOnAction(e->{
+        scenePlayIce.getButtonReplayRed().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getButtonReplayRed().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getButtonReplayRed().setOnAction(e->{
             //scenePlayIce.winDisappears();
-            scenePlayIce.angleSlider.setValue(0);
-            scenePlayIce.forceSlider.setValue(0);
-            scenePlayIce.orangeBaskets.setCurrentFrame(0);
-            scenePlayIce.redBaskets.setCurrentFrame(0);
+            scenePlayIce.getAngleSliderButton().setValue(0);
+            scenePlayIce.getForceSliderButton().setValue(0);
+            scenePlayIce.getOrangeBaskets().setCurrentFrame(0);
+            scenePlayIce.getRedBaskets().setCurrentFrame(0);
             
-            scenePlayIce.winPaneRed.setScaleX(0.001);
-            scenePlayIce.winPaneRed.setScaleY(0.001);
-            scenePlayIce.winPaneOrange.setScaleX(0.001);
-            scenePlayIce.winPaneOrange.setScaleY(0.001);
+            scenePlayIce.getWinPaneRed().setScaleX(0.001);
+            scenePlayIce.getWinPaneRed().setScaleY(0.001);
+            scenePlayIce.getWinPaneOrange().setScaleX(0.001);
+            scenePlayIce.getWinPaneOrange().setScaleY(0.001);
             
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
-        scenePlayIce.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.buttonReplayOrange.setOnAction(e->{
+        scenePlayIce.getButtonReplayOrange().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getButtonReplayOrange().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getButtonReplayOrange().setOnAction(e->{
             //scenePlayIce.winDisappears();
-            scenePlayIce.angleSlider.setValue(0);
-            scenePlayIce.forceSlider.setValue(0);
-            scenePlayIce.orangeBaskets.setCurrentFrame(0);
-            scenePlayIce.redBaskets.setCurrentFrame(0);
+            scenePlayIce.getAngleSliderButton().setValue(0);
+            scenePlayIce.getForceSliderButton().setValue(0);
+            scenePlayIce.getOrangeBaskets().setCurrentFrame(0);
+            scenePlayIce.getRedBaskets().setCurrentFrame(0);
             
-            scenePlayIce.winPaneRed.setScaleX(0.001);
-            scenePlayIce.winPaneRed.setScaleY(0.001);
-            scenePlayIce.winPaneOrange.setScaleX(0.001);
-            scenePlayIce.winPaneOrange.setScaleY(0.001);
+            scenePlayIce.getWinPaneRed().setScaleX(0.001);
+            scenePlayIce.getWinPaneRed().setScaleY(0.001);
+            scenePlayIce.getWinPaneOrange().setScaleX(0.001);
+            scenePlayIce.getWinPaneOrange().setScaleY(0.001);
             
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
     
         //sound button
-        scenePlayIce.soundButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.soundButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.soundButton.setOnAction(btnMuteClicked);
+        scenePlayIce.getSoundButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getSoundButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getSoundButton().setOnAction(btnMuteClicked);
         
     //GRASS    
-        scenePlayGrass.playButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.playButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.playButton.setOnAction(e->{
+        scenePlayGrass.getPlayButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getPlayButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getPlayButton().setOnAction(e->{
             playButtonHit(scenePlayGrass);
         });
-        scenePlayGrass.menuButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.menuButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.menuButton.setOnAction(e->{scenePlayGrass.menuAppears();});
+        scenePlayGrass.getMenuButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getMenuButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getMenuButton().setOnAction(e->{scenePlayGrass.menuAppears();});
         
         //replay
-        scenePlayGrass.buttonReplayRed.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.buttonReplayRed.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.buttonReplayRed.setOnAction(e->{
+        scenePlayGrass.getButtonReplayRed().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getButtonReplayRed().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getButtonReplayRed().setOnAction(e->{
             //scenePlayGrass.winDisappears();
-            scenePlayGrass.angleSlider.setValue(0);
-            scenePlayGrass.forceSlider.setValue(0);
-            scenePlayGrass.orangeBaskets.setCurrentFrame(0);
-            scenePlayGrass.redBaskets.setCurrentFrame(0);
+            scenePlayGrass.getAngleSliderButton().setValue(0);
+            scenePlayGrass.getForceSliderButton().setValue(0);
+            scenePlayGrass.getOrangeBaskets().setCurrentFrame(0);
+            scenePlayGrass.getRedBaskets().setCurrentFrame(0);
             
-            scenePlayGrass.winPaneRed.setScaleX(0.001);
-            scenePlayGrass.winPaneRed.setScaleY(0.001);
-            scenePlayGrass.winPaneOrange.setScaleX(0.001);
-            scenePlayGrass.winPaneOrange.setScaleY(0.001);
+            scenePlayGrass.getWinPaneRed().setScaleX(0.001);
+            scenePlayGrass.getWinPaneRed().setScaleY(0.001);
+            scenePlayGrass.getWinPaneOrange().setScaleX(0.001);
+            scenePlayGrass.getWinPaneOrange().setScaleY(0.001);
             
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
-        scenePlayGrass.buttonReplayOrange.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.buttonReplayOrange.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.buttonReplayOrange.setOnAction(e->{
+        scenePlayGrass.getButtonReplayOrange().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getButtonReplayOrange().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getButtonReplayOrange().setOnAction(e->{
             //scenePlayGrass.winDisappears();
-            scenePlayGrass.angleSlider.setValue(0);
-            scenePlayGrass.forceSlider.setValue(0);
-            scenePlayGrass.orangeBaskets.setCurrentFrame(0);
-            scenePlayGrass.redBaskets.setCurrentFrame(0);
+            scenePlayGrass.getAngleSliderButton().setValue(0);
+            scenePlayGrass.getForceSliderButton().setValue(0);
+            scenePlayGrass.getOrangeBaskets().setCurrentFrame(0);
+            scenePlayGrass.getRedBaskets().setCurrentFrame(0);
             
-            scenePlayGrass.winPaneRed.setScaleX(0.001);
-            scenePlayGrass.winPaneRed.setScaleY(0.001);
-            scenePlayGrass.winPaneOrange.setScaleX(0.001);
-            scenePlayGrass.winPaneOrange.setScaleY(0.001);
+            scenePlayGrass.getWinPaneRed().setScaleX(0.001);
+            scenePlayGrass.getWinPaneRed().setScaleY(0.001);
+            scenePlayGrass.getWinPaneOrange().setScaleX(0.001);
+            scenePlayGrass.getWinPaneOrange().setScaleY(0.001);
             
             goToWelcome.handle(e);
             Sound.yaySound.stop();
         });
     
         //sound button
-        scenePlayGrass.soundButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.soundButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.soundButton.setOnAction(btnMuteClicked);
+        scenePlayGrass.getSoundButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getSoundButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getSoundButton().setOnAction(btnMuteClicked);
         
 //MENU
     //normal
-        scenePlayNormal.resumeButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.resumeButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.resumeButton.setOnAction(e->{scenePlayNormal.menuDisappears();});
+        scenePlayNormal.getResumeButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getResumeButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getResumeButton().setOnAction(e->{scenePlayNormal.menuDisappears();});
         
-        scenePlayNormal.homeButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.homeButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.homeButton.setOnAction(goToWelcome);
+        scenePlayNormal.getHomeButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getHomeButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getHomeButton().setOnAction(goToWelcome);
         
-        scenePlayNormal.exitButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.exitButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.exitButton.setOnAction(e->{stage.close();});
+        scenePlayNormal.getExitButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getExitButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getExitButton().setOnAction(e->{stage.close();});
         
-        scenePlayNormal.physicsButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayNormal.physicsButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayNormal.physicsButton.setOnAction(e->{
+        scenePlayNormal.getPhysicsButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayNormal.getPhysicsButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayNormal.getPhysicsButton().setOnAction(e->{
         
-            if (scenePlayNormal.physicsButton.getGraphic() == scenePlayNormal.physicsOn ) {
-                scenePlayNormal.physicsButton.setGraphic(scenePlayNormal.physicsOff);
+            if (scenePlayNormal.getPhysicsButton().getGraphic() == scenePlayNormal.getPhysicsOn() ) {
+                scenePlayNormal.getPhysicsButton().setGraphic(scenePlayNormal.getPhysicsOff());
                 scenePlayNormal.physicsDisappears();
             }
             else {
-                scenePlayNormal.physicsButton.setGraphic(scenePlayNormal.physicsOn);
+                scenePlayNormal.getPhysicsButton().setGraphic(scenePlayNormal.getPhysicsOn());
                 scenePlayNormal.physicsAppears();
             }
          });
         
     //ice    
-        scenePlayIce.resumeButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.resumeButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.resumeButton.setOnAction(e->{scenePlayIce.menuDisappears();});
+        scenePlayIce.getResumeButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getResumeButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getResumeButton().setOnAction(e->{scenePlayIce.menuDisappears();});
         
-        scenePlayIce.homeButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.homeButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.homeButton.setOnAction(goToWelcome);
+        scenePlayIce.getHomeButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getHomeButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getHomeButton().setOnAction(goToWelcome);
         
-        scenePlayIce.exitButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.exitButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.exitButton.setOnAction(e->{stage.close();});
+        scenePlayIce.getExitButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getExitButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getExitButton().setOnAction(e->{stage.close();});
         
-        scenePlayIce.physicsButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayIce.physicsButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayIce.physicsButton.setOnAction(e->{
+        scenePlayIce.getPhysicsButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayIce.getPhysicsButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayIce.getPhysicsButton().setOnAction(e->{
         
-            if (scenePlayIce.physicsButton.getGraphic() == scenePlayIce.physicsOn ) {
-                scenePlayIce.physicsButton.setGraphic(scenePlayIce.physicsOff);
+            if (scenePlayIce.getPhysicsButton().getGraphic() == scenePlayIce.getPhysicsOn() ) {
+                scenePlayIce.getPhysicsButton().setGraphic(scenePlayIce.getPhysicsOff());
                 scenePlayIce.physicsDisappears();
             }
             else {
-                scenePlayIce.physicsButton.setGraphic(scenePlayIce.physicsOn);
+                scenePlayIce.getPhysicsButton().setGraphic(scenePlayIce.getPhysicsOn());
                 scenePlayIce.physicsAppears();
             }
          });
       
     //grass    
-        scenePlayGrass.resumeButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.resumeButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.resumeButton.setOnAction(e->{scenePlayGrass.menuDisappears();});
+        scenePlayGrass.getResumeButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getResumeButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getResumeButton().setOnAction(e->{scenePlayGrass.menuDisappears();});
         
-        scenePlayGrass.homeButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.homeButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.homeButton.setOnAction(goToWelcome);
+        scenePlayGrass.getHomeButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getHomeButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getHomeButton().setOnAction(goToWelcome);
         
-        scenePlayGrass.exitButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.exitButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.exitButton.setOnAction(e->{stage.close();});
+        scenePlayGrass.getExitButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getExitButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getExitButton().setOnAction(e->{stage.close();});
         
-        scenePlayGrass.physicsButton.setOnMouseEntered(btnOnMouseEntered);
-        scenePlayGrass.physicsButton.setOnMouseExited(btnOnMouseExited);
-        scenePlayGrass.physicsButton.setOnAction(e->{
+        scenePlayGrass.getPhysicsButton().setOnMouseEntered(btnOnMouseEntered);
+        scenePlayGrass.getPhysicsButton().setOnMouseExited(btnOnMouseExited);
+        scenePlayGrass.getPhysicsButton().setOnAction(e->{
         
-            if (scenePlayGrass.physicsButton.getGraphic() == scenePlayGrass.physicsOn ) {//turn off
-                scenePlayGrass.physicsButton.setGraphic(scenePlayGrass.physicsOff);
+            if (scenePlayGrass.getPhysicsButton().getGraphic() == scenePlayGrass.getPhysicsOn() ) {//turn off
+                scenePlayGrass.getPhysicsButton().setGraphic(scenePlayGrass.getPhysicsOff());
                 scenePlayGrass.physicsDisappears();
             }
             else { //turn on
-                scenePlayGrass.physicsButton.setGraphic(scenePlayGrass.physicsOn);
+                scenePlayGrass.getPhysicsButton().setGraphic(scenePlayGrass.getPhysicsOn());
                 scenePlayGrass.physicsAppears();
             }
          });
@@ -385,27 +382,27 @@ public class MainApp extends Application {
     
     public void startGame(ScenePlay sc){
         //sc.winAppears(1);
-        sc.winPaneRed.setScaleX(0.001);
-        sc.winPaneRed.setScaleY(0.001);
-        sc.winPaneOrange.setScaleX(0.001);
-        sc.winPaneOrange.setScaleY(0.001);
+        sc.getWinPaneRed().setScaleX(0.001);
+        sc.getWinPaneRed().setScaleY(0.001);
+        sc.getWinPaneOrange().setScaleX(0.001);
+        sc.getWinPaneOrange().setScaleY(0.001);
         
         Sound.playBgSound.play();
         Sound.welcomeBgSound.stop();
         GameStatus.initialize();
         sc.placeObjectsInGamePane();
-        GameStatus.positionObjects(1350, 780, sc.gamePane.getLayoutX(), sc.gamePane.getLayoutY());
+        GameStatus.positionObjects(1350, 780, sc.getGamePane().getLayoutX(), sc.getGamePane().getLayoutY());
         GameStatus.table.setImage(GameStatus.gameState);
-        sc.frictionValue.setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[gameState])+" F/N");
+        sc.getFrictionValueLabel().setText(String.valueOf(GameStatus.FRICTION_COEFFICIENT[gameState])+" F/N");
         executeTurn(sc);
     }
     
     public void executeTurn(ScenePlay sc){
-        sc.playButton.setDisable(false);
-        sc.menuButton.setDisable(false);
-        sc.forceSlider.setDisable(false);
-        sc.angleSlider.setDisable(false);
-        GameStatus.cue.appears(sc.angleSlider);
+        sc.getPlayButton().setDisable(false);
+        sc.getMenuButton().setDisable(false);
+        sc.getForceSliderButton().setDisable(false);
+        sc.getAngleSliderButton().setDisable(false);
+        GameStatus.cue.appears(sc.getAngleSliderButton());
     }
 
     public void game(ScenePlay sc){
@@ -450,8 +447,8 @@ public class MainApp extends Application {
         
         System.out.println("ball finish moving");
         //update baskets
-        sc.orangeBaskets.setCurrentFrame(GameStatus.teamsPoints[0]);
-        sc.redBaskets.setCurrentFrame(GameStatus.teamsPoints[1]);
+        sc.getOrangeBaskets().setCurrentFrame(GameStatus.teamsPoints[0]);
+        sc.getRedBaskets().setCurrentFrame(GameStatus.teamsPoints[1]);
         
         if(GameStatus.listOfBalls[0].isPocketed){//white ball is in pocket
             whiteInPocket();
@@ -460,21 +457,21 @@ public class MainApp extends Application {
         if(GameStatus.listOfBalls[8].isPocketed){//black ball is in pocket
 
             int winningTeam;
-            if(GameStatus.teamsPoints[sc.teamName.getCurrentFrame()] >= 4){
-                winningTeam = sc.teamName.getCurrentFrame();
+            if(GameStatus.teamsPoints[sc.getTeamNameBaskets().getCurrentFrame()] >= 4){
+                winningTeam = sc.getTeamNameBaskets().getCurrentFrame();
                 System.out.println("normal win");
             }
             else{
-                winningTeam = (sc.teamName.getCurrentFrame()==0)?1:0;
+                winningTeam = (sc.getTeamNameBaskets().getCurrentFrame()==0)?1:0;
                 System.out.println("bomb win");
             }
             if(winningTeam == 0){
-                sc.winPaneOrange.setScaleX(1);
-                sc.winPaneOrange.setScaleY(1);
+                sc.getWinPaneOrange().setScaleX(1);
+                sc.getWinPaneOrange().setScaleY(1);
                 Sound.yaySound.play();
             }else{
-                sc.winPaneRed.setScaleX(1);
-                sc.winPaneRed.setScaleY(1);
+                sc.getWinPaneRed().setScaleX(1);
+                sc.getWinPaneRed().setScaleY(1);
                 Sound.yaySound.play();
             }
             
@@ -485,22 +482,22 @@ public class MainApp extends Application {
 
     public void playButtonHit(ScenePlay sc){
         
-        sc.forceValue.setText(Float.valueOf(df.format(sc.forceSlider.getValue()))+" N");
-        sc.angleValue.setText(Float.valueOf(df.format(sc.angleSlider.getValue()))+" deg");
+        sc.getForceValueLabel().setText(Float.valueOf(DECIMAL_FORMAT.format(sc.getForceSliderButton().getValue()))+" N");
+        sc.getAngleValueLabel().setText(Float.valueOf(DECIMAL_FORMAT.format(sc.getAngleSliderButton().getValue()))+"°");
         
-        sc.playButton.setDisable(true);
-        sc.menuButton.setDisable(true);
-        sc.forceSlider.setDisable(true);
-        sc.angleSlider.setDisable(true);
+        sc.getPlayButton().setDisable(true);
+        sc.getMenuButton().setDisable(true);
+        sc.getForceSliderButton().setDisable(true);
+        sc.getAngleSliderButton().setDisable(true);
         
-        double vx = sc.forceSlider.getValue()*Math.cos(sc.angleSlider.getValue()*PI/180);
-        double vy = sc.forceSlider.getValue()*Math.sin(sc.angleSlider.getValue()*PI/180);
+        double vx = sc.getForceSliderButton().getValue()*Math.cos(sc.getAngleSliderButton().getValue()*PI/180);
+        double vy = sc.getForceSliderButton().getValue()*Math.sin(sc.getAngleSliderButton().getValue()*PI/180);
         
         GameStatus.listOfBalls[0].setVi(new Vector(vx,vy));
 
-        GameStatus.cue.hitAnim(sc.angleSlider,sc.forceSlider);
+        GameStatus.cue.hitAnim(sc.getAngleSliderButton(),sc.getForceSliderButton());
         
-        GameStatus.cue.hitAnim.setOnFinished(e-> {
+        GameStatus.cue.getHitAnim().setOnFinished(e-> {
             GameStatus.cue.setOpacity(0d);
             
             Task<Integer> task = new Task<Integer>() {
@@ -520,7 +517,7 @@ public class MainApp extends Application {
     
     public void changeTeam(ScenePlay sc){
         System.out.println("change team done");
-        sc.teamName.setCurrentFrame((sc.teamName.getCurrentFrame()+1)%2);
+        sc.getTeamNameBaskets().setCurrentFrame((sc.getTeamNameBaskets().getCurrentFrame()+1)%2);
         executeTurn(sc);
     }
     

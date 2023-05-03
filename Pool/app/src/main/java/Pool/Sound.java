@@ -32,7 +32,6 @@ public class Sound {
         yaySound = new MediaPlayer(new javafx.scene.media.Media(yayFile.toURI().toString()));
         yaySound.setVolume(0.2);
         yaySound.setCycleCount(1);
-        
     }
 
     public static void muteSound(){

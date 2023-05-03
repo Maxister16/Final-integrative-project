@@ -10,7 +10,7 @@ import javafx.scene.shape.Polyline;
 
 public class CueStick extends ImageView{
     
-    public PathTransition hitAnim;
+    private PathTransition hitAnim;
     
     public CueStick(double width){
         //set image and size
@@ -20,6 +20,10 @@ public class CueStick extends ImageView{
         this.setPreserveRatio(true);
         this.setFitWidth(width);
         this.setFitHeight(this.getFitWidth()*(img.getHeight()/img.getWidth()));
+    }
+    //accessor
+    public PathTransition getHitAnim(){
+        return hitAnim;
     }
     
     //when the stick appears

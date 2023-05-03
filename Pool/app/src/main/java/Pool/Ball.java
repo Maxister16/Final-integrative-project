@@ -169,4 +169,4 @@ public class Ball extends Circle implements InteractiveObject {
         this.setFill(new ImagePattern(newImage));
     }
 
-    }
+}

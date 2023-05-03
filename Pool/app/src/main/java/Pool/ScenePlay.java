@@ -23,53 +23,142 @@ import java.awt.font.ImageGraphicAttribute;
 public class ScenePlay {
     
             private Scene scene;
-            public Pane gamePane;
-            StackPane layout = new StackPane();
-            public GridPane gridPaneMenu = new GridPane();
-            ImageView menuBg;
-            Rectangle rectangle;
+            private Pane gamePane;
+            private StackPane layout = new StackPane();
+            private GridPane gridPaneMenu = new GridPane();
+            private ImageView menuBg;
+            private Rectangle menuRectangle;
 
-            ImageView forceTitle;
-            ImageView angleTitle;
-            ImageView frictionTitle;
+            private ImageView forceTitle;
+            private ImageView angleTitle;
+            private ImageView frictionTitle;
 
     //menu
-            public Button resumeButton ;
-            public Button homeButton ;
-            public Button exitButton ;
-            public Button physicsButton;
-            ImageView physicsOn;
-            ImageView physicsOff;
-            public FadeTransition fade = new FadeTransition();
+            private Button resumeButton ;
+            private Button homeButton ;
+            private Button exitButton ;
+            private Button physicsButton;
+            private ImageView physicsOn;
+            private ImageView physicsOff;
+            private FadeTransition fade = new FadeTransition();
             
     //in scene
-            public Button playButton;
-            public Button menuButton;
-            public Slider forceSlider;
-            public Slider angleSlider;
-            
-            public Button soundButton;
-
-            ImageView soundOnIMG;
-            ImageView soundOffIMG;
-
-            Label frictionValue;
-            Label angleValue;
-            Label forceValue;
+            private Button playButton;
+            private Button menuButton;
+            private Button soundButton;
+            private Slider forceSlider;
+            private Slider angleSlider;
+            private ImageView soundOnIMG;
+            private ImageView soundOffIMG;
             
     //decorations        
-            public CustomAnimation redBaskets;
-            public CustomAnimation orangeBaskets;
-            public CustomAnimation teamName;
+            private CustomAnimation redBaskets;
+            private CustomAnimation orangeBaskets;
+            private CustomAnimation teamName;
+            private Label frictionValue;
+            private Label angleValue;
+            private Label forceValue;
             
     //winpane
-            public Pane winPaneRed;
-            public Pane winPaneOrange;
-            public Button buttonReplayRed;
-            public Button buttonReplayOrange;
-            Rectangle winBlur;
-            ImageView orangeWin;
-            ImageView redWin;
+            private Pane winPaneRed;
+            private Pane winPaneOrange;
+            private Button buttonReplayRed;
+            private Button buttonReplayOrange;
+            private Rectangle winBlur;
+            private ImageView orangeWin;
+            private ImageView redWin;
+            
+            //accessor method
+            public Scene getScene() {
+                return this.scene;
+            }
+            
+            public Pane getGamePane(){
+                return gamePane;
+            }
+    //menu button
+            public Button getResumeButton(){
+                return resumeButton;
+            }
+            public Button getHomeButton(){
+                return homeButton;
+            }
+            public Button getExitButton(){
+                return exitButton;
+            }
+            public Button getPhysicsButton(){
+                return physicsButton;
+            }
+            public ImageView getPhysicsOn(){
+                return physicsOn;
+            }
+            public ImageView getPhysicsOff(){
+                return physicsOff;
+            }
+    //in scenes button
+            public Button getPlayButton(){
+                return playButton;
+            }
+            public Button getMenuButton(){
+                return menuButton;
+            }
+            public Button getSoundButton(){
+                return soundButton;
+            }
+            public Slider getForceSliderButton(){
+                return forceSlider;
+            }
+            public Slider getAngleSliderButton(){
+                return angleSlider;
+            }
+            public ImageView getSoundOnIMG(){
+                return soundOnIMG;
+            }
+            public ImageView getSoundOffIMG(){
+                return soundOffIMG;
+            }
+    //decorations        
+            public CustomAnimation getRedBaskets(){
+                return redBaskets;
+            }
+            public CustomAnimation getOrangeBaskets(){
+                return orangeBaskets;
+            }
+            public CustomAnimation getTeamNameBaskets(){
+                return teamName;
+            }
+            public Label getFrictionValueLabel(){
+                return frictionValue;
+            }
+            public Label getAngleValueLabel(){
+                return angleValue;
+            }
+            public Label getForceValueLabel(){
+                return forceValue;
+            }
+    //winPane
+            public Pane getWinPaneRed(){
+                return winPaneRed;
+            }
+            public Pane getWinPaneOrange(){
+                return winPaneOrange;
+            }
+            public Button getButtonReplayRed(){
+                return buttonReplayRed;
+            }
+            public Button getButtonReplayOrange(){
+                return buttonReplayOrange;
+            }
+            public Rectangle getWinBlur(){
+                return winBlur;
+            }
+            public ImageView getOrangeWin(){
+                return orangeWin;
+            }
+            public ImageView getRedWin(){
+                return redWin;
+            }
+            
             
             public void placeObjectsInGamePane(){
                 gamePane.getChildren().clear();
@@ -80,10 +169,10 @@ public class ScenePlay {
             }
             
             public void menuAppears(){
-                layout.getChildren().addAll(rectangle,menuBg,gridPaneMenu);
+                layout.getChildren().addAll(menuRectangle,menuBg,gridPaneMenu);
             }
             public void menuDisappears(){
-                layout.getChildren().removeAll(rectangle,menuBg,gridPaneMenu);
+                layout.getChildren().removeAll(menuRectangle,menuBg,gridPaneMenu);
             }
 
             
@@ -106,6 +195,7 @@ public class ScenePlay {
                 forceTitle.setStyle("-fx-opacity: 0;");
             }
             
+            //set the scene
             public ScenePlay()  {
 
                 //Create Principal Panes
@@ -374,10 +464,10 @@ public class ScenePlay {
 
                 menuBg.setPreserveRatio(true);
                 menuBg.setFitWidth(500);
-                rectangle = new Rectangle(1350, 700);
-                rectangle.setFill(Color.WHITE);
-                rectangle.setTranslateY(-42);
-                fade.setNode(rectangle);
+                menuRectangle = new Rectangle(1350, 700);
+                menuRectangle.setFill(Color.WHITE);
+                menuRectangle.setTranslateY(-42);
+                fade.setNode(menuRectangle);
                 fade.setFromValue(0.0);
                 fade.setToValue(0.4);
                 fade.setDuration(Duration.millis(1000));
@@ -435,9 +525,5 @@ public class ScenePlay {
                 
                 layout.getChildren().addAll(winPaneOrange,winPaneRed);
                 
-            }
-
-            public Scene getScene() {
-                return this.scene;
             }
         }
