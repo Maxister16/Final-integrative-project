@@ -108,19 +108,19 @@ public class Ball extends Circle implements InteractiveObject {
 
     
     //checking if the ball collides with the table
-        if(position.x<=tableBorderMinX|| position.x>=tableBorderMaxX){
+        if(position.getXcomponent()<=tableBorderMinX|| position.getXcomponent()>=tableBorderMaxX){
             this.getVi().setXcomponent(-1*this.getVi().getXcomponent());
-            if(position.x <=tableBorderMinX)
-                position.x = tableBorderMinX;
+            if(position.getXcomponent() <=tableBorderMinX)
+                position.setXcomponent(tableBorderMinX);
             else
-                position.x = tableBorderMaxX;
+                position.setXcomponent(tableBorderMaxX);
         }
-        if(position.y<=tableBorderMinY|| position.y>=tableBorderMaxY){
+        if(position.getYcomponent()<=tableBorderMinY|| position.getYcomponent()>=tableBorderMaxY){
             this.getVi().setYcomponent(-1*this.getVi().getYcomponent());
-            if(position.y <=tableBorderMinY)
-                position.y = tableBorderMinY;
+            if(position.getYcomponent() <=tableBorderMinY)
+                position.setYcomponent(tableBorderMinY);
             else
-                position.y = tableBorderMaxY;
+                position.setYcomponent(tableBorderMaxY);
         }
 
         //SLOWING DOWN OF THE VELOCITY
